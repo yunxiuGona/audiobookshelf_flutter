@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:audio_book/C.dart';
 import 'package:audio_book/business/audiobook_api/beans/all_library_bean.dart';
@@ -12,7 +13,9 @@ import 'beans/library_items_bean.dart';
 
 class AudiobookshelfApi extends GetConnect{
   final String baseUrl=C.HOST;
+  final Duration timeout= Duration(seconds: 20);
   Map<String,String>? headers;
+  final OK = 200;
 
   Future<LoginBean> login(String username, String password) async{
     var resp = await post(headers: headers,"/login",{"username": username, "password": password});
@@ -26,10 +29,14 @@ class AudiobookshelfApi extends GetConnect{
     var resp = await post(headers: headers,"/logout", {"socketId":socketId});
   }
 
-  Future<AllLibraryBean> allLibrary() async{
+  Future<AllLibraryBean?> allLibrary() async{
     initUserInfo();
     var resp = await get(headers: headers,"/api/libraries");
-    return AllLibraryBean.fromJson(resp.body);
+    if(resp.status.code==OK&&resp.body!=null) {
+      return AllLibraryBean.fromJson(resp.body);
+    }else{
+      return null;
+    }
   }
 
   Future<LibraryDetailBean> libraryDetail(String libraryID) async{
@@ -38,12 +45,19 @@ class AudiobookshelfApi extends GetConnect{
     return LibraryDetailBean.fromJson(resp.body);
   }
 
-  Future<LibraryItemsBean> libraryItems(String libraryID) async{
+  Future<LibraryItemsBean?> libraryItems(String libraryID) async{
     initUserInfo();
     var resp = await get(headers: headers,"/api/libraries/${libraryID}/items");
-    return LibraryItemsBean.fromJson(resp.body);
+    if(resp.status.code==OK){
+      return LibraryItemsBean.fromJson(resp.body);
+    }else{
+      return null;
+    }
   }
 
+  String getMediaCoverUrl(String mediaID){
+    return "${C.HOST}/audiobookshelf/api/items/${mediaID}/cover";
+  }
   initUserInfo(){
     if((headers==null||headers!.isEmpty) && SPUtils.getUserData()!=null){
       headers = {"Authorization":"Bearer ${SPUtils.getUserData()?.user?.token}"};
