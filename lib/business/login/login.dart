@@ -1,8 +1,13 @@
-import 'package:audio_book/business/utils/api_utils.dart';
+
+import 'dart:convert';
+
+import 'package:audio_book/business/home/home.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/response/response.dart' as http;
 
+import '../audiobook_api/AudiobookshelfApi.dart';
 import '../utils/sp_utils.dart';
 
 class Login extends StatefulWidget {
@@ -23,17 +28,12 @@ class _LoginState extends State<Login> {
     // 这里应该是实际的网络请求
     SPUtils.saveUserName(username);
     SPUtils.savePassword(password);
-    final loginResponse = await API.login(
-      username: username,
-      password: password,
-      responseErrorHandler: (response, [error]) {
-        print(response.statusCode);
-      },
-    );
+    final loginResponse = await AudiobookshelfApi().login(username,password,);
     if (loginResponse == null) {
-      ToastUtils.showError(context, "登录失败：网络错误");
     } else {
       ToastUtils.showSuccess(context, "登录成功");
+      SPUtils.saveUserData(jsonEncode(loginResponse));
+      Get.to(Home());
 
     }
   }
@@ -59,8 +59,10 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    _usernameController.text = SPUtils.getUserName() ?? "";
-    _passwordController.text = SPUtils.getPassword() ?? "";
+    Future.delayed(Duration(milliseconds: 200),(){
+      _usernameController.text = "wangyunxiu";
+      _passwordController.text = "Wangyunxiu123";
+    });
   }
 
   @override

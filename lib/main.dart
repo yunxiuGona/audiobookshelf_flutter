@@ -1,10 +1,11 @@
 import 'package:audio_book/C.dart';
 import 'package:audio_book/business/login/login.dart';
-import 'package:audio_book/business/utils/api_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
-import 'package:audiobookshelf_api/audiobookshelf_api.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'business/home/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,8 +13,8 @@ void main() {
 }
 
 void initLibs() async{
-  API = AudiobookshelfApi(baseUrl: Uri.http(C.HOST));
   SPUtils.prefs =  await SharedPreferences.getInstance();
+  SPUtils.getUserData();
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Login(),
+      home: SPUtils.getUserData()!=null?Home(): Login(),
     );
   }
 }
