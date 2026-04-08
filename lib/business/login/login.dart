@@ -21,6 +21,8 @@ class _LoginState extends State<Login> {
   // 模拟网络登录函数
   Future<void> netlogin(String username, String password) async {
     // 这里应该是实际的网络请求
+    SPUtils.saveUserName(username);
+    SPUtils.savePassword(password);
     final loginResponse = await API.login(
       username: username,
       password: password,
@@ -28,8 +30,6 @@ class _LoginState extends State<Login> {
         print(response.statusCode);
       },
     );
-    SPUtils.saveUserName(username);
-    SPUtils.savePassword(password);
     if (loginResponse == null) {
       ToastUtils.showError(context, "登录失败：网络错误");
     } else {

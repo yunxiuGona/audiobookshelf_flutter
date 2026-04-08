@@ -38,9 +38,27 @@ T fromJson<T>(
   T Function(Map<String, dynamic> tJson) tFromJson,
 ) {
   if (json is Map<String, dynamic>) {
-    return tFromJson(json);
+    var result;
+    try{
+      result = tFromJson(json);
+    }catch(e){
+      print("*****************JSON Parse Error********************");
+      print("***${T}");
+      print("***${e}");
+      print("*****************************************************");
+    }
+    return result;
   } else if (json is List<dynamic>) {
-    return tFromJson(json.whereType<Map<String, dynamic>>().first);
+    var result;
+    try{
+      result = tFromJson(json.whereType<Map<String, dynamic>>().first);
+    }catch(e){
+      print("*****************JSON Parse Error********************");
+      print("***${T}");
+      print("***${e}");
+      print("*****************************************************");
+    }
+    return result;
   }
   throw UnsupportedJsonException(
     'fromJson: Unsupported JSON type: ${json.runtimeType}',
