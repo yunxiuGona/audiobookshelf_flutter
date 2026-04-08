@@ -22,9 +22,6 @@ class GetLibraryResponse with _$GetLibraryResponse {
   }) = GetLibraryResponseLibrary;
 
   factory GetLibraryResponse.fromJson(Map<String, dynamic> json) {
-    if (json.containsKey('issues')) {
-      return _$$GetLibraryResponseFilterDataFromJson(json);
-    }
     return GetLibraryResponse.library(library: Library.fromJson(json));
   }
 }

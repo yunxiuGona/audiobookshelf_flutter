@@ -30,7 +30,6 @@ class User with _$User {
     required DateTime createdAt,
     required UserPermissions permissions,
     required List<String> librariesAccessible,
-    required List<String> itemTagsAccessible,
   }) = _User;
 
   @jsonConverters
