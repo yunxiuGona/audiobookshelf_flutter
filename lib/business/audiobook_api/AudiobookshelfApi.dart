@@ -5,6 +5,7 @@ import 'package:audio_book/C.dart';
 import 'package:audio_book/business/audiobook_api/beans/all_library_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_detail_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/login_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/media_progress_bean.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
@@ -50,6 +51,16 @@ class AudiobookshelfApi extends GetConnect{
     var resp = await get(headers: headers,"/api/libraries/${libraryID}/items");
     if(resp.status.code==OK){
       return LibraryItemsBean.fromJson(resp.body);
+    }else{
+      return null;
+    }
+  }
+
+  Future<MediaProgressBean?> mediaProgress(String libraryItemID) async{
+    initUserInfo();
+    var resp = await get(headers: headers,"/api/me/progress/${libraryItemID}");
+    if(resp.status.code==OK){
+      return MediaProgressBean.fromJson(resp.body);
     }else{
       return null;
     }
