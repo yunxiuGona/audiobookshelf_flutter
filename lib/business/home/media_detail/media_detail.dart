@@ -1,9 +1,14 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
+import 'package:audio_book/business/audiobook_api/beans/media_meta_data_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_progress_bean.dart';
 import 'package:audio_book/business/home/media_detail/media_detail_bottom_view.dart';
 import 'package:audio_book/business/home/media_detail/media_detail_header_view.dart';
+import 'package:audio_book/business/services/AudioPlayerService.dart';
+import 'package:audio_book/business/widgets/animated_play_button.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
+import 'package:get/get.dart';
 import 'media_detail_description_view.dart';
 import 'media_detail_stats_view.dart';
 import 'media_detail_tag_view.dart';
@@ -19,7 +24,7 @@ class MediaDetail extends StatefulWidget {
 
 class _MediaDetailState extends State<MediaDetail> {
   Media? media;
-  Metadata? meta;
+  MediaMetaDataBean? meta;
   bool loading = false;
 
   MediaProgressBean? mediaProgressBean;
@@ -82,7 +87,20 @@ class _MediaDetailState extends State<MediaDetail> {
             width: double.infinity,
             height: double.infinity,
             alignment: Alignment.bottomCenter,
-            child: Container(child: MediaDetailBottomView(widget.result, loading: loading,mediaProgressBean: mediaProgressBean,)),
+            child: MediaDetailBottomView(widget.result, loading: loading,mediaProgressBean: mediaProgressBean,onPlayTap: (status) async{
+              if(status==PlayButtonState.paused){
+                // 播放
+                setState(() {
+                  loading=true;
+                });
+                var playBean = await AudiobookshelfApi().playMedia(widget.result.id??"");
+                AudioPlayerService.playUrl(playBean?.libraryItem?.media?.episodes?.first.enclosure?.url??"");
+                Get.back();
+                setState(() {
+                  loading=false;
+                });
+              }
+            },),
           ),
         ],
       ),

@@ -48,6 +48,8 @@ dependencies:
   google_fonts: ^8.0.2
   dropdown_button2: ^3.0.0
   simple_html_css: ^5.0.0
+  just_audio: ^0.10.5
+  audio_service: ^0.18.18
 
 dev_dependencies:
   flutter_test:

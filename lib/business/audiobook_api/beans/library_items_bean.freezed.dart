@@ -953,7 +953,7 @@ as int?,
 /// @nodoc
 mixin _$Media {
 
-@JsonKey(name: 'metadata') Metadata? get metadata;@JsonKey(name: 'coverPath') String? get coverPath;@JsonKey(name: 'tags') List<dynamic>? get tags;@JsonKey(name: 'numTracks') int? get numTracks;@JsonKey(name: 'numAudioFiles') int? get numAudioFiles;@JsonKey(name: 'numChapters') int? get numChapters;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'size') int? get size;
+@JsonKey(name: 'metadata') MediaMetaDataBean? get metadata;@JsonKey(name: 'coverPath') String? get coverPath;@JsonKey(name: 'tags') List<dynamic>? get tags;@JsonKey(name: 'numTracks') int? get numTracks;@JsonKey(name: 'numAudioFiles') int? get numAudioFiles;@JsonKey(name: 'numChapters') int? get numChapters;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'size') int? get size;
 /// Create a copy of Media
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -986,11 +986,11 @@ abstract mixin class $MediaCopyWith<$Res>  {
   factory $MediaCopyWith(Media value, $Res Function(Media) _then) = _$MediaCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'metadata') Metadata? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<dynamic>? tags,@JsonKey(name: 'numTracks') int? numTracks,@JsonKey(name: 'numAudioFiles') int? numAudioFiles,@JsonKey(name: 'numChapters') int? numChapters,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'size') int? size
+@JsonKey(name: 'metadata') MediaMetaDataBean? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<dynamic>? tags,@JsonKey(name: 'numTracks') int? numTracks,@JsonKey(name: 'numAudioFiles') int? numAudioFiles,@JsonKey(name: 'numChapters') int? numChapters,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'size') int? size
 });
 
 
-$MetadataCopyWith<$Res>? get metadata;
+$MediaMetaDataBeanCopyWith<$Res>? get metadata;
 
 }
 /// @nodoc
@@ -1006,7 +1006,7 @@ class _$MediaCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? metadata = freezed,Object? coverPath = freezed,Object? tags = freezed,Object? numTracks = freezed,Object? numAudioFiles = freezed,Object? numChapters = freezed,Object? duration = freezed,Object? size = freezed,}) {
   return _then(_self.copyWith(
 metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as Metadata?,coverPath: freezed == coverPath ? _self.coverPath : coverPath // ignore: cast_nullable_to_non_nullable
+as MediaMetaDataBean?,coverPath: freezed == coverPath ? _self.coverPath : coverPath // ignore: cast_nullable_to_non_nullable
 as String?,tags: freezed == tags ? _self.tags : tags // ignore: cast_nullable_to_non_nullable
 as List<dynamic>?,numTracks: freezed == numTracks ? _self.numTracks : numTracks // ignore: cast_nullable_to_non_nullable
 as int?,numAudioFiles: freezed == numAudioFiles ? _self.numAudioFiles : numAudioFiles // ignore: cast_nullable_to_non_nullable
@@ -1020,12 +1020,12 @@ as int?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MetadataCopyWith<$Res>? get metadata {
+$MediaMetaDataBeanCopyWith<$Res>? get metadata {
     if (_self.metadata == null) {
     return null;
   }
 
-  return $MetadataCopyWith<$Res>(_self.metadata!, (value) {
+  return $MediaMetaDataBeanCopyWith<$Res>(_self.metadata!, (value) {
     return _then(_self.copyWith(metadata: value));
   });
 }
@@ -1110,7 +1110,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'metadata')  Metadata? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Media() when $default != null:
 return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.numAudioFiles,_that.numChapters,_that.duration,_that.size);case _:
@@ -1131,7 +1131,7 @@ return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'metadata')  Metadata? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)  $default,) {final _that = this;
 switch (_that) {
 case _Media():
 return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.numAudioFiles,_that.numChapters,_that.duration,_that.size);case _:
@@ -1151,7 +1151,7 @@ return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'metadata')  Metadata? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)?  $default,) {final _that = this;
 switch (_that) {
 case _Media() when $default != null:
 return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.numAudioFiles,_that.numChapters,_that.duration,_that.size);case _:
@@ -1169,7 +1169,7 @@ class _Media implements Media {
   const _Media({@JsonKey(name: 'metadata') this.metadata, @JsonKey(name: 'coverPath') this.coverPath, @JsonKey(name: 'tags') final  List<dynamic>? tags, @JsonKey(name: 'numTracks') this.numTracks, @JsonKey(name: 'numAudioFiles') this.numAudioFiles, @JsonKey(name: 'numChapters') this.numChapters, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'size') this.size}): _tags = tags;
   factory _Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
 
-@override@JsonKey(name: 'metadata') final  Metadata? metadata;
+@override@JsonKey(name: 'metadata') final  MediaMetaDataBean? metadata;
 @override@JsonKey(name: 'coverPath') final  String? coverPath;
  final  List<dynamic>? _tags;
 @override@JsonKey(name: 'tags') List<dynamic>? get tags {
@@ -1219,11 +1219,11 @@ abstract mixin class _$MediaCopyWith<$Res> implements $MediaCopyWith<$Res> {
   factory _$MediaCopyWith(_Media value, $Res Function(_Media) _then) = __$MediaCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'metadata') Metadata? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<dynamic>? tags,@JsonKey(name: 'numTracks') int? numTracks,@JsonKey(name: 'numAudioFiles') int? numAudioFiles,@JsonKey(name: 'numChapters') int? numChapters,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'size') int? size
+@JsonKey(name: 'metadata') MediaMetaDataBean? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<dynamic>? tags,@JsonKey(name: 'numTracks') int? numTracks,@JsonKey(name: 'numAudioFiles') int? numAudioFiles,@JsonKey(name: 'numChapters') int? numChapters,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'size') int? size
 });
 
 
-@override $MetadataCopyWith<$Res>? get metadata;
+@override $MediaMetaDataBeanCopyWith<$Res>? get metadata;
 
 }
 /// @nodoc
@@ -1239,7 +1239,7 @@ class __$MediaCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? metadata = freezed,Object? coverPath = freezed,Object? tags = freezed,Object? numTracks = freezed,Object? numAudioFiles = freezed,Object? numChapters = freezed,Object? duration = freezed,Object? size = freezed,}) {
   return _then(_Media(
 metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as Metadata?,coverPath: freezed == coverPath ? _self.coverPath : coverPath // ignore: cast_nullable_to_non_nullable
+as MediaMetaDataBean?,coverPath: freezed == coverPath ? _self.coverPath : coverPath // ignore: cast_nullable_to_non_nullable
 as String?,tags: freezed == tags ? _self._tags : tags // ignore: cast_nullable_to_non_nullable
 as List<dynamic>?,numTracks: freezed == numTracks ? _self.numTracks : numTracks // ignore: cast_nullable_to_non_nullable
 as int?,numAudioFiles: freezed == numAudioFiles ? _self.numAudioFiles : numAudioFiles // ignore: cast_nullable_to_non_nullable
@@ -1254,319 +1254,15 @@ as int?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MetadataCopyWith<$Res>? get metadata {
+$MediaMetaDataBeanCopyWith<$Res>? get metadata {
     if (_self.metadata == null) {
     return null;
   }
 
-  return $MetadataCopyWith<$Res>(_self.metadata!, (value) {
+  return $MediaMetaDataBeanCopyWith<$Res>(_self.metadata!, (value) {
     return _then(_self.copyWith(metadata: value));
   });
 }
-}
-
-
-/// @nodoc
-mixin _$Metadata {
-
-@JsonKey(name: 'title') String? get title;@JsonKey(name: 'subtitle') String? get subtitle;@JsonKey(name: 'titleIgnorePrefix') String? get titleIgnorePrefix;@JsonKey(name: 'authorName') String? get authorName;@JsonKey(name: 'narratorName') String? get narratorName;@JsonKey(name: 'seriesName') String? get seriesName;@JsonKey(name: 'genres') List<String>? get genres;@JsonKey(name: 'publishedYear') String? get publishedYear;@JsonKey(name: 'publisher') String? get publisher;@JsonKey(name: 'description') String? get description;@JsonKey(name: 'asin') String? get asin;@JsonKey(name: 'explicit') bool? get explicit;
-/// Create a copy of Metadata
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$MetadataCopyWith<Metadata> get copyWith => _$MetadataCopyWithImpl<Metadata>(this as Metadata, _$identity);
-
-  /// Serializes this Metadata to a JSON map.
-  Map<String, dynamic> toJson();
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Metadata&&(identical(other.title, title) || other.title == title)&&(identical(other.subtitle, subtitle) || other.subtitle == subtitle)&&(identical(other.titleIgnorePrefix, titleIgnorePrefix) || other.titleIgnorePrefix == titleIgnorePrefix)&&(identical(other.authorName, authorName) || other.authorName == authorName)&&(identical(other.narratorName, narratorName) || other.narratorName == narratorName)&&(identical(other.seriesName, seriesName) || other.seriesName == seriesName)&&const DeepCollectionEquality().equals(other.genres, genres)&&(identical(other.publishedYear, publishedYear) || other.publishedYear == publishedYear)&&(identical(other.publisher, publisher) || other.publisher == publisher)&&(identical(other.description, description) || other.description == description)&&(identical(other.asin, asin) || other.asin == asin)&&(identical(other.explicit, explicit) || other.explicit == explicit));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,title,subtitle,titleIgnorePrefix,authorName,narratorName,seriesName,const DeepCollectionEquality().hash(genres),publishedYear,publisher,description,asin,explicit);
-
-@override
-String toString() {
-  return 'Metadata(title: $title, subtitle: $subtitle, titleIgnorePrefix: $titleIgnorePrefix, authorName: $authorName, narratorName: $narratorName, seriesName: $seriesName, genres: $genres, publishedYear: $publishedYear, publisher: $publisher, description: $description, asin: $asin, explicit: $explicit)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $MetadataCopyWith<$Res>  {
-  factory $MetadataCopyWith(Metadata value, $Res Function(Metadata) _then) = _$MetadataCopyWithImpl;
-@useResult
-$Res call({
-@JsonKey(name: 'title') String? title,@JsonKey(name: 'subtitle') String? subtitle,@JsonKey(name: 'titleIgnorePrefix') String? titleIgnorePrefix,@JsonKey(name: 'authorName') String? authorName,@JsonKey(name: 'narratorName') String? narratorName,@JsonKey(name: 'seriesName') String? seriesName,@JsonKey(name: 'genres') List<String>? genres,@JsonKey(name: 'publishedYear') String? publishedYear,@JsonKey(name: 'publisher') String? publisher,@JsonKey(name: 'description') String? description,@JsonKey(name: 'asin') String? asin,@JsonKey(name: 'explicit') bool? explicit
-});
-
-
-
-
-}
-/// @nodoc
-class _$MetadataCopyWithImpl<$Res>
-    implements $MetadataCopyWith<$Res> {
-  _$MetadataCopyWithImpl(this._self, this._then);
-
-  final Metadata _self;
-  final $Res Function(Metadata) _then;
-
-/// Create a copy of Metadata
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? title = freezed,Object? subtitle = freezed,Object? titleIgnorePrefix = freezed,Object? authorName = freezed,Object? narratorName = freezed,Object? seriesName = freezed,Object? genres = freezed,Object? publishedYear = freezed,Object? publisher = freezed,Object? description = freezed,Object? asin = freezed,Object? explicit = freezed,}) {
-  return _then(_self.copyWith(
-title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String?,subtitle: freezed == subtitle ? _self.subtitle : subtitle // ignore: cast_nullable_to_non_nullable
-as String?,titleIgnorePrefix: freezed == titleIgnorePrefix ? _self.titleIgnorePrefix : titleIgnorePrefix // ignore: cast_nullable_to_non_nullable
-as String?,authorName: freezed == authorName ? _self.authorName : authorName // ignore: cast_nullable_to_non_nullable
-as String?,narratorName: freezed == narratorName ? _self.narratorName : narratorName // ignore: cast_nullable_to_non_nullable
-as String?,seriesName: freezed == seriesName ? _self.seriesName : seriesName // ignore: cast_nullable_to_non_nullable
-as String?,genres: freezed == genres ? _self.genres : genres // ignore: cast_nullable_to_non_nullable
-as List<String>?,publishedYear: freezed == publishedYear ? _self.publishedYear : publishedYear // ignore: cast_nullable_to_non_nullable
-as String?,publisher: freezed == publisher ? _self.publisher : publisher // ignore: cast_nullable_to_non_nullable
-as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String?,asin: freezed == asin ? _self.asin : asin // ignore: cast_nullable_to_non_nullable
-as String?,explicit: freezed == explicit ? _self.explicit : explicit // ignore: cast_nullable_to_non_nullable
-as bool?,
-  ));
-}
-
-}
-
-
-/// Adds pattern-matching-related methods to [Metadata].
-extension MetadataPatterns on Metadata {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Metadata value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _Metadata() when $default != null:
-return $default(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Metadata value)  $default,){
-final _that = this;
-switch (_that) {
-case _Metadata():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Metadata value)?  $default,){
-final _that = this;
-switch (_that) {
-case _Metadata() when $default != null:
-return $default(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'title')  String? title, @JsonKey(name: 'subtitle')  String? subtitle, @JsonKey(name: 'titleIgnorePrefix')  String? titleIgnorePrefix, @JsonKey(name: 'authorName')  String? authorName, @JsonKey(name: 'narratorName')  String? narratorName, @JsonKey(name: 'seriesName')  String? seriesName, @JsonKey(name: 'genres')  List<String>? genres, @JsonKey(name: 'publishedYear')  String? publishedYear, @JsonKey(name: 'publisher')  String? publisher, @JsonKey(name: 'description')  String? description, @JsonKey(name: 'asin')  String? asin, @JsonKey(name: 'explicit')  bool? explicit)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _Metadata() when $default != null:
-return $default(_that.title,_that.subtitle,_that.titleIgnorePrefix,_that.authorName,_that.narratorName,_that.seriesName,_that.genres,_that.publishedYear,_that.publisher,_that.description,_that.asin,_that.explicit);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'title')  String? title, @JsonKey(name: 'subtitle')  String? subtitle, @JsonKey(name: 'titleIgnorePrefix')  String? titleIgnorePrefix, @JsonKey(name: 'authorName')  String? authorName, @JsonKey(name: 'narratorName')  String? narratorName, @JsonKey(name: 'seriesName')  String? seriesName, @JsonKey(name: 'genres')  List<String>? genres, @JsonKey(name: 'publishedYear')  String? publishedYear, @JsonKey(name: 'publisher')  String? publisher, @JsonKey(name: 'description')  String? description, @JsonKey(name: 'asin')  String? asin, @JsonKey(name: 'explicit')  bool? explicit)  $default,) {final _that = this;
-switch (_that) {
-case _Metadata():
-return $default(_that.title,_that.subtitle,_that.titleIgnorePrefix,_that.authorName,_that.narratorName,_that.seriesName,_that.genres,_that.publishedYear,_that.publisher,_that.description,_that.asin,_that.explicit);case _:
-  throw StateError('Unexpected subclass');
-
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'title')  String? title, @JsonKey(name: 'subtitle')  String? subtitle, @JsonKey(name: 'titleIgnorePrefix')  String? titleIgnorePrefix, @JsonKey(name: 'authorName')  String? authorName, @JsonKey(name: 'narratorName')  String? narratorName, @JsonKey(name: 'seriesName')  String? seriesName, @JsonKey(name: 'genres')  List<String>? genres, @JsonKey(name: 'publishedYear')  String? publishedYear, @JsonKey(name: 'publisher')  String? publisher, @JsonKey(name: 'description')  String? description, @JsonKey(name: 'asin')  String? asin, @JsonKey(name: 'explicit')  bool? explicit)?  $default,) {final _that = this;
-switch (_that) {
-case _Metadata() when $default != null:
-return $default(_that.title,_that.subtitle,_that.titleIgnorePrefix,_that.authorName,_that.narratorName,_that.seriesName,_that.genres,_that.publishedYear,_that.publisher,_that.description,_that.asin,_that.explicit);case _:
-  return null;
-
-}
-}
-
-}
-
-/// @nodoc
-@JsonSerializable()
-
-class _Metadata implements Metadata {
-  const _Metadata({@JsonKey(name: 'title') this.title, @JsonKey(name: 'subtitle') this.subtitle, @JsonKey(name: 'titleIgnorePrefix') this.titleIgnorePrefix, @JsonKey(name: 'authorName') this.authorName, @JsonKey(name: 'narratorName') this.narratorName, @JsonKey(name: 'seriesName') this.seriesName, @JsonKey(name: 'genres') final  List<String>? genres, @JsonKey(name: 'publishedYear') this.publishedYear, @JsonKey(name: 'publisher') this.publisher, @JsonKey(name: 'description') this.description, @JsonKey(name: 'asin') this.asin, @JsonKey(name: 'explicit') this.explicit}): _genres = genres;
-  factory _Metadata.fromJson(Map<String, dynamic> json) => _$MetadataFromJson(json);
-
-@override@JsonKey(name: 'title') final  String? title;
-@override@JsonKey(name: 'subtitle') final  String? subtitle;
-@override@JsonKey(name: 'titleIgnorePrefix') final  String? titleIgnorePrefix;
-@override@JsonKey(name: 'authorName') final  String? authorName;
-@override@JsonKey(name: 'narratorName') final  String? narratorName;
-@override@JsonKey(name: 'seriesName') final  String? seriesName;
- final  List<String>? _genres;
-@override@JsonKey(name: 'genres') List<String>? get genres {
-  final value = _genres;
-  if (value == null) return null;
-  if (_genres is EqualUnmodifiableListView) return _genres;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(value);
-}
-
-@override@JsonKey(name: 'publishedYear') final  String? publishedYear;
-@override@JsonKey(name: 'publisher') final  String? publisher;
-@override@JsonKey(name: 'description') final  String? description;
-@override@JsonKey(name: 'asin') final  String? asin;
-@override@JsonKey(name: 'explicit') final  bool? explicit;
-
-/// Create a copy of Metadata
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$MetadataCopyWith<_Metadata> get copyWith => __$MetadataCopyWithImpl<_Metadata>(this, _$identity);
-
-@override
-Map<String, dynamic> toJson() {
-  return _$MetadataToJson(this, );
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Metadata&&(identical(other.title, title) || other.title == title)&&(identical(other.subtitle, subtitle) || other.subtitle == subtitle)&&(identical(other.titleIgnorePrefix, titleIgnorePrefix) || other.titleIgnorePrefix == titleIgnorePrefix)&&(identical(other.authorName, authorName) || other.authorName == authorName)&&(identical(other.narratorName, narratorName) || other.narratorName == narratorName)&&(identical(other.seriesName, seriesName) || other.seriesName == seriesName)&&const DeepCollectionEquality().equals(other._genres, _genres)&&(identical(other.publishedYear, publishedYear) || other.publishedYear == publishedYear)&&(identical(other.publisher, publisher) || other.publisher == publisher)&&(identical(other.description, description) || other.description == description)&&(identical(other.asin, asin) || other.asin == asin)&&(identical(other.explicit, explicit) || other.explicit == explicit));
-}
-
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,title,subtitle,titleIgnorePrefix,authorName,narratorName,seriesName,const DeepCollectionEquality().hash(_genres),publishedYear,publisher,description,asin,explicit);
-
-@override
-String toString() {
-  return 'Metadata(title: $title, subtitle: $subtitle, titleIgnorePrefix: $titleIgnorePrefix, authorName: $authorName, narratorName: $narratorName, seriesName: $seriesName, genres: $genres, publishedYear: $publishedYear, publisher: $publisher, description: $description, asin: $asin, explicit: $explicit)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$MetadataCopyWith<$Res> implements $MetadataCopyWith<$Res> {
-  factory _$MetadataCopyWith(_Metadata value, $Res Function(_Metadata) _then) = __$MetadataCopyWithImpl;
-@override @useResult
-$Res call({
-@JsonKey(name: 'title') String? title,@JsonKey(name: 'subtitle') String? subtitle,@JsonKey(name: 'titleIgnorePrefix') String? titleIgnorePrefix,@JsonKey(name: 'authorName') String? authorName,@JsonKey(name: 'narratorName') String? narratorName,@JsonKey(name: 'seriesName') String? seriesName,@JsonKey(name: 'genres') List<String>? genres,@JsonKey(name: 'publishedYear') String? publishedYear,@JsonKey(name: 'publisher') String? publisher,@JsonKey(name: 'description') String? description,@JsonKey(name: 'asin') String? asin,@JsonKey(name: 'explicit') bool? explicit
-});
-
-
-
-
-}
-/// @nodoc
-class __$MetadataCopyWithImpl<$Res>
-    implements _$MetadataCopyWith<$Res> {
-  __$MetadataCopyWithImpl(this._self, this._then);
-
-  final _Metadata _self;
-  final $Res Function(_Metadata) _then;
-
-/// Create a copy of Metadata
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? title = freezed,Object? subtitle = freezed,Object? titleIgnorePrefix = freezed,Object? authorName = freezed,Object? narratorName = freezed,Object? seriesName = freezed,Object? genres = freezed,Object? publishedYear = freezed,Object? publisher = freezed,Object? description = freezed,Object? asin = freezed,Object? explicit = freezed,}) {
-  return _then(_Metadata(
-title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String?,subtitle: freezed == subtitle ? _self.subtitle : subtitle // ignore: cast_nullable_to_non_nullable
-as String?,titleIgnorePrefix: freezed == titleIgnorePrefix ? _self.titleIgnorePrefix : titleIgnorePrefix // ignore: cast_nullable_to_non_nullable
-as String?,authorName: freezed == authorName ? _self.authorName : authorName // ignore: cast_nullable_to_non_nullable
-as String?,narratorName: freezed == narratorName ? _self.narratorName : narratorName // ignore: cast_nullable_to_non_nullable
-as String?,seriesName: freezed == seriesName ? _self.seriesName : seriesName // ignore: cast_nullable_to_non_nullable
-as String?,genres: freezed == genres ? _self._genres : genres // ignore: cast_nullable_to_non_nullable
-as List<String>?,publishedYear: freezed == publishedYear ? _self.publishedYear : publishedYear // ignore: cast_nullable_to_non_nullable
-as String?,publisher: freezed == publisher ? _self.publisher : publisher // ignore: cast_nullable_to_non_nullable
-as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String?,asin: freezed == asin ? _self.asin : asin // ignore: cast_nullable_to_non_nullable
-as String?,explicit: freezed == explicit ? _self.explicit : explicit // ignore: cast_nullable_to_non_nullable
-as bool?,
-  ));
-}
-
-
 }
 
 // dart format on

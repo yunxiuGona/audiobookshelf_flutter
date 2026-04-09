@@ -1,23 +1,20 @@
-import 'package:audio_book/C.dart';
 import 'package:audio_book/business/login/login.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'business/home/home.dart';
+import 'business/home/home/home.dart';
+import 'business/services/AudioPlayerService.dart';
 
-void main() {
-  runApp(const MyApp());
-  initLibs();
-}
-
-void initLibs() async{
+void main() async{
+  await AudioPlayerService.init();
   SPUtils.prefs =  await SharedPreferences.getInstance();
   CacheUtils.prefs =  await SharedPreferences.getInstance();
   SPUtils.getUserData();
+
+  runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

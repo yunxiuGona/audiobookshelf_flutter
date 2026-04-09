@@ -107,7 +107,7 @@ Map<String, dynamic> _$CollapsedSeriesToJson(_CollapsedSeries instance) =>
 _Media _$MediaFromJson(Map<String, dynamic> json) => _Media(
   metadata: json['metadata'] == null
       ? null
-      : Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
+      : MediaMetaDataBean.fromJson(json['metadata'] as Map<String, dynamic>),
   coverPath: json['coverPath'] as String?,
   tags: json['tags'] as List<dynamic>?,
   numTracks: (json['numTracks'] as num?)?.toInt(),
@@ -126,34 +126,4 @@ Map<String, dynamic> _$MediaToJson(_Media instance) => <String, dynamic>{
   'numChapters': instance.numChapters,
   'duration': instance.duration,
   'size': instance.size,
-};
-
-_Metadata _$MetadataFromJson(Map<String, dynamic> json) => _Metadata(
-  title: json['title'] as String?,
-  subtitle: json['subtitle'] as String?,
-  titleIgnorePrefix: json['titleIgnorePrefix'] as String?,
-  authorName: json['authorName'] as String?,
-  narratorName: json['narratorName'] as String?,
-  seriesName: json['seriesName'] as String?,
-  genres: (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList(),
-  publishedYear: json['publishedYear'] as String?,
-  publisher: json['publisher'] as String?,
-  description: json['description'] as String?,
-  asin: json['asin'] as String?,
-  explicit: json['explicit'] as bool?,
-);
-
-Map<String, dynamic> _$MetadataToJson(_Metadata instance) => <String, dynamic>{
-  'title': instance.title,
-  'subtitle': instance.subtitle,
-  'titleIgnorePrefix': instance.titleIgnorePrefix,
-  'authorName': instance.authorName,
-  'narratorName': instance.narratorName,
-  'seriesName': instance.seriesName,
-  'genres': instance.genres,
-  'publishedYear': instance.publishedYear,
-  'publisher': instance.publisher,
-  'description': instance.description,
-  'asin': instance.asin,
-  'explicit': instance.explicit,
 };

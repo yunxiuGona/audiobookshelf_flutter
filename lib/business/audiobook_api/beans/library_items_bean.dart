@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'media_meta_data_bean.dart';
+
 part 'library_items_bean.freezed.dart';
 part 'library_items_bean.g.dart';
 
@@ -64,7 +66,7 @@ abstract class CollapsedSeries with _$CollapsedSeries {
 @freezed
 abstract class Media with _$Media {
   const factory Media({
-    @JsonKey(name: 'metadata') Metadata? metadata,
+    @JsonKey(name: 'metadata') MediaMetaDataBean? metadata,
     @JsonKey(name: 'coverPath') String? coverPath,
     @JsonKey(name: 'tags') List<dynamic>? tags,
     @JsonKey(name: 'numTracks') int? numTracks,
@@ -75,25 +77,5 @@ abstract class Media with _$Media {
   }) = _Media;
 
   factory Media.fromJson(Map<String, Object?> json) => _$MediaFromJson(json);
-}
-
-@freezed
-abstract class Metadata with _$Metadata {
-  const factory Metadata({
-    @JsonKey(name: 'title') String? title,
-    @JsonKey(name: 'subtitle') String? subtitle,
-    @JsonKey(name: 'titleIgnorePrefix') String? titleIgnorePrefix,
-    @JsonKey(name: 'authorName') String? authorName,
-    @JsonKey(name: 'narratorName') String? narratorName,
-    @JsonKey(name: 'seriesName') String? seriesName,
-    @JsonKey(name: 'genres') List<String>? genres,
-    @JsonKey(name: 'publishedYear') String? publishedYear,
-    @JsonKey(name: 'publisher') String? publisher,
-    @JsonKey(name: 'description') String? description,
-    @JsonKey(name: 'asin') String? asin,
-    @JsonKey(name: 'explicit') bool? explicit,
-  }) = _Metadata;
-
-  factory Metadata.fromJson(Map<String, Object?> json) => _$MetadataFromJson(json);
 }
 

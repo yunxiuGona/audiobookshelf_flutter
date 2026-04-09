@@ -1,8 +1,9 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-import 'home_main/home_main.dart';
-import 'home_user.dart';
+import '../home_main/home_main.dart';
+import '../home_user.dart';
+import 'home_floating_button_view.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,9 +18,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: (_bottomNavIndex==0)?HomeMain():HomeUser(), //destination screen
-      floatingActionButton: FloatingActionButton(onPressed: () {  },
-        //params
-      ),
+      floatingActionButton: HomeFloatingButtonView(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
         icons: [Icons.home_filled, Icons.person],
