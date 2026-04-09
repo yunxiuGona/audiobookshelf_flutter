@@ -1,7 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-import 'home_main.dart';
+import 'home_main/home_main.dart';
 import 'home_user.dart';
 
 class Home extends StatefulWidget {
