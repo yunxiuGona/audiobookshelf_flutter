@@ -130,6 +130,7 @@ Map<String, dynamic> _$MediaToJson(_Media instance) => <String, dynamic>{
 
 _Metadata _$MetadataFromJson(Map<String, dynamic> json) => _Metadata(
   title: json['title'] as String?,
+  subtitle: json['subtitle'] as String?,
   titleIgnorePrefix: json['titleIgnorePrefix'] as String?,
   authorName: json['authorName'] as String?,
   narratorName: json['narratorName'] as String?,
@@ -144,6 +145,7 @@ _Metadata _$MetadataFromJson(Map<String, dynamic> json) => _Metadata(
 
 Map<String, dynamic> _$MetadataToJson(_Metadata instance) => <String, dynamic>{
   'title': instance.title,
+  'subtitle': instance.subtitle,
   'titleIgnorePrefix': instance.titleIgnorePrefix,
   'authorName': instance.authorName,
   'narratorName': instance.narratorName,

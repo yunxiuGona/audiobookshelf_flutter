@@ -81,6 +81,7 @@ abstract class Media with _$Media {
 abstract class Metadata with _$Metadata {
   const factory Metadata({
     @JsonKey(name: 'title') String? title,
+    @JsonKey(name: 'subtitle') String? subtitle,
     @JsonKey(name: 'titleIgnorePrefix') String? titleIgnorePrefix,
     @JsonKey(name: 'authorName') String? authorName,
     @JsonKey(name: 'narratorName') String? narratorName,

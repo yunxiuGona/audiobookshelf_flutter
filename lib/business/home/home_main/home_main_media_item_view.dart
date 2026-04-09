@@ -1,4 +1,6 @@
+import 'package:audio_book/business/home/media_detail/media_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../audiobook_api/AudiobookshelfApi.dart';
 import '../../audiobook_api/beans/library_items_bean.dart';
@@ -10,7 +12,7 @@ class HomeMainMediaItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return InkWell(child: Card(
       child: Container(
         padding: EdgeInsets.all(10),
         child: Row(
@@ -36,6 +38,10 @@ class HomeMainMediaItemView extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),onTap: (){
+      if(result!=null){
+        Get.to(MediaDetail(result!));
+      }
+    },);
   }
 }

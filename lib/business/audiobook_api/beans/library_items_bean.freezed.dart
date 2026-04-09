@@ -1269,7 +1269,7 @@ $MetadataCopyWith<$Res>? get metadata {
 /// @nodoc
 mixin _$Metadata {
 
-@JsonKey(name: 'title') String? get title;@JsonKey(name: 'titleIgnorePrefix') String? get titleIgnorePrefix;@JsonKey(name: 'authorName') String? get authorName;@JsonKey(name: 'narratorName') String? get narratorName;@JsonKey(name: 'seriesName') String? get seriesName;@JsonKey(name: 'genres') List<String>? get genres;@JsonKey(name: 'publishedYear') String? get publishedYear;@JsonKey(name: 'publisher') String? get publisher;@JsonKey(name: 'description') String? get description;@JsonKey(name: 'asin') String? get asin;@JsonKey(name: 'explicit') bool? get explicit;
+@JsonKey(name: 'title') String? get title;@JsonKey(name: 'subtitle') String? get subtitle;@JsonKey(name: 'titleIgnorePrefix') String? get titleIgnorePrefix;@JsonKey(name: 'authorName') String? get authorName;@JsonKey(name: 'narratorName') String? get narratorName;@JsonKey(name: 'seriesName') String? get seriesName;@JsonKey(name: 'genres') List<String>? get genres;@JsonKey(name: 'publishedYear') String? get publishedYear;@JsonKey(name: 'publisher') String? get publisher;@JsonKey(name: 'description') String? get description;@JsonKey(name: 'asin') String? get asin;@JsonKey(name: 'explicit') bool? get explicit;
 /// Create a copy of Metadata
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1282,16 +1282,16 @@ $MetadataCopyWith<Metadata> get copyWith => _$MetadataCopyWithImpl<Metadata>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Metadata&&(identical(other.title, title) || other.title == title)&&(identical(other.titleIgnorePrefix, titleIgnorePrefix) || other.titleIgnorePrefix == titleIgnorePrefix)&&(identical(other.authorName, authorName) || other.authorName == authorName)&&(identical(other.narratorName, narratorName) || other.narratorName == narratorName)&&(identical(other.seriesName, seriesName) || other.seriesName == seriesName)&&const DeepCollectionEquality().equals(other.genres, genres)&&(identical(other.publishedYear, publishedYear) || other.publishedYear == publishedYear)&&(identical(other.publisher, publisher) || other.publisher == publisher)&&(identical(other.description, description) || other.description == description)&&(identical(other.asin, asin) || other.asin == asin)&&(identical(other.explicit, explicit) || other.explicit == explicit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Metadata&&(identical(other.title, title) || other.title == title)&&(identical(other.subtitle, subtitle) || other.subtitle == subtitle)&&(identical(other.titleIgnorePrefix, titleIgnorePrefix) || other.titleIgnorePrefix == titleIgnorePrefix)&&(identical(other.authorName, authorName) || other.authorName == authorName)&&(identical(other.narratorName, narratorName) || other.narratorName == narratorName)&&(identical(other.seriesName, seriesName) || other.seriesName == seriesName)&&const DeepCollectionEquality().equals(other.genres, genres)&&(identical(other.publishedYear, publishedYear) || other.publishedYear == publishedYear)&&(identical(other.publisher, publisher) || other.publisher == publisher)&&(identical(other.description, description) || other.description == description)&&(identical(other.asin, asin) || other.asin == asin)&&(identical(other.explicit, explicit) || other.explicit == explicit));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,title,titleIgnorePrefix,authorName,narratorName,seriesName,const DeepCollectionEquality().hash(genres),publishedYear,publisher,description,asin,explicit);
+int get hashCode => Object.hash(runtimeType,title,subtitle,titleIgnorePrefix,authorName,narratorName,seriesName,const DeepCollectionEquality().hash(genres),publishedYear,publisher,description,asin,explicit);
 
 @override
 String toString() {
-  return 'Metadata(title: $title, titleIgnorePrefix: $titleIgnorePrefix, authorName: $authorName, narratorName: $narratorName, seriesName: $seriesName, genres: $genres, publishedYear: $publishedYear, publisher: $publisher, description: $description, asin: $asin, explicit: $explicit)';
+  return 'Metadata(title: $title, subtitle: $subtitle, titleIgnorePrefix: $titleIgnorePrefix, authorName: $authorName, narratorName: $narratorName, seriesName: $seriesName, genres: $genres, publishedYear: $publishedYear, publisher: $publisher, description: $description, asin: $asin, explicit: $explicit)';
 }
 
 
@@ -1302,7 +1302,7 @@ abstract mixin class $MetadataCopyWith<$Res>  {
   factory $MetadataCopyWith(Metadata value, $Res Function(Metadata) _then) = _$MetadataCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'title') String? title,@JsonKey(name: 'titleIgnorePrefix') String? titleIgnorePrefix,@JsonKey(name: 'authorName') String? authorName,@JsonKey(name: 'narratorName') String? narratorName,@JsonKey(name: 'seriesName') String? seriesName,@JsonKey(name: 'genres') List<String>? genres,@JsonKey(name: 'publishedYear') String? publishedYear,@JsonKey(name: 'publisher') String? publisher,@JsonKey(name: 'description') String? description,@JsonKey(name: 'asin') String? asin,@JsonKey(name: 'explicit') bool? explicit
+@JsonKey(name: 'title') String? title,@JsonKey(name: 'subtitle') String? subtitle,@JsonKey(name: 'titleIgnorePrefix') String? titleIgnorePrefix,@JsonKey(name: 'authorName') String? authorName,@JsonKey(name: 'narratorName') String? narratorName,@JsonKey(name: 'seriesName') String? seriesName,@JsonKey(name: 'genres') List<String>? genres,@JsonKey(name: 'publishedYear') String? publishedYear,@JsonKey(name: 'publisher') String? publisher,@JsonKey(name: 'description') String? description,@JsonKey(name: 'asin') String? asin,@JsonKey(name: 'explicit') bool? explicit
 });
 
 
@@ -1319,9 +1319,10 @@ class _$MetadataCopyWithImpl<$Res>
 
 /// Create a copy of Metadata
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? title = freezed,Object? titleIgnorePrefix = freezed,Object? authorName = freezed,Object? narratorName = freezed,Object? seriesName = freezed,Object? genres = freezed,Object? publishedYear = freezed,Object? publisher = freezed,Object? description = freezed,Object? asin = freezed,Object? explicit = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? title = freezed,Object? subtitle = freezed,Object? titleIgnorePrefix = freezed,Object? authorName = freezed,Object? narratorName = freezed,Object? seriesName = freezed,Object? genres = freezed,Object? publishedYear = freezed,Object? publisher = freezed,Object? description = freezed,Object? asin = freezed,Object? explicit = freezed,}) {
   return _then(_self.copyWith(
 title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String?,subtitle: freezed == subtitle ? _self.subtitle : subtitle // ignore: cast_nullable_to_non_nullable
 as String?,titleIgnorePrefix: freezed == titleIgnorePrefix ? _self.titleIgnorePrefix : titleIgnorePrefix // ignore: cast_nullable_to_non_nullable
 as String?,authorName: freezed == authorName ? _self.authorName : authorName // ignore: cast_nullable_to_non_nullable
 as String?,narratorName: freezed == narratorName ? _self.narratorName : narratorName // ignore: cast_nullable_to_non_nullable
@@ -1417,10 +1418,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'title')  String? title, @JsonKey(name: 'titleIgnorePrefix')  String? titleIgnorePrefix, @JsonKey(name: 'authorName')  String? authorName, @JsonKey(name: 'narratorName')  String? narratorName, @JsonKey(name: 'seriesName')  String? seriesName, @JsonKey(name: 'genres')  List<String>? genres, @JsonKey(name: 'publishedYear')  String? publishedYear, @JsonKey(name: 'publisher')  String? publisher, @JsonKey(name: 'description')  String? description, @JsonKey(name: 'asin')  String? asin, @JsonKey(name: 'explicit')  bool? explicit)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'title')  String? title, @JsonKey(name: 'subtitle')  String? subtitle, @JsonKey(name: 'titleIgnorePrefix')  String? titleIgnorePrefix, @JsonKey(name: 'authorName')  String? authorName, @JsonKey(name: 'narratorName')  String? narratorName, @JsonKey(name: 'seriesName')  String? seriesName, @JsonKey(name: 'genres')  List<String>? genres, @JsonKey(name: 'publishedYear')  String? publishedYear, @JsonKey(name: 'publisher')  String? publisher, @JsonKey(name: 'description')  String? description, @JsonKey(name: 'asin')  String? asin, @JsonKey(name: 'explicit')  bool? explicit)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Metadata() when $default != null:
-return $default(_that.title,_that.titleIgnorePrefix,_that.authorName,_that.narratorName,_that.seriesName,_that.genres,_that.publishedYear,_that.publisher,_that.description,_that.asin,_that.explicit);case _:
+return $default(_that.title,_that.subtitle,_that.titleIgnorePrefix,_that.authorName,_that.narratorName,_that.seriesName,_that.genres,_that.publishedYear,_that.publisher,_that.description,_that.asin,_that.explicit);case _:
   return orElse();
 
 }
@@ -1438,10 +1439,10 @@ return $default(_that.title,_that.titleIgnorePrefix,_that.authorName,_that.narra
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'title')  String? title, @JsonKey(name: 'titleIgnorePrefix')  String? titleIgnorePrefix, @JsonKey(name: 'authorName')  String? authorName, @JsonKey(name: 'narratorName')  String? narratorName, @JsonKey(name: 'seriesName')  String? seriesName, @JsonKey(name: 'genres')  List<String>? genres, @JsonKey(name: 'publishedYear')  String? publishedYear, @JsonKey(name: 'publisher')  String? publisher, @JsonKey(name: 'description')  String? description, @JsonKey(name: 'asin')  String? asin, @JsonKey(name: 'explicit')  bool? explicit)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'title')  String? title, @JsonKey(name: 'subtitle')  String? subtitle, @JsonKey(name: 'titleIgnorePrefix')  String? titleIgnorePrefix, @JsonKey(name: 'authorName')  String? authorName, @JsonKey(name: 'narratorName')  String? narratorName, @JsonKey(name: 'seriesName')  String? seriesName, @JsonKey(name: 'genres')  List<String>? genres, @JsonKey(name: 'publishedYear')  String? publishedYear, @JsonKey(name: 'publisher')  String? publisher, @JsonKey(name: 'description')  String? description, @JsonKey(name: 'asin')  String? asin, @JsonKey(name: 'explicit')  bool? explicit)  $default,) {final _that = this;
 switch (_that) {
 case _Metadata():
-return $default(_that.title,_that.titleIgnorePrefix,_that.authorName,_that.narratorName,_that.seriesName,_that.genres,_that.publishedYear,_that.publisher,_that.description,_that.asin,_that.explicit);case _:
+return $default(_that.title,_that.subtitle,_that.titleIgnorePrefix,_that.authorName,_that.narratorName,_that.seriesName,_that.genres,_that.publishedYear,_that.publisher,_that.description,_that.asin,_that.explicit);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1458,10 +1459,10 @@ return $default(_that.title,_that.titleIgnorePrefix,_that.authorName,_that.narra
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'title')  String? title, @JsonKey(name: 'titleIgnorePrefix')  String? titleIgnorePrefix, @JsonKey(name: 'authorName')  String? authorName, @JsonKey(name: 'narratorName')  String? narratorName, @JsonKey(name: 'seriesName')  String? seriesName, @JsonKey(name: 'genres')  List<String>? genres, @JsonKey(name: 'publishedYear')  String? publishedYear, @JsonKey(name: 'publisher')  String? publisher, @JsonKey(name: 'description')  String? description, @JsonKey(name: 'asin')  String? asin, @JsonKey(name: 'explicit')  bool? explicit)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'title')  String? title, @JsonKey(name: 'subtitle')  String? subtitle, @JsonKey(name: 'titleIgnorePrefix')  String? titleIgnorePrefix, @JsonKey(name: 'authorName')  String? authorName, @JsonKey(name: 'narratorName')  String? narratorName, @JsonKey(name: 'seriesName')  String? seriesName, @JsonKey(name: 'genres')  List<String>? genres, @JsonKey(name: 'publishedYear')  String? publishedYear, @JsonKey(name: 'publisher')  String? publisher, @JsonKey(name: 'description')  String? description, @JsonKey(name: 'asin')  String? asin, @JsonKey(name: 'explicit')  bool? explicit)?  $default,) {final _that = this;
 switch (_that) {
 case _Metadata() when $default != null:
-return $default(_that.title,_that.titleIgnorePrefix,_that.authorName,_that.narratorName,_that.seriesName,_that.genres,_that.publishedYear,_that.publisher,_that.description,_that.asin,_that.explicit);case _:
+return $default(_that.title,_that.subtitle,_that.titleIgnorePrefix,_that.authorName,_that.narratorName,_that.seriesName,_that.genres,_that.publishedYear,_that.publisher,_that.description,_that.asin,_that.explicit);case _:
   return null;
 
 }
@@ -1473,10 +1474,11 @@ return $default(_that.title,_that.titleIgnorePrefix,_that.authorName,_that.narra
 @JsonSerializable()
 
 class _Metadata implements Metadata {
-  const _Metadata({@JsonKey(name: 'title') this.title, @JsonKey(name: 'titleIgnorePrefix') this.titleIgnorePrefix, @JsonKey(name: 'authorName') this.authorName, @JsonKey(name: 'narratorName') this.narratorName, @JsonKey(name: 'seriesName') this.seriesName, @JsonKey(name: 'genres') final  List<String>? genres, @JsonKey(name: 'publishedYear') this.publishedYear, @JsonKey(name: 'publisher') this.publisher, @JsonKey(name: 'description') this.description, @JsonKey(name: 'asin') this.asin, @JsonKey(name: 'explicit') this.explicit}): _genres = genres;
+  const _Metadata({@JsonKey(name: 'title') this.title, @JsonKey(name: 'subtitle') this.subtitle, @JsonKey(name: 'titleIgnorePrefix') this.titleIgnorePrefix, @JsonKey(name: 'authorName') this.authorName, @JsonKey(name: 'narratorName') this.narratorName, @JsonKey(name: 'seriesName') this.seriesName, @JsonKey(name: 'genres') final  List<String>? genres, @JsonKey(name: 'publishedYear') this.publishedYear, @JsonKey(name: 'publisher') this.publisher, @JsonKey(name: 'description') this.description, @JsonKey(name: 'asin') this.asin, @JsonKey(name: 'explicit') this.explicit}): _genres = genres;
   factory _Metadata.fromJson(Map<String, dynamic> json) => _$MetadataFromJson(json);
 
 @override@JsonKey(name: 'title') final  String? title;
+@override@JsonKey(name: 'subtitle') final  String? subtitle;
 @override@JsonKey(name: 'titleIgnorePrefix') final  String? titleIgnorePrefix;
 @override@JsonKey(name: 'authorName') final  String? authorName;
 @override@JsonKey(name: 'narratorName') final  String? narratorName;
@@ -1509,16 +1511,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Metadata&&(identical(other.title, title) || other.title == title)&&(identical(other.titleIgnorePrefix, titleIgnorePrefix) || other.titleIgnorePrefix == titleIgnorePrefix)&&(identical(other.authorName, authorName) || other.authorName == authorName)&&(identical(other.narratorName, narratorName) || other.narratorName == narratorName)&&(identical(other.seriesName, seriesName) || other.seriesName == seriesName)&&const DeepCollectionEquality().equals(other._genres, _genres)&&(identical(other.publishedYear, publishedYear) || other.publishedYear == publishedYear)&&(identical(other.publisher, publisher) || other.publisher == publisher)&&(identical(other.description, description) || other.description == description)&&(identical(other.asin, asin) || other.asin == asin)&&(identical(other.explicit, explicit) || other.explicit == explicit));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Metadata&&(identical(other.title, title) || other.title == title)&&(identical(other.subtitle, subtitle) || other.subtitle == subtitle)&&(identical(other.titleIgnorePrefix, titleIgnorePrefix) || other.titleIgnorePrefix == titleIgnorePrefix)&&(identical(other.authorName, authorName) || other.authorName == authorName)&&(identical(other.narratorName, narratorName) || other.narratorName == narratorName)&&(identical(other.seriesName, seriesName) || other.seriesName == seriesName)&&const DeepCollectionEquality().equals(other._genres, _genres)&&(identical(other.publishedYear, publishedYear) || other.publishedYear == publishedYear)&&(identical(other.publisher, publisher) || other.publisher == publisher)&&(identical(other.description, description) || other.description == description)&&(identical(other.asin, asin) || other.asin == asin)&&(identical(other.explicit, explicit) || other.explicit == explicit));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,title,titleIgnorePrefix,authorName,narratorName,seriesName,const DeepCollectionEquality().hash(_genres),publishedYear,publisher,description,asin,explicit);
+int get hashCode => Object.hash(runtimeType,title,subtitle,titleIgnorePrefix,authorName,narratorName,seriesName,const DeepCollectionEquality().hash(_genres),publishedYear,publisher,description,asin,explicit);
 
 @override
 String toString() {
-  return 'Metadata(title: $title, titleIgnorePrefix: $titleIgnorePrefix, authorName: $authorName, narratorName: $narratorName, seriesName: $seriesName, genres: $genres, publishedYear: $publishedYear, publisher: $publisher, description: $description, asin: $asin, explicit: $explicit)';
+  return 'Metadata(title: $title, subtitle: $subtitle, titleIgnorePrefix: $titleIgnorePrefix, authorName: $authorName, narratorName: $narratorName, seriesName: $seriesName, genres: $genres, publishedYear: $publishedYear, publisher: $publisher, description: $description, asin: $asin, explicit: $explicit)';
 }
 
 
@@ -1529,7 +1531,7 @@ abstract mixin class _$MetadataCopyWith<$Res> implements $MetadataCopyWith<$Res>
   factory _$MetadataCopyWith(_Metadata value, $Res Function(_Metadata) _then) = __$MetadataCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'title') String? title,@JsonKey(name: 'titleIgnorePrefix') String? titleIgnorePrefix,@JsonKey(name: 'authorName') String? authorName,@JsonKey(name: 'narratorName') String? narratorName,@JsonKey(name: 'seriesName') String? seriesName,@JsonKey(name: 'genres') List<String>? genres,@JsonKey(name: 'publishedYear') String? publishedYear,@JsonKey(name: 'publisher') String? publisher,@JsonKey(name: 'description') String? description,@JsonKey(name: 'asin') String? asin,@JsonKey(name: 'explicit') bool? explicit
+@JsonKey(name: 'title') String? title,@JsonKey(name: 'subtitle') String? subtitle,@JsonKey(name: 'titleIgnorePrefix') String? titleIgnorePrefix,@JsonKey(name: 'authorName') String? authorName,@JsonKey(name: 'narratorName') String? narratorName,@JsonKey(name: 'seriesName') String? seriesName,@JsonKey(name: 'genres') List<String>? genres,@JsonKey(name: 'publishedYear') String? publishedYear,@JsonKey(name: 'publisher') String? publisher,@JsonKey(name: 'description') String? description,@JsonKey(name: 'asin') String? asin,@JsonKey(name: 'explicit') bool? explicit
 });
 
 
@@ -1546,9 +1548,10 @@ class __$MetadataCopyWithImpl<$Res>
 
 /// Create a copy of Metadata
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? title = freezed,Object? titleIgnorePrefix = freezed,Object? authorName = freezed,Object? narratorName = freezed,Object? seriesName = freezed,Object? genres = freezed,Object? publishedYear = freezed,Object? publisher = freezed,Object? description = freezed,Object? asin = freezed,Object? explicit = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? title = freezed,Object? subtitle = freezed,Object? titleIgnorePrefix = freezed,Object? authorName = freezed,Object? narratorName = freezed,Object? seriesName = freezed,Object? genres = freezed,Object? publishedYear = freezed,Object? publisher = freezed,Object? description = freezed,Object? asin = freezed,Object? explicit = freezed,}) {
   return _then(_Metadata(
 title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String?,subtitle: freezed == subtitle ? _self.subtitle : subtitle // ignore: cast_nullable_to_non_nullable
 as String?,titleIgnorePrefix: freezed == titleIgnorePrefix ? _self.titleIgnorePrefix : titleIgnorePrefix // ignore: cast_nullable_to_non_nullable
 as String?,authorName: freezed == authorName ? _self.authorName : authorName // ignore: cast_nullable_to_non_nullable
 as String?,narratorName: freezed == narratorName ? _self.narratorName : narratorName // ignore: cast_nullable_to_non_nullable
