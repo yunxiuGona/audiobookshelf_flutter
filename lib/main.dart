@@ -1,5 +1,6 @@
 import 'package:audio_book/C.dart';
 import 'package:audio_book/business/login/login.dart';
+import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ void main() {
 
 void initLibs() async{
   SPUtils.prefs =  await SharedPreferences.getInstance();
+  CacheUtils.prefs =  await SharedPreferences.getInstance();
   SPUtils.getUserData();
 }
 class MyApp extends StatelessWidget {
@@ -27,13 +29,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.white),
-        fontFamily: GoogleFonts.poppins().fontFamily,
+        fontFamily: "AlibabaPuHuiTiSC",
       ),
       home: SPUtils.getUserData()!=null?Home(): Login(),
     );
   }
 }
-
+//
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 

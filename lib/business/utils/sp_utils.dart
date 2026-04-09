@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:audio_book/business/audiobook_api/beans/all_library_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/login_bean.dart';
@@ -38,11 +39,12 @@ class SPUtils{
       return LibraryBean.fromJson(bean);
     }
   }
-  static void saveLastLibraryCachedItems(LibraryItemsBean? libraryItemsBean){
-    prefs?.setString("lastLibraryCachedItems", jsonEncode(libraryItemsBean));
+
+  static void saveLastAllLibraries(LibraryItemsBean? libraryItemsBean){
+    prefs?.setString("lastAllLibraryCached", jsonEncode(libraryItemsBean));
   }
-  static LibraryItemsBean? getLastLibraryCachedItems(){
-    var json = prefs?.getString("lastLibraryCachedItems");
+  static AllLibraryBean? getLastAllLibraries(){
+    var json = prefs?.getString("lastAllLibraryCached");
     if(json==null||json.isEmpty) {
       return null;
     }
@@ -50,7 +52,7 @@ class SPUtils{
     if(bean==null){
       return null;
     }else{
-      return LibraryItemsBean.fromJson(bean);
+      return AllLibraryBean.fromJson(bean);
     }
   }
   static LoginBean? getUserData(){

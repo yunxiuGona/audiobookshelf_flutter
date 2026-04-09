@@ -1,6 +1,7 @@
 import 'package:audio_book/business/audiobook_api/beans/all_library_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
+import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:audio_book/business/utils/string_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
@@ -30,16 +31,16 @@ class _HomeMainState extends State<HomeMain> {
   }
 
   void restoreCache() {
+    allLibraries = CacheUtils.getLibraiesCache();
+    libraryItems = CacheUtils.getMediasCache();
     var libraryLastSelected = SPUtils.getSelectedLibrary();
     valueListenable.value = libraryLastSelected?.name ?? "";
-
-    var cachedlibraryItems = SPUtils.getLastLibraryCachedItems();
-    if (libraryLastSelected != null && cachedlibraryItems != null) {
-      setState(() {
-        libraryItems = cachedlibraryItems;
-      });
-    } else {
-      Future.delayed(Duration(milliseconds: 100), () {
+    setState(() {
+    });
+    var isLibrariesEmpty = allLibraries==null||allLibraries?.libraries==null||allLibraries!.libraries!.isEmpty;
+    var isMediasEmpty = libraryItems==null||libraryItems?.results==null||libraryItems!.results!.isEmpty;
+    if(isLibrariesEmpty||isMediasEmpty){
+      Future.delayed(Duration(milliseconds: 200), () {
         _refreshController.requestRefresh();
       });
     }
@@ -133,10 +134,10 @@ class _HomeMainState extends State<HomeMain> {
           height: 80,
           padding: EdgeInsets.only(top: 30),
           color: Colors.white,
+          alignment: Alignment.center,
           child: Container(
             child: Text("JustListen", style: TextStyle(color: Colors.black54, fontSize: 20)),
           ),
-          alignment: Alignment.center,
         ),
         Container(height: 1, color: Colors.grey.shade200),
       ],
@@ -185,10 +186,11 @@ class _HomeMainState extends State<HomeMain> {
     });
     var libraryLastSelected = SPUtils.getSelectedLibrary();
     var libraeySelected = allLibraries?.libraries?.first;
-    if (findLibraryFromData(libraryLastSelected?.name) != null) {
-      libraeySelected = findLibraryFromData(libraeySelected?.name);
+    if (libraeySelected!=null&&findLibraryFromData(libraryLastSelected?.name) != null) {
+      libraeySelected = findLibraryFromData(libraeySelected.name);
     }
     if (libraeySelected != null) {
+      SPUtils.saveSelectedLibrary(libraeySelected);
       valueListenable.value = libraeySelected.name ?? "";
       var _resp_libraryItems = await AudiobookshelfApi().libraryItems(libraeySelected.id ?? '');
       if (_resp_libraryItems == null) {
@@ -197,7 +199,7 @@ class _HomeMainState extends State<HomeMain> {
         return;
       } else {
         setState(() {
-          SPUtils.saveLastLibraryCachedItems(libraryItems);
+          CacheUtils.saveMediasCache(libraryItems);
           libraryItems = _resp_libraryItems;
         });
       }
