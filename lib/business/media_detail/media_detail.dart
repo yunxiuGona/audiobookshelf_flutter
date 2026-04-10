@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../audiobook_api/beans/library_item_detail.dart';
 import '../audiobook_api/beans/media.dart';
+import '../widgets/loading_view.dart';
 import 'media_detail_bottom_view.dart';
 import 'media_detail_description_view.dart';
 import 'media_detail_header_view.dart';
@@ -39,7 +40,7 @@ class _MediaDetailState extends State<MediaDetail> {
     meta = libraryItemDetailBean?.media?.metadata;
     return Scaffold(
       appBar: AppBar(title: Text("详情")),
-      body: Stack(
+      body: loading?LoadingView():Stack(
         children: [
           SingleChildScrollView(
             child: Column(

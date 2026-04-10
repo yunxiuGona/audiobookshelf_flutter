@@ -61,12 +61,4 @@ class MediaDetailHeaderView extends StatelessWidget {
       ),
     );
   }
-  String _formatDuration(double? seconds) {
-    if (seconds == null) return "-";
-    final d = Duration(seconds: seconds.toInt());
-    final h = d.inHours;
-    final m = d.inMinutes % 60;
-    return "${h}小时${m}分钟";
-  }
-
 }
