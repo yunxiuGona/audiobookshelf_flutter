@@ -15,13 +15,17 @@ class MediaDetailStatsView extends StatefulWidget {
 class _MediaDetailStatsViewState extends State<MediaDetailStatsView> {
   @override
   Widget build(BuildContext context) {
+    var duration = 0.0;
+    widget.libraryItemDetailBean?.media?.audioFiles?.forEach((file){
+      duration = (duration+(file.duration??0.0)) ;
+    });
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _item("章节", "${widget.libraryItemDetailBean?.media?.chapters?.length}"),
-          _item("时长", _formatDuration(widget.libraryItemDetailBean?.media?.duration)),
+          _item("时长", _formatDuration(duration)),
         ],
       ),
     );

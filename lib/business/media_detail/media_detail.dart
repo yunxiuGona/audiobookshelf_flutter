@@ -1,11 +1,13 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
 import 'package:audio_book/business/services/AudioPlayerService.dart';
+import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../audiobook_api/beans/library_item_detail.dart';
 import '../audiobook_api/beans/media.dart';
+import '../audiobook_api/beans/media_progress.dart';
 import '../widgets/loading_view.dart';
 import 'media_detail_bottom_view.dart';
 import 'media_detail_description_view.dart';
@@ -26,8 +28,9 @@ class _MediaDetailState extends State<MediaDetail> {
   Media? media;
   MediaMetaData? meta;
   bool loading = false;
+  bool buttonloading = false;
 
-  // MediaProgress? mediaProgressBean;
+  MediaProgress? mediaProgressBean;
   LibraryItemDetail? libraryItemDetailBean;
   @override
   void initState() {
@@ -88,18 +91,10 @@ class _MediaDetailState extends State<MediaDetail> {
             width: double.infinity,
             height: double.infinity,
             alignment: Alignment.bottomCenter,
-            child: MediaDetailBottomView(libraryItemDetailBean, loading: loading,onPlayTap: (status) async{
+            child: MediaDetailBottomView(libraryItemDetailBean, mediaProgressBean, loading: buttonloading,onPlayTap: (status) async{
               if(status==PlayButtonState.paused){
                 // 播放
-                setState(() {
-                  loading=true;
-                });
-                var playBean = await AudiobookshelfApi().playMedia(widget.libraryid);
-                AudioPlayerService.playUrl(playBean?.libraryItem?.media?.episodes?.first.enclosure?.url??"");
-                Get.back();
-                setState(() {
-                  loading=false;
-                });
+                doPlay();
               }
             },),
           ),
@@ -108,12 +103,40 @@ class _MediaDetailState extends State<MediaDetail> {
     );
   }
 
+
+  void doPlay(){
+    setState(() {
+      buttonloading = true;
+    });
+    var playedDuration = mediaProgressBean?.currentTime??0.0;
+    var currentIndex = 0;
+    var tmpAddDuration=0.0;
+    for(int i=0;i<(libraryItemDetailBean?.media?.audioFiles?.length??0);i++){
+      var file = libraryItemDetailBean?.media?.audioFiles?.elementAt(i);
+      tmpAddDuration = tmpAddDuration+(file?.duration??0.0);
+      if(tmpAddDuration>playedDuration){
+        break;
+      }else{
+        currentIndex++;
+      }
+    }
+    var curFile = libraryItemDetailBean?.media?.audioFiles?.elementAt(currentIndex);
+    AudioPlayerService.isPlayingStream.listen((playing) {
+      setState(() {
+        buttonloading = playing;
+      });
+    });
+    AudioPlayerService.playUrl(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id??"", curFile?.ino??""));
+  }
   void initMediaStatus() async{
     setState(() {
       loading = true;
     });
     libraryItemDetailBean = await AudiobookshelfApi().libraryItemDetail(widget.libraryid);
-    // mediaProgressBean = await AudiobookshelfApi().mediaProgress(widget.libraryid);
+    mediaProgressBean = await AudiobookshelfApi().mediaProgress(widget.libraryid);
+    if(libraryItemDetailBean==null||mediaProgressBean==null){
+      ToastUtils.showError(context, "加载失败");
+    }
     setState(() {
       loading = false;
     });

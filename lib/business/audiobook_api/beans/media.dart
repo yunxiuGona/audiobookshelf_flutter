@@ -1,3 +1,4 @@
+import 'package:audio_book/business/audiobook_api/beans/audio_file.dart';
 import 'package:audio_book/business/audiobook_api/beans/play_media.dart';
 import 'package:audio_book/business/audiobook_api/beans/track.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,7 +21,7 @@ abstract class Media with _$Media {
     @JsonKey(name: 'tags') List<String>? tags,
     @JsonKey(name: 'episodes') List<Episodes>? episodes,
     @JsonKey(name: 'chapters') List<Chapter>? chapters,
-    @JsonKey(name: 'audioFiles') List<AudioFileMetaData>? audioFiles,
+    @JsonKey(name: 'audioFiles') List<AudioFile>? audioFiles,
     @JsonKey(name: 'tracks') List<Track>? tracks,
     @JsonKey(name: 'autoDownloadEpisodes') bool? autoDownloadEpisodes,
     @JsonKey(name: 'autoDownloadSchedule') String? autoDownloadSchedule,
