@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'media_meta_data_bean.dart';
+part of 'media_meta_data.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_MediaMetaDataBean _$MediaMetaDataBeanFromJson(Map<String, dynamic> json) =>
-    _MediaMetaDataBean(
+_MediaMetaData _$MediaMetaDataFromJson(Map<String, dynamic> json) =>
+    _MediaMetaData(
       title: json['title'] as String?,
       titleIgnorePrefix: json['titleIgnorePrefix'] as String?,
       subtitle: json['subtitle'],
@@ -38,7 +38,7 @@ _MediaMetaDataBean _$MediaMetaDataBeanFromJson(Map<String, dynamic> json) =>
       descriptionPlain: json['descriptionPlain'] as String?,
     );
 
-Map<String, dynamic> _$MediaMetaDataBeanToJson(_MediaMetaDataBean instance) =>
+Map<String, dynamic> _$MediaMetaDataToJson(_MediaMetaData instance) =>
     <String, dynamic>{
       'title': instance.title,
       'titleIgnorePrefix': instance.titleIgnorePrefix,

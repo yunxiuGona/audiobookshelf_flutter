@@ -1,10 +1,10 @@
-import 'package:audio_book/business/audiobook_api/beans/play_media_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/play_media.dart';
 import 'package:audio_book/business/audiobook_api/beans/track.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'audio_file_meta_data.dart';
 import 'episodes.dart';
-import 'media_meta_data_bean.dart';
+import 'media_meta_data.dart';
 
 part 'setting.freezed.dart';
 part 'setting.g.dart';

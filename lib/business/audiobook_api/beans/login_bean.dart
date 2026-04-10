@@ -67,7 +67,7 @@ abstract class User with _$User {
     @JsonKey(name: 'username') String? username,
     @JsonKey(name: 'type') String? type,
     @JsonKey(name: 'token') String? token,
-    @JsonKey(name: 'mediaProgress') List<MediaProgress>? mediaProgress,
+    @JsonKey(name: 'mediaProgress') List<LoginMediaProgress>? mediaProgress,
     @JsonKey(name: 'seriesHideFromContinueListening') List<dynamic>? seriesHideFromContinueListening,
     @JsonKey(name: 'bookmarks') List<dynamic>? bookmarks,
     @JsonKey(name: 'isActive') bool? isActive,
@@ -102,8 +102,8 @@ abstract class Permissions with _$Permissions {
 }
 
 @freezed
-abstract class MediaProgress with _$MediaProgress {
-  const factory MediaProgress({
+abstract class LoginMediaProgress with _$LoginMediaProgress {
+  const factory LoginMediaProgress({
     @JsonKey(name: 'id') String? id,
     @JsonKey(name: 'userId') String? userId,
     @JsonKey(name: 'libraryItemId') String? libraryItemId,
@@ -117,8 +117,8 @@ abstract class MediaProgress with _$MediaProgress {
     @JsonKey(name: 'ebookProgress') int? ebookProgress,
     @JsonKey(name: 'lastUpdate') int? lastUpdate,
     @JsonKey(name: 'startedAt') int? startedAt,
-  }) = _MediaProgress;
+  }) = _LoginMediaProgress;
 
-  factory MediaProgress.fromJson(Map<String, Object?> json) => _$MediaProgressFromJson(json);
+  factory LoginMediaProgress.fromJson(Map<String, Object?> json) => _$LoginMediaProgressFromJson(json);
 }
 

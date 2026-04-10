@@ -11,7 +11,7 @@ _Media _$MediaFromJson(Map<String, dynamic> json) => _Media(
   libraryItemId: json['libraryItemId'] as String?,
   metadata: json['metadata'] == null
       ? null
-      : MediaMetaDataBean.fromJson(json['metadata'] as Map<String, dynamic>),
+      : MediaMetaData.fromJson(json['metadata'] as Map<String, dynamic>),
   coverPath: json['coverPath'] as String?,
   tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
   episodes: (json['episodes'] as List<dynamic>?)

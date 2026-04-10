@@ -588,7 +588,7 @@ as int?,
 /// @nodoc
 mixin _$MediaLisItemBean {
 
-@JsonKey(name: 'metadata') MediaMetaDataBean? get metadata;@JsonKey(name: 'coverPath') String? get coverPath;@JsonKey(name: 'tags') List<dynamic>? get tags;@JsonKey(name: 'numTracks') int? get numTracks;@JsonKey(name: 'numAudioFiles') int? get numAudioFiles;@JsonKey(name: 'numChapters') int? get numChapters;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'size') int? get size;
+@JsonKey(name: 'metadata') MediaMetaData? get metadata;@JsonKey(name: 'coverPath') String? get coverPath;@JsonKey(name: 'tags') List<dynamic>? get tags;@JsonKey(name: 'numTracks') int? get numTracks;@JsonKey(name: 'numAudioFiles') int? get numAudioFiles;@JsonKey(name: 'numChapters') int? get numChapters;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'size') int? get size;
 /// Create a copy of MediaLisItemBean
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -621,11 +621,11 @@ abstract mixin class $MediaLisItemBeanCopyWith<$Res>  {
   factory $MediaLisItemBeanCopyWith(MediaLisItemBean value, $Res Function(MediaLisItemBean) _then) = _$MediaLisItemBeanCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'metadata') MediaMetaDataBean? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<dynamic>? tags,@JsonKey(name: 'numTracks') int? numTracks,@JsonKey(name: 'numAudioFiles') int? numAudioFiles,@JsonKey(name: 'numChapters') int? numChapters,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'size') int? size
+@JsonKey(name: 'metadata') MediaMetaData? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<dynamic>? tags,@JsonKey(name: 'numTracks') int? numTracks,@JsonKey(name: 'numAudioFiles') int? numAudioFiles,@JsonKey(name: 'numChapters') int? numChapters,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'size') int? size
 });
 
 
-$MediaMetaDataBeanCopyWith<$Res>? get metadata;
+$MediaMetaDataCopyWith<$Res>? get metadata;
 
 }
 /// @nodoc
@@ -641,7 +641,7 @@ class _$MediaLisItemBeanCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? metadata = freezed,Object? coverPath = freezed,Object? tags = freezed,Object? numTracks = freezed,Object? numAudioFiles = freezed,Object? numChapters = freezed,Object? duration = freezed,Object? size = freezed,}) {
   return _then(_self.copyWith(
 metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as MediaMetaDataBean?,coverPath: freezed == coverPath ? _self.coverPath : coverPath // ignore: cast_nullable_to_non_nullable
+as MediaMetaData?,coverPath: freezed == coverPath ? _self.coverPath : coverPath // ignore: cast_nullable_to_non_nullable
 as String?,tags: freezed == tags ? _self.tags : tags // ignore: cast_nullable_to_non_nullable
 as List<dynamic>?,numTracks: freezed == numTracks ? _self.numTracks : numTracks // ignore: cast_nullable_to_non_nullable
 as int?,numAudioFiles: freezed == numAudioFiles ? _self.numAudioFiles : numAudioFiles // ignore: cast_nullable_to_non_nullable
@@ -655,12 +655,12 @@ as int?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MediaMetaDataBeanCopyWith<$Res>? get metadata {
+$MediaMetaDataCopyWith<$Res>? get metadata {
     if (_self.metadata == null) {
     return null;
   }
 
-  return $MediaMetaDataBeanCopyWith<$Res>(_self.metadata!, (value) {
+  return $MediaMetaDataCopyWith<$Res>(_self.metadata!, (value) {
     return _then(_self.copyWith(metadata: value));
   });
 }
@@ -745,7 +745,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'metadata')  MediaMetaData? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MediaLisItemBean() when $default != null:
 return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.numAudioFiles,_that.numChapters,_that.duration,_that.size);case _:
@@ -766,7 +766,7 @@ return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'metadata')  MediaMetaData? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)  $default,) {final _that = this;
 switch (_that) {
 case _MediaLisItemBean():
 return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.numAudioFiles,_that.numChapters,_that.duration,_that.size);case _:
@@ -786,7 +786,7 @@ return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'metadata')  MediaMetaData? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)?  $default,) {final _that = this;
 switch (_that) {
 case _MediaLisItemBean() when $default != null:
 return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.numAudioFiles,_that.numChapters,_that.duration,_that.size);case _:
@@ -804,7 +804,7 @@ class _MediaLisItemBean implements MediaLisItemBean {
   const _MediaLisItemBean({@JsonKey(name: 'metadata') this.metadata, @JsonKey(name: 'coverPath') this.coverPath, @JsonKey(name: 'tags') final  List<dynamic>? tags, @JsonKey(name: 'numTracks') this.numTracks, @JsonKey(name: 'numAudioFiles') this.numAudioFiles, @JsonKey(name: 'numChapters') this.numChapters, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'size') this.size}): _tags = tags;
   factory _MediaLisItemBean.fromJson(Map<String, dynamic> json) => _$MediaLisItemBeanFromJson(json);
 
-@override@JsonKey(name: 'metadata') final  MediaMetaDataBean? metadata;
+@override@JsonKey(name: 'metadata') final  MediaMetaData? metadata;
 @override@JsonKey(name: 'coverPath') final  String? coverPath;
  final  List<dynamic>? _tags;
 @override@JsonKey(name: 'tags') List<dynamic>? get tags {
@@ -854,11 +854,11 @@ abstract mixin class _$MediaLisItemBeanCopyWith<$Res> implements $MediaLisItemBe
   factory _$MediaLisItemBeanCopyWith(_MediaLisItemBean value, $Res Function(_MediaLisItemBean) _then) = __$MediaLisItemBeanCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'metadata') MediaMetaDataBean? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<dynamic>? tags,@JsonKey(name: 'numTracks') int? numTracks,@JsonKey(name: 'numAudioFiles') int? numAudioFiles,@JsonKey(name: 'numChapters') int? numChapters,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'size') int? size
+@JsonKey(name: 'metadata') MediaMetaData? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<dynamic>? tags,@JsonKey(name: 'numTracks') int? numTracks,@JsonKey(name: 'numAudioFiles') int? numAudioFiles,@JsonKey(name: 'numChapters') int? numChapters,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'size') int? size
 });
 
 
-@override $MediaMetaDataBeanCopyWith<$Res>? get metadata;
+@override $MediaMetaDataCopyWith<$Res>? get metadata;
 
 }
 /// @nodoc
@@ -874,7 +874,7 @@ class __$MediaLisItemBeanCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? metadata = freezed,Object? coverPath = freezed,Object? tags = freezed,Object? numTracks = freezed,Object? numAudioFiles = freezed,Object? numChapters = freezed,Object? duration = freezed,Object? size = freezed,}) {
   return _then(_MediaLisItemBean(
 metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as MediaMetaDataBean?,coverPath: freezed == coverPath ? _self.coverPath : coverPath // ignore: cast_nullable_to_non_nullable
+as MediaMetaData?,coverPath: freezed == coverPath ? _self.coverPath : coverPath // ignore: cast_nullable_to_non_nullable
 as String?,tags: freezed == tags ? _self._tags : tags // ignore: cast_nullable_to_non_nullable
 as List<dynamic>?,numTracks: freezed == numTracks ? _self.numTracks : numTracks // ignore: cast_nullable_to_non_nullable
 as int?,numAudioFiles: freezed == numAudioFiles ? _self.numAudioFiles : numAudioFiles // ignore: cast_nullable_to_non_nullable
@@ -889,12 +889,12 @@ as int?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MediaMetaDataBeanCopyWith<$Res>? get metadata {
+$MediaMetaDataCopyWith<$Res>? get metadata {
     if (_self.metadata == null) {
     return null;
   }
 
-  return $MediaMetaDataBeanCopyWith<$Res>(_self.metadata!, (value) {
+  return $MediaMetaDataCopyWith<$Res>(_self.metadata!, (value) {
     return _then(_self.copyWith(metadata: value));
   });
 }

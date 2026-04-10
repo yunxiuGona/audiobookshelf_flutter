@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'media_progress_bean.dart';
+part of 'media_progress.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'media_progress_bean.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$MediaProgressBean {
+mixin _$MediaProgress {
 
 @JsonKey(name: 'id') String? get id;@JsonKey(name: 'libraryItemId') String? get libraryItemId;@JsonKey(name: 'episodeId') String? get episodeId;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'progress') double? get progress;@JsonKey(name: 'currentTime') double? get currentTime;@JsonKey(name: 'isFinished') bool? get isFinished;@JsonKey(name: 'hideFromContinueListening') bool? get hideFromContinueListening;@JsonKey(name: 'lastUpdate') int? get lastUpdate;@JsonKey(name: 'startedAt') int? get startedAt;@JsonKey(name: 'finishedAt') dynamic get finishedAt;
-/// Create a copy of MediaProgressBean
+/// Create a copy of MediaProgress
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$MediaProgressBeanCopyWith<MediaProgressBean> get copyWith => _$MediaProgressBeanCopyWithImpl<MediaProgressBean>(this as MediaProgressBean, _$identity);
+$MediaProgressCopyWith<MediaProgress> get copyWith => _$MediaProgressCopyWithImpl<MediaProgress>(this as MediaProgress, _$identity);
 
-  /// Serializes this MediaProgressBean to a JSON map.
+  /// Serializes this MediaProgress to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaProgressBean&&(identical(other.id, id) || other.id == id)&&(identical(other.libraryItemId, libraryItemId) || other.libraryItemId == libraryItemId)&&(identical(other.episodeId, episodeId) || other.episodeId == episodeId)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.currentTime, currentTime) || other.currentTime == currentTime)&&(identical(other.isFinished, isFinished) || other.isFinished == isFinished)&&(identical(other.hideFromContinueListening, hideFromContinueListening) || other.hideFromContinueListening == hideFromContinueListening)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&const DeepCollectionEquality().equals(other.finishedAt, finishedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaProgress&&(identical(other.id, id) || other.id == id)&&(identical(other.libraryItemId, libraryItemId) || other.libraryItemId == libraryItemId)&&(identical(other.episodeId, episodeId) || other.episodeId == episodeId)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.currentTime, currentTime) || other.currentTime == currentTime)&&(identical(other.isFinished, isFinished) || other.isFinished == isFinished)&&(identical(other.hideFromContinueListening, hideFromContinueListening) || other.hideFromContinueListening == hideFromContinueListening)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&const DeepCollectionEquality().equals(other.finishedAt, finishedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,id,libraryItemId,episodeId,duration,
 
 @override
 String toString() {
-  return 'MediaProgressBean(id: $id, libraryItemId: $libraryItemId, episodeId: $episodeId, duration: $duration, progress: $progress, currentTime: $currentTime, isFinished: $isFinished, hideFromContinueListening: $hideFromContinueListening, lastUpdate: $lastUpdate, startedAt: $startedAt, finishedAt: $finishedAt)';
+  return 'MediaProgress(id: $id, libraryItemId: $libraryItemId, episodeId: $episodeId, duration: $duration, progress: $progress, currentTime: $currentTime, isFinished: $isFinished, hideFromContinueListening: $hideFromContinueListening, lastUpdate: $lastUpdate, startedAt: $startedAt, finishedAt: $finishedAt)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $MediaProgressBeanCopyWith<$Res>  {
-  factory $MediaProgressBeanCopyWith(MediaProgressBean value, $Res Function(MediaProgressBean) _then) = _$MediaProgressBeanCopyWithImpl;
+abstract mixin class $MediaProgressCopyWith<$Res>  {
+  factory $MediaProgressCopyWith(MediaProgress value, $Res Function(MediaProgress) _then) = _$MediaProgressCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'id') String? id,@JsonKey(name: 'libraryItemId') String? libraryItemId,@JsonKey(name: 'episodeId') String? episodeId,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'progress') double? progress,@JsonKey(name: 'currentTime') double? currentTime,@JsonKey(name: 'isFinished') bool? isFinished,@JsonKey(name: 'hideFromContinueListening') bool? hideFromContinueListening,@JsonKey(name: 'lastUpdate') int? lastUpdate,@JsonKey(name: 'startedAt') int? startedAt,@JsonKey(name: 'finishedAt') dynamic finishedAt
@@ -56,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$MediaProgressBeanCopyWithImpl<$Res>
-    implements $MediaProgressBeanCopyWith<$Res> {
-  _$MediaProgressBeanCopyWithImpl(this._self, this._then);
+class _$MediaProgressCopyWithImpl<$Res>
+    implements $MediaProgressCopyWith<$Res> {
+  _$MediaProgressCopyWithImpl(this._self, this._then);
 
-  final MediaProgressBean _self;
-  final $Res Function(MediaProgressBean) _then;
+  final MediaProgress _self;
+  final $Res Function(MediaProgress) _then;
 
-/// Create a copy of MediaProgressBean
+/// Create a copy of MediaProgress
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? libraryItemId = freezed,Object? episodeId = freezed,Object? duration = freezed,Object? progress = freezed,Object? currentTime = freezed,Object? isFinished = freezed,Object? hideFromContinueListening = freezed,Object? lastUpdate = freezed,Object? startedAt = freezed,Object? finishedAt = freezed,}) {
   return _then(_self.copyWith(
@@ -85,8 +85,8 @@ as dynamic,
 }
 
 
-/// Adds pattern-matching-related methods to [MediaProgressBean].
-extension MediaProgressBeanPatterns on MediaProgressBean {
+/// Adds pattern-matching-related methods to [MediaProgress].
+extension MediaProgressPatterns on MediaProgress {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -99,10 +99,10 @@ extension MediaProgressBeanPatterns on MediaProgressBean {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MediaProgressBean value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MediaProgress value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _MediaProgressBean() when $default != null:
+case _MediaProgress() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -121,10 +121,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MediaProgressBean value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MediaProgress value)  $default,){
 final _that = this;
 switch (_that) {
-case _MediaProgressBean():
+case _MediaProgress():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -142,10 +142,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MediaProgressBean value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MediaProgress value)?  $default,){
 final _that = this;
 switch (_that) {
-case _MediaProgressBean() when $default != null:
+case _MediaProgress() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -165,7 +165,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'episodeId')  String? episodeId, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'progress')  double? progress, @JsonKey(name: 'currentTime')  double? currentTime, @JsonKey(name: 'isFinished')  bool? isFinished, @JsonKey(name: 'hideFromContinueListening')  bool? hideFromContinueListening, @JsonKey(name: 'lastUpdate')  int? lastUpdate, @JsonKey(name: 'startedAt')  int? startedAt, @JsonKey(name: 'finishedAt')  dynamic finishedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _MediaProgressBean() when $default != null:
+case _MediaProgress() when $default != null:
 return $default(_that.id,_that.libraryItemId,_that.episodeId,_that.duration,_that.progress,_that.currentTime,_that.isFinished,_that.hideFromContinueListening,_that.lastUpdate,_that.startedAt,_that.finishedAt);case _:
   return orElse();
 
@@ -186,7 +186,7 @@ return $default(_that.id,_that.libraryItemId,_that.episodeId,_that.duration,_tha
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'episodeId')  String? episodeId, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'progress')  double? progress, @JsonKey(name: 'currentTime')  double? currentTime, @JsonKey(name: 'isFinished')  bool? isFinished, @JsonKey(name: 'hideFromContinueListening')  bool? hideFromContinueListening, @JsonKey(name: 'lastUpdate')  int? lastUpdate, @JsonKey(name: 'startedAt')  int? startedAt, @JsonKey(name: 'finishedAt')  dynamic finishedAt)  $default,) {final _that = this;
 switch (_that) {
-case _MediaProgressBean():
+case _MediaProgress():
 return $default(_that.id,_that.libraryItemId,_that.episodeId,_that.duration,_that.progress,_that.currentTime,_that.isFinished,_that.hideFromContinueListening,_that.lastUpdate,_that.startedAt,_that.finishedAt);case _:
   throw StateError('Unexpected subclass');
 
@@ -206,7 +206,7 @@ return $default(_that.id,_that.libraryItemId,_that.episodeId,_that.duration,_tha
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'episodeId')  String? episodeId, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'progress')  double? progress, @JsonKey(name: 'currentTime')  double? currentTime, @JsonKey(name: 'isFinished')  bool? isFinished, @JsonKey(name: 'hideFromContinueListening')  bool? hideFromContinueListening, @JsonKey(name: 'lastUpdate')  int? lastUpdate, @JsonKey(name: 'startedAt')  int? startedAt, @JsonKey(name: 'finishedAt')  dynamic finishedAt)?  $default,) {final _that = this;
 switch (_that) {
-case _MediaProgressBean() when $default != null:
+case _MediaProgress() when $default != null:
 return $default(_that.id,_that.libraryItemId,_that.episodeId,_that.duration,_that.progress,_that.currentTime,_that.isFinished,_that.hideFromContinueListening,_that.lastUpdate,_that.startedAt,_that.finishedAt);case _:
   return null;
 
@@ -218,9 +218,9 @@ return $default(_that.id,_that.libraryItemId,_that.episodeId,_that.duration,_tha
 /// @nodoc
 @JsonSerializable()
 
-class _MediaProgressBean implements MediaProgressBean {
-  const _MediaProgressBean({@JsonKey(name: 'id') this.id, @JsonKey(name: 'libraryItemId') this.libraryItemId, @JsonKey(name: 'episodeId') this.episodeId, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'progress') this.progress, @JsonKey(name: 'currentTime') this.currentTime, @JsonKey(name: 'isFinished') this.isFinished, @JsonKey(name: 'hideFromContinueListening') this.hideFromContinueListening, @JsonKey(name: 'lastUpdate') this.lastUpdate, @JsonKey(name: 'startedAt') this.startedAt, @JsonKey(name: 'finishedAt') this.finishedAt});
-  factory _MediaProgressBean.fromJson(Map<String, dynamic> json) => _$MediaProgressBeanFromJson(json);
+class _MediaProgress implements MediaProgress {
+  const _MediaProgress({@JsonKey(name: 'id') this.id, @JsonKey(name: 'libraryItemId') this.libraryItemId, @JsonKey(name: 'episodeId') this.episodeId, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'progress') this.progress, @JsonKey(name: 'currentTime') this.currentTime, @JsonKey(name: 'isFinished') this.isFinished, @JsonKey(name: 'hideFromContinueListening') this.hideFromContinueListening, @JsonKey(name: 'lastUpdate') this.lastUpdate, @JsonKey(name: 'startedAt') this.startedAt, @JsonKey(name: 'finishedAt') this.finishedAt});
+  factory _MediaProgress.fromJson(Map<String, dynamic> json) => _$MediaProgressFromJson(json);
 
 @override@JsonKey(name: 'id') final  String? id;
 @override@JsonKey(name: 'libraryItemId') final  String? libraryItemId;
@@ -234,20 +234,20 @@ class _MediaProgressBean implements MediaProgressBean {
 @override@JsonKey(name: 'startedAt') final  int? startedAt;
 @override@JsonKey(name: 'finishedAt') final  dynamic finishedAt;
 
-/// Create a copy of MediaProgressBean
+/// Create a copy of MediaProgress
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$MediaProgressBeanCopyWith<_MediaProgressBean> get copyWith => __$MediaProgressBeanCopyWithImpl<_MediaProgressBean>(this, _$identity);
+_$MediaProgressCopyWith<_MediaProgress> get copyWith => __$MediaProgressCopyWithImpl<_MediaProgress>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$MediaProgressBeanToJson(this, );
+  return _$MediaProgressToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MediaProgressBean&&(identical(other.id, id) || other.id == id)&&(identical(other.libraryItemId, libraryItemId) || other.libraryItemId == libraryItemId)&&(identical(other.episodeId, episodeId) || other.episodeId == episodeId)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.currentTime, currentTime) || other.currentTime == currentTime)&&(identical(other.isFinished, isFinished) || other.isFinished == isFinished)&&(identical(other.hideFromContinueListening, hideFromContinueListening) || other.hideFromContinueListening == hideFromContinueListening)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&const DeepCollectionEquality().equals(other.finishedAt, finishedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MediaProgress&&(identical(other.id, id) || other.id == id)&&(identical(other.libraryItemId, libraryItemId) || other.libraryItemId == libraryItemId)&&(identical(other.episodeId, episodeId) || other.episodeId == episodeId)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.currentTime, currentTime) || other.currentTime == currentTime)&&(identical(other.isFinished, isFinished) || other.isFinished == isFinished)&&(identical(other.hideFromContinueListening, hideFromContinueListening) || other.hideFromContinueListening == hideFromContinueListening)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&const DeepCollectionEquality().equals(other.finishedAt, finishedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -256,15 +256,15 @@ int get hashCode => Object.hash(runtimeType,id,libraryItemId,episodeId,duration,
 
 @override
 String toString() {
-  return 'MediaProgressBean(id: $id, libraryItemId: $libraryItemId, episodeId: $episodeId, duration: $duration, progress: $progress, currentTime: $currentTime, isFinished: $isFinished, hideFromContinueListening: $hideFromContinueListening, lastUpdate: $lastUpdate, startedAt: $startedAt, finishedAt: $finishedAt)';
+  return 'MediaProgress(id: $id, libraryItemId: $libraryItemId, episodeId: $episodeId, duration: $duration, progress: $progress, currentTime: $currentTime, isFinished: $isFinished, hideFromContinueListening: $hideFromContinueListening, lastUpdate: $lastUpdate, startedAt: $startedAt, finishedAt: $finishedAt)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$MediaProgressBeanCopyWith<$Res> implements $MediaProgressBeanCopyWith<$Res> {
-  factory _$MediaProgressBeanCopyWith(_MediaProgressBean value, $Res Function(_MediaProgressBean) _then) = __$MediaProgressBeanCopyWithImpl;
+abstract mixin class _$MediaProgressCopyWith<$Res> implements $MediaProgressCopyWith<$Res> {
+  factory _$MediaProgressCopyWith(_MediaProgress value, $Res Function(_MediaProgress) _then) = __$MediaProgressCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'id') String? id,@JsonKey(name: 'libraryItemId') String? libraryItemId,@JsonKey(name: 'episodeId') String? episodeId,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'progress') double? progress,@JsonKey(name: 'currentTime') double? currentTime,@JsonKey(name: 'isFinished') bool? isFinished,@JsonKey(name: 'hideFromContinueListening') bool? hideFromContinueListening,@JsonKey(name: 'lastUpdate') int? lastUpdate,@JsonKey(name: 'startedAt') int? startedAt,@JsonKey(name: 'finishedAt') dynamic finishedAt
@@ -275,17 +275,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$MediaProgressBeanCopyWithImpl<$Res>
-    implements _$MediaProgressBeanCopyWith<$Res> {
-  __$MediaProgressBeanCopyWithImpl(this._self, this._then);
+class __$MediaProgressCopyWithImpl<$Res>
+    implements _$MediaProgressCopyWith<$Res> {
+  __$MediaProgressCopyWithImpl(this._self, this._then);
 
-  final _MediaProgressBean _self;
-  final $Res Function(_MediaProgressBean) _then;
+  final _MediaProgress _self;
+  final $Res Function(_MediaProgress) _then;
 
-/// Create a copy of MediaProgressBean
+/// Create a copy of MediaProgress
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? libraryItemId = freezed,Object? episodeId = freezed,Object? duration = freezed,Object? progress = freezed,Object? currentTime = freezed,Object? isFinished = freezed,Object? hideFromContinueListening = freezed,Object? lastUpdate = freezed,Object? startedAt = freezed,Object? finishedAt = freezed,}) {
-  return _then(_MediaProgressBean(
+  return _then(_MediaProgress(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,libraryItemId: freezed == libraryItemId ? _self.libraryItemId : libraryItemId // ignore: cast_nullable_to_non_nullable
 as String?,episodeId: freezed == episodeId ? _self.episodeId : episodeId // ignore: cast_nullable_to_non_nullable

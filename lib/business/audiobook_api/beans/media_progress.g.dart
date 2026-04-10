@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'media_progress_bean.dart';
+part of 'media_progress.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_MediaProgressBean _$MediaProgressBeanFromJson(Map<String, dynamic> json) =>
-    _MediaProgressBean(
+_MediaProgress _$MediaProgressFromJson(Map<String, dynamic> json) =>
+    _MediaProgress(
       id: json['id'] as String?,
       libraryItemId: json['libraryItemId'] as String?,
       episodeId: json['episodeId'] as String?,
@@ -21,7 +21,7 @@ _MediaProgressBean _$MediaProgressBeanFromJson(Map<String, dynamic> json) =>
       finishedAt: json['finishedAt'],
     );
 
-Map<String, dynamic> _$MediaProgressBeanToJson(_MediaProgressBean instance) =>
+Map<String, dynamic> _$MediaProgressToJson(_MediaProgress instance) =>
     <String, dynamic>{
       'id': instance.id,
       'libraryItemId': instance.libraryItemId,

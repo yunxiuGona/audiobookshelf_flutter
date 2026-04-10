@@ -3,7 +3,7 @@ import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart'
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:flutter/material.dart';
 import '../../audiobook_api/beans/library_item_detail.dart';
-import '../../audiobook_api/beans/media_progress_bean.dart';
+import '../../audiobook_api/beans/media_progress.dart';
 
 class MediaDetailBottomView extends StatefulWidget {
   LibraryItemDetail? libraryItemDetailBean;

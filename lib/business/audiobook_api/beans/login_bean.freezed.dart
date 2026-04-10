@@ -738,7 +738,7 @@ as bool?,
 /// @nodoc
 mixin _$User {
 
-@JsonKey(name: 'id') String? get id;@JsonKey(name: 'username') String? get username;@JsonKey(name: 'type') String? get type;@JsonKey(name: 'token') String? get token;@JsonKey(name: 'mediaProgress') List<MediaProgress>? get mediaProgress;@JsonKey(name: 'seriesHideFromContinueListening') List<dynamic>? get seriesHideFromContinueListening;@JsonKey(name: 'bookmarks') List<dynamic>? get bookmarks;@JsonKey(name: 'isActive') bool? get isActive;@JsonKey(name: 'isLocked') bool? get isLocked;@JsonKey(name: 'lastSeen') int? get lastSeen;@JsonKey(name: 'createdAt') int? get createdAt;@JsonKey(name: 'permissions') Permissions? get permissions;@JsonKey(name: 'librariesAccessible') List<dynamic>? get librariesAccessible;@JsonKey(name: 'itemTagsSelected') List<dynamic>? get itemTagsSelected;@JsonKey(name: 'hasOpenIDLink') bool? get hasOpenIDLink;@JsonKey(name: 'accessToken') String? get accessToken;
+@JsonKey(name: 'id') String? get id;@JsonKey(name: 'username') String? get username;@JsonKey(name: 'type') String? get type;@JsonKey(name: 'token') String? get token;@JsonKey(name: 'mediaProgress') List<LoginMediaProgress>? get mediaProgress;@JsonKey(name: 'seriesHideFromContinueListening') List<dynamic>? get seriesHideFromContinueListening;@JsonKey(name: 'bookmarks') List<dynamic>? get bookmarks;@JsonKey(name: 'isActive') bool? get isActive;@JsonKey(name: 'isLocked') bool? get isLocked;@JsonKey(name: 'lastSeen') int? get lastSeen;@JsonKey(name: 'createdAt') int? get createdAt;@JsonKey(name: 'permissions') Permissions? get permissions;@JsonKey(name: 'librariesAccessible') List<dynamic>? get librariesAccessible;@JsonKey(name: 'itemTagsSelected') List<dynamic>? get itemTagsSelected;@JsonKey(name: 'hasOpenIDLink') bool? get hasOpenIDLink;@JsonKey(name: 'accessToken') String? get accessToken;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -771,7 +771,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'id') String? id,@JsonKey(name: 'username') String? username,@JsonKey(name: 'type') String? type,@JsonKey(name: 'token') String? token,@JsonKey(name: 'mediaProgress') List<MediaProgress>? mediaProgress,@JsonKey(name: 'seriesHideFromContinueListening') List<dynamic>? seriesHideFromContinueListening,@JsonKey(name: 'bookmarks') List<dynamic>? bookmarks,@JsonKey(name: 'isActive') bool? isActive,@JsonKey(name: 'isLocked') bool? isLocked,@JsonKey(name: 'lastSeen') int? lastSeen,@JsonKey(name: 'createdAt') int? createdAt,@JsonKey(name: 'permissions') Permissions? permissions,@JsonKey(name: 'librariesAccessible') List<dynamic>? librariesAccessible,@JsonKey(name: 'itemTagsSelected') List<dynamic>? itemTagsSelected,@JsonKey(name: 'hasOpenIDLink') bool? hasOpenIDLink,@JsonKey(name: 'accessToken') String? accessToken
+@JsonKey(name: 'id') String? id,@JsonKey(name: 'username') String? username,@JsonKey(name: 'type') String? type,@JsonKey(name: 'token') String? token,@JsonKey(name: 'mediaProgress') List<LoginMediaProgress>? mediaProgress,@JsonKey(name: 'seriesHideFromContinueListening') List<dynamic>? seriesHideFromContinueListening,@JsonKey(name: 'bookmarks') List<dynamic>? bookmarks,@JsonKey(name: 'isActive') bool? isActive,@JsonKey(name: 'isLocked') bool? isLocked,@JsonKey(name: 'lastSeen') int? lastSeen,@JsonKey(name: 'createdAt') int? createdAt,@JsonKey(name: 'permissions') Permissions? permissions,@JsonKey(name: 'librariesAccessible') List<dynamic>? librariesAccessible,@JsonKey(name: 'itemTagsSelected') List<dynamic>? itemTagsSelected,@JsonKey(name: 'hasOpenIDLink') bool? hasOpenIDLink,@JsonKey(name: 'accessToken') String? accessToken
 });
 
 
@@ -795,7 +795,7 @@ as String?,username: freezed == username ? _self.username : username // ignore: 
 as String?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String?,token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
 as String?,mediaProgress: freezed == mediaProgress ? _self.mediaProgress : mediaProgress // ignore: cast_nullable_to_non_nullable
-as List<MediaProgress>?,seriesHideFromContinueListening: freezed == seriesHideFromContinueListening ? _self.seriesHideFromContinueListening : seriesHideFromContinueListening // ignore: cast_nullable_to_non_nullable
+as List<LoginMediaProgress>?,seriesHideFromContinueListening: freezed == seriesHideFromContinueListening ? _self.seriesHideFromContinueListening : seriesHideFromContinueListening // ignore: cast_nullable_to_non_nullable
 as List<dynamic>?,bookmarks: freezed == bookmarks ? _self.bookmarks : bookmarks // ignore: cast_nullable_to_non_nullable
 as List<dynamic>?,isActive: freezed == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
 as bool?,isLocked: freezed == isLocked ? _self.isLocked : isLocked // ignore: cast_nullable_to_non_nullable
@@ -903,7 +903,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'username')  String? username, @JsonKey(name: 'type')  String? type, @JsonKey(name: 'token')  String? token, @JsonKey(name: 'mediaProgress')  List<MediaProgress>? mediaProgress, @JsonKey(name: 'seriesHideFromContinueListening')  List<dynamic>? seriesHideFromContinueListening, @JsonKey(name: 'bookmarks')  List<dynamic>? bookmarks, @JsonKey(name: 'isActive')  bool? isActive, @JsonKey(name: 'isLocked')  bool? isLocked, @JsonKey(name: 'lastSeen')  int? lastSeen, @JsonKey(name: 'createdAt')  int? createdAt, @JsonKey(name: 'permissions')  Permissions? permissions, @JsonKey(name: 'librariesAccessible')  List<dynamic>? librariesAccessible, @JsonKey(name: 'itemTagsSelected')  List<dynamic>? itemTagsSelected, @JsonKey(name: 'hasOpenIDLink')  bool? hasOpenIDLink, @JsonKey(name: 'accessToken')  String? accessToken)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'username')  String? username, @JsonKey(name: 'type')  String? type, @JsonKey(name: 'token')  String? token, @JsonKey(name: 'mediaProgress')  List<LoginMediaProgress>? mediaProgress, @JsonKey(name: 'seriesHideFromContinueListening')  List<dynamic>? seriesHideFromContinueListening, @JsonKey(name: 'bookmarks')  List<dynamic>? bookmarks, @JsonKey(name: 'isActive')  bool? isActive, @JsonKey(name: 'isLocked')  bool? isLocked, @JsonKey(name: 'lastSeen')  int? lastSeen, @JsonKey(name: 'createdAt')  int? createdAt, @JsonKey(name: 'permissions')  Permissions? permissions, @JsonKey(name: 'librariesAccessible')  List<dynamic>? librariesAccessible, @JsonKey(name: 'itemTagsSelected')  List<dynamic>? itemTagsSelected, @JsonKey(name: 'hasOpenIDLink')  bool? hasOpenIDLink, @JsonKey(name: 'accessToken')  String? accessToken)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.id,_that.username,_that.type,_that.token,_that.mediaProgress,_that.seriesHideFromContinueListening,_that.bookmarks,_that.isActive,_that.isLocked,_that.lastSeen,_that.createdAt,_that.permissions,_that.librariesAccessible,_that.itemTagsSelected,_that.hasOpenIDLink,_that.accessToken);case _:
@@ -924,7 +924,7 @@ return $default(_that.id,_that.username,_that.type,_that.token,_that.mediaProgre
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'username')  String? username, @JsonKey(name: 'type')  String? type, @JsonKey(name: 'token')  String? token, @JsonKey(name: 'mediaProgress')  List<MediaProgress>? mediaProgress, @JsonKey(name: 'seriesHideFromContinueListening')  List<dynamic>? seriesHideFromContinueListening, @JsonKey(name: 'bookmarks')  List<dynamic>? bookmarks, @JsonKey(name: 'isActive')  bool? isActive, @JsonKey(name: 'isLocked')  bool? isLocked, @JsonKey(name: 'lastSeen')  int? lastSeen, @JsonKey(name: 'createdAt')  int? createdAt, @JsonKey(name: 'permissions')  Permissions? permissions, @JsonKey(name: 'librariesAccessible')  List<dynamic>? librariesAccessible, @JsonKey(name: 'itemTagsSelected')  List<dynamic>? itemTagsSelected, @JsonKey(name: 'hasOpenIDLink')  bool? hasOpenIDLink, @JsonKey(name: 'accessToken')  String? accessToken)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'username')  String? username, @JsonKey(name: 'type')  String? type, @JsonKey(name: 'token')  String? token, @JsonKey(name: 'mediaProgress')  List<LoginMediaProgress>? mediaProgress, @JsonKey(name: 'seriesHideFromContinueListening')  List<dynamic>? seriesHideFromContinueListening, @JsonKey(name: 'bookmarks')  List<dynamic>? bookmarks, @JsonKey(name: 'isActive')  bool? isActive, @JsonKey(name: 'isLocked')  bool? isLocked, @JsonKey(name: 'lastSeen')  int? lastSeen, @JsonKey(name: 'createdAt')  int? createdAt, @JsonKey(name: 'permissions')  Permissions? permissions, @JsonKey(name: 'librariesAccessible')  List<dynamic>? librariesAccessible, @JsonKey(name: 'itemTagsSelected')  List<dynamic>? itemTagsSelected, @JsonKey(name: 'hasOpenIDLink')  bool? hasOpenIDLink, @JsonKey(name: 'accessToken')  String? accessToken)  $default,) {final _that = this;
 switch (_that) {
 case _User():
 return $default(_that.id,_that.username,_that.type,_that.token,_that.mediaProgress,_that.seriesHideFromContinueListening,_that.bookmarks,_that.isActive,_that.isLocked,_that.lastSeen,_that.createdAt,_that.permissions,_that.librariesAccessible,_that.itemTagsSelected,_that.hasOpenIDLink,_that.accessToken);case _:
@@ -944,7 +944,7 @@ return $default(_that.id,_that.username,_that.type,_that.token,_that.mediaProgre
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'username')  String? username, @JsonKey(name: 'type')  String? type, @JsonKey(name: 'token')  String? token, @JsonKey(name: 'mediaProgress')  List<MediaProgress>? mediaProgress, @JsonKey(name: 'seriesHideFromContinueListening')  List<dynamic>? seriesHideFromContinueListening, @JsonKey(name: 'bookmarks')  List<dynamic>? bookmarks, @JsonKey(name: 'isActive')  bool? isActive, @JsonKey(name: 'isLocked')  bool? isLocked, @JsonKey(name: 'lastSeen')  int? lastSeen, @JsonKey(name: 'createdAt')  int? createdAt, @JsonKey(name: 'permissions')  Permissions? permissions, @JsonKey(name: 'librariesAccessible')  List<dynamic>? librariesAccessible, @JsonKey(name: 'itemTagsSelected')  List<dynamic>? itemTagsSelected, @JsonKey(name: 'hasOpenIDLink')  bool? hasOpenIDLink, @JsonKey(name: 'accessToken')  String? accessToken)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'username')  String? username, @JsonKey(name: 'type')  String? type, @JsonKey(name: 'token')  String? token, @JsonKey(name: 'mediaProgress')  List<LoginMediaProgress>? mediaProgress, @JsonKey(name: 'seriesHideFromContinueListening')  List<dynamic>? seriesHideFromContinueListening, @JsonKey(name: 'bookmarks')  List<dynamic>? bookmarks, @JsonKey(name: 'isActive')  bool? isActive, @JsonKey(name: 'isLocked')  bool? isLocked, @JsonKey(name: 'lastSeen')  int? lastSeen, @JsonKey(name: 'createdAt')  int? createdAt, @JsonKey(name: 'permissions')  Permissions? permissions, @JsonKey(name: 'librariesAccessible')  List<dynamic>? librariesAccessible, @JsonKey(name: 'itemTagsSelected')  List<dynamic>? itemTagsSelected, @JsonKey(name: 'hasOpenIDLink')  bool? hasOpenIDLink, @JsonKey(name: 'accessToken')  String? accessToken)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.id,_that.username,_that.type,_that.token,_that.mediaProgress,_that.seriesHideFromContinueListening,_that.bookmarks,_that.isActive,_that.isLocked,_that.lastSeen,_that.createdAt,_that.permissions,_that.librariesAccessible,_that.itemTagsSelected,_that.hasOpenIDLink,_that.accessToken);case _:
@@ -959,15 +959,15 @@ return $default(_that.id,_that.username,_that.type,_that.token,_that.mediaProgre
 @JsonSerializable()
 
 class _User implements User {
-  const _User({@JsonKey(name: 'id') this.id, @JsonKey(name: 'username') this.username, @JsonKey(name: 'type') this.type, @JsonKey(name: 'token') this.token, @JsonKey(name: 'mediaProgress') final  List<MediaProgress>? mediaProgress, @JsonKey(name: 'seriesHideFromContinueListening') final  List<dynamic>? seriesHideFromContinueListening, @JsonKey(name: 'bookmarks') final  List<dynamic>? bookmarks, @JsonKey(name: 'isActive') this.isActive, @JsonKey(name: 'isLocked') this.isLocked, @JsonKey(name: 'lastSeen') this.lastSeen, @JsonKey(name: 'createdAt') this.createdAt, @JsonKey(name: 'permissions') this.permissions, @JsonKey(name: 'librariesAccessible') final  List<dynamic>? librariesAccessible, @JsonKey(name: 'itemTagsSelected') final  List<dynamic>? itemTagsSelected, @JsonKey(name: 'hasOpenIDLink') this.hasOpenIDLink, @JsonKey(name: 'accessToken') this.accessToken}): _mediaProgress = mediaProgress,_seriesHideFromContinueListening = seriesHideFromContinueListening,_bookmarks = bookmarks,_librariesAccessible = librariesAccessible,_itemTagsSelected = itemTagsSelected;
+  const _User({@JsonKey(name: 'id') this.id, @JsonKey(name: 'username') this.username, @JsonKey(name: 'type') this.type, @JsonKey(name: 'token') this.token, @JsonKey(name: 'mediaProgress') final  List<LoginMediaProgress>? mediaProgress, @JsonKey(name: 'seriesHideFromContinueListening') final  List<dynamic>? seriesHideFromContinueListening, @JsonKey(name: 'bookmarks') final  List<dynamic>? bookmarks, @JsonKey(name: 'isActive') this.isActive, @JsonKey(name: 'isLocked') this.isLocked, @JsonKey(name: 'lastSeen') this.lastSeen, @JsonKey(name: 'createdAt') this.createdAt, @JsonKey(name: 'permissions') this.permissions, @JsonKey(name: 'librariesAccessible') final  List<dynamic>? librariesAccessible, @JsonKey(name: 'itemTagsSelected') final  List<dynamic>? itemTagsSelected, @JsonKey(name: 'hasOpenIDLink') this.hasOpenIDLink, @JsonKey(name: 'accessToken') this.accessToken}): _mediaProgress = mediaProgress,_seriesHideFromContinueListening = seriesHideFromContinueListening,_bookmarks = bookmarks,_librariesAccessible = librariesAccessible,_itemTagsSelected = itemTagsSelected;
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
 @override@JsonKey(name: 'id') final  String? id;
 @override@JsonKey(name: 'username') final  String? username;
 @override@JsonKey(name: 'type') final  String? type;
 @override@JsonKey(name: 'token') final  String? token;
- final  List<MediaProgress>? _mediaProgress;
-@override@JsonKey(name: 'mediaProgress') List<MediaProgress>? get mediaProgress {
+ final  List<LoginMediaProgress>? _mediaProgress;
+@override@JsonKey(name: 'mediaProgress') List<LoginMediaProgress>? get mediaProgress {
   final value = _mediaProgress;
   if (value == null) return null;
   if (_mediaProgress is EqualUnmodifiableListView) return _mediaProgress;
@@ -1052,7 +1052,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'id') String? id,@JsonKey(name: 'username') String? username,@JsonKey(name: 'type') String? type,@JsonKey(name: 'token') String? token,@JsonKey(name: 'mediaProgress') List<MediaProgress>? mediaProgress,@JsonKey(name: 'seriesHideFromContinueListening') List<dynamic>? seriesHideFromContinueListening,@JsonKey(name: 'bookmarks') List<dynamic>? bookmarks,@JsonKey(name: 'isActive') bool? isActive,@JsonKey(name: 'isLocked') bool? isLocked,@JsonKey(name: 'lastSeen') int? lastSeen,@JsonKey(name: 'createdAt') int? createdAt,@JsonKey(name: 'permissions') Permissions? permissions,@JsonKey(name: 'librariesAccessible') List<dynamic>? librariesAccessible,@JsonKey(name: 'itemTagsSelected') List<dynamic>? itemTagsSelected,@JsonKey(name: 'hasOpenIDLink') bool? hasOpenIDLink,@JsonKey(name: 'accessToken') String? accessToken
+@JsonKey(name: 'id') String? id,@JsonKey(name: 'username') String? username,@JsonKey(name: 'type') String? type,@JsonKey(name: 'token') String? token,@JsonKey(name: 'mediaProgress') List<LoginMediaProgress>? mediaProgress,@JsonKey(name: 'seriesHideFromContinueListening') List<dynamic>? seriesHideFromContinueListening,@JsonKey(name: 'bookmarks') List<dynamic>? bookmarks,@JsonKey(name: 'isActive') bool? isActive,@JsonKey(name: 'isLocked') bool? isLocked,@JsonKey(name: 'lastSeen') int? lastSeen,@JsonKey(name: 'createdAt') int? createdAt,@JsonKey(name: 'permissions') Permissions? permissions,@JsonKey(name: 'librariesAccessible') List<dynamic>? librariesAccessible,@JsonKey(name: 'itemTagsSelected') List<dynamic>? itemTagsSelected,@JsonKey(name: 'hasOpenIDLink') bool? hasOpenIDLink,@JsonKey(name: 'accessToken') String? accessToken
 });
 
 
@@ -1076,7 +1076,7 @@ as String?,username: freezed == username ? _self.username : username // ignore: 
 as String?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String?,token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
 as String?,mediaProgress: freezed == mediaProgress ? _self._mediaProgress : mediaProgress // ignore: cast_nullable_to_non_nullable
-as List<MediaProgress>?,seriesHideFromContinueListening: freezed == seriesHideFromContinueListening ? _self._seriesHideFromContinueListening : seriesHideFromContinueListening // ignore: cast_nullable_to_non_nullable
+as List<LoginMediaProgress>?,seriesHideFromContinueListening: freezed == seriesHideFromContinueListening ? _self._seriesHideFromContinueListening : seriesHideFromContinueListening // ignore: cast_nullable_to_non_nullable
 as List<dynamic>?,bookmarks: freezed == bookmarks ? _self._bookmarks : bookmarks // ignore: cast_nullable_to_non_nullable
 as List<dynamic>?,isActive: freezed == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
 as bool?,isLocked: freezed == isLocked ? _self.isLocked : isLocked // ignore: cast_nullable_to_non_nullable
@@ -1395,22 +1395,22 @@ as bool?,
 
 
 /// @nodoc
-mixin _$MediaProgress {
+mixin _$LoginMediaProgress {
 
 @JsonKey(name: 'id') String? get id;@JsonKey(name: 'userId') String? get userId;@JsonKey(name: 'libraryItemId') String? get libraryItemId;@JsonKey(name: 'mediaItemId') String? get mediaItemId;@JsonKey(name: 'mediaItemType') String? get mediaItemType;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'progress') int? get progress;@JsonKey(name: 'currentTime') int? get currentTime;@JsonKey(name: 'isFinished') bool? get isFinished;@JsonKey(name: 'hideFromContinueListening') bool? get hideFromContinueListening;@JsonKey(name: 'ebookProgress') int? get ebookProgress;@JsonKey(name: 'lastUpdate') int? get lastUpdate;@JsonKey(name: 'startedAt') int? get startedAt;
-/// Create a copy of MediaProgress
+/// Create a copy of LoginMediaProgress
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$MediaProgressCopyWith<MediaProgress> get copyWith => _$MediaProgressCopyWithImpl<MediaProgress>(this as MediaProgress, _$identity);
+$LoginMediaProgressCopyWith<LoginMediaProgress> get copyWith => _$LoginMediaProgressCopyWithImpl<LoginMediaProgress>(this as LoginMediaProgress, _$identity);
 
-  /// Serializes this MediaProgress to a JSON map.
+  /// Serializes this LoginMediaProgress to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaProgress&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.libraryItemId, libraryItemId) || other.libraryItemId == libraryItemId)&&(identical(other.mediaItemId, mediaItemId) || other.mediaItemId == mediaItemId)&&(identical(other.mediaItemType, mediaItemType) || other.mediaItemType == mediaItemType)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.currentTime, currentTime) || other.currentTime == currentTime)&&(identical(other.isFinished, isFinished) || other.isFinished == isFinished)&&(identical(other.hideFromContinueListening, hideFromContinueListening) || other.hideFromContinueListening == hideFromContinueListening)&&(identical(other.ebookProgress, ebookProgress) || other.ebookProgress == ebookProgress)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginMediaProgress&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.libraryItemId, libraryItemId) || other.libraryItemId == libraryItemId)&&(identical(other.mediaItemId, mediaItemId) || other.mediaItemId == mediaItemId)&&(identical(other.mediaItemType, mediaItemType) || other.mediaItemType == mediaItemType)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.currentTime, currentTime) || other.currentTime == currentTime)&&(identical(other.isFinished, isFinished) || other.isFinished == isFinished)&&(identical(other.hideFromContinueListening, hideFromContinueListening) || other.hideFromContinueListening == hideFromContinueListening)&&(identical(other.ebookProgress, ebookProgress) || other.ebookProgress == ebookProgress)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1419,15 +1419,15 @@ int get hashCode => Object.hash(runtimeType,id,userId,libraryItemId,mediaItemId,
 
 @override
 String toString() {
-  return 'MediaProgress(id: $id, userId: $userId, libraryItemId: $libraryItemId, mediaItemId: $mediaItemId, mediaItemType: $mediaItemType, duration: $duration, progress: $progress, currentTime: $currentTime, isFinished: $isFinished, hideFromContinueListening: $hideFromContinueListening, ebookProgress: $ebookProgress, lastUpdate: $lastUpdate, startedAt: $startedAt)';
+  return 'LoginMediaProgress(id: $id, userId: $userId, libraryItemId: $libraryItemId, mediaItemId: $mediaItemId, mediaItemType: $mediaItemType, duration: $duration, progress: $progress, currentTime: $currentTime, isFinished: $isFinished, hideFromContinueListening: $hideFromContinueListening, ebookProgress: $ebookProgress, lastUpdate: $lastUpdate, startedAt: $startedAt)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $MediaProgressCopyWith<$Res>  {
-  factory $MediaProgressCopyWith(MediaProgress value, $Res Function(MediaProgress) _then) = _$MediaProgressCopyWithImpl;
+abstract mixin class $LoginMediaProgressCopyWith<$Res>  {
+  factory $LoginMediaProgressCopyWith(LoginMediaProgress value, $Res Function(LoginMediaProgress) _then) = _$LoginMediaProgressCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'id') String? id,@JsonKey(name: 'userId') String? userId,@JsonKey(name: 'libraryItemId') String? libraryItemId,@JsonKey(name: 'mediaItemId') String? mediaItemId,@JsonKey(name: 'mediaItemType') String? mediaItemType,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'progress') int? progress,@JsonKey(name: 'currentTime') int? currentTime,@JsonKey(name: 'isFinished') bool? isFinished,@JsonKey(name: 'hideFromContinueListening') bool? hideFromContinueListening,@JsonKey(name: 'ebookProgress') int? ebookProgress,@JsonKey(name: 'lastUpdate') int? lastUpdate,@JsonKey(name: 'startedAt') int? startedAt
@@ -1438,14 +1438,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$MediaProgressCopyWithImpl<$Res>
-    implements $MediaProgressCopyWith<$Res> {
-  _$MediaProgressCopyWithImpl(this._self, this._then);
+class _$LoginMediaProgressCopyWithImpl<$Res>
+    implements $LoginMediaProgressCopyWith<$Res> {
+  _$LoginMediaProgressCopyWithImpl(this._self, this._then);
 
-  final MediaProgress _self;
-  final $Res Function(MediaProgress) _then;
+  final LoginMediaProgress _self;
+  final $Res Function(LoginMediaProgress) _then;
 
-/// Create a copy of MediaProgress
+/// Create a copy of LoginMediaProgress
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? userId = freezed,Object? libraryItemId = freezed,Object? mediaItemId = freezed,Object? mediaItemType = freezed,Object? duration = freezed,Object? progress = freezed,Object? currentTime = freezed,Object? isFinished = freezed,Object? hideFromContinueListening = freezed,Object? ebookProgress = freezed,Object? lastUpdate = freezed,Object? startedAt = freezed,}) {
   return _then(_self.copyWith(
@@ -1469,8 +1469,8 @@ as int?,
 }
 
 
-/// Adds pattern-matching-related methods to [MediaProgress].
-extension MediaProgressPatterns on MediaProgress {
+/// Adds pattern-matching-related methods to [LoginMediaProgress].
+extension LoginMediaProgressPatterns on LoginMediaProgress {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -1483,10 +1483,10 @@ extension MediaProgressPatterns on MediaProgress {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MediaProgress value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LoginMediaProgress value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _MediaProgress() when $default != null:
+case _LoginMediaProgress() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -1505,10 +1505,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MediaProgress value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LoginMediaProgress value)  $default,){
 final _that = this;
 switch (_that) {
-case _MediaProgress():
+case _LoginMediaProgress():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -1526,10 +1526,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MediaProgress value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LoginMediaProgress value)?  $default,){
 final _that = this;
 switch (_that) {
-case _MediaProgress() when $default != null:
+case _LoginMediaProgress() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -1549,7 +1549,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'userId')  String? userId, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'mediaItemId')  String? mediaItemId, @JsonKey(name: 'mediaItemType')  String? mediaItemType, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'progress')  int? progress, @JsonKey(name: 'currentTime')  int? currentTime, @JsonKey(name: 'isFinished')  bool? isFinished, @JsonKey(name: 'hideFromContinueListening')  bool? hideFromContinueListening, @JsonKey(name: 'ebookProgress')  int? ebookProgress, @JsonKey(name: 'lastUpdate')  int? lastUpdate, @JsonKey(name: 'startedAt')  int? startedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _MediaProgress() when $default != null:
+case _LoginMediaProgress() when $default != null:
 return $default(_that.id,_that.userId,_that.libraryItemId,_that.mediaItemId,_that.mediaItemType,_that.duration,_that.progress,_that.currentTime,_that.isFinished,_that.hideFromContinueListening,_that.ebookProgress,_that.lastUpdate,_that.startedAt);case _:
   return orElse();
 
@@ -1570,7 +1570,7 @@ return $default(_that.id,_that.userId,_that.libraryItemId,_that.mediaItemId,_tha
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'userId')  String? userId, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'mediaItemId')  String? mediaItemId, @JsonKey(name: 'mediaItemType')  String? mediaItemType, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'progress')  int? progress, @JsonKey(name: 'currentTime')  int? currentTime, @JsonKey(name: 'isFinished')  bool? isFinished, @JsonKey(name: 'hideFromContinueListening')  bool? hideFromContinueListening, @JsonKey(name: 'ebookProgress')  int? ebookProgress, @JsonKey(name: 'lastUpdate')  int? lastUpdate, @JsonKey(name: 'startedAt')  int? startedAt)  $default,) {final _that = this;
 switch (_that) {
-case _MediaProgress():
+case _LoginMediaProgress():
 return $default(_that.id,_that.userId,_that.libraryItemId,_that.mediaItemId,_that.mediaItemType,_that.duration,_that.progress,_that.currentTime,_that.isFinished,_that.hideFromContinueListening,_that.ebookProgress,_that.lastUpdate,_that.startedAt);case _:
   throw StateError('Unexpected subclass');
 
@@ -1590,7 +1590,7 @@ return $default(_that.id,_that.userId,_that.libraryItemId,_that.mediaItemId,_tha
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'userId')  String? userId, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'mediaItemId')  String? mediaItemId, @JsonKey(name: 'mediaItemType')  String? mediaItemType, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'progress')  int? progress, @JsonKey(name: 'currentTime')  int? currentTime, @JsonKey(name: 'isFinished')  bool? isFinished, @JsonKey(name: 'hideFromContinueListening')  bool? hideFromContinueListening, @JsonKey(name: 'ebookProgress')  int? ebookProgress, @JsonKey(name: 'lastUpdate')  int? lastUpdate, @JsonKey(name: 'startedAt')  int? startedAt)?  $default,) {final _that = this;
 switch (_that) {
-case _MediaProgress() when $default != null:
+case _LoginMediaProgress() when $default != null:
 return $default(_that.id,_that.userId,_that.libraryItemId,_that.mediaItemId,_that.mediaItemType,_that.duration,_that.progress,_that.currentTime,_that.isFinished,_that.hideFromContinueListening,_that.ebookProgress,_that.lastUpdate,_that.startedAt);case _:
   return null;
 
@@ -1602,9 +1602,9 @@ return $default(_that.id,_that.userId,_that.libraryItemId,_that.mediaItemId,_tha
 /// @nodoc
 @JsonSerializable()
 
-class _MediaProgress implements MediaProgress {
-  const _MediaProgress({@JsonKey(name: 'id') this.id, @JsonKey(name: 'userId') this.userId, @JsonKey(name: 'libraryItemId') this.libraryItemId, @JsonKey(name: 'mediaItemId') this.mediaItemId, @JsonKey(name: 'mediaItemType') this.mediaItemType, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'progress') this.progress, @JsonKey(name: 'currentTime') this.currentTime, @JsonKey(name: 'isFinished') this.isFinished, @JsonKey(name: 'hideFromContinueListening') this.hideFromContinueListening, @JsonKey(name: 'ebookProgress') this.ebookProgress, @JsonKey(name: 'lastUpdate') this.lastUpdate, @JsonKey(name: 'startedAt') this.startedAt});
-  factory _MediaProgress.fromJson(Map<String, dynamic> json) => _$MediaProgressFromJson(json);
+class _LoginMediaProgress implements LoginMediaProgress {
+  const _LoginMediaProgress({@JsonKey(name: 'id') this.id, @JsonKey(name: 'userId') this.userId, @JsonKey(name: 'libraryItemId') this.libraryItemId, @JsonKey(name: 'mediaItemId') this.mediaItemId, @JsonKey(name: 'mediaItemType') this.mediaItemType, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'progress') this.progress, @JsonKey(name: 'currentTime') this.currentTime, @JsonKey(name: 'isFinished') this.isFinished, @JsonKey(name: 'hideFromContinueListening') this.hideFromContinueListening, @JsonKey(name: 'ebookProgress') this.ebookProgress, @JsonKey(name: 'lastUpdate') this.lastUpdate, @JsonKey(name: 'startedAt') this.startedAt});
+  factory _LoginMediaProgress.fromJson(Map<String, dynamic> json) => _$LoginMediaProgressFromJson(json);
 
 @override@JsonKey(name: 'id') final  String? id;
 @override@JsonKey(name: 'userId') final  String? userId;
@@ -1620,20 +1620,20 @@ class _MediaProgress implements MediaProgress {
 @override@JsonKey(name: 'lastUpdate') final  int? lastUpdate;
 @override@JsonKey(name: 'startedAt') final  int? startedAt;
 
-/// Create a copy of MediaProgress
+/// Create a copy of LoginMediaProgress
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$MediaProgressCopyWith<_MediaProgress> get copyWith => __$MediaProgressCopyWithImpl<_MediaProgress>(this, _$identity);
+_$LoginMediaProgressCopyWith<_LoginMediaProgress> get copyWith => __$LoginMediaProgressCopyWithImpl<_LoginMediaProgress>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$MediaProgressToJson(this, );
+  return _$LoginMediaProgressToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MediaProgress&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.libraryItemId, libraryItemId) || other.libraryItemId == libraryItemId)&&(identical(other.mediaItemId, mediaItemId) || other.mediaItemId == mediaItemId)&&(identical(other.mediaItemType, mediaItemType) || other.mediaItemType == mediaItemType)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.currentTime, currentTime) || other.currentTime == currentTime)&&(identical(other.isFinished, isFinished) || other.isFinished == isFinished)&&(identical(other.hideFromContinueListening, hideFromContinueListening) || other.hideFromContinueListening == hideFromContinueListening)&&(identical(other.ebookProgress, ebookProgress) || other.ebookProgress == ebookProgress)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginMediaProgress&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.libraryItemId, libraryItemId) || other.libraryItemId == libraryItemId)&&(identical(other.mediaItemId, mediaItemId) || other.mediaItemId == mediaItemId)&&(identical(other.mediaItemType, mediaItemType) || other.mediaItemType == mediaItemType)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.currentTime, currentTime) || other.currentTime == currentTime)&&(identical(other.isFinished, isFinished) || other.isFinished == isFinished)&&(identical(other.hideFromContinueListening, hideFromContinueListening) || other.hideFromContinueListening == hideFromContinueListening)&&(identical(other.ebookProgress, ebookProgress) || other.ebookProgress == ebookProgress)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1642,15 +1642,15 @@ int get hashCode => Object.hash(runtimeType,id,userId,libraryItemId,mediaItemId,
 
 @override
 String toString() {
-  return 'MediaProgress(id: $id, userId: $userId, libraryItemId: $libraryItemId, mediaItemId: $mediaItemId, mediaItemType: $mediaItemType, duration: $duration, progress: $progress, currentTime: $currentTime, isFinished: $isFinished, hideFromContinueListening: $hideFromContinueListening, ebookProgress: $ebookProgress, lastUpdate: $lastUpdate, startedAt: $startedAt)';
+  return 'LoginMediaProgress(id: $id, userId: $userId, libraryItemId: $libraryItemId, mediaItemId: $mediaItemId, mediaItemType: $mediaItemType, duration: $duration, progress: $progress, currentTime: $currentTime, isFinished: $isFinished, hideFromContinueListening: $hideFromContinueListening, ebookProgress: $ebookProgress, lastUpdate: $lastUpdate, startedAt: $startedAt)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$MediaProgressCopyWith<$Res> implements $MediaProgressCopyWith<$Res> {
-  factory _$MediaProgressCopyWith(_MediaProgress value, $Res Function(_MediaProgress) _then) = __$MediaProgressCopyWithImpl;
+abstract mixin class _$LoginMediaProgressCopyWith<$Res> implements $LoginMediaProgressCopyWith<$Res> {
+  factory _$LoginMediaProgressCopyWith(_LoginMediaProgress value, $Res Function(_LoginMediaProgress) _then) = __$LoginMediaProgressCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'id') String? id,@JsonKey(name: 'userId') String? userId,@JsonKey(name: 'libraryItemId') String? libraryItemId,@JsonKey(name: 'mediaItemId') String? mediaItemId,@JsonKey(name: 'mediaItemType') String? mediaItemType,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'progress') int? progress,@JsonKey(name: 'currentTime') int? currentTime,@JsonKey(name: 'isFinished') bool? isFinished,@JsonKey(name: 'hideFromContinueListening') bool? hideFromContinueListening,@JsonKey(name: 'ebookProgress') int? ebookProgress,@JsonKey(name: 'lastUpdate') int? lastUpdate,@JsonKey(name: 'startedAt') int? startedAt
@@ -1661,17 +1661,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$MediaProgressCopyWithImpl<$Res>
-    implements _$MediaProgressCopyWith<$Res> {
-  __$MediaProgressCopyWithImpl(this._self, this._then);
+class __$LoginMediaProgressCopyWithImpl<$Res>
+    implements _$LoginMediaProgressCopyWith<$Res> {
+  __$LoginMediaProgressCopyWithImpl(this._self, this._then);
 
-  final _MediaProgress _self;
-  final $Res Function(_MediaProgress) _then;
+  final _LoginMediaProgress _self;
+  final $Res Function(_LoginMediaProgress) _then;
 
-/// Create a copy of MediaProgress
+/// Create a copy of LoginMediaProgress
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? userId = freezed,Object? libraryItemId = freezed,Object? mediaItemId = freezed,Object? mediaItemType = freezed,Object? duration = freezed,Object? progress = freezed,Object? currentTime = freezed,Object? isFinished = freezed,Object? hideFromContinueListening = freezed,Object? ebookProgress = freezed,Object? lastUpdate = freezed,Object? startedAt = freezed,}) {
-  return _then(_MediaProgress(
+  return _then(_LoginMediaProgress(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String?,libraryItemId: freezed == libraryItemId ? _self.libraryItemId : libraryItemId // ignore: cast_nullable_to_non_nullable

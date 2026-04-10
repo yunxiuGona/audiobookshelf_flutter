@@ -58,9 +58,7 @@ _MediaLisItemBean _$MediaLisItemBeanFromJson(Map<String, dynamic> json) =>
     _MediaLisItemBean(
       metadata: json['metadata'] == null
           ? null
-          : MediaMetaDataBean.fromJson(
-              json['metadata'] as Map<String, dynamic>,
-            ),
+          : MediaMetaData.fromJson(json['metadata'] as Map<String, dynamic>),
       coverPath: json['coverPath'] as String?,
       tags: json['tags'] as List<dynamic>?,
       numTracks: (json['numTracks'] as num?)?.toInt(),

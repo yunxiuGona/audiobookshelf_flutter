@@ -1,11 +1,11 @@
-import 'package:audio_book/business/audiobook_api/beans/play_media_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/play_media.dart';
 import 'package:audio_book/business/audiobook_api/beans/track.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'audio_file_meta_data.dart';
 import 'chapter.dart';
 import 'episodes.dart';
-import 'media_meta_data_bean.dart';
+import 'media_meta_data.dart';
 
 part 'media.freezed.dart';
 part 'media.g.dart';
@@ -15,7 +15,7 @@ abstract class Media with _$Media {
   const factory Media({
     @JsonKey(name: 'id') String? id,
     @JsonKey(name: 'libraryItemId') String? libraryItemId,
-    @JsonKey(name: 'metadata') MediaMetaDataBean? metadata,
+    @JsonKey(name: 'metadata') MediaMetaData? metadata,
     @JsonKey(name: 'coverPath') String? coverPath,
     @JsonKey(name: 'tags') List<String>? tags,
     @JsonKey(name: 'episodes') List<Episodes>? episodes,

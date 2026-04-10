@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'media_meta_data_bean.freezed.dart';
-part 'media_meta_data_bean.g.dart';
+part 'media_meta_data.freezed.dart';
+part 'media_meta_data.g.dart';
 
 @freezed
-abstract class MediaMetaDataBean with _$MediaMetaDataBean {
-  const factory MediaMetaDataBean({
+abstract class MediaMetaData with _$MediaMetaData {
+  const factory MediaMetaData({
     @JsonKey(name: 'title') String? title,
     @JsonKey(name: 'titleIgnorePrefix') String? titleIgnorePrefix,
     @JsonKey(name: 'subtitle') dynamic subtitle,
@@ -26,9 +26,9 @@ abstract class MediaMetaDataBean with _$MediaMetaDataBean {
     @JsonKey(name: 'narratorName') String? narratorName,
     @JsonKey(name: 'seriesName') String? seriesName,
     @JsonKey(name: 'descriptionPlain') String? descriptionPlain,
-  }) = _MediaMetaDataBean;
+  }) = _MediaMetaData;
 
-  factory MediaMetaDataBean.fromJson(Map<String, Object?> json) => _$MediaMetaDataBeanFromJson(json);
+  factory MediaMetaData.fromJson(Map<String, Object?> json) => _$MediaMetaDataFromJson(json);
 }
 
 @freezed

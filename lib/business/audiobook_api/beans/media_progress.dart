@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'media_progress_bean.freezed.dart';
-part 'media_progress_bean.g.dart';
+part 'media_progress.freezed.dart';
+part 'media_progress.g.dart';
 
 @freezed
-abstract class MediaProgressBean with _$MediaProgressBean {
-  const factory MediaProgressBean({
+abstract class MediaProgress with _$MediaProgress {
+  const factory MediaProgress({
     @JsonKey(name: 'id') String? id,
     @JsonKey(name: 'libraryItemId') String? libraryItemId,
     @JsonKey(name: 'episodeId') String? episodeId,
@@ -17,8 +17,8 @@ abstract class MediaProgressBean with _$MediaProgressBean {
     @JsonKey(name: 'lastUpdate') int? lastUpdate,
     @JsonKey(name: 'startedAt') int? startedAt,
     @JsonKey(name: 'finishedAt') dynamic finishedAt,
-  }) = _MediaProgressBean;
+  }) = _MediaProgress;
 
-  factory MediaProgressBean.fromJson(Map<String, Object?> json) => _$MediaProgressBeanFromJson(json);
+  factory MediaProgress.fromJson(Map<String, Object?> json) => _$MediaProgressFromJson(json);
 }
 

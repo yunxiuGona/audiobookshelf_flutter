@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'library_item.dart';
-import 'media_meta_data_bean.dart';
+import 'media_meta_data.dart';
 
 part 'library_items_bean.freezed.dart';
 part 'library_items_bean.g.dart';
@@ -39,7 +39,7 @@ abstract class CollapsedSeries with _$CollapsedSeries {
 @freezed
 abstract class MediaLisItemBean with _$MediaLisItemBean {
   const factory MediaLisItemBean({
-    @JsonKey(name: 'metadata') MediaMetaDataBean? metadata,
+    @JsonKey(name: 'metadata') MediaMetaData? metadata,
     @JsonKey(name: 'coverPath') String? coverPath,
     @JsonKey(name: 'tags') List<dynamic>? tags,
     @JsonKey(name: 'numTracks') int? numTracks,

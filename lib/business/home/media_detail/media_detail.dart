@@ -1,5 +1,5 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
-import 'package:audio_book/business/audiobook_api/beans/media_meta_data_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
 import 'package:audio_book/business/home/media_detail/media_detail_bottom_view.dart';
 import 'package:audio_book/business/home/media_detail/media_detail_header_view.dart';
 import 'package:audio_book/business/services/AudioPlayerService.dart';
@@ -23,10 +23,10 @@ class MediaDetail extends StatefulWidget {
 
 class _MediaDetailState extends State<MediaDetail> {
   Media? media;
-  MediaMetaDataBean? meta;
+  MediaMetaData? meta;
   bool loading = false;
 
-  // MediaProgressBean? mediaProgressBean;
+  // MediaProgress? mediaProgressBean;
   LibraryItemDetail? libraryItemDetailBean;
   @override
   void initState() {

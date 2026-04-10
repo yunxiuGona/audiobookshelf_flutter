@@ -120,7 +120,7 @@ _User _$UserFromJson(Map<String, dynamic> json) => _User(
   type: json['type'] as String?,
   token: json['token'] as String?,
   mediaProgress: (json['mediaProgress'] as List<dynamic>?)
-      ?.map((e) => MediaProgress.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => LoginMediaProgress.fromJson(e as Map<String, dynamic>))
       .toList(),
   seriesHideFromContinueListening:
       json['seriesHideFromContinueListening'] as List<dynamic>?,
@@ -182,8 +182,8 @@ Map<String, dynamic> _$PermissionsToJson(_Permissions instance) =>
       'selectedTagsNotAccessible': instance.selectedTagsNotAccessible,
     };
 
-_MediaProgress _$MediaProgressFromJson(Map<String, dynamic> json) =>
-    _MediaProgress(
+_LoginMediaProgress _$LoginMediaProgressFromJson(Map<String, dynamic> json) =>
+    _LoginMediaProgress(
       id: json['id'] as String?,
       userId: json['userId'] as String?,
       libraryItemId: json['libraryItemId'] as String?,
@@ -199,7 +199,7 @@ _MediaProgress _$MediaProgressFromJson(Map<String, dynamic> json) =>
       startedAt: (json['startedAt'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$MediaProgressToJson(_MediaProgress instance) =>
+Map<String, dynamic> _$LoginMediaProgressToJson(_LoginMediaProgress instance) =>
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
