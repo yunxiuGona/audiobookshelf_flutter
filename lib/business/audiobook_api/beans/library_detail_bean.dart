@@ -1,4 +1,8 @@
+import 'package:audio_book/business/audiobook_api/beans/library_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/setting.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'folder.dart';
 
 part 'library_detail_bean.freezed.dart';
 part 'library_detail_bean.g.dart';
@@ -9,53 +13,10 @@ abstract class LibraryDetailBean with _$LibraryDetailBean {
     @JsonKey(name: 'filterdata') Filterdata? filterdata,
     @JsonKey(name: 'issues') int? issues,
     @JsonKey(name: 'numUserPlaylists') int? numUserPlaylists,
-    @JsonKey(name: 'library') Library? library,
+    @JsonKey(name: 'library') LibraryBean? library,
   }) = _LibraryDetailBean;
 
   factory LibraryDetailBean.fromJson(Map<String, Object?> json) => _$LibraryDetailBeanFromJson(json);
-}
-
-@freezed
-abstract class Library with _$Library {
-  const factory Library({
-    @JsonKey(name: 'id') String? id,
-    @JsonKey(name: 'name') String? name,
-    @JsonKey(name: 'folders') List<Folders>? folders,
-    @JsonKey(name: 'displayOrder') int? displayOrder,
-    @JsonKey(name: 'icon') String? icon,
-    @JsonKey(name: 'mediaType') String? mediaType,
-    @JsonKey(name: 'provider') String? provider,
-    @JsonKey(name: 'settings') Settings? settings,
-    @JsonKey(name: 'createdAt') int? createdAt,
-    @JsonKey(name: 'lastUpdate') int? lastUpdate,
-  }) = _Library;
-
-  factory Library.fromJson(Map<String, Object?> json) => _$LibraryFromJson(json);
-}
-
-@freezed
-abstract class Settings with _$Settings {
-  const factory Settings({
-    @JsonKey(name: 'coverAspectRatio') int? coverAspectRatio,
-    @JsonKey(name: 'disableWatcher') bool? disableWatcher,
-    @JsonKey(name: 'skipMatchingMediaWithAsin') bool? skipMatchingMediaWithAsin,
-    @JsonKey(name: 'skipMatchingMediaWithIsbn') bool? skipMatchingMediaWithIsbn,
-    @JsonKey(name: 'autoScanCronExpression') dynamic autoScanCronExpression,
-  }) = _Settings;
-
-  factory Settings.fromJson(Map<String, Object?> json) => _$SettingsFromJson(json);
-}
-
-@freezed
-abstract class Folders with _$Folders {
-  const factory Folders({
-    @JsonKey(name: 'id') String? id,
-    @JsonKey(name: 'fullPath') String? fullPath,
-    @JsonKey(name: 'libraryId') String? libraryId,
-    @JsonKey(name: 'addedAt') int? addedAt,
-  }) = _Folders;
-
-  factory Folders.fromJson(Map<String, Object?> json) => _$FoldersFromJson(json);
 }
 
 @freezed

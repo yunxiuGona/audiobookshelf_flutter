@@ -42,7 +42,7 @@ abstract class Results with _$Results {
     @JsonKey(name: 'isMissing') bool? isMissing,
     @JsonKey(name: 'isInvalid') bool? isInvalid,
     @JsonKey(name: 'mediaType') String? mediaType,
-    @JsonKey(name: 'media') Media? media,
+    @JsonKey(name: 'media') MediaLisItemBean? media,
     @JsonKey(name: 'numFiles') int? numFiles,
     @JsonKey(name: 'size') int? size,
     @JsonKey(name: 'collapsedSeries') CollapsedSeries? collapsedSeries,
@@ -64,8 +64,8 @@ abstract class CollapsedSeries with _$CollapsedSeries {
 }
 
 @freezed
-abstract class Media with _$Media {
-  const factory Media({
+abstract class MediaLisItemBean with _$MediaLisItemBean {
+  const factory MediaLisItemBean({
     @JsonKey(name: 'metadata') MediaMetaDataBean? metadata,
     @JsonKey(name: 'coverPath') String? coverPath,
     @JsonKey(name: 'tags') List<dynamic>? tags,
@@ -74,8 +74,8 @@ abstract class Media with _$Media {
     @JsonKey(name: 'numChapters') int? numChapters,
     @JsonKey(name: 'duration') double? duration,
     @JsonKey(name: 'size') int? size,
-  }) = _Media;
+  }) = _MediaLisItemBean;
 
-  factory Media.fromJson(Map<String, Object?> json) => _$MediaFromJson(json);
+  factory MediaLisItemBean.fromJson(Map<String, Object?> json) => _$MediaLisItemBeanFromJson(json);
 }
 

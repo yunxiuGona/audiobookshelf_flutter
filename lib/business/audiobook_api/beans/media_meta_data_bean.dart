@@ -25,6 +25,7 @@ abstract class MediaMetaDataBean with _$MediaMetaDataBean {
     @JsonKey(name: 'authorNameLF') String? authorNameLF,
     @JsonKey(name: 'narratorName') String? narratorName,
     @JsonKey(name: 'seriesName') String? seriesName,
+    @JsonKey(name: 'descriptionPlain') String? descriptionPlain,
   }) = _MediaMetaDataBean;
 
   factory MediaMetaDataBean.fromJson(Map<String, Object?> json) => _$MediaMetaDataBeanFromJson(json);

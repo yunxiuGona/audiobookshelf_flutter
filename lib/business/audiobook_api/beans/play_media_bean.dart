@@ -3,6 +3,9 @@ import 'package:audio_book/business/audiobook_api/beans/media_meta_data_bean.dar
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'audio_file_meta_tag_bean.dart';
+import 'audio_tracks.dart';
+import 'library_file.dart';
+import 'media.dart';
 
 part 'play_media_bean.freezed.dart';
 part 'play_media_bean.g.dart';
@@ -61,145 +64,19 @@ abstract class LibraryItem with _$LibraryItem {
     @JsonKey(name: 'isInvalid') bool? isInvalid,
     @JsonKey(name: 'mediaType') String? mediaType,
     @JsonKey(name: 'media') Media? media,
-    @JsonKey(name: 'libraryFiles') List<LibraryFiles>? libraryFiles,
+    @JsonKey(name: 'libraryFiles') List<LibraryFile>? libraryFiles,
     @JsonKey(name: 'size') int? size,
   }) = _LibraryItem;
 
   factory LibraryItem.fromJson(Map<String, Object?> json) => _$LibraryItemFromJson(json);
 }
 
-@freezed
-abstract class LibraryFiles with _$LibraryFiles {
-  const factory LibraryFiles({
-    @JsonKey(name: 'ino') String? ino,
-    @JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata,
-    @JsonKey(name: 'addedAt') int? addedAt,
-    @JsonKey(name: 'updatedAt') int? updatedAt,
-    @JsonKey(name: 'fileType') String? fileType,
-  }) = _LibraryFiles;
-
-  factory LibraryFiles.fromJson(Map<String, Object?> json) => _$LibraryFilesFromJson(json);
-}
 
 
-@freezed
-abstract class Media with _$Media {
-  const factory Media({
-    @JsonKey(name: 'libraryItemId') String? libraryItemId,
-    @JsonKey(name: 'metadata') MediaMetaDataBean? metadata,
-    @JsonKey(name: 'coverPath') String? coverPath,
-    @JsonKey(name: 'tags') List<dynamic>? tags,
-    @JsonKey(name: 'episodes') List<Episodes>? episodes,
-    @JsonKey(name: 'autoDownloadEpisodes') bool? autoDownloadEpisodes,
-    @JsonKey(name: 'autoDownloadSchedule') String? autoDownloadSchedule,
-    @JsonKey(name: 'lastEpisodeCheck') int? lastEpisodeCheck,
-    @JsonKey(name: 'maxEpisodesToKeep') int? maxEpisodesToKeep,
-    @JsonKey(name: 'maxNewEpisodesToDownload') int? maxNewEpisodesToDownload,
-    @JsonKey(name: 'size') int? size,
-  }) = _Media;
-
-  factory Media.fromJson(Map<String, Object?> json) => _$MediaFromJson(json);
-}
-
-@freezed
-abstract class Episodes with _$Episodes {
-  const factory Episodes({
-    @JsonKey(name: 'libraryItemId') String? libraryItemId,
-    @JsonKey(name: 'id') String? id,
-    @JsonKey(name: 'index') int? index,
-    @JsonKey(name: 'season') String? season,
-    @JsonKey(name: 'episode') String? episode,
-    @JsonKey(name: 'episodeType') String? episodeType,
-    @JsonKey(name: 'title') String? title,
-    @JsonKey(name: 'subtitle') String? subtitle,
-    @JsonKey(name: 'description') String? description,
-    @JsonKey(name: 'enclosure') Enclosure? enclosure,
-    @JsonKey(name: 'pubDate') String? pubDate,
-    @JsonKey(name: 'audioFile') AudioFile? audioFile,
-    @JsonKey(name: 'audioTrack') AudioTrack? audioTrack,
-    @JsonKey(name: 'publishedAt') int? publishedAt,
-    @JsonKey(name: 'addedAt') int? addedAt,
-    @JsonKey(name: 'updatedAt') int? updatedAt,
-    @JsonKey(name: 'duration') double? duration,
-    @JsonKey(name: 'size') int? size,
-  }) = _Episodes;
-
-  factory Episodes.fromJson(Map<String, Object?> json) => _$EpisodesFromJson(json);
-}
-
-@freezed
-abstract class AudioTrack with _$AudioTrack {
-  const factory AudioTrack({
-    @JsonKey(name: 'index') int? index,
-    @JsonKey(name: 'startOffset') int? startOffset,
-    @JsonKey(name: 'duration') double? duration,
-    @JsonKey(name: 'title') String? title,
-    @JsonKey(name: 'contentUrl') String? contentUrl,
-    @JsonKey(name: 'mimeType') String? mimeType,
-    @JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata,
-  }) = _AudioTrack;
-
-  factory AudioTrack.fromJson(Map<String, Object?> json) => _$AudioTrackFromJson(json);
-}
-
-@freezed
-abstract class AudioFile with _$AudioFile {
-  const factory AudioFile({
-    @JsonKey(name: 'index') int? index,
-    @JsonKey(name: 'ino') String? ino,
-    @JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata,
-    @JsonKey(name: 'addedAt') int? addedAt,
-    @JsonKey(name: 'updatedAt') int? updatedAt,
-    @JsonKey(name: 'trackNumFromMeta') dynamic trackNumFromMeta,
-    @JsonKey(name: 'discNumFromMeta') dynamic discNumFromMeta,
-    @JsonKey(name: 'trackNumFromFilename') dynamic trackNumFromFilename,
-    @JsonKey(name: 'discNumFromFilename') dynamic discNumFromFilename,
-    @JsonKey(name: 'manuallyVerified') bool? manuallyVerified,
-    @JsonKey(name: 'exclude') bool? exclude,
-    @JsonKey(name: 'error') dynamic error,
-    @JsonKey(name: 'format') String? format,
-    @JsonKey(name: 'duration') double? duration,
-    @JsonKey(name: 'bitRate') int? bitRate,
-    @JsonKey(name: 'language') dynamic language,
-    @JsonKey(name: 'codec') String? codec,
-    @JsonKey(name: 'timeBase') String? timeBase,
-    @JsonKey(name: 'channels') int? channels,
-    @JsonKey(name: 'channelLayout') String? channelLayout,
-    @JsonKey(name: 'chapters') List<dynamic>? chapters,
-    @JsonKey(name: 'embeddedCoverArt') String? embeddedCoverArt,
-    @JsonKey(name: 'metaTags') AudioFileMetaTagBean? metaTags,
-    @JsonKey(name: 'mimeType') String? mimeType,
-  }) = _AudioFile;
-
-  factory AudioFile.fromJson(Map<String, Object?> json) => _$AudioFileFromJson(json);
-}
 
 
-@freezed
-abstract class Enclosure with _$Enclosure {
-  const factory Enclosure({
-    @JsonKey(name: 'url') String? url,
-    @JsonKey(name: 'type') String? type,
-    @JsonKey(name: 'length') String? length,
-  }) = _Enclosure;
 
-  factory Enclosure.fromJson(Map<String, Object?> json) => _$EnclosureFromJson(json);
-}
 
-@freezed
-abstract class AudioTracks with _$AudioTracks {
-  const factory AudioTracks({
-    @JsonKey(name: 'index') int? index,
-    @JsonKey(name: 'startOffset') int? startOffset,
-    @JsonKey(name: 'duration') double? duration,
-    @JsonKey(name: 'title') String? title,
-    @JsonKey(name: 'contentUrl') String? contentUrl,
-    @JsonKey(name: 'mimeType') String? mimeType,
-    @JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata,
-  }) = _AudioTracks;
-
-  factory AudioTracks.fromJson(Map<String, Object?> json) => _$AudioTracksFromJson(json);
-}
 
 
 @freezed

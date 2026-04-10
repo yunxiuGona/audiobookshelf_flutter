@@ -1,9 +1,11 @@
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:flutter/material.dart';
 
+import '../../audiobook_api/beans/library_item_detail_bean.dart';
+
 class MediaDetailStatsView extends StatefulWidget {
-  Media? media;
-  MediaDetailStatsView(this.media,{Key? key}) : super(key: key);
+  LibraryItemDetailBean? libraryItemDetailBean;
+  MediaDetailStatsView(this.libraryItemDetailBean,{Key? key}) : super(key: key);
 
   @override
   _MediaDetailStatsViewState createState() => _MediaDetailStatsViewState();
@@ -17,9 +19,8 @@ class _MediaDetailStatsViewState extends State<MediaDetailStatsView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _item("集数", "${widget.media?.numTracks}"),
-          _item("章节", "${widget.media?.numChapters}"),
-          _item("时长", _formatDuration(widget.media?.duration)),
+          _item("章节", "${widget.libraryItemDetailBean?.media?.chapters?.length}"),
+          _item("时长", _formatDuration(widget.libraryItemDetailBean?.media?.duration)),
         ],
       ),
     );

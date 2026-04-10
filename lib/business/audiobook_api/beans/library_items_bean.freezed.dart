@@ -316,7 +316,7 @@ as String?,
 /// @nodoc
 mixin _$Results {
 
-@JsonKey(name: 'id') String? get id;@JsonKey(name: 'ino') String? get ino;@JsonKey(name: 'libraryId') String? get libraryId;@JsonKey(name: 'folderId') String? get folderId;@JsonKey(name: 'path') String? get path;@JsonKey(name: 'relPath') String? get relPath;@JsonKey(name: 'isFile') bool? get isFile;@JsonKey(name: 'mtimeMs') int? get mtimeMs;@JsonKey(name: 'ctimeMs') int? get ctimeMs;@JsonKey(name: 'birthtimeMs') int? get birthtimeMs;@JsonKey(name: 'addedAt') int? get addedAt;@JsonKey(name: 'updatedAt') int? get updatedAt;@JsonKey(name: 'isMissing') bool? get isMissing;@JsonKey(name: 'isInvalid') bool? get isInvalid;@JsonKey(name: 'mediaType') String? get mediaType;@JsonKey(name: 'media') Media? get media;@JsonKey(name: 'numFiles') int? get numFiles;@JsonKey(name: 'size') int? get size;@JsonKey(name: 'collapsedSeries') CollapsedSeries? get collapsedSeries;
+@JsonKey(name: 'id') String? get id;@JsonKey(name: 'ino') String? get ino;@JsonKey(name: 'libraryId') String? get libraryId;@JsonKey(name: 'folderId') String? get folderId;@JsonKey(name: 'path') String? get path;@JsonKey(name: 'relPath') String? get relPath;@JsonKey(name: 'isFile') bool? get isFile;@JsonKey(name: 'mtimeMs') int? get mtimeMs;@JsonKey(name: 'ctimeMs') int? get ctimeMs;@JsonKey(name: 'birthtimeMs') int? get birthtimeMs;@JsonKey(name: 'addedAt') int? get addedAt;@JsonKey(name: 'updatedAt') int? get updatedAt;@JsonKey(name: 'isMissing') bool? get isMissing;@JsonKey(name: 'isInvalid') bool? get isInvalid;@JsonKey(name: 'mediaType') String? get mediaType;@JsonKey(name: 'media') MediaLisItemBean? get media;@JsonKey(name: 'numFiles') int? get numFiles;@JsonKey(name: 'size') int? get size;@JsonKey(name: 'collapsedSeries') CollapsedSeries? get collapsedSeries;
 /// Create a copy of Results
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -349,11 +349,11 @@ abstract mixin class $ResultsCopyWith<$Res>  {
   factory $ResultsCopyWith(Results value, $Res Function(Results) _then) = _$ResultsCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'id') String? id,@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'libraryId') String? libraryId,@JsonKey(name: 'folderId') String? folderId,@JsonKey(name: 'path') String? path,@JsonKey(name: 'relPath') String? relPath,@JsonKey(name: 'isFile') bool? isFile,@JsonKey(name: 'mtimeMs') int? mtimeMs,@JsonKey(name: 'ctimeMs') int? ctimeMs,@JsonKey(name: 'birthtimeMs') int? birthtimeMs,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'isMissing') bool? isMissing,@JsonKey(name: 'isInvalid') bool? isInvalid,@JsonKey(name: 'mediaType') String? mediaType,@JsonKey(name: 'media') Media? media,@JsonKey(name: 'numFiles') int? numFiles,@JsonKey(name: 'size') int? size,@JsonKey(name: 'collapsedSeries') CollapsedSeries? collapsedSeries
+@JsonKey(name: 'id') String? id,@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'libraryId') String? libraryId,@JsonKey(name: 'folderId') String? folderId,@JsonKey(name: 'path') String? path,@JsonKey(name: 'relPath') String? relPath,@JsonKey(name: 'isFile') bool? isFile,@JsonKey(name: 'mtimeMs') int? mtimeMs,@JsonKey(name: 'ctimeMs') int? ctimeMs,@JsonKey(name: 'birthtimeMs') int? birthtimeMs,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'isMissing') bool? isMissing,@JsonKey(name: 'isInvalid') bool? isInvalid,@JsonKey(name: 'mediaType') String? mediaType,@JsonKey(name: 'media') MediaLisItemBean? media,@JsonKey(name: 'numFiles') int? numFiles,@JsonKey(name: 'size') int? size,@JsonKey(name: 'collapsedSeries') CollapsedSeries? collapsedSeries
 });
 
 
-$MediaCopyWith<$Res>? get media;$CollapsedSeriesCopyWith<$Res>? get collapsedSeries;
+$MediaLisItemBeanCopyWith<$Res>? get media;$CollapsedSeriesCopyWith<$Res>? get collapsedSeries;
 
 }
 /// @nodoc
@@ -384,7 +384,7 @@ as int?,isMissing: freezed == isMissing ? _self.isMissing : isMissing // ignore:
 as bool?,isInvalid: freezed == isInvalid ? _self.isInvalid : isInvalid // ignore: cast_nullable_to_non_nullable
 as bool?,mediaType: freezed == mediaType ? _self.mediaType : mediaType // ignore: cast_nullable_to_non_nullable
 as String?,media: freezed == media ? _self.media : media // ignore: cast_nullable_to_non_nullable
-as Media?,numFiles: freezed == numFiles ? _self.numFiles : numFiles // ignore: cast_nullable_to_non_nullable
+as MediaLisItemBean?,numFiles: freezed == numFiles ? _self.numFiles : numFiles // ignore: cast_nullable_to_non_nullable
 as int?,size: freezed == size ? _self.size : size // ignore: cast_nullable_to_non_nullable
 as int?,collapsedSeries: freezed == collapsedSeries ? _self.collapsedSeries : collapsedSeries // ignore: cast_nullable_to_non_nullable
 as CollapsedSeries?,
@@ -394,12 +394,12 @@ as CollapsedSeries?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MediaCopyWith<$Res>? get media {
+$MediaLisItemBeanCopyWith<$Res>? get media {
     if (_self.media == null) {
     return null;
   }
 
-  return $MediaCopyWith<$Res>(_self.media!, (value) {
+  return $MediaLisItemBeanCopyWith<$Res>(_self.media!, (value) {
     return _then(_self.copyWith(media: value));
   });
 }/// Create a copy of Results
@@ -496,7 +496,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'libraryId')  String? libraryId, @JsonKey(name: 'folderId')  String? folderId, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'isFile')  bool? isFile, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'isMissing')  bool? isMissing, @JsonKey(name: 'isInvalid')  bool? isInvalid, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'media')  Media? media, @JsonKey(name: 'numFiles')  int? numFiles, @JsonKey(name: 'size')  int? size, @JsonKey(name: 'collapsedSeries')  CollapsedSeries? collapsedSeries)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'libraryId')  String? libraryId, @JsonKey(name: 'folderId')  String? folderId, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'isFile')  bool? isFile, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'isMissing')  bool? isMissing, @JsonKey(name: 'isInvalid')  bool? isInvalid, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'media')  MediaLisItemBean? media, @JsonKey(name: 'numFiles')  int? numFiles, @JsonKey(name: 'size')  int? size, @JsonKey(name: 'collapsedSeries')  CollapsedSeries? collapsedSeries)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Results() when $default != null:
 return $default(_that.id,_that.ino,_that.libraryId,_that.folderId,_that.path,_that.relPath,_that.isFile,_that.mtimeMs,_that.ctimeMs,_that.birthtimeMs,_that.addedAt,_that.updatedAt,_that.isMissing,_that.isInvalid,_that.mediaType,_that.media,_that.numFiles,_that.size,_that.collapsedSeries);case _:
@@ -517,7 +517,7 @@ return $default(_that.id,_that.ino,_that.libraryId,_that.folderId,_that.path,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'libraryId')  String? libraryId, @JsonKey(name: 'folderId')  String? folderId, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'isFile')  bool? isFile, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'isMissing')  bool? isMissing, @JsonKey(name: 'isInvalid')  bool? isInvalid, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'media')  Media? media, @JsonKey(name: 'numFiles')  int? numFiles, @JsonKey(name: 'size')  int? size, @JsonKey(name: 'collapsedSeries')  CollapsedSeries? collapsedSeries)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'libraryId')  String? libraryId, @JsonKey(name: 'folderId')  String? folderId, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'isFile')  bool? isFile, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'isMissing')  bool? isMissing, @JsonKey(name: 'isInvalid')  bool? isInvalid, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'media')  MediaLisItemBean? media, @JsonKey(name: 'numFiles')  int? numFiles, @JsonKey(name: 'size')  int? size, @JsonKey(name: 'collapsedSeries')  CollapsedSeries? collapsedSeries)  $default,) {final _that = this;
 switch (_that) {
 case _Results():
 return $default(_that.id,_that.ino,_that.libraryId,_that.folderId,_that.path,_that.relPath,_that.isFile,_that.mtimeMs,_that.ctimeMs,_that.birthtimeMs,_that.addedAt,_that.updatedAt,_that.isMissing,_that.isInvalid,_that.mediaType,_that.media,_that.numFiles,_that.size,_that.collapsedSeries);case _:
@@ -537,7 +537,7 @@ return $default(_that.id,_that.ino,_that.libraryId,_that.folderId,_that.path,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'libraryId')  String? libraryId, @JsonKey(name: 'folderId')  String? folderId, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'isFile')  bool? isFile, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'isMissing')  bool? isMissing, @JsonKey(name: 'isInvalid')  bool? isInvalid, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'media')  Media? media, @JsonKey(name: 'numFiles')  int? numFiles, @JsonKey(name: 'size')  int? size, @JsonKey(name: 'collapsedSeries')  CollapsedSeries? collapsedSeries)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'libraryId')  String? libraryId, @JsonKey(name: 'folderId')  String? folderId, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'isFile')  bool? isFile, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'isMissing')  bool? isMissing, @JsonKey(name: 'isInvalid')  bool? isInvalid, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'media')  MediaLisItemBean? media, @JsonKey(name: 'numFiles')  int? numFiles, @JsonKey(name: 'size')  int? size, @JsonKey(name: 'collapsedSeries')  CollapsedSeries? collapsedSeries)?  $default,) {final _that = this;
 switch (_that) {
 case _Results() when $default != null:
 return $default(_that.id,_that.ino,_that.libraryId,_that.folderId,_that.path,_that.relPath,_that.isFile,_that.mtimeMs,_that.ctimeMs,_that.birthtimeMs,_that.addedAt,_that.updatedAt,_that.isMissing,_that.isInvalid,_that.mediaType,_that.media,_that.numFiles,_that.size,_that.collapsedSeries);case _:
@@ -570,7 +570,7 @@ class _Results implements Results {
 @override@JsonKey(name: 'isMissing') final  bool? isMissing;
 @override@JsonKey(name: 'isInvalid') final  bool? isInvalid;
 @override@JsonKey(name: 'mediaType') final  String? mediaType;
-@override@JsonKey(name: 'media') final  Media? media;
+@override@JsonKey(name: 'media') final  MediaLisItemBean? media;
 @override@JsonKey(name: 'numFiles') final  int? numFiles;
 @override@JsonKey(name: 'size') final  int? size;
 @override@JsonKey(name: 'collapsedSeries') final  CollapsedSeries? collapsedSeries;
@@ -608,11 +608,11 @@ abstract mixin class _$ResultsCopyWith<$Res> implements $ResultsCopyWith<$Res> {
   factory _$ResultsCopyWith(_Results value, $Res Function(_Results) _then) = __$ResultsCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'id') String? id,@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'libraryId') String? libraryId,@JsonKey(name: 'folderId') String? folderId,@JsonKey(name: 'path') String? path,@JsonKey(name: 'relPath') String? relPath,@JsonKey(name: 'isFile') bool? isFile,@JsonKey(name: 'mtimeMs') int? mtimeMs,@JsonKey(name: 'ctimeMs') int? ctimeMs,@JsonKey(name: 'birthtimeMs') int? birthtimeMs,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'isMissing') bool? isMissing,@JsonKey(name: 'isInvalid') bool? isInvalid,@JsonKey(name: 'mediaType') String? mediaType,@JsonKey(name: 'media') Media? media,@JsonKey(name: 'numFiles') int? numFiles,@JsonKey(name: 'size') int? size,@JsonKey(name: 'collapsedSeries') CollapsedSeries? collapsedSeries
+@JsonKey(name: 'id') String? id,@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'libraryId') String? libraryId,@JsonKey(name: 'folderId') String? folderId,@JsonKey(name: 'path') String? path,@JsonKey(name: 'relPath') String? relPath,@JsonKey(name: 'isFile') bool? isFile,@JsonKey(name: 'mtimeMs') int? mtimeMs,@JsonKey(name: 'ctimeMs') int? ctimeMs,@JsonKey(name: 'birthtimeMs') int? birthtimeMs,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'isMissing') bool? isMissing,@JsonKey(name: 'isInvalid') bool? isInvalid,@JsonKey(name: 'mediaType') String? mediaType,@JsonKey(name: 'media') MediaLisItemBean? media,@JsonKey(name: 'numFiles') int? numFiles,@JsonKey(name: 'size') int? size,@JsonKey(name: 'collapsedSeries') CollapsedSeries? collapsedSeries
 });
 
 
-@override $MediaCopyWith<$Res>? get media;@override $CollapsedSeriesCopyWith<$Res>? get collapsedSeries;
+@override $MediaLisItemBeanCopyWith<$Res>? get media;@override $CollapsedSeriesCopyWith<$Res>? get collapsedSeries;
 
 }
 /// @nodoc
@@ -643,7 +643,7 @@ as int?,isMissing: freezed == isMissing ? _self.isMissing : isMissing // ignore:
 as bool?,isInvalid: freezed == isInvalid ? _self.isInvalid : isInvalid // ignore: cast_nullable_to_non_nullable
 as bool?,mediaType: freezed == mediaType ? _self.mediaType : mediaType // ignore: cast_nullable_to_non_nullable
 as String?,media: freezed == media ? _self.media : media // ignore: cast_nullable_to_non_nullable
-as Media?,numFiles: freezed == numFiles ? _self.numFiles : numFiles // ignore: cast_nullable_to_non_nullable
+as MediaLisItemBean?,numFiles: freezed == numFiles ? _self.numFiles : numFiles // ignore: cast_nullable_to_non_nullable
 as int?,size: freezed == size ? _self.size : size // ignore: cast_nullable_to_non_nullable
 as int?,collapsedSeries: freezed == collapsedSeries ? _self.collapsedSeries : collapsedSeries // ignore: cast_nullable_to_non_nullable
 as CollapsedSeries?,
@@ -654,12 +654,12 @@ as CollapsedSeries?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MediaCopyWith<$Res>? get media {
+$MediaLisItemBeanCopyWith<$Res>? get media {
     if (_self.media == null) {
     return null;
   }
 
-  return $MediaCopyWith<$Res>(_self.media!, (value) {
+  return $MediaLisItemBeanCopyWith<$Res>(_self.media!, (value) {
     return _then(_self.copyWith(media: value));
   });
 }/// Create a copy of Results
@@ -951,22 +951,22 @@ as int?,
 
 
 /// @nodoc
-mixin _$Media {
+mixin _$MediaLisItemBean {
 
 @JsonKey(name: 'metadata') MediaMetaDataBean? get metadata;@JsonKey(name: 'coverPath') String? get coverPath;@JsonKey(name: 'tags') List<dynamic>? get tags;@JsonKey(name: 'numTracks') int? get numTracks;@JsonKey(name: 'numAudioFiles') int? get numAudioFiles;@JsonKey(name: 'numChapters') int? get numChapters;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'size') int? get size;
-/// Create a copy of Media
+/// Create a copy of MediaLisItemBean
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$MediaCopyWith<Media> get copyWith => _$MediaCopyWithImpl<Media>(this as Media, _$identity);
+$MediaLisItemBeanCopyWith<MediaLisItemBean> get copyWith => _$MediaLisItemBeanCopyWithImpl<MediaLisItemBean>(this as MediaLisItemBean, _$identity);
 
-  /// Serializes this Media to a JSON map.
+  /// Serializes this MediaLisItemBean to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Media&&(identical(other.metadata, metadata) || other.metadata == metadata)&&(identical(other.coverPath, coverPath) || other.coverPath == coverPath)&&const DeepCollectionEquality().equals(other.tags, tags)&&(identical(other.numTracks, numTracks) || other.numTracks == numTracks)&&(identical(other.numAudioFiles, numAudioFiles) || other.numAudioFiles == numAudioFiles)&&(identical(other.numChapters, numChapters) || other.numChapters == numChapters)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.size, size) || other.size == size));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaLisItemBean&&(identical(other.metadata, metadata) || other.metadata == metadata)&&(identical(other.coverPath, coverPath) || other.coverPath == coverPath)&&const DeepCollectionEquality().equals(other.tags, tags)&&(identical(other.numTracks, numTracks) || other.numTracks == numTracks)&&(identical(other.numAudioFiles, numAudioFiles) || other.numAudioFiles == numAudioFiles)&&(identical(other.numChapters, numChapters) || other.numChapters == numChapters)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.size, size) || other.size == size));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -975,15 +975,15 @@ int get hashCode => Object.hash(runtimeType,metadata,coverPath,const DeepCollect
 
 @override
 String toString() {
-  return 'Media(metadata: $metadata, coverPath: $coverPath, tags: $tags, numTracks: $numTracks, numAudioFiles: $numAudioFiles, numChapters: $numChapters, duration: $duration, size: $size)';
+  return 'MediaLisItemBean(metadata: $metadata, coverPath: $coverPath, tags: $tags, numTracks: $numTracks, numAudioFiles: $numAudioFiles, numChapters: $numChapters, duration: $duration, size: $size)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $MediaCopyWith<$Res>  {
-  factory $MediaCopyWith(Media value, $Res Function(Media) _then) = _$MediaCopyWithImpl;
+abstract mixin class $MediaLisItemBeanCopyWith<$Res>  {
+  factory $MediaLisItemBeanCopyWith(MediaLisItemBean value, $Res Function(MediaLisItemBean) _then) = _$MediaLisItemBeanCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'metadata') MediaMetaDataBean? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<dynamic>? tags,@JsonKey(name: 'numTracks') int? numTracks,@JsonKey(name: 'numAudioFiles') int? numAudioFiles,@JsonKey(name: 'numChapters') int? numChapters,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'size') int? size
@@ -994,14 +994,14 @@ $MediaMetaDataBeanCopyWith<$Res>? get metadata;
 
 }
 /// @nodoc
-class _$MediaCopyWithImpl<$Res>
-    implements $MediaCopyWith<$Res> {
-  _$MediaCopyWithImpl(this._self, this._then);
+class _$MediaLisItemBeanCopyWithImpl<$Res>
+    implements $MediaLisItemBeanCopyWith<$Res> {
+  _$MediaLisItemBeanCopyWithImpl(this._self, this._then);
 
-  final Media _self;
-  final $Res Function(Media) _then;
+  final MediaLisItemBean _self;
+  final $Res Function(MediaLisItemBean) _then;
 
-/// Create a copy of Media
+/// Create a copy of MediaLisItemBean
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? metadata = freezed,Object? coverPath = freezed,Object? tags = freezed,Object? numTracks = freezed,Object? numAudioFiles = freezed,Object? numChapters = freezed,Object? duration = freezed,Object? size = freezed,}) {
   return _then(_self.copyWith(
@@ -1016,7 +1016,7 @@ as double?,size: freezed == size ? _self.size : size // ignore: cast_nullable_to
 as int?,
   ));
 }
-/// Create a copy of Media
+/// Create a copy of MediaLisItemBean
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -1032,8 +1032,8 @@ $MediaMetaDataBeanCopyWith<$Res>? get metadata {
 }
 
 
-/// Adds pattern-matching-related methods to [Media].
-extension MediaPatterns on Media {
+/// Adds pattern-matching-related methods to [MediaLisItemBean].
+extension MediaLisItemBeanPatterns on MediaLisItemBean {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -1046,10 +1046,10 @@ extension MediaPatterns on Media {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Media value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MediaLisItemBean value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Media() when $default != null:
+case _MediaLisItemBean() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -1068,10 +1068,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Media value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MediaLisItemBean value)  $default,){
 final _that = this;
 switch (_that) {
-case _Media():
+case _MediaLisItemBean():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -1089,10 +1089,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Media value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MediaLisItemBean value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Media() when $default != null:
+case _MediaLisItemBean() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -1112,7 +1112,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Media() when $default != null:
+case _MediaLisItemBean() when $default != null:
 return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.numAudioFiles,_that.numChapters,_that.duration,_that.size);case _:
   return orElse();
 
@@ -1133,7 +1133,7 @@ return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)  $default,) {final _that = this;
 switch (_that) {
-case _Media():
+case _MediaLisItemBean():
 return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.numAudioFiles,_that.numChapters,_that.duration,_that.size);case _:
   throw StateError('Unexpected subclass');
 
@@ -1153,7 +1153,7 @@ return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<dynamic>? tags, @JsonKey(name: 'numTracks')  int? numTracks, @JsonKey(name: 'numAudioFiles')  int? numAudioFiles, @JsonKey(name: 'numChapters')  int? numChapters, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'size')  int? size)?  $default,) {final _that = this;
 switch (_that) {
-case _Media() when $default != null:
+case _MediaLisItemBean() when $default != null:
 return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.numAudioFiles,_that.numChapters,_that.duration,_that.size);case _:
   return null;
 
@@ -1165,9 +1165,9 @@ return $default(_that.metadata,_that.coverPath,_that.tags,_that.numTracks,_that.
 /// @nodoc
 @JsonSerializable()
 
-class _Media implements Media {
-  const _Media({@JsonKey(name: 'metadata') this.metadata, @JsonKey(name: 'coverPath') this.coverPath, @JsonKey(name: 'tags') final  List<dynamic>? tags, @JsonKey(name: 'numTracks') this.numTracks, @JsonKey(name: 'numAudioFiles') this.numAudioFiles, @JsonKey(name: 'numChapters') this.numChapters, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'size') this.size}): _tags = tags;
-  factory _Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
+class _MediaLisItemBean implements MediaLisItemBean {
+  const _MediaLisItemBean({@JsonKey(name: 'metadata') this.metadata, @JsonKey(name: 'coverPath') this.coverPath, @JsonKey(name: 'tags') final  List<dynamic>? tags, @JsonKey(name: 'numTracks') this.numTracks, @JsonKey(name: 'numAudioFiles') this.numAudioFiles, @JsonKey(name: 'numChapters') this.numChapters, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'size') this.size}): _tags = tags;
+  factory _MediaLisItemBean.fromJson(Map<String, dynamic> json) => _$MediaLisItemBeanFromJson(json);
 
 @override@JsonKey(name: 'metadata') final  MediaMetaDataBean? metadata;
 @override@JsonKey(name: 'coverPath') final  String? coverPath;
@@ -1186,20 +1186,20 @@ class _Media implements Media {
 @override@JsonKey(name: 'duration') final  double? duration;
 @override@JsonKey(name: 'size') final  int? size;
 
-/// Create a copy of Media
+/// Create a copy of MediaLisItemBean
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$MediaCopyWith<_Media> get copyWith => __$MediaCopyWithImpl<_Media>(this, _$identity);
+_$MediaLisItemBeanCopyWith<_MediaLisItemBean> get copyWith => __$MediaLisItemBeanCopyWithImpl<_MediaLisItemBean>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$MediaToJson(this, );
+  return _$MediaLisItemBeanToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Media&&(identical(other.metadata, metadata) || other.metadata == metadata)&&(identical(other.coverPath, coverPath) || other.coverPath == coverPath)&&const DeepCollectionEquality().equals(other._tags, _tags)&&(identical(other.numTracks, numTracks) || other.numTracks == numTracks)&&(identical(other.numAudioFiles, numAudioFiles) || other.numAudioFiles == numAudioFiles)&&(identical(other.numChapters, numChapters) || other.numChapters == numChapters)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.size, size) || other.size == size));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MediaLisItemBean&&(identical(other.metadata, metadata) || other.metadata == metadata)&&(identical(other.coverPath, coverPath) || other.coverPath == coverPath)&&const DeepCollectionEquality().equals(other._tags, _tags)&&(identical(other.numTracks, numTracks) || other.numTracks == numTracks)&&(identical(other.numAudioFiles, numAudioFiles) || other.numAudioFiles == numAudioFiles)&&(identical(other.numChapters, numChapters) || other.numChapters == numChapters)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.size, size) || other.size == size));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1208,15 +1208,15 @@ int get hashCode => Object.hash(runtimeType,metadata,coverPath,const DeepCollect
 
 @override
 String toString() {
-  return 'Media(metadata: $metadata, coverPath: $coverPath, tags: $tags, numTracks: $numTracks, numAudioFiles: $numAudioFiles, numChapters: $numChapters, duration: $duration, size: $size)';
+  return 'MediaLisItemBean(metadata: $metadata, coverPath: $coverPath, tags: $tags, numTracks: $numTracks, numAudioFiles: $numAudioFiles, numChapters: $numChapters, duration: $duration, size: $size)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$MediaCopyWith<$Res> implements $MediaCopyWith<$Res> {
-  factory _$MediaCopyWith(_Media value, $Res Function(_Media) _then) = __$MediaCopyWithImpl;
+abstract mixin class _$MediaLisItemBeanCopyWith<$Res> implements $MediaLisItemBeanCopyWith<$Res> {
+  factory _$MediaLisItemBeanCopyWith(_MediaLisItemBean value, $Res Function(_MediaLisItemBean) _then) = __$MediaLisItemBeanCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'metadata') MediaMetaDataBean? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<dynamic>? tags,@JsonKey(name: 'numTracks') int? numTracks,@JsonKey(name: 'numAudioFiles') int? numAudioFiles,@JsonKey(name: 'numChapters') int? numChapters,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'size') int? size
@@ -1227,17 +1227,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$MediaCopyWithImpl<$Res>
-    implements _$MediaCopyWith<$Res> {
-  __$MediaCopyWithImpl(this._self, this._then);
+class __$MediaLisItemBeanCopyWithImpl<$Res>
+    implements _$MediaLisItemBeanCopyWith<$Res> {
+  __$MediaLisItemBeanCopyWithImpl(this._self, this._then);
 
-  final _Media _self;
-  final $Res Function(_Media) _then;
+  final _MediaLisItemBean _self;
+  final $Res Function(_MediaLisItemBean) _then;
 
-/// Create a copy of Media
+/// Create a copy of MediaLisItemBean
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? metadata = freezed,Object? coverPath = freezed,Object? tags = freezed,Object? numTracks = freezed,Object? numAudioFiles = freezed,Object? numChapters = freezed,Object? duration = freezed,Object? size = freezed,}) {
-  return _then(_Media(
+  return _then(_MediaLisItemBean(
 metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
 as MediaMetaDataBean?,coverPath: freezed == coverPath ? _self.coverPath : coverPath // ignore: cast_nullable_to_non_nullable
 as String?,tags: freezed == tags ? _self._tags : tags // ignore: cast_nullable_to_non_nullable
@@ -1250,7 +1250,7 @@ as int?,
   ));
 }
 
-/// Create a copy of Media
+/// Create a copy of MediaLisItemBean
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

@@ -1,22 +1,21 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data_bean.dart';
-import 'package:audio_book/business/audiobook_api/beans/media_progress_bean.dart';
 import 'package:audio_book/business/home/media_detail/media_detail_bottom_view.dart';
 import 'package:audio_book/business/home/media_detail/media_detail_header_view.dart';
 import 'package:audio_book/business/services/AudioPlayerService.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
-import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
-import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:get/get.dart';
+import '../../audiobook_api/beans/library_item_detail_bean.dart';
+import '../../audiobook_api/beans/media.dart';
 import 'media_detail_description_view.dart';
 import 'media_detail_stats_view.dart';
 import 'media_detail_tag_view.dart';
 
 class MediaDetail extends StatefulWidget {
-  final Results result;
+  final String libraryid;
 
-  const MediaDetail(this.result, {Key? key}) : super(key: key);
+  const MediaDetail(this.libraryid, {Key? key}) : super(key: key);
 
   @override
   _MediaDetailState createState() => _MediaDetailState();
@@ -27,7 +26,8 @@ class _MediaDetailState extends State<MediaDetail> {
   MediaMetaDataBean? meta;
   bool loading = false;
 
-  MediaProgressBean? mediaProgressBean;
+  // MediaProgressBean? mediaProgressBean;
+  LibraryItemDetailBean? libraryItemDetailBean;
   @override
   void initState() {
     super.initState();
@@ -35,8 +35,8 @@ class _MediaDetailState extends State<MediaDetail> {
   }
   @override
   Widget build(BuildContext context) {
-    media = widget.result.media;
-    meta = widget.result.media?.metadata;
+    media = libraryItemDetailBean?.media;
+    meta = libraryItemDetailBean?.media?.metadata;
     return Scaffold(
       appBar: AppBar(title: Text("详情")),
       body: Stack(
@@ -46,7 +46,7 @@ class _MediaDetailState extends State<MediaDetail> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 /// 🔥 封面 + 基本信息
-                MediaDetailHeaderView(widget.result),
+                MediaDetailHeaderView(libraryItemDetailBean),
                 SizedBox(height: 16),
 
                 /// 📚 标题
@@ -65,16 +65,16 @@ class _MediaDetailState extends State<MediaDetail> {
                 /// 作者 / 播音
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text("作者：${meta?.authorName ?? "-"}\n播音：${meta?.narratorName ?? "-"}", style: const TextStyle(fontSize: 14)),
+                  child: Text("作者：${meta?.authors.toString() ?? "-"}\n播音：${meta?.narrators.toString() ?? "-"}", style: const TextStyle(fontSize: 14)),
                 ),
                 const SizedBox(height: 12),
 
                 /// 标签
-                MediaDetailTagView(meta?.genres ?? []),
+                MediaDetailTagView(media?.tags ?? []),
                 const SizedBox(height: 12),
 
                 /// 数据信息
-                MediaDetailStatsView(media),
+                MediaDetailStatsView(libraryItemDetailBean),
                 const SizedBox(height: 16),
 
                 /// 简介
@@ -87,13 +87,13 @@ class _MediaDetailState extends State<MediaDetail> {
             width: double.infinity,
             height: double.infinity,
             alignment: Alignment.bottomCenter,
-            child: MediaDetailBottomView(widget.result, loading: loading,mediaProgressBean: mediaProgressBean,onPlayTap: (status) async{
+            child: MediaDetailBottomView(libraryItemDetailBean, loading: loading,onPlayTap: (status) async{
               if(status==PlayButtonState.paused){
                 // 播放
                 setState(() {
                   loading=true;
                 });
-                var playBean = await AudiobookshelfApi().playMedia(widget.result.id??"");
+                var playBean = await AudiobookshelfApi().playMedia(widget.libraryid);
                 AudioPlayerService.playUrl(playBean?.libraryItem?.media?.episodes?.first.enclosure?.url??"");
                 Get.back();
                 setState(() {
@@ -111,7 +111,8 @@ class _MediaDetailState extends State<MediaDetail> {
     setState(() {
       loading = true;
     });
-    mediaProgressBean = await AudiobookshelfApi().mediaProgress(widget.result.id??"");
+    libraryItemDetailBean = await AudiobookshelfApi().libraryItemDetail(widget.libraryid);
+    // mediaProgressBean = await AudiobookshelfApi().mediaProgress(widget.libraryid);
     setState(() {
       loading = false;
     });

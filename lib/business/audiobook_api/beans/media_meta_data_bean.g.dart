@@ -35,6 +35,7 @@ _MediaMetaDataBean _$MediaMetaDataBeanFromJson(Map<String, dynamic> json) =>
       authorNameLF: json['authorNameLF'] as String?,
       narratorName: json['narratorName'] as String?,
       seriesName: json['seriesName'] as String?,
+      descriptionPlain: json['descriptionPlain'] as String?,
     );
 
 Map<String, dynamic> _$MediaMetaDataBeanToJson(_MediaMetaDataBean instance) =>
@@ -58,6 +59,7 @@ Map<String, dynamic> _$MediaMetaDataBeanToJson(_MediaMetaDataBean instance) =>
       'authorNameLF': instance.authorNameLF,
       'narratorName': instance.narratorName,
       'seriesName': instance.seriesName,
+      'descriptionPlain': instance.descriptionPlain,
     };
 
 _Series _$SeriesFromJson(Map<String, dynamic> json) => _Series(

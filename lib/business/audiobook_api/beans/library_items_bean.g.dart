@@ -56,7 +56,7 @@ _Results _$ResultsFromJson(Map<String, dynamic> json) => _Results(
   mediaType: json['mediaType'] as String?,
   media: json['media'] == null
       ? null
-      : Media.fromJson(json['media'] as Map<String, dynamic>),
+      : MediaLisItemBean.fromJson(json['media'] as Map<String, dynamic>),
   numFiles: (json['numFiles'] as num?)?.toInt(),
   size: (json['size'] as num?)?.toInt(),
   collapsedSeries: json['collapsedSeries'] == null
@@ -104,26 +104,30 @@ Map<String, dynamic> _$CollapsedSeriesToJson(_CollapsedSeries instance) =>
       'numBooks': instance.numBooks,
     };
 
-_Media _$MediaFromJson(Map<String, dynamic> json) => _Media(
-  metadata: json['metadata'] == null
-      ? null
-      : MediaMetaDataBean.fromJson(json['metadata'] as Map<String, dynamic>),
-  coverPath: json['coverPath'] as String?,
-  tags: json['tags'] as List<dynamic>?,
-  numTracks: (json['numTracks'] as num?)?.toInt(),
-  numAudioFiles: (json['numAudioFiles'] as num?)?.toInt(),
-  numChapters: (json['numChapters'] as num?)?.toInt(),
-  duration: (json['duration'] as num?)?.toDouble(),
-  size: (json['size'] as num?)?.toInt(),
-);
+_MediaLisItemBean _$MediaLisItemBeanFromJson(Map<String, dynamic> json) =>
+    _MediaLisItemBean(
+      metadata: json['metadata'] == null
+          ? null
+          : MediaMetaDataBean.fromJson(
+              json['metadata'] as Map<String, dynamic>,
+            ),
+      coverPath: json['coverPath'] as String?,
+      tags: json['tags'] as List<dynamic>?,
+      numTracks: (json['numTracks'] as num?)?.toInt(),
+      numAudioFiles: (json['numAudioFiles'] as num?)?.toInt(),
+      numChapters: (json['numChapters'] as num?)?.toInt(),
+      duration: (json['duration'] as num?)?.toDouble(),
+      size: (json['size'] as num?)?.toInt(),
+    );
 
-Map<String, dynamic> _$MediaToJson(_Media instance) => <String, dynamic>{
-  'metadata': instance.metadata,
-  'coverPath': instance.coverPath,
-  'tags': instance.tags,
-  'numTracks': instance.numTracks,
-  'numAudioFiles': instance.numAudioFiles,
-  'numChapters': instance.numChapters,
-  'duration': instance.duration,
-  'size': instance.size,
-};
+Map<String, dynamic> _$MediaLisItemBeanToJson(_MediaLisItemBean instance) =>
+    <String, dynamic>{
+      'metadata': instance.metadata,
+      'coverPath': instance.coverPath,
+      'tags': instance.tags,
+      'numTracks': instance.numTracks,
+      'numAudioFiles': instance.numAudioFiles,
+      'numChapters': instance.numChapters,
+      'duration': instance.duration,
+      'size': instance.size,
+    };

@@ -1,11 +1,12 @@
+import 'package:audio_book/business/audiobook_api/beans/library_item_detail_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:flutter/material.dart';
 
 import '../../audiobook_api/AudiobookshelfApi.dart';
 
 class MediaDetailHeaderView extends StatelessWidget {
-  Results? results;
-  MediaDetailHeaderView(this.results, {Key? key}) : super(key: key);
+  LibraryItemDetailBean? libraryItemDetailBean;
+  MediaDetailHeaderView(this.libraryItemDetailBean, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class MediaDetailHeaderView extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
-              AudiobookshelfApi().getMediaCoverUrl(results?.id ?? ''),
+              AudiobookshelfApi().getMediaCoverUrl(libraryItemDetailBean?.id ?? ''),
               width: 100,
               height: 140,
               fit: BoxFit.cover,
@@ -32,7 +33,7 @@ class MediaDetailHeaderView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  results?.media?.metadata?.title ?? "",
+                  libraryItemDetailBean?.media?.metadata?.title ?? "",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -44,14 +45,14 @@ class MediaDetailHeaderView extends StatelessWidget {
                 const SizedBox(height: 8),
 
                 Text(
-                  results?.media?.metadata?.authorName ?? "",
+                  libraryItemDetailBean?.media?.metadata?.narrators.toString() ?? "",
                   style: const TextStyle(color: Colors.grey),
                 ),
 
                 const SizedBox(height: 8),
 
                 Text(
-                  "${_formatDuration(results?.media?.duration)} · ${results?.media?.numTracks}集",
+                  "${libraryItemDetailBean?.media?.chapters?.length}章",
                   style: const TextStyle(color: Colors.grey),
                 ),
               ],

@@ -2,15 +2,15 @@
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:flutter/material.dart';
+import '../../audiobook_api/beans/library_item_detail_bean.dart';
 import '../../audiobook_api/beans/media_progress_bean.dart';
 
 class MediaDetailBottomView extends StatefulWidget {
-  Results result;
+  LibraryItemDetailBean? libraryItemDetailBean;
   bool loading;
-  MediaProgressBean? mediaProgressBean;
 
   Function(PlayButtonState? state)? onPlayTap;
-  MediaDetailBottomView(this.result, {Key? key,this.loading=false,this.mediaProgressBean,this.onPlayTap}) : super(key: key);
+  MediaDetailBottomView(this.libraryItemDetailBean, {Key? key,this.loading=false,this.onPlayTap}) : super(key: key);
 
   @override
   _MediaDetailBottomViewState createState() => _MediaDetailBottomViewState();
@@ -25,8 +25,9 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
     if(widget.loading){
       text = "加载中";
     }else{
-      var p = widget.mediaProgressBean?.progress??0.0;
-        text = p>0?"继续播放 ${(p*100).roundToDouble()}%":"从头播放";
+      // var p = widget.libraryItemDetailBean?.userMediaProgress?.progress??0.0;
+      //   text = p>0?"继续播放 ${(p*100).roundToDouble()}%":"从头播放";
+      text="播放";
     }
     state = widget.loading?PlayButtonState.loading:PlayButtonState.paused;
 

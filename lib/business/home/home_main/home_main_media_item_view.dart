@@ -40,7 +40,7 @@ class HomeMainMediaItemView extends StatelessWidget {
       ),
     ),onTap: (){
       if(result!=null){
-        Get.to(MediaDetail(result!));
+        Get.to(MediaDetail(result?.id??""));
       }
     },);
   }

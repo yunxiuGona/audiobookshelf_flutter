@@ -11,11 +11,12 @@ import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
 
+import 'beans/library_item_detail_bean.dart';
 import 'beans/library_items_bean.dart';
 
 class AudiobookshelfApi extends GetConnect{
   final String baseUrl=C.HOST;
-  final Duration timeout= Duration(seconds: 20);
+  final Duration timeout= Duration(seconds: 30);
   Map<String,String>? headers;
   final OK = 200;
 
@@ -57,6 +58,17 @@ class AudiobookshelfApi extends GetConnect{
     }
   }
 
+
+  Future<LibraryItemDetailBean?> libraryItemDetail(String libraryID) async{
+    initUserInfo();
+    var resp = await get(headers: headers,"/api/items/${libraryID}");
+    if(resp.status.code==OK){
+      return LibraryItemDetailBean.fromJson(resp.body);
+    }else{
+      return null;
+    }
+  }
+
   Future<MediaProgressBean?> mediaProgress(String libraryItemID) async{
     initUserInfo();
     var resp = await get(headers: headers,"/api/me/progress/${libraryItemID}");
@@ -69,7 +81,7 @@ class AudiobookshelfApi extends GetConnect{
 
   Future<PlayMediaBean?> playMedia(String id) async{
     initUserInfo();
-    var resp = await get(headers: headers,"/api/items/${id}/play");
+    var resp = await post(headers: headers,"/api/items/${id}/play", {});
     if(resp.status.code==OK){
       return PlayMediaBean.fromJson(resp.body);
     }else{
