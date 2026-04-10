@@ -1,5 +1,5 @@
-import 'package:audio_book/business/audiobook_api/beans/all_library_bean.dart';
-import 'package:audio_book/business/audiobook_api/beans/library_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/all_library.dart';
+import 'package:audio_book/business/audiobook_api/beans/library.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:audio_book/business/home/home_main/home_main_library_filter_view.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
@@ -23,7 +23,7 @@ class HomeMain extends StatefulWidget {
 
 class _HomeMainState extends State<HomeMain> {
   late RefreshController _refreshController;
-  AllLibraryBean? allLibraries;
+  AllLibrary? allLibraries;
   LibraryItemsBean? libraryItems;
   final valueListenable = ValueNotifier<String?>(null);
 
@@ -97,7 +97,7 @@ class _HomeMainState extends State<HomeMain> {
     );
   }
 
-  LibraryBean? findLibraryFromData(String? value) {
+  Library? findLibraryFromData(String? value) {
     for (int i = 0; i < (allLibraries?.libraries?.length ?? 0); i++) {
       if (allLibraries?.libraries?.elementAt(i).name == value) {
         return allLibraries?.libraries?.elementAt(i);

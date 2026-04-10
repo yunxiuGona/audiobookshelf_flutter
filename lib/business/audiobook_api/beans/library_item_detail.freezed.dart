@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'library_item_detail_bean.dart';
+part of 'library_item_detail.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'library_item_detail_bean.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$LibraryItemDetailBean {
+mixin _$LibraryItemDetail {
 
 @JsonKey(name: 'id') String? get id;@JsonKey(name: 'ino') String? get ino;@JsonKey(name: 'oldLibraryItemId') dynamic get oldLibraryItemId;@JsonKey(name: 'libraryId') String? get libraryId;@JsonKey(name: 'folderId') String? get folderId;@JsonKey(name: 'path') String? get path;@JsonKey(name: 'relPath') String? get relPath;@JsonKey(name: 'isFile') bool? get isFile;@JsonKey(name: 'mtimeMs') int? get mtimeMs;@JsonKey(name: 'ctimeMs') int? get ctimeMs;@JsonKey(name: 'birthtimeMs') int? get birthtimeMs;@JsonKey(name: 'addedAt') int? get addedAt;@JsonKey(name: 'updatedAt') int? get updatedAt;@JsonKey(name: 'lastScan') int? get lastScan;@JsonKey(name: 'scanVersion') String? get scanVersion;@JsonKey(name: 'isMissing') bool? get isMissing;@JsonKey(name: 'isInvalid') bool? get isInvalid;@JsonKey(name: 'mediaType') String? get mediaType;@JsonKey(name: 'media') Media? get media;@JsonKey(name: 'libraryFiles') List<LibraryFile>? get libraryFiles;@JsonKey(name: 'size') int? get size;
-/// Create a copy of LibraryItemDetailBean
+/// Create a copy of LibraryItemDetail
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$LibraryItemDetailBeanCopyWith<LibraryItemDetailBean> get copyWith => _$LibraryItemDetailBeanCopyWithImpl<LibraryItemDetailBean>(this as LibraryItemDetailBean, _$identity);
+$LibraryItemDetailCopyWith<LibraryItemDetail> get copyWith => _$LibraryItemDetailCopyWithImpl<LibraryItemDetail>(this as LibraryItemDetail, _$identity);
 
-  /// Serializes this LibraryItemDetailBean to a JSON map.
+  /// Serializes this LibraryItemDetail to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LibraryItemDetailBean&&(identical(other.id, id) || other.id == id)&&(identical(other.ino, ino) || other.ino == ino)&&const DeepCollectionEquality().equals(other.oldLibraryItemId, oldLibraryItemId)&&(identical(other.libraryId, libraryId) || other.libraryId == libraryId)&&(identical(other.folderId, folderId) || other.folderId == folderId)&&(identical(other.path, path) || other.path == path)&&(identical(other.relPath, relPath) || other.relPath == relPath)&&(identical(other.isFile, isFile) || other.isFile == isFile)&&(identical(other.mtimeMs, mtimeMs) || other.mtimeMs == mtimeMs)&&(identical(other.ctimeMs, ctimeMs) || other.ctimeMs == ctimeMs)&&(identical(other.birthtimeMs, birthtimeMs) || other.birthtimeMs == birthtimeMs)&&(identical(other.addedAt, addedAt) || other.addedAt == addedAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.lastScan, lastScan) || other.lastScan == lastScan)&&(identical(other.scanVersion, scanVersion) || other.scanVersion == scanVersion)&&(identical(other.isMissing, isMissing) || other.isMissing == isMissing)&&(identical(other.isInvalid, isInvalid) || other.isInvalid == isInvalid)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.media, media) || other.media == media)&&const DeepCollectionEquality().equals(other.libraryFiles, libraryFiles)&&(identical(other.size, size) || other.size == size));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LibraryItemDetail&&(identical(other.id, id) || other.id == id)&&(identical(other.ino, ino) || other.ino == ino)&&const DeepCollectionEquality().equals(other.oldLibraryItemId, oldLibraryItemId)&&(identical(other.libraryId, libraryId) || other.libraryId == libraryId)&&(identical(other.folderId, folderId) || other.folderId == folderId)&&(identical(other.path, path) || other.path == path)&&(identical(other.relPath, relPath) || other.relPath == relPath)&&(identical(other.isFile, isFile) || other.isFile == isFile)&&(identical(other.mtimeMs, mtimeMs) || other.mtimeMs == mtimeMs)&&(identical(other.ctimeMs, ctimeMs) || other.ctimeMs == ctimeMs)&&(identical(other.birthtimeMs, birthtimeMs) || other.birthtimeMs == birthtimeMs)&&(identical(other.addedAt, addedAt) || other.addedAt == addedAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.lastScan, lastScan) || other.lastScan == lastScan)&&(identical(other.scanVersion, scanVersion) || other.scanVersion == scanVersion)&&(identical(other.isMissing, isMissing) || other.isMissing == isMissing)&&(identical(other.isInvalid, isInvalid) || other.isInvalid == isInvalid)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.media, media) || other.media == media)&&const DeepCollectionEquality().equals(other.libraryFiles, libraryFiles)&&(identical(other.size, size) || other.size == size));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hashAll([runtimeType,id,ino,const DeepCollectionEqual
 
 @override
 String toString() {
-  return 'LibraryItemDetailBean(id: $id, ino: $ino, oldLibraryItemId: $oldLibraryItemId, libraryId: $libraryId, folderId: $folderId, path: $path, relPath: $relPath, isFile: $isFile, mtimeMs: $mtimeMs, ctimeMs: $ctimeMs, birthtimeMs: $birthtimeMs, addedAt: $addedAt, updatedAt: $updatedAt, lastScan: $lastScan, scanVersion: $scanVersion, isMissing: $isMissing, isInvalid: $isInvalid, mediaType: $mediaType, media: $media, libraryFiles: $libraryFiles, size: $size)';
+  return 'LibraryItemDetail(id: $id, ino: $ino, oldLibraryItemId: $oldLibraryItemId, libraryId: $libraryId, folderId: $folderId, path: $path, relPath: $relPath, isFile: $isFile, mtimeMs: $mtimeMs, ctimeMs: $ctimeMs, birthtimeMs: $birthtimeMs, addedAt: $addedAt, updatedAt: $updatedAt, lastScan: $lastScan, scanVersion: $scanVersion, isMissing: $isMissing, isInvalid: $isInvalid, mediaType: $mediaType, media: $media, libraryFiles: $libraryFiles, size: $size)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $LibraryItemDetailBeanCopyWith<$Res>  {
-  factory $LibraryItemDetailBeanCopyWith(LibraryItemDetailBean value, $Res Function(LibraryItemDetailBean) _then) = _$LibraryItemDetailBeanCopyWithImpl;
+abstract mixin class $LibraryItemDetailCopyWith<$Res>  {
+  factory $LibraryItemDetailCopyWith(LibraryItemDetail value, $Res Function(LibraryItemDetail) _then) = _$LibraryItemDetailCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'id') String? id,@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'oldLibraryItemId') dynamic oldLibraryItemId,@JsonKey(name: 'libraryId') String? libraryId,@JsonKey(name: 'folderId') String? folderId,@JsonKey(name: 'path') String? path,@JsonKey(name: 'relPath') String? relPath,@JsonKey(name: 'isFile') bool? isFile,@JsonKey(name: 'mtimeMs') int? mtimeMs,@JsonKey(name: 'ctimeMs') int? ctimeMs,@JsonKey(name: 'birthtimeMs') int? birthtimeMs,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'lastScan') int? lastScan,@JsonKey(name: 'scanVersion') String? scanVersion,@JsonKey(name: 'isMissing') bool? isMissing,@JsonKey(name: 'isInvalid') bool? isInvalid,@JsonKey(name: 'mediaType') String? mediaType,@JsonKey(name: 'media') Media? media,@JsonKey(name: 'libraryFiles') List<LibraryFile>? libraryFiles,@JsonKey(name: 'size') int? size
@@ -56,14 +56,14 @@ $MediaCopyWith<$Res>? get media;
 
 }
 /// @nodoc
-class _$LibraryItemDetailBeanCopyWithImpl<$Res>
-    implements $LibraryItemDetailBeanCopyWith<$Res> {
-  _$LibraryItemDetailBeanCopyWithImpl(this._self, this._then);
+class _$LibraryItemDetailCopyWithImpl<$Res>
+    implements $LibraryItemDetailCopyWith<$Res> {
+  _$LibraryItemDetailCopyWithImpl(this._self, this._then);
 
-  final LibraryItemDetailBean _self;
-  final $Res Function(LibraryItemDetailBean) _then;
+  final LibraryItemDetail _self;
+  final $Res Function(LibraryItemDetail) _then;
 
-/// Create a copy of LibraryItemDetailBean
+/// Create a copy of LibraryItemDetail
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? ino = freezed,Object? oldLibraryItemId = freezed,Object? libraryId = freezed,Object? folderId = freezed,Object? path = freezed,Object? relPath = freezed,Object? isFile = freezed,Object? mtimeMs = freezed,Object? ctimeMs = freezed,Object? birthtimeMs = freezed,Object? addedAt = freezed,Object? updatedAt = freezed,Object? lastScan = freezed,Object? scanVersion = freezed,Object? isMissing = freezed,Object? isInvalid = freezed,Object? mediaType = freezed,Object? media = freezed,Object? libraryFiles = freezed,Object? size = freezed,}) {
   return _then(_self.copyWith(
@@ -91,7 +91,7 @@ as List<LibraryFile>?,size: freezed == size ? _self.size : size // ignore: cast_
 as int?,
   ));
 }
-/// Create a copy of LibraryItemDetailBean
+/// Create a copy of LibraryItemDetail
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -107,8 +107,8 @@ $MediaCopyWith<$Res>? get media {
 }
 
 
-/// Adds pattern-matching-related methods to [LibraryItemDetailBean].
-extension LibraryItemDetailBeanPatterns on LibraryItemDetailBean {
+/// Adds pattern-matching-related methods to [LibraryItemDetail].
+extension LibraryItemDetailPatterns on LibraryItemDetail {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -121,10 +121,10 @@ extension LibraryItemDetailBeanPatterns on LibraryItemDetailBean {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LibraryItemDetailBean value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LibraryItemDetail value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _LibraryItemDetailBean() when $default != null:
+case _LibraryItemDetail() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -143,10 +143,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LibraryItemDetailBean value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LibraryItemDetail value)  $default,){
 final _that = this;
 switch (_that) {
-case _LibraryItemDetailBean():
+case _LibraryItemDetail():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -164,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LibraryItemDetailBean value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LibraryItemDetail value)?  $default,){
 final _that = this;
 switch (_that) {
-case _LibraryItemDetailBean() when $default != null:
+case _LibraryItemDetail() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -187,7 +187,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'oldLibraryItemId')  dynamic oldLibraryItemId, @JsonKey(name: 'libraryId')  String? libraryId, @JsonKey(name: 'folderId')  String? folderId, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'isFile')  bool? isFile, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'lastScan')  int? lastScan, @JsonKey(name: 'scanVersion')  String? scanVersion, @JsonKey(name: 'isMissing')  bool? isMissing, @JsonKey(name: 'isInvalid')  bool? isInvalid, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'media')  Media? media, @JsonKey(name: 'libraryFiles')  List<LibraryFile>? libraryFiles, @JsonKey(name: 'size')  int? size)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _LibraryItemDetailBean() when $default != null:
+case _LibraryItemDetail() when $default != null:
 return $default(_that.id,_that.ino,_that.oldLibraryItemId,_that.libraryId,_that.folderId,_that.path,_that.relPath,_that.isFile,_that.mtimeMs,_that.ctimeMs,_that.birthtimeMs,_that.addedAt,_that.updatedAt,_that.lastScan,_that.scanVersion,_that.isMissing,_that.isInvalid,_that.mediaType,_that.media,_that.libraryFiles,_that.size);case _:
   return orElse();
 
@@ -208,7 +208,7 @@ return $default(_that.id,_that.ino,_that.oldLibraryItemId,_that.libraryId,_that.
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'oldLibraryItemId')  dynamic oldLibraryItemId, @JsonKey(name: 'libraryId')  String? libraryId, @JsonKey(name: 'folderId')  String? folderId, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'isFile')  bool? isFile, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'lastScan')  int? lastScan, @JsonKey(name: 'scanVersion')  String? scanVersion, @JsonKey(name: 'isMissing')  bool? isMissing, @JsonKey(name: 'isInvalid')  bool? isInvalid, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'media')  Media? media, @JsonKey(name: 'libraryFiles')  List<LibraryFile>? libraryFiles, @JsonKey(name: 'size')  int? size)  $default,) {final _that = this;
 switch (_that) {
-case _LibraryItemDetailBean():
+case _LibraryItemDetail():
 return $default(_that.id,_that.ino,_that.oldLibraryItemId,_that.libraryId,_that.folderId,_that.path,_that.relPath,_that.isFile,_that.mtimeMs,_that.ctimeMs,_that.birthtimeMs,_that.addedAt,_that.updatedAt,_that.lastScan,_that.scanVersion,_that.isMissing,_that.isInvalid,_that.mediaType,_that.media,_that.libraryFiles,_that.size);case _:
   throw StateError('Unexpected subclass');
 
@@ -228,7 +228,7 @@ return $default(_that.id,_that.ino,_that.oldLibraryItemId,_that.libraryId,_that.
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'oldLibraryItemId')  dynamic oldLibraryItemId, @JsonKey(name: 'libraryId')  String? libraryId, @JsonKey(name: 'folderId')  String? folderId, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'isFile')  bool? isFile, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'lastScan')  int? lastScan, @JsonKey(name: 'scanVersion')  String? scanVersion, @JsonKey(name: 'isMissing')  bool? isMissing, @JsonKey(name: 'isInvalid')  bool? isInvalid, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'media')  Media? media, @JsonKey(name: 'libraryFiles')  List<LibraryFile>? libraryFiles, @JsonKey(name: 'size')  int? size)?  $default,) {final _that = this;
 switch (_that) {
-case _LibraryItemDetailBean() when $default != null:
+case _LibraryItemDetail() when $default != null:
 return $default(_that.id,_that.ino,_that.oldLibraryItemId,_that.libraryId,_that.folderId,_that.path,_that.relPath,_that.isFile,_that.mtimeMs,_that.ctimeMs,_that.birthtimeMs,_that.addedAt,_that.updatedAt,_that.lastScan,_that.scanVersion,_that.isMissing,_that.isInvalid,_that.mediaType,_that.media,_that.libraryFiles,_that.size);case _:
   return null;
 
@@ -240,9 +240,9 @@ return $default(_that.id,_that.ino,_that.oldLibraryItemId,_that.libraryId,_that.
 /// @nodoc
 @JsonSerializable()
 
-class _LibraryItemDetailBean implements LibraryItemDetailBean {
-  const _LibraryItemDetailBean({@JsonKey(name: 'id') this.id, @JsonKey(name: 'ino') this.ino, @JsonKey(name: 'oldLibraryItemId') this.oldLibraryItemId, @JsonKey(name: 'libraryId') this.libraryId, @JsonKey(name: 'folderId') this.folderId, @JsonKey(name: 'path') this.path, @JsonKey(name: 'relPath') this.relPath, @JsonKey(name: 'isFile') this.isFile, @JsonKey(name: 'mtimeMs') this.mtimeMs, @JsonKey(name: 'ctimeMs') this.ctimeMs, @JsonKey(name: 'birthtimeMs') this.birthtimeMs, @JsonKey(name: 'addedAt') this.addedAt, @JsonKey(name: 'updatedAt') this.updatedAt, @JsonKey(name: 'lastScan') this.lastScan, @JsonKey(name: 'scanVersion') this.scanVersion, @JsonKey(name: 'isMissing') this.isMissing, @JsonKey(name: 'isInvalid') this.isInvalid, @JsonKey(name: 'mediaType') this.mediaType, @JsonKey(name: 'media') this.media, @JsonKey(name: 'libraryFiles') final  List<LibraryFile>? libraryFiles, @JsonKey(name: 'size') this.size}): _libraryFiles = libraryFiles;
-  factory _LibraryItemDetailBean.fromJson(Map<String, dynamic> json) => _$LibraryItemDetailBeanFromJson(json);
+class _LibraryItemDetail implements LibraryItemDetail {
+  const _LibraryItemDetail({@JsonKey(name: 'id') this.id, @JsonKey(name: 'ino') this.ino, @JsonKey(name: 'oldLibraryItemId') this.oldLibraryItemId, @JsonKey(name: 'libraryId') this.libraryId, @JsonKey(name: 'folderId') this.folderId, @JsonKey(name: 'path') this.path, @JsonKey(name: 'relPath') this.relPath, @JsonKey(name: 'isFile') this.isFile, @JsonKey(name: 'mtimeMs') this.mtimeMs, @JsonKey(name: 'ctimeMs') this.ctimeMs, @JsonKey(name: 'birthtimeMs') this.birthtimeMs, @JsonKey(name: 'addedAt') this.addedAt, @JsonKey(name: 'updatedAt') this.updatedAt, @JsonKey(name: 'lastScan') this.lastScan, @JsonKey(name: 'scanVersion') this.scanVersion, @JsonKey(name: 'isMissing') this.isMissing, @JsonKey(name: 'isInvalid') this.isInvalid, @JsonKey(name: 'mediaType') this.mediaType, @JsonKey(name: 'media') this.media, @JsonKey(name: 'libraryFiles') final  List<LibraryFile>? libraryFiles, @JsonKey(name: 'size') this.size}): _libraryFiles = libraryFiles;
+  factory _LibraryItemDetail.fromJson(Map<String, dynamic> json) => _$LibraryItemDetailFromJson(json);
 
 @override@JsonKey(name: 'id') final  String? id;
 @override@JsonKey(name: 'ino') final  String? ino;
@@ -274,20 +274,20 @@ class _LibraryItemDetailBean implements LibraryItemDetailBean {
 
 @override@JsonKey(name: 'size') final  int? size;
 
-/// Create a copy of LibraryItemDetailBean
+/// Create a copy of LibraryItemDetail
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$LibraryItemDetailBeanCopyWith<_LibraryItemDetailBean> get copyWith => __$LibraryItemDetailBeanCopyWithImpl<_LibraryItemDetailBean>(this, _$identity);
+_$LibraryItemDetailCopyWith<_LibraryItemDetail> get copyWith => __$LibraryItemDetailCopyWithImpl<_LibraryItemDetail>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$LibraryItemDetailBeanToJson(this, );
+  return _$LibraryItemDetailToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LibraryItemDetailBean&&(identical(other.id, id) || other.id == id)&&(identical(other.ino, ino) || other.ino == ino)&&const DeepCollectionEquality().equals(other.oldLibraryItemId, oldLibraryItemId)&&(identical(other.libraryId, libraryId) || other.libraryId == libraryId)&&(identical(other.folderId, folderId) || other.folderId == folderId)&&(identical(other.path, path) || other.path == path)&&(identical(other.relPath, relPath) || other.relPath == relPath)&&(identical(other.isFile, isFile) || other.isFile == isFile)&&(identical(other.mtimeMs, mtimeMs) || other.mtimeMs == mtimeMs)&&(identical(other.ctimeMs, ctimeMs) || other.ctimeMs == ctimeMs)&&(identical(other.birthtimeMs, birthtimeMs) || other.birthtimeMs == birthtimeMs)&&(identical(other.addedAt, addedAt) || other.addedAt == addedAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.lastScan, lastScan) || other.lastScan == lastScan)&&(identical(other.scanVersion, scanVersion) || other.scanVersion == scanVersion)&&(identical(other.isMissing, isMissing) || other.isMissing == isMissing)&&(identical(other.isInvalid, isInvalid) || other.isInvalid == isInvalid)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.media, media) || other.media == media)&&const DeepCollectionEquality().equals(other._libraryFiles, _libraryFiles)&&(identical(other.size, size) || other.size == size));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LibraryItemDetail&&(identical(other.id, id) || other.id == id)&&(identical(other.ino, ino) || other.ino == ino)&&const DeepCollectionEquality().equals(other.oldLibraryItemId, oldLibraryItemId)&&(identical(other.libraryId, libraryId) || other.libraryId == libraryId)&&(identical(other.folderId, folderId) || other.folderId == folderId)&&(identical(other.path, path) || other.path == path)&&(identical(other.relPath, relPath) || other.relPath == relPath)&&(identical(other.isFile, isFile) || other.isFile == isFile)&&(identical(other.mtimeMs, mtimeMs) || other.mtimeMs == mtimeMs)&&(identical(other.ctimeMs, ctimeMs) || other.ctimeMs == ctimeMs)&&(identical(other.birthtimeMs, birthtimeMs) || other.birthtimeMs == birthtimeMs)&&(identical(other.addedAt, addedAt) || other.addedAt == addedAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.lastScan, lastScan) || other.lastScan == lastScan)&&(identical(other.scanVersion, scanVersion) || other.scanVersion == scanVersion)&&(identical(other.isMissing, isMissing) || other.isMissing == isMissing)&&(identical(other.isInvalid, isInvalid) || other.isInvalid == isInvalid)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.media, media) || other.media == media)&&const DeepCollectionEquality().equals(other._libraryFiles, _libraryFiles)&&(identical(other.size, size) || other.size == size));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -296,15 +296,15 @@ int get hashCode => Object.hashAll([runtimeType,id,ino,const DeepCollectionEqual
 
 @override
 String toString() {
-  return 'LibraryItemDetailBean(id: $id, ino: $ino, oldLibraryItemId: $oldLibraryItemId, libraryId: $libraryId, folderId: $folderId, path: $path, relPath: $relPath, isFile: $isFile, mtimeMs: $mtimeMs, ctimeMs: $ctimeMs, birthtimeMs: $birthtimeMs, addedAt: $addedAt, updatedAt: $updatedAt, lastScan: $lastScan, scanVersion: $scanVersion, isMissing: $isMissing, isInvalid: $isInvalid, mediaType: $mediaType, media: $media, libraryFiles: $libraryFiles, size: $size)';
+  return 'LibraryItemDetail(id: $id, ino: $ino, oldLibraryItemId: $oldLibraryItemId, libraryId: $libraryId, folderId: $folderId, path: $path, relPath: $relPath, isFile: $isFile, mtimeMs: $mtimeMs, ctimeMs: $ctimeMs, birthtimeMs: $birthtimeMs, addedAt: $addedAt, updatedAt: $updatedAt, lastScan: $lastScan, scanVersion: $scanVersion, isMissing: $isMissing, isInvalid: $isInvalid, mediaType: $mediaType, media: $media, libraryFiles: $libraryFiles, size: $size)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LibraryItemDetailBeanCopyWith<$Res> implements $LibraryItemDetailBeanCopyWith<$Res> {
-  factory _$LibraryItemDetailBeanCopyWith(_LibraryItemDetailBean value, $Res Function(_LibraryItemDetailBean) _then) = __$LibraryItemDetailBeanCopyWithImpl;
+abstract mixin class _$LibraryItemDetailCopyWith<$Res> implements $LibraryItemDetailCopyWith<$Res> {
+  factory _$LibraryItemDetailCopyWith(_LibraryItemDetail value, $Res Function(_LibraryItemDetail) _then) = __$LibraryItemDetailCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'id') String? id,@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'oldLibraryItemId') dynamic oldLibraryItemId,@JsonKey(name: 'libraryId') String? libraryId,@JsonKey(name: 'folderId') String? folderId,@JsonKey(name: 'path') String? path,@JsonKey(name: 'relPath') String? relPath,@JsonKey(name: 'isFile') bool? isFile,@JsonKey(name: 'mtimeMs') int? mtimeMs,@JsonKey(name: 'ctimeMs') int? ctimeMs,@JsonKey(name: 'birthtimeMs') int? birthtimeMs,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'lastScan') int? lastScan,@JsonKey(name: 'scanVersion') String? scanVersion,@JsonKey(name: 'isMissing') bool? isMissing,@JsonKey(name: 'isInvalid') bool? isInvalid,@JsonKey(name: 'mediaType') String? mediaType,@JsonKey(name: 'media') Media? media,@JsonKey(name: 'libraryFiles') List<LibraryFile>? libraryFiles,@JsonKey(name: 'size') int? size
@@ -315,17 +315,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$LibraryItemDetailBeanCopyWithImpl<$Res>
-    implements _$LibraryItemDetailBeanCopyWith<$Res> {
-  __$LibraryItemDetailBeanCopyWithImpl(this._self, this._then);
+class __$LibraryItemDetailCopyWithImpl<$Res>
+    implements _$LibraryItemDetailCopyWith<$Res> {
+  __$LibraryItemDetailCopyWithImpl(this._self, this._then);
 
-  final _LibraryItemDetailBean _self;
-  final $Res Function(_LibraryItemDetailBean) _then;
+  final _LibraryItemDetail _self;
+  final $Res Function(_LibraryItemDetail) _then;
 
-/// Create a copy of LibraryItemDetailBean
+/// Create a copy of LibraryItemDetail
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? ino = freezed,Object? oldLibraryItemId = freezed,Object? libraryId = freezed,Object? folderId = freezed,Object? path = freezed,Object? relPath = freezed,Object? isFile = freezed,Object? mtimeMs = freezed,Object? ctimeMs = freezed,Object? birthtimeMs = freezed,Object? addedAt = freezed,Object? updatedAt = freezed,Object? lastScan = freezed,Object? scanVersion = freezed,Object? isMissing = freezed,Object? isInvalid = freezed,Object? mediaType = freezed,Object? media = freezed,Object? libraryFiles = freezed,Object? size = freezed,}) {
-  return _then(_LibraryItemDetailBean(
+  return _then(_LibraryItemDetail(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,ino: freezed == ino ? _self.ino : ino // ignore: cast_nullable_to_non_nullable
 as String?,oldLibraryItemId: freezed == oldLibraryItemId ? _self.oldLibraryItemId : oldLibraryItemId // ignore: cast_nullable_to_non_nullable
@@ -351,7 +351,7 @@ as int?,
   ));
 }
 
-/// Create a copy of LibraryItemDetailBean
+/// Create a copy of LibraryItemDetail
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

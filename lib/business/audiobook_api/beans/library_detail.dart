@@ -1,22 +1,22 @@
-import 'package:audio_book/business/audiobook_api/beans/library_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/library.dart';
 import 'package:audio_book/business/audiobook_api/beans/setting.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'folder.dart';
 
-part 'library_detail_bean.freezed.dart';
-part 'library_detail_bean.g.dart';
+part 'library_detail.freezed.dart';
+part 'library_detail.g.dart';
 
 @freezed
-abstract class LibraryDetailBean with _$LibraryDetailBean {
-  const factory LibraryDetailBean({
+abstract class LibraryDetail with _$LibraryDetail {
+  const factory LibraryDetail({
     @JsonKey(name: 'filterdata') Filterdata? filterdata,
     @JsonKey(name: 'issues') int? issues,
     @JsonKey(name: 'numUserPlaylists') int? numUserPlaylists,
-    @JsonKey(name: 'library') LibraryBean? library,
-  }) = _LibraryDetailBean;
+    @JsonKey(name: 'library') Library? library,
+  }) = _LibraryDetail;
 
-  factory LibraryDetailBean.fromJson(Map<String, Object?> json) => _$LibraryDetailBeanFromJson(json);
+  factory LibraryDetail.fromJson(Map<String, Object?> json) => _$LibraryDetailFromJson(json);
 }
 
 @freezed

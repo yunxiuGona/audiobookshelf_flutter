@@ -11,9 +11,7 @@ _Track _$TrackFromJson(Map<String, dynamic> json) => _Track(
   ino: json['ino'] as String?,
   metadata: json['metadata'] == null
       ? null
-      : AudioFileMetaDataBean.fromJson(
-          json['metadata'] as Map<String, dynamic>,
-        ),
+      : AudioFileMetaData.fromJson(json['metadata'] as Map<String, dynamic>),
   addedAt: (json['addedAt'] as num?)?.toInt(),
   updatedAt: (json['updatedAt'] as num?)?.toInt(),
   trackNumFromMeta: json['trackNumFromMeta'],
@@ -35,7 +33,7 @@ _Track _$TrackFromJson(Map<String, dynamic> json) => _Track(
   embeddedCoverArt: json['embeddedCoverArt'],
   metaTags: json['metaTags'] == null
       ? null
-      : AudioFileMetaTagBean.fromJson(json['metaTags'] as Map<String, dynamic>),
+      : AudioFileMetaTag.fromJson(json['metaTags'] as Map<String, dynamic>),
   mimeType: json['mimeType'] as String?,
   title: json['title'] as String?,
   startOffset: (json['startOffset'] as num?)?.toInt(),

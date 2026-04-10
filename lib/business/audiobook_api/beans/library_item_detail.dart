@@ -3,12 +3,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'library_file.dart';
 import 'media.dart';
 
-part 'library_item_detail_bean.freezed.dart';
-part 'library_item_detail_bean.g.dart';
+part 'library_item_detail.freezed.dart';
+part 'library_item_detail.g.dart';
 
 @freezed
-abstract class LibraryItemDetailBean with _$LibraryItemDetailBean {
-  const factory LibraryItemDetailBean({
+abstract class LibraryItemDetail with _$LibraryItemDetail {
+  const factory LibraryItemDetail({
     @JsonKey(name: 'id') String? id,
     @JsonKey(name: 'ino') String? ino,
     @JsonKey(name: 'oldLibraryItemId') dynamic oldLibraryItemId,
@@ -30,9 +30,9 @@ abstract class LibraryItemDetailBean with _$LibraryItemDetailBean {
     @JsonKey(name: 'media') Media? media,
     @JsonKey(name: 'libraryFiles') List<LibraryFile>? libraryFiles,
     @JsonKey(name: 'size') int? size,
-  }) = _LibraryItemDetailBean;
+  }) = _LibraryItemDetail;
 
-  factory LibraryItemDetailBean.fromJson(Map<String, Object?> json) => _$LibraryItemDetailBeanFromJson(json);
+  factory LibraryItemDetail.fromJson(Map<String, Object?> json) => _$LibraryItemDetailFromJson(json);
 }
 
 

@@ -2,10 +2,10 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../audiobook_api/beans/all_library_bean.dart';
+import '../../audiobook_api/beans/all_library.dart';
 
 class HomeMainLibraryFilterView extends StatefulWidget {
-  AllLibraryBean? allLibraries;
+  AllLibrary? allLibraries;
   final ValueListenable<String?>? valueListenable;
   final Function(String value)? onChanged;
 

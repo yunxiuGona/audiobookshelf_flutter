@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'audio_file_meta_data_bean.dart';
+part of 'audio_file_meta_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'audio_file_meta_data_bean.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$AudioFileMetaDataBean {
+mixin _$AudioFileMetaData {
 
 @JsonKey(name: 'filename') String? get filename;@JsonKey(name: 'ext') String? get ext;@JsonKey(name: 'path') String? get path;@JsonKey(name: 'relPath') String? get relPath;@JsonKey(name: 'size') int? get size;@JsonKey(name: 'mtimeMs') int? get mtimeMs;@JsonKey(name: 'ctimeMs') int? get ctimeMs;@JsonKey(name: 'birthtimeMs') int? get birthtimeMs;
-/// Create a copy of AudioFileMetaDataBean
+/// Create a copy of AudioFileMetaData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$AudioFileMetaDataBeanCopyWith<AudioFileMetaDataBean> get copyWith => _$AudioFileMetaDataBeanCopyWithImpl<AudioFileMetaDataBean>(this as AudioFileMetaDataBean, _$identity);
+$AudioFileMetaDataCopyWith<AudioFileMetaData> get copyWith => _$AudioFileMetaDataCopyWithImpl<AudioFileMetaData>(this as AudioFileMetaData, _$identity);
 
-  /// Serializes this AudioFileMetaDataBean to a JSON map.
+  /// Serializes this AudioFileMetaData to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioFileMetaDataBean&&(identical(other.filename, filename) || other.filename == filename)&&(identical(other.ext, ext) || other.ext == ext)&&(identical(other.path, path) || other.path == path)&&(identical(other.relPath, relPath) || other.relPath == relPath)&&(identical(other.size, size) || other.size == size)&&(identical(other.mtimeMs, mtimeMs) || other.mtimeMs == mtimeMs)&&(identical(other.ctimeMs, ctimeMs) || other.ctimeMs == ctimeMs)&&(identical(other.birthtimeMs, birthtimeMs) || other.birthtimeMs == birthtimeMs));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AudioFileMetaData&&(identical(other.filename, filename) || other.filename == filename)&&(identical(other.ext, ext) || other.ext == ext)&&(identical(other.path, path) || other.path == path)&&(identical(other.relPath, relPath) || other.relPath == relPath)&&(identical(other.size, size) || other.size == size)&&(identical(other.mtimeMs, mtimeMs) || other.mtimeMs == mtimeMs)&&(identical(other.ctimeMs, ctimeMs) || other.ctimeMs == ctimeMs)&&(identical(other.birthtimeMs, birthtimeMs) || other.birthtimeMs == birthtimeMs));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,filename,ext,path,relPath,size,mtime
 
 @override
 String toString() {
-  return 'AudioFileMetaDataBean(filename: $filename, ext: $ext, path: $path, relPath: $relPath, size: $size, mtimeMs: $mtimeMs, ctimeMs: $ctimeMs, birthtimeMs: $birthtimeMs)';
+  return 'AudioFileMetaData(filename: $filename, ext: $ext, path: $path, relPath: $relPath, size: $size, mtimeMs: $mtimeMs, ctimeMs: $ctimeMs, birthtimeMs: $birthtimeMs)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $AudioFileMetaDataBeanCopyWith<$Res>  {
-  factory $AudioFileMetaDataBeanCopyWith(AudioFileMetaDataBean value, $Res Function(AudioFileMetaDataBean) _then) = _$AudioFileMetaDataBeanCopyWithImpl;
+abstract mixin class $AudioFileMetaDataCopyWith<$Res>  {
+  factory $AudioFileMetaDataCopyWith(AudioFileMetaData value, $Res Function(AudioFileMetaData) _then) = _$AudioFileMetaDataCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'filename') String? filename,@JsonKey(name: 'ext') String? ext,@JsonKey(name: 'path') String? path,@JsonKey(name: 'relPath') String? relPath,@JsonKey(name: 'size') int? size,@JsonKey(name: 'mtimeMs') int? mtimeMs,@JsonKey(name: 'ctimeMs') int? ctimeMs,@JsonKey(name: 'birthtimeMs') int? birthtimeMs
@@ -56,14 +56,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$AudioFileMetaDataBeanCopyWithImpl<$Res>
-    implements $AudioFileMetaDataBeanCopyWith<$Res> {
-  _$AudioFileMetaDataBeanCopyWithImpl(this._self, this._then);
+class _$AudioFileMetaDataCopyWithImpl<$Res>
+    implements $AudioFileMetaDataCopyWith<$Res> {
+  _$AudioFileMetaDataCopyWithImpl(this._self, this._then);
 
-  final AudioFileMetaDataBean _self;
-  final $Res Function(AudioFileMetaDataBean) _then;
+  final AudioFileMetaData _self;
+  final $Res Function(AudioFileMetaData) _then;
 
-/// Create a copy of AudioFileMetaDataBean
+/// Create a copy of AudioFileMetaData
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? filename = freezed,Object? ext = freezed,Object? path = freezed,Object? relPath = freezed,Object? size = freezed,Object? mtimeMs = freezed,Object? ctimeMs = freezed,Object? birthtimeMs = freezed,}) {
   return _then(_self.copyWith(
@@ -82,8 +82,8 @@ as int?,
 }
 
 
-/// Adds pattern-matching-related methods to [AudioFileMetaDataBean].
-extension AudioFileMetaDataBeanPatterns on AudioFileMetaDataBean {
+/// Adds pattern-matching-related methods to [AudioFileMetaData].
+extension AudioFileMetaDataPatterns on AudioFileMetaData {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -96,10 +96,10 @@ extension AudioFileMetaDataBeanPatterns on AudioFileMetaDataBean {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AudioFileMetaDataBean value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AudioFileMetaData value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _AudioFileMetaDataBean() when $default != null:
+case _AudioFileMetaData() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -118,10 +118,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AudioFileMetaDataBean value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AudioFileMetaData value)  $default,){
 final _that = this;
 switch (_that) {
-case _AudioFileMetaDataBean():
+case _AudioFileMetaData():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -139,10 +139,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AudioFileMetaDataBean value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AudioFileMetaData value)?  $default,){
 final _that = this;
 switch (_that) {
-case _AudioFileMetaDataBean() when $default != null:
+case _AudioFileMetaData() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -162,7 +162,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'filename')  String? filename, @JsonKey(name: 'ext')  String? ext, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'size')  int? size, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _AudioFileMetaDataBean() when $default != null:
+case _AudioFileMetaData() when $default != null:
 return $default(_that.filename,_that.ext,_that.path,_that.relPath,_that.size,_that.mtimeMs,_that.ctimeMs,_that.birthtimeMs);case _:
   return orElse();
 
@@ -183,7 +183,7 @@ return $default(_that.filename,_that.ext,_that.path,_that.relPath,_that.size,_th
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'filename')  String? filename, @JsonKey(name: 'ext')  String? ext, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'size')  int? size, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs)  $default,) {final _that = this;
 switch (_that) {
-case _AudioFileMetaDataBean():
+case _AudioFileMetaData():
 return $default(_that.filename,_that.ext,_that.path,_that.relPath,_that.size,_that.mtimeMs,_that.ctimeMs,_that.birthtimeMs);case _:
   throw StateError('Unexpected subclass');
 
@@ -203,7 +203,7 @@ return $default(_that.filename,_that.ext,_that.path,_that.relPath,_that.size,_th
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'filename')  String? filename, @JsonKey(name: 'ext')  String? ext, @JsonKey(name: 'path')  String? path, @JsonKey(name: 'relPath')  String? relPath, @JsonKey(name: 'size')  int? size, @JsonKey(name: 'mtimeMs')  int? mtimeMs, @JsonKey(name: 'ctimeMs')  int? ctimeMs, @JsonKey(name: 'birthtimeMs')  int? birthtimeMs)?  $default,) {final _that = this;
 switch (_that) {
-case _AudioFileMetaDataBean() when $default != null:
+case _AudioFileMetaData() when $default != null:
 return $default(_that.filename,_that.ext,_that.path,_that.relPath,_that.size,_that.mtimeMs,_that.ctimeMs,_that.birthtimeMs);case _:
   return null;
 
@@ -215,9 +215,9 @@ return $default(_that.filename,_that.ext,_that.path,_that.relPath,_that.size,_th
 /// @nodoc
 @JsonSerializable()
 
-class _AudioFileMetaDataBean implements AudioFileMetaDataBean {
-  const _AudioFileMetaDataBean({@JsonKey(name: 'filename') this.filename, @JsonKey(name: 'ext') this.ext, @JsonKey(name: 'path') this.path, @JsonKey(name: 'relPath') this.relPath, @JsonKey(name: 'size') this.size, @JsonKey(name: 'mtimeMs') this.mtimeMs, @JsonKey(name: 'ctimeMs') this.ctimeMs, @JsonKey(name: 'birthtimeMs') this.birthtimeMs});
-  factory _AudioFileMetaDataBean.fromJson(Map<String, dynamic> json) => _$AudioFileMetaDataBeanFromJson(json);
+class _AudioFileMetaData implements AudioFileMetaData {
+  const _AudioFileMetaData({@JsonKey(name: 'filename') this.filename, @JsonKey(name: 'ext') this.ext, @JsonKey(name: 'path') this.path, @JsonKey(name: 'relPath') this.relPath, @JsonKey(name: 'size') this.size, @JsonKey(name: 'mtimeMs') this.mtimeMs, @JsonKey(name: 'ctimeMs') this.ctimeMs, @JsonKey(name: 'birthtimeMs') this.birthtimeMs});
+  factory _AudioFileMetaData.fromJson(Map<String, dynamic> json) => _$AudioFileMetaDataFromJson(json);
 
 @override@JsonKey(name: 'filename') final  String? filename;
 @override@JsonKey(name: 'ext') final  String? ext;
@@ -228,20 +228,20 @@ class _AudioFileMetaDataBean implements AudioFileMetaDataBean {
 @override@JsonKey(name: 'ctimeMs') final  int? ctimeMs;
 @override@JsonKey(name: 'birthtimeMs') final  int? birthtimeMs;
 
-/// Create a copy of AudioFileMetaDataBean
+/// Create a copy of AudioFileMetaData
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$AudioFileMetaDataBeanCopyWith<_AudioFileMetaDataBean> get copyWith => __$AudioFileMetaDataBeanCopyWithImpl<_AudioFileMetaDataBean>(this, _$identity);
+_$AudioFileMetaDataCopyWith<_AudioFileMetaData> get copyWith => __$AudioFileMetaDataCopyWithImpl<_AudioFileMetaData>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$AudioFileMetaDataBeanToJson(this, );
+  return _$AudioFileMetaDataToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioFileMetaDataBean&&(identical(other.filename, filename) || other.filename == filename)&&(identical(other.ext, ext) || other.ext == ext)&&(identical(other.path, path) || other.path == path)&&(identical(other.relPath, relPath) || other.relPath == relPath)&&(identical(other.size, size) || other.size == size)&&(identical(other.mtimeMs, mtimeMs) || other.mtimeMs == mtimeMs)&&(identical(other.ctimeMs, ctimeMs) || other.ctimeMs == ctimeMs)&&(identical(other.birthtimeMs, birthtimeMs) || other.birthtimeMs == birthtimeMs));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AudioFileMetaData&&(identical(other.filename, filename) || other.filename == filename)&&(identical(other.ext, ext) || other.ext == ext)&&(identical(other.path, path) || other.path == path)&&(identical(other.relPath, relPath) || other.relPath == relPath)&&(identical(other.size, size) || other.size == size)&&(identical(other.mtimeMs, mtimeMs) || other.mtimeMs == mtimeMs)&&(identical(other.ctimeMs, ctimeMs) || other.ctimeMs == ctimeMs)&&(identical(other.birthtimeMs, birthtimeMs) || other.birthtimeMs == birthtimeMs));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -250,15 +250,15 @@ int get hashCode => Object.hash(runtimeType,filename,ext,path,relPath,size,mtime
 
 @override
 String toString() {
-  return 'AudioFileMetaDataBean(filename: $filename, ext: $ext, path: $path, relPath: $relPath, size: $size, mtimeMs: $mtimeMs, ctimeMs: $ctimeMs, birthtimeMs: $birthtimeMs)';
+  return 'AudioFileMetaData(filename: $filename, ext: $ext, path: $path, relPath: $relPath, size: $size, mtimeMs: $mtimeMs, ctimeMs: $ctimeMs, birthtimeMs: $birthtimeMs)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$AudioFileMetaDataBeanCopyWith<$Res> implements $AudioFileMetaDataBeanCopyWith<$Res> {
-  factory _$AudioFileMetaDataBeanCopyWith(_AudioFileMetaDataBean value, $Res Function(_AudioFileMetaDataBean) _then) = __$AudioFileMetaDataBeanCopyWithImpl;
+abstract mixin class _$AudioFileMetaDataCopyWith<$Res> implements $AudioFileMetaDataCopyWith<$Res> {
+  factory _$AudioFileMetaDataCopyWith(_AudioFileMetaData value, $Res Function(_AudioFileMetaData) _then) = __$AudioFileMetaDataCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'filename') String? filename,@JsonKey(name: 'ext') String? ext,@JsonKey(name: 'path') String? path,@JsonKey(name: 'relPath') String? relPath,@JsonKey(name: 'size') int? size,@JsonKey(name: 'mtimeMs') int? mtimeMs,@JsonKey(name: 'ctimeMs') int? ctimeMs,@JsonKey(name: 'birthtimeMs') int? birthtimeMs
@@ -269,17 +269,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$AudioFileMetaDataBeanCopyWithImpl<$Res>
-    implements _$AudioFileMetaDataBeanCopyWith<$Res> {
-  __$AudioFileMetaDataBeanCopyWithImpl(this._self, this._then);
+class __$AudioFileMetaDataCopyWithImpl<$Res>
+    implements _$AudioFileMetaDataCopyWith<$Res> {
+  __$AudioFileMetaDataCopyWithImpl(this._self, this._then);
 
-  final _AudioFileMetaDataBean _self;
-  final $Res Function(_AudioFileMetaDataBean) _then;
+  final _AudioFileMetaData _self;
+  final $Res Function(_AudioFileMetaData) _then;
 
-/// Create a copy of AudioFileMetaDataBean
+/// Create a copy of AudioFileMetaData
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? filename = freezed,Object? ext = freezed,Object? path = freezed,Object? relPath = freezed,Object? size = freezed,Object? mtimeMs = freezed,Object? ctimeMs = freezed,Object? birthtimeMs = freezed,}) {
-  return _then(_AudioFileMetaDataBean(
+  return _then(_AudioFileMetaData(
 filename: freezed == filename ? _self.filename : filename // ignore: cast_nullable_to_non_nullable
 as String?,ext: freezed == ext ? _self.ext : ext // ignore: cast_nullable_to_non_nullable
 as String?,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable

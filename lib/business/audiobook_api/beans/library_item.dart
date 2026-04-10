@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'audio_file_meta_data_bean.dart';
+import 'audio_file_meta_data.dart';
 import 'library_file.dart';
 import 'media.dart';
 

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LibraryFile {
 
-@JsonKey(name: 'ino') String? get ino;@JsonKey(name: 'metadata') AudioFileMetaDataBean? get metadata;@JsonKey(name: 'isSupplementary') dynamic get isSupplementary;@JsonKey(name: 'addedAt') int? get addedAt;@JsonKey(name: 'updatedAt') int? get updatedAt;@JsonKey(name: 'fileType') String? get fileType;
+@JsonKey(name: 'ino') String? get ino;@JsonKey(name: 'metadata') AudioFileMetaData? get metadata;@JsonKey(name: 'isSupplementary') dynamic get isSupplementary;@JsonKey(name: 'addedAt') int? get addedAt;@JsonKey(name: 'updatedAt') int? get updatedAt;@JsonKey(name: 'fileType') String? get fileType;
 /// Create a copy of LibraryFile
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $LibraryFileCopyWith<$Res>  {
   factory $LibraryFileCopyWith(LibraryFile value, $Res Function(LibraryFile) _then) = _$LibraryFileCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata,@JsonKey(name: 'isSupplementary') dynamic isSupplementary,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'fileType') String? fileType
+@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'metadata') AudioFileMetaData? metadata,@JsonKey(name: 'isSupplementary') dynamic isSupplementary,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'fileType') String? fileType
 });
 
 
-$AudioFileMetaDataBeanCopyWith<$Res>? get metadata;
+$AudioFileMetaDataCopyWith<$Res>? get metadata;
 
 }
 /// @nodoc
@@ -69,7 +69,7 @@ class _$LibraryFileCopyWithImpl<$Res>
   return _then(_self.copyWith(
 ino: freezed == ino ? _self.ino : ino // ignore: cast_nullable_to_non_nullable
 as String?,metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as AudioFileMetaDataBean?,isSupplementary: freezed == isSupplementary ? _self.isSupplementary : isSupplementary // ignore: cast_nullable_to_non_nullable
+as AudioFileMetaData?,isSupplementary: freezed == isSupplementary ? _self.isSupplementary : isSupplementary // ignore: cast_nullable_to_non_nullable
 as dynamic,addedAt: freezed == addedAt ? _self.addedAt : addedAt // ignore: cast_nullable_to_non_nullable
 as int?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as int?,fileType: freezed == fileType ? _self.fileType : fileType // ignore: cast_nullable_to_non_nullable
@@ -80,12 +80,12 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$AudioFileMetaDataBeanCopyWith<$Res>? get metadata {
+$AudioFileMetaDataCopyWith<$Res>? get metadata {
     if (_self.metadata == null) {
     return null;
   }
 
-  return $AudioFileMetaDataBeanCopyWith<$Res>(_self.metadata!, (value) {
+  return $AudioFileMetaDataCopyWith<$Res>(_self.metadata!, (value) {
     return _then(_self.copyWith(metadata: value));
   });
 }
@@ -170,7 +170,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaDataBean? metadata, @JsonKey(name: 'isSupplementary')  dynamic isSupplementary, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'fileType')  String? fileType)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaData? metadata, @JsonKey(name: 'isSupplementary')  dynamic isSupplementary, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'fileType')  String? fileType)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LibraryFile() when $default != null:
 return $default(_that.ino,_that.metadata,_that.isSupplementary,_that.addedAt,_that.updatedAt,_that.fileType);case _:
@@ -191,7 +191,7 @@ return $default(_that.ino,_that.metadata,_that.isSupplementary,_that.addedAt,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaDataBean? metadata, @JsonKey(name: 'isSupplementary')  dynamic isSupplementary, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'fileType')  String? fileType)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaData? metadata, @JsonKey(name: 'isSupplementary')  dynamic isSupplementary, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'fileType')  String? fileType)  $default,) {final _that = this;
 switch (_that) {
 case _LibraryFile():
 return $default(_that.ino,_that.metadata,_that.isSupplementary,_that.addedAt,_that.updatedAt,_that.fileType);case _:
@@ -211,7 +211,7 @@ return $default(_that.ino,_that.metadata,_that.isSupplementary,_that.addedAt,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaDataBean? metadata, @JsonKey(name: 'isSupplementary')  dynamic isSupplementary, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'fileType')  String? fileType)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaData? metadata, @JsonKey(name: 'isSupplementary')  dynamic isSupplementary, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'fileType')  String? fileType)?  $default,) {final _that = this;
 switch (_that) {
 case _LibraryFile() when $default != null:
 return $default(_that.ino,_that.metadata,_that.isSupplementary,_that.addedAt,_that.updatedAt,_that.fileType);case _:
@@ -230,7 +230,7 @@ class _LibraryFile implements LibraryFile {
   factory _LibraryFile.fromJson(Map<String, dynamic> json) => _$LibraryFileFromJson(json);
 
 @override@JsonKey(name: 'ino') final  String? ino;
-@override@JsonKey(name: 'metadata') final  AudioFileMetaDataBean? metadata;
+@override@JsonKey(name: 'metadata') final  AudioFileMetaData? metadata;
 @override@JsonKey(name: 'isSupplementary') final  dynamic isSupplementary;
 @override@JsonKey(name: 'addedAt') final  int? addedAt;
 @override@JsonKey(name: 'updatedAt') final  int? updatedAt;
@@ -269,11 +269,11 @@ abstract mixin class _$LibraryFileCopyWith<$Res> implements $LibraryFileCopyWith
   factory _$LibraryFileCopyWith(_LibraryFile value, $Res Function(_LibraryFile) _then) = __$LibraryFileCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata,@JsonKey(name: 'isSupplementary') dynamic isSupplementary,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'fileType') String? fileType
+@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'metadata') AudioFileMetaData? metadata,@JsonKey(name: 'isSupplementary') dynamic isSupplementary,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'fileType') String? fileType
 });
 
 
-@override $AudioFileMetaDataBeanCopyWith<$Res>? get metadata;
+@override $AudioFileMetaDataCopyWith<$Res>? get metadata;
 
 }
 /// @nodoc
@@ -290,7 +290,7 @@ class __$LibraryFileCopyWithImpl<$Res>
   return _then(_LibraryFile(
 ino: freezed == ino ? _self.ino : ino // ignore: cast_nullable_to_non_nullable
 as String?,metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as AudioFileMetaDataBean?,isSupplementary: freezed == isSupplementary ? _self.isSupplementary : isSupplementary // ignore: cast_nullable_to_non_nullable
+as AudioFileMetaData?,isSupplementary: freezed == isSupplementary ? _self.isSupplementary : isSupplementary // ignore: cast_nullable_to_non_nullable
 as dynamic,addedAt: freezed == addedAt ? _self.addedAt : addedAt // ignore: cast_nullable_to_non_nullable
 as int?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as int?,fileType: freezed == fileType ? _self.fileType : fileType // ignore: cast_nullable_to_non_nullable
@@ -302,12 +302,12 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$AudioFileMetaDataBeanCopyWith<$Res>? get metadata {
+$AudioFileMetaDataCopyWith<$Res>? get metadata {
     if (_self.metadata == null) {
     return null;
   }
 
-  return $AudioFileMetaDataBeanCopyWith<$Res>(_self.metadata!, (value) {
+  return $AudioFileMetaDataCopyWith<$Res>(_self.metadata!, (value) {
     return _then(_self.copyWith(metadata: value));
   });
 }

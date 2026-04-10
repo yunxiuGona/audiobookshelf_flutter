@@ -6,7 +6,7 @@ import 'package:audio_book/business/services/AudioPlayerService.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../audiobook_api/beans/library_item_detail_bean.dart';
+import '../../audiobook_api/beans/library_item_detail.dart';
 import '../../audiobook_api/beans/media.dart';
 import 'media_detail_description_view.dart';
 import 'media_detail_stats_view.dart';
@@ -27,7 +27,7 @@ class _MediaDetailState extends State<MediaDetail> {
   bool loading = false;
 
   // MediaProgressBean? mediaProgressBean;
-  LibraryItemDetailBean? libraryItemDetailBean;
+  LibraryItemDetail? libraryItemDetailBean;
   @override
   void initState() {
     super.initState();

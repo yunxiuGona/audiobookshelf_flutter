@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'audio_file_meta_data_bean.dart';
-import 'audio_file_meta_tag_bean.dart';
+import 'audio_file_meta_data.dart';
+import 'audio_file_meta_tag.dart';
 
 part 'track.freezed.dart';
 part 'track.g.dart';
@@ -11,7 +11,7 @@ abstract class Track with _$Track {
   const factory Track({
     @JsonKey(name: 'index') int? index,
     @JsonKey(name: 'ino') String? ino,
-    @JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata,
+    @JsonKey(name: 'metadata') AudioFileMetaData? metadata,
     @JsonKey(name: 'addedAt') int? addedAt,
     @JsonKey(name: 'updatedAt') int? updatedAt,
     @JsonKey(name: 'trackNumFromMeta') dynamic trackNumFromMeta,
@@ -31,7 +31,7 @@ abstract class Track with _$Track {
     @JsonKey(name: 'channelLayout') String? channelLayout,
     @JsonKey(name: 'chapters') List<dynamic>? chapters,
     @JsonKey(name: 'embeddedCoverArt') dynamic embeddedCoverArt,
-    @JsonKey(name: 'metaTags') AudioFileMetaTagBean? metaTags,
+    @JsonKey(name: 'metaTags') AudioFileMetaTag? metaTags,
     @JsonKey(name: 'mimeType') String? mimeType,
     @JsonKey(name: 'title') String? title,
     @JsonKey(name: 'startOffset') int? startOffset,

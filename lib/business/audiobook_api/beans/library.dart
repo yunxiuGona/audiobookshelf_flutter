@@ -3,12 +3,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'folder.dart';
 
-part 'library_bean.freezed.dart';
-part 'library_bean.g.dart';
+part 'library.freezed.dart';
+part 'library.g.dart';
 
 @freezed
-abstract class LibraryBean with _$LibraryBean {
-  const factory LibraryBean({
+abstract class Library with _$Library {
+  const factory Library({
     @JsonKey(name: 'id') String? id,
     @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'folders') List<Folder>? folders,
@@ -19,8 +19,8 @@ abstract class LibraryBean with _$LibraryBean {
     @JsonKey(name: 'settings') Setting? settings,
     @JsonKey(name: 'createdAt') int? createdAt,
     @JsonKey(name: 'lastUpdate') int? lastUpdate,
-  }) = _LibraryBean;
+  }) = _Library;
 
-  factory LibraryBean.fromJson(Map<String, Object?> json) => _$LibraryBeanFromJson(json);
+  factory Library.fromJson(Map<String, Object?> json) => _$LibraryFromJson(json);
 }
 

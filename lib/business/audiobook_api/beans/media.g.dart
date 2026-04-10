@@ -21,7 +21,7 @@ _Media _$MediaFromJson(Map<String, dynamic> json) => _Media(
       ?.map((e) => Chapter.fromJson(e as Map<String, dynamic>))
       .toList(),
   audioFiles: (json['audioFiles'] as List<dynamic>?)
-      ?.map((e) => AudioFileMetaDataBean.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => AudioFileMetaData.fromJson(e as Map<String, dynamic>))
       .toList(),
   tracks: (json['tracks'] as List<dynamic>?)
       ?.map((e) => Track.fromJson(e as Map<String, dynamic>))

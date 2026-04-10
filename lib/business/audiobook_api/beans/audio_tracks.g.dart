@@ -15,9 +15,7 @@ _AudioTracks _$AudioTracksFromJson(Map<String, dynamic> json) => _AudioTracks(
   mimeType: json['mimeType'] as String?,
   metadata: json['metadata'] == null
       ? null
-      : AudioFileMetaDataBean.fromJson(
-          json['metadata'] as Map<String, dynamic>,
-        ),
+      : AudioFileMetaData.fromJson(json['metadata'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$AudioTracksToJson(_AudioTracks instance) =>

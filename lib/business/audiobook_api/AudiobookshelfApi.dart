@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:audio_book/C.dart';
-import 'package:audio_book/business/audiobook_api/beans/all_library_bean.dart';
-import 'package:audio_book/business/audiobook_api/beans/library_detail_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/all_library.dart';
+import 'package:audio_book/business/audiobook_api/beans/library_detail.dart';
 import 'package:audio_book/business/audiobook_api/beans/login_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_progress_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/play_media_bean.dart';
@@ -11,7 +11,7 @@ import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
 
-import 'beans/library_item_detail_bean.dart';
+import 'beans/library_item_detail.dart';
 import 'beans/library_items_bean.dart';
 
 class AudiobookshelfApi extends GetConnect{
@@ -32,20 +32,20 @@ class AudiobookshelfApi extends GetConnect{
     var resp = await post(headers: headers,"/logout", {"socketId":socketId});
   }
 
-  Future<AllLibraryBean?> allLibrary() async{
+  Future<AllLibrary?> allLibrary() async{
     initUserInfo();
     var resp = await get(headers: headers,"/api/libraries");
     if(resp.status.code==OK&&resp.body!=null) {
-      return AllLibraryBean.fromJson(resp.body);
+      return AllLibrary.fromJson(resp.body);
     }else{
       return null;
     }
   }
 
-  Future<LibraryDetailBean> libraryDetail(String libraryID) async{
+  Future<LibraryDetail> libraryDetail(String libraryID) async{
     initUserInfo();
     var resp = await get(headers: headers,"/api/libraries/${libraryID}");
-    return LibraryDetailBean.fromJson(resp.body);
+    return LibraryDetail.fromJson(resp.body);
   }
 
   Future<LibraryItemsBean?> libraryItems(String libraryID) async{
@@ -59,11 +59,11 @@ class AudiobookshelfApi extends GetConnect{
   }
 
 
-  Future<LibraryItemDetailBean?> libraryItemDetail(String libraryID) async{
+  Future<LibraryItemDetail?> libraryItemDetail(String libraryID) async{
     initUserInfo();
     var resp = await get(headers: headers,"/api/items/${libraryID}");
     if(resp.status.code==OK){
-      return LibraryItemDetailBean.fromJson(resp.body);
+      return LibraryItemDetail.fromJson(resp.body);
     }else{
       return null;
     }

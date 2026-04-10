@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'library_detail_bean.dart';
+part of 'library_detail.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'library_detail_bean.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$LibraryDetailBean {
+mixin _$LibraryDetail {
 
-@JsonKey(name: 'filterdata') Filterdata? get filterdata;@JsonKey(name: 'issues') int? get issues;@JsonKey(name: 'numUserPlaylists') int? get numUserPlaylists;@JsonKey(name: 'library') LibraryBean? get library;
-/// Create a copy of LibraryDetailBean
+@JsonKey(name: 'filterdata') Filterdata? get filterdata;@JsonKey(name: 'issues') int? get issues;@JsonKey(name: 'numUserPlaylists') int? get numUserPlaylists;@JsonKey(name: 'library') Library? get library;
+/// Create a copy of LibraryDetail
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$LibraryDetailBeanCopyWith<LibraryDetailBean> get copyWith => _$LibraryDetailBeanCopyWithImpl<LibraryDetailBean>(this as LibraryDetailBean, _$identity);
+$LibraryDetailCopyWith<LibraryDetail> get copyWith => _$LibraryDetailCopyWithImpl<LibraryDetail>(this as LibraryDetail, _$identity);
 
-  /// Serializes this LibraryDetailBean to a JSON map.
+  /// Serializes this LibraryDetail to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LibraryDetailBean&&(identical(other.filterdata, filterdata) || other.filterdata == filterdata)&&(identical(other.issues, issues) || other.issues == issues)&&(identical(other.numUserPlaylists, numUserPlaylists) || other.numUserPlaylists == numUserPlaylists)&&(identical(other.library, library) || other.library == library));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LibraryDetail&&(identical(other.filterdata, filterdata) || other.filterdata == filterdata)&&(identical(other.issues, issues) || other.issues == issues)&&(identical(other.numUserPlaylists, numUserPlaylists) || other.numUserPlaylists == numUserPlaylists)&&(identical(other.library, library) || other.library == library));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,33 +37,33 @@ int get hashCode => Object.hash(runtimeType,filterdata,issues,numUserPlaylists,l
 
 @override
 String toString() {
-  return 'LibraryDetailBean(filterdata: $filterdata, issues: $issues, numUserPlaylists: $numUserPlaylists, library: $library)';
+  return 'LibraryDetail(filterdata: $filterdata, issues: $issues, numUserPlaylists: $numUserPlaylists, library: $library)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $LibraryDetailBeanCopyWith<$Res>  {
-  factory $LibraryDetailBeanCopyWith(LibraryDetailBean value, $Res Function(LibraryDetailBean) _then) = _$LibraryDetailBeanCopyWithImpl;
+abstract mixin class $LibraryDetailCopyWith<$Res>  {
+  factory $LibraryDetailCopyWith(LibraryDetail value, $Res Function(LibraryDetail) _then) = _$LibraryDetailCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'filterdata') Filterdata? filterdata,@JsonKey(name: 'issues') int? issues,@JsonKey(name: 'numUserPlaylists') int? numUserPlaylists,@JsonKey(name: 'library') LibraryBean? library
+@JsonKey(name: 'filterdata') Filterdata? filterdata,@JsonKey(name: 'issues') int? issues,@JsonKey(name: 'numUserPlaylists') int? numUserPlaylists,@JsonKey(name: 'library') Library? library
 });
 
 
-$FilterdataCopyWith<$Res>? get filterdata;$LibraryBeanCopyWith<$Res>? get library;
+$FilterdataCopyWith<$Res>? get filterdata;$LibraryCopyWith<$Res>? get library;
 
 }
 /// @nodoc
-class _$LibraryDetailBeanCopyWithImpl<$Res>
-    implements $LibraryDetailBeanCopyWith<$Res> {
-  _$LibraryDetailBeanCopyWithImpl(this._self, this._then);
+class _$LibraryDetailCopyWithImpl<$Res>
+    implements $LibraryDetailCopyWith<$Res> {
+  _$LibraryDetailCopyWithImpl(this._self, this._then);
 
-  final LibraryDetailBean _self;
-  final $Res Function(LibraryDetailBean) _then;
+  final LibraryDetail _self;
+  final $Res Function(LibraryDetail) _then;
 
-/// Create a copy of LibraryDetailBean
+/// Create a copy of LibraryDetail
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? filterdata = freezed,Object? issues = freezed,Object? numUserPlaylists = freezed,Object? library = freezed,}) {
   return _then(_self.copyWith(
@@ -71,10 +71,10 @@ filterdata: freezed == filterdata ? _self.filterdata : filterdata // ignore: cas
 as Filterdata?,issues: freezed == issues ? _self.issues : issues // ignore: cast_nullable_to_non_nullable
 as int?,numUserPlaylists: freezed == numUserPlaylists ? _self.numUserPlaylists : numUserPlaylists // ignore: cast_nullable_to_non_nullable
 as int?,library: freezed == library ? _self.library : library // ignore: cast_nullable_to_non_nullable
-as LibraryBean?,
+as Library?,
   ));
 }
-/// Create a copy of LibraryDetailBean
+/// Create a copy of LibraryDetail
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -86,24 +86,24 @@ $FilterdataCopyWith<$Res>? get filterdata {
   return $FilterdataCopyWith<$Res>(_self.filterdata!, (value) {
     return _then(_self.copyWith(filterdata: value));
   });
-}/// Create a copy of LibraryDetailBean
+}/// Create a copy of LibraryDetail
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$LibraryBeanCopyWith<$Res>? get library {
+$LibraryCopyWith<$Res>? get library {
     if (_self.library == null) {
     return null;
   }
 
-  return $LibraryBeanCopyWith<$Res>(_self.library!, (value) {
+  return $LibraryCopyWith<$Res>(_self.library!, (value) {
     return _then(_self.copyWith(library: value));
   });
 }
 }
 
 
-/// Adds pattern-matching-related methods to [LibraryDetailBean].
-extension LibraryDetailBeanPatterns on LibraryDetailBean {
+/// Adds pattern-matching-related methods to [LibraryDetail].
+extension LibraryDetailPatterns on LibraryDetail {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -116,10 +116,10 @@ extension LibraryDetailBeanPatterns on LibraryDetailBean {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LibraryDetailBean value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LibraryDetail value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _LibraryDetailBean() when $default != null:
+case _LibraryDetail() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -138,10 +138,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LibraryDetailBean value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LibraryDetail value)  $default,){
 final _that = this;
 switch (_that) {
-case _LibraryDetailBean():
+case _LibraryDetail():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -159,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LibraryDetailBean value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LibraryDetail value)?  $default,){
 final _that = this;
 switch (_that) {
-case _LibraryDetailBean() when $default != null:
+case _LibraryDetail() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -180,9 +180,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'filterdata')  Filterdata? filterdata, @JsonKey(name: 'issues')  int? issues, @JsonKey(name: 'numUserPlaylists')  int? numUserPlaylists, @JsonKey(name: 'library')  LibraryBean? library)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'filterdata')  Filterdata? filterdata, @JsonKey(name: 'issues')  int? issues, @JsonKey(name: 'numUserPlaylists')  int? numUserPlaylists, @JsonKey(name: 'library')  Library? library)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _LibraryDetailBean() when $default != null:
+case _LibraryDetail() when $default != null:
 return $default(_that.filterdata,_that.issues,_that.numUserPlaylists,_that.library);case _:
   return orElse();
 
@@ -201,9 +201,9 @@ return $default(_that.filterdata,_that.issues,_that.numUserPlaylists,_that.libra
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'filterdata')  Filterdata? filterdata, @JsonKey(name: 'issues')  int? issues, @JsonKey(name: 'numUserPlaylists')  int? numUserPlaylists, @JsonKey(name: 'library')  LibraryBean? library)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'filterdata')  Filterdata? filterdata, @JsonKey(name: 'issues')  int? issues, @JsonKey(name: 'numUserPlaylists')  int? numUserPlaylists, @JsonKey(name: 'library')  Library? library)  $default,) {final _that = this;
 switch (_that) {
-case _LibraryDetailBean():
+case _LibraryDetail():
 return $default(_that.filterdata,_that.issues,_that.numUserPlaylists,_that.library);case _:
   throw StateError('Unexpected subclass');
 
@@ -221,9 +221,9 @@ return $default(_that.filterdata,_that.issues,_that.numUserPlaylists,_that.libra
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'filterdata')  Filterdata? filterdata, @JsonKey(name: 'issues')  int? issues, @JsonKey(name: 'numUserPlaylists')  int? numUserPlaylists, @JsonKey(name: 'library')  LibraryBean? library)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'filterdata')  Filterdata? filterdata, @JsonKey(name: 'issues')  int? issues, @JsonKey(name: 'numUserPlaylists')  int? numUserPlaylists, @JsonKey(name: 'library')  Library? library)?  $default,) {final _that = this;
 switch (_that) {
-case _LibraryDetailBean() when $default != null:
+case _LibraryDetail() when $default != null:
 return $default(_that.filterdata,_that.issues,_that.numUserPlaylists,_that.library);case _:
   return null;
 
@@ -235,29 +235,29 @@ return $default(_that.filterdata,_that.issues,_that.numUserPlaylists,_that.libra
 /// @nodoc
 @JsonSerializable()
 
-class _LibraryDetailBean implements LibraryDetailBean {
-  const _LibraryDetailBean({@JsonKey(name: 'filterdata') this.filterdata, @JsonKey(name: 'issues') this.issues, @JsonKey(name: 'numUserPlaylists') this.numUserPlaylists, @JsonKey(name: 'library') this.library});
-  factory _LibraryDetailBean.fromJson(Map<String, dynamic> json) => _$LibraryDetailBeanFromJson(json);
+class _LibraryDetail implements LibraryDetail {
+  const _LibraryDetail({@JsonKey(name: 'filterdata') this.filterdata, @JsonKey(name: 'issues') this.issues, @JsonKey(name: 'numUserPlaylists') this.numUserPlaylists, @JsonKey(name: 'library') this.library});
+  factory _LibraryDetail.fromJson(Map<String, dynamic> json) => _$LibraryDetailFromJson(json);
 
 @override@JsonKey(name: 'filterdata') final  Filterdata? filterdata;
 @override@JsonKey(name: 'issues') final  int? issues;
 @override@JsonKey(name: 'numUserPlaylists') final  int? numUserPlaylists;
-@override@JsonKey(name: 'library') final  LibraryBean? library;
+@override@JsonKey(name: 'library') final  Library? library;
 
-/// Create a copy of LibraryDetailBean
+/// Create a copy of LibraryDetail
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$LibraryDetailBeanCopyWith<_LibraryDetailBean> get copyWith => __$LibraryDetailBeanCopyWithImpl<_LibraryDetailBean>(this, _$identity);
+_$LibraryDetailCopyWith<_LibraryDetail> get copyWith => __$LibraryDetailCopyWithImpl<_LibraryDetail>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$LibraryDetailBeanToJson(this, );
+  return _$LibraryDetailToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LibraryDetailBean&&(identical(other.filterdata, filterdata) || other.filterdata == filterdata)&&(identical(other.issues, issues) || other.issues == issues)&&(identical(other.numUserPlaylists, numUserPlaylists) || other.numUserPlaylists == numUserPlaylists)&&(identical(other.library, library) || other.library == library));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LibraryDetail&&(identical(other.filterdata, filterdata) || other.filterdata == filterdata)&&(identical(other.issues, issues) || other.issues == issues)&&(identical(other.numUserPlaylists, numUserPlaylists) || other.numUserPlaylists == numUserPlaylists)&&(identical(other.library, library) || other.library == library));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -266,45 +266,45 @@ int get hashCode => Object.hash(runtimeType,filterdata,issues,numUserPlaylists,l
 
 @override
 String toString() {
-  return 'LibraryDetailBean(filterdata: $filterdata, issues: $issues, numUserPlaylists: $numUserPlaylists, library: $library)';
+  return 'LibraryDetail(filterdata: $filterdata, issues: $issues, numUserPlaylists: $numUserPlaylists, library: $library)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LibraryDetailBeanCopyWith<$Res> implements $LibraryDetailBeanCopyWith<$Res> {
-  factory _$LibraryDetailBeanCopyWith(_LibraryDetailBean value, $Res Function(_LibraryDetailBean) _then) = __$LibraryDetailBeanCopyWithImpl;
+abstract mixin class _$LibraryDetailCopyWith<$Res> implements $LibraryDetailCopyWith<$Res> {
+  factory _$LibraryDetailCopyWith(_LibraryDetail value, $Res Function(_LibraryDetail) _then) = __$LibraryDetailCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'filterdata') Filterdata? filterdata,@JsonKey(name: 'issues') int? issues,@JsonKey(name: 'numUserPlaylists') int? numUserPlaylists,@JsonKey(name: 'library') LibraryBean? library
+@JsonKey(name: 'filterdata') Filterdata? filterdata,@JsonKey(name: 'issues') int? issues,@JsonKey(name: 'numUserPlaylists') int? numUserPlaylists,@JsonKey(name: 'library') Library? library
 });
 
 
-@override $FilterdataCopyWith<$Res>? get filterdata;@override $LibraryBeanCopyWith<$Res>? get library;
+@override $FilterdataCopyWith<$Res>? get filterdata;@override $LibraryCopyWith<$Res>? get library;
 
 }
 /// @nodoc
-class __$LibraryDetailBeanCopyWithImpl<$Res>
-    implements _$LibraryDetailBeanCopyWith<$Res> {
-  __$LibraryDetailBeanCopyWithImpl(this._self, this._then);
+class __$LibraryDetailCopyWithImpl<$Res>
+    implements _$LibraryDetailCopyWith<$Res> {
+  __$LibraryDetailCopyWithImpl(this._self, this._then);
 
-  final _LibraryDetailBean _self;
-  final $Res Function(_LibraryDetailBean) _then;
+  final _LibraryDetail _self;
+  final $Res Function(_LibraryDetail) _then;
 
-/// Create a copy of LibraryDetailBean
+/// Create a copy of LibraryDetail
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? filterdata = freezed,Object? issues = freezed,Object? numUserPlaylists = freezed,Object? library = freezed,}) {
-  return _then(_LibraryDetailBean(
+  return _then(_LibraryDetail(
 filterdata: freezed == filterdata ? _self.filterdata : filterdata // ignore: cast_nullable_to_non_nullable
 as Filterdata?,issues: freezed == issues ? _self.issues : issues // ignore: cast_nullable_to_non_nullable
 as int?,numUserPlaylists: freezed == numUserPlaylists ? _self.numUserPlaylists : numUserPlaylists // ignore: cast_nullable_to_non_nullable
 as int?,library: freezed == library ? _self.library : library // ignore: cast_nullable_to_non_nullable
-as LibraryBean?,
+as Library?,
   ));
 }
 
-/// Create a copy of LibraryDetailBean
+/// Create a copy of LibraryDetail
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -316,16 +316,16 @@ $FilterdataCopyWith<$Res>? get filterdata {
   return $FilterdataCopyWith<$Res>(_self.filterdata!, (value) {
     return _then(_self.copyWith(filterdata: value));
   });
-}/// Create a copy of LibraryDetailBean
+}/// Create a copy of LibraryDetail
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$LibraryBeanCopyWith<$Res>? get library {
+$LibraryCopyWith<$Res>? get library {
     if (_self.library == null) {
     return null;
   }
 
-  return $LibraryBeanCopyWith<$Res>(_self.library!, (value) {
+  return $LibraryCopyWith<$Res>(_self.library!, (value) {
     return _then(_self.copyWith(library: value));
   });
 }

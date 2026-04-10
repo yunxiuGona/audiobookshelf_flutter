@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:audio_book/business/audiobook_api/beans/all_library_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/all_library.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../audiobook_api/beans/library_items_bean.dart';
@@ -26,7 +26,7 @@ class CacheUtils{
   static void saveLibraiesCache(LibraryItemsBean? libraryItemsBean){
     prefs?.setString("cache_libraies", jsonEncode(libraryItemsBean));
   }
-  static AllLibraryBean? getLibraiesCache(){
+  static AllLibrary? getLibraiesCache(){
     var json = prefs?.getString("cache_libraies");
     if(json==null||json.isEmpty) {
       return null;
@@ -35,7 +35,7 @@ class CacheUtils{
     if(bean==null){
       return null;
     }else{
-      return AllLibraryBean.fromJson(bean);
+      return AllLibrary.fromJson(bean);
     }
   }
 }

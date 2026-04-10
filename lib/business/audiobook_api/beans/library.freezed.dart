@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'library_bean.dart';
+part of 'library.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'library_bean.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$LibraryBean {
+mixin _$Library {
 
 @JsonKey(name: 'id') String? get id;@JsonKey(name: 'name') String? get name;@JsonKey(name: 'folders') List<Folder>? get folders;@JsonKey(name: 'displayOrder') int? get displayOrder;@JsonKey(name: 'icon') String? get icon;@JsonKey(name: 'mediaType') String? get mediaType;@JsonKey(name: 'provider') String? get provider;@JsonKey(name: 'settings') Setting? get settings;@JsonKey(name: 'createdAt') int? get createdAt;@JsonKey(name: 'lastUpdate') int? get lastUpdate;
-/// Create a copy of LibraryBean
+/// Create a copy of Library
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$LibraryBeanCopyWith<LibraryBean> get copyWith => _$LibraryBeanCopyWithImpl<LibraryBean>(this as LibraryBean, _$identity);
+$LibraryCopyWith<Library> get copyWith => _$LibraryCopyWithImpl<Library>(this as Library, _$identity);
 
-  /// Serializes this LibraryBean to a JSON map.
+  /// Serializes this Library to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LibraryBean&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.folders, folders)&&(identical(other.displayOrder, displayOrder) || other.displayOrder == displayOrder)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.provider, provider) || other.provider == provider)&&(identical(other.settings, settings) || other.settings == settings)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Library&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.folders, folders)&&(identical(other.displayOrder, displayOrder) || other.displayOrder == displayOrder)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.provider, provider) || other.provider == provider)&&(identical(other.settings, settings) || other.settings == settings)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality
 
 @override
 String toString() {
-  return 'LibraryBean(id: $id, name: $name, folders: $folders, displayOrder: $displayOrder, icon: $icon, mediaType: $mediaType, provider: $provider, settings: $settings, createdAt: $createdAt, lastUpdate: $lastUpdate)';
+  return 'Library(id: $id, name: $name, folders: $folders, displayOrder: $displayOrder, icon: $icon, mediaType: $mediaType, provider: $provider, settings: $settings, createdAt: $createdAt, lastUpdate: $lastUpdate)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $LibraryBeanCopyWith<$Res>  {
-  factory $LibraryBeanCopyWith(LibraryBean value, $Res Function(LibraryBean) _then) = _$LibraryBeanCopyWithImpl;
+abstract mixin class $LibraryCopyWith<$Res>  {
+  factory $LibraryCopyWith(Library value, $Res Function(Library) _then) = _$LibraryCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'id') String? id,@JsonKey(name: 'name') String? name,@JsonKey(name: 'folders') List<Folder>? folders,@JsonKey(name: 'displayOrder') int? displayOrder,@JsonKey(name: 'icon') String? icon,@JsonKey(name: 'mediaType') String? mediaType,@JsonKey(name: 'provider') String? provider,@JsonKey(name: 'settings') Setting? settings,@JsonKey(name: 'createdAt') int? createdAt,@JsonKey(name: 'lastUpdate') int? lastUpdate
@@ -56,14 +56,14 @@ $SettingCopyWith<$Res>? get settings;
 
 }
 /// @nodoc
-class _$LibraryBeanCopyWithImpl<$Res>
-    implements $LibraryBeanCopyWith<$Res> {
-  _$LibraryBeanCopyWithImpl(this._self, this._then);
+class _$LibraryCopyWithImpl<$Res>
+    implements $LibraryCopyWith<$Res> {
+  _$LibraryCopyWithImpl(this._self, this._then);
 
-  final LibraryBean _self;
-  final $Res Function(LibraryBean) _then;
+  final Library _self;
+  final $Res Function(Library) _then;
 
-/// Create a copy of LibraryBean
+/// Create a copy of Library
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? folders = freezed,Object? displayOrder = freezed,Object? icon = freezed,Object? mediaType = freezed,Object? provider = freezed,Object? settings = freezed,Object? createdAt = freezed,Object? lastUpdate = freezed,}) {
   return _then(_self.copyWith(
@@ -80,7 +80,7 @@ as int?,lastUpdate: freezed == lastUpdate ? _self.lastUpdate : lastUpdate // ign
 as int?,
   ));
 }
-/// Create a copy of LibraryBean
+/// Create a copy of Library
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -96,8 +96,8 @@ $SettingCopyWith<$Res>? get settings {
 }
 
 
-/// Adds pattern-matching-related methods to [LibraryBean].
-extension LibraryBeanPatterns on LibraryBean {
+/// Adds pattern-matching-related methods to [Library].
+extension LibraryPatterns on Library {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -110,10 +110,10 @@ extension LibraryBeanPatterns on LibraryBean {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LibraryBean value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Library value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _LibraryBean() when $default != null:
+case _Library() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -132,10 +132,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LibraryBean value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Library value)  $default,){
 final _that = this;
 switch (_that) {
-case _LibraryBean():
+case _Library():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -153,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LibraryBean value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Library value)?  $default,){
 final _that = this;
 switch (_that) {
-case _LibraryBean() when $default != null:
+case _Library() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -176,7 +176,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'name')  String? name, @JsonKey(name: 'folders')  List<Folder>? folders, @JsonKey(name: 'displayOrder')  int? displayOrder, @JsonKey(name: 'icon')  String? icon, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'provider')  String? provider, @JsonKey(name: 'settings')  Setting? settings, @JsonKey(name: 'createdAt')  int? createdAt, @JsonKey(name: 'lastUpdate')  int? lastUpdate)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _LibraryBean() when $default != null:
+case _Library() when $default != null:
 return $default(_that.id,_that.name,_that.folders,_that.displayOrder,_that.icon,_that.mediaType,_that.provider,_that.settings,_that.createdAt,_that.lastUpdate);case _:
   return orElse();
 
@@ -197,7 +197,7 @@ return $default(_that.id,_that.name,_that.folders,_that.displayOrder,_that.icon,
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'name')  String? name, @JsonKey(name: 'folders')  List<Folder>? folders, @JsonKey(name: 'displayOrder')  int? displayOrder, @JsonKey(name: 'icon')  String? icon, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'provider')  String? provider, @JsonKey(name: 'settings')  Setting? settings, @JsonKey(name: 'createdAt')  int? createdAt, @JsonKey(name: 'lastUpdate')  int? lastUpdate)  $default,) {final _that = this;
 switch (_that) {
-case _LibraryBean():
+case _Library():
 return $default(_that.id,_that.name,_that.folders,_that.displayOrder,_that.icon,_that.mediaType,_that.provider,_that.settings,_that.createdAt,_that.lastUpdate);case _:
   throw StateError('Unexpected subclass');
 
@@ -217,7 +217,7 @@ return $default(_that.id,_that.name,_that.folders,_that.displayOrder,_that.icon,
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'name')  String? name, @JsonKey(name: 'folders')  List<Folder>? folders, @JsonKey(name: 'displayOrder')  int? displayOrder, @JsonKey(name: 'icon')  String? icon, @JsonKey(name: 'mediaType')  String? mediaType, @JsonKey(name: 'provider')  String? provider, @JsonKey(name: 'settings')  Setting? settings, @JsonKey(name: 'createdAt')  int? createdAt, @JsonKey(name: 'lastUpdate')  int? lastUpdate)?  $default,) {final _that = this;
 switch (_that) {
-case _LibraryBean() when $default != null:
+case _Library() when $default != null:
 return $default(_that.id,_that.name,_that.folders,_that.displayOrder,_that.icon,_that.mediaType,_that.provider,_that.settings,_that.createdAt,_that.lastUpdate);case _:
   return null;
 
@@ -229,9 +229,9 @@ return $default(_that.id,_that.name,_that.folders,_that.displayOrder,_that.icon,
 /// @nodoc
 @JsonSerializable()
 
-class _LibraryBean implements LibraryBean {
-  const _LibraryBean({@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name, @JsonKey(name: 'folders') final  List<Folder>? folders, @JsonKey(name: 'displayOrder') this.displayOrder, @JsonKey(name: 'icon') this.icon, @JsonKey(name: 'mediaType') this.mediaType, @JsonKey(name: 'provider') this.provider, @JsonKey(name: 'settings') this.settings, @JsonKey(name: 'createdAt') this.createdAt, @JsonKey(name: 'lastUpdate') this.lastUpdate}): _folders = folders;
-  factory _LibraryBean.fromJson(Map<String, dynamic> json) => _$LibraryBeanFromJson(json);
+class _Library implements Library {
+  const _Library({@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name, @JsonKey(name: 'folders') final  List<Folder>? folders, @JsonKey(name: 'displayOrder') this.displayOrder, @JsonKey(name: 'icon') this.icon, @JsonKey(name: 'mediaType') this.mediaType, @JsonKey(name: 'provider') this.provider, @JsonKey(name: 'settings') this.settings, @JsonKey(name: 'createdAt') this.createdAt, @JsonKey(name: 'lastUpdate') this.lastUpdate}): _folders = folders;
+  factory _Library.fromJson(Map<String, dynamic> json) => _$LibraryFromJson(json);
 
 @override@JsonKey(name: 'id') final  String? id;
 @override@JsonKey(name: 'name') final  String? name;
@@ -252,20 +252,20 @@ class _LibraryBean implements LibraryBean {
 @override@JsonKey(name: 'createdAt') final  int? createdAt;
 @override@JsonKey(name: 'lastUpdate') final  int? lastUpdate;
 
-/// Create a copy of LibraryBean
+/// Create a copy of Library
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$LibraryBeanCopyWith<_LibraryBean> get copyWith => __$LibraryBeanCopyWithImpl<_LibraryBean>(this, _$identity);
+_$LibraryCopyWith<_Library> get copyWith => __$LibraryCopyWithImpl<_Library>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$LibraryBeanToJson(this, );
+  return _$LibraryToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LibraryBean&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._folders, _folders)&&(identical(other.displayOrder, displayOrder) || other.displayOrder == displayOrder)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.provider, provider) || other.provider == provider)&&(identical(other.settings, settings) || other.settings == settings)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Library&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._folders, _folders)&&(identical(other.displayOrder, displayOrder) || other.displayOrder == displayOrder)&&(identical(other.icon, icon) || other.icon == icon)&&(identical(other.mediaType, mediaType) || other.mediaType == mediaType)&&(identical(other.provider, provider) || other.provider == provider)&&(identical(other.settings, settings) || other.settings == settings)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -274,15 +274,15 @@ int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality
 
 @override
 String toString() {
-  return 'LibraryBean(id: $id, name: $name, folders: $folders, displayOrder: $displayOrder, icon: $icon, mediaType: $mediaType, provider: $provider, settings: $settings, createdAt: $createdAt, lastUpdate: $lastUpdate)';
+  return 'Library(id: $id, name: $name, folders: $folders, displayOrder: $displayOrder, icon: $icon, mediaType: $mediaType, provider: $provider, settings: $settings, createdAt: $createdAt, lastUpdate: $lastUpdate)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LibraryBeanCopyWith<$Res> implements $LibraryBeanCopyWith<$Res> {
-  factory _$LibraryBeanCopyWith(_LibraryBean value, $Res Function(_LibraryBean) _then) = __$LibraryBeanCopyWithImpl;
+abstract mixin class _$LibraryCopyWith<$Res> implements $LibraryCopyWith<$Res> {
+  factory _$LibraryCopyWith(_Library value, $Res Function(_Library) _then) = __$LibraryCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'id') String? id,@JsonKey(name: 'name') String? name,@JsonKey(name: 'folders') List<Folder>? folders,@JsonKey(name: 'displayOrder') int? displayOrder,@JsonKey(name: 'icon') String? icon,@JsonKey(name: 'mediaType') String? mediaType,@JsonKey(name: 'provider') String? provider,@JsonKey(name: 'settings') Setting? settings,@JsonKey(name: 'createdAt') int? createdAt,@JsonKey(name: 'lastUpdate') int? lastUpdate
@@ -293,17 +293,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$LibraryBeanCopyWithImpl<$Res>
-    implements _$LibraryBeanCopyWith<$Res> {
-  __$LibraryBeanCopyWithImpl(this._self, this._then);
+class __$LibraryCopyWithImpl<$Res>
+    implements _$LibraryCopyWith<$Res> {
+  __$LibraryCopyWithImpl(this._self, this._then);
 
-  final _LibraryBean _self;
-  final $Res Function(_LibraryBean) _then;
+  final _Library _self;
+  final $Res Function(_Library) _then;
 
-/// Create a copy of LibraryBean
+/// Create a copy of Library
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? folders = freezed,Object? displayOrder = freezed,Object? icon = freezed,Object? mediaType = freezed,Object? provider = freezed,Object? settings = freezed,Object? createdAt = freezed,Object? lastUpdate = freezed,}) {
-  return _then(_LibraryBean(
+  return _then(_Library(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,folders: freezed == folders ? _self._folders : folders // ignore: cast_nullable_to_non_nullable
@@ -318,7 +318,7 @@ as int?,
   ));
 }
 
-/// Create a copy of LibraryBean
+/// Create a copy of Library
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

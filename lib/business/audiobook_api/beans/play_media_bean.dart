@@ -1,8 +1,8 @@
-import 'package:audio_book/business/audiobook_api/beans/audio_file_meta_data_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/audio_file_meta_data.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data_bean.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'audio_file_meta_tag_bean.dart';
+import 'audio_file_meta_tag.dart';
 import 'audio_tracks.dart';
 import 'deviceInfo.dart';
 import 'library_file.dart';

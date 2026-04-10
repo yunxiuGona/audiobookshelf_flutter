@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:audio_book/business/audiobook_api/beans/all_library_bean.dart';
-import 'package:audio_book/business/audiobook_api/beans/library_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/all_library.dart';
+import 'package:audio_book/business/audiobook_api/beans/library.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/login_bean.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,10 +24,10 @@ class SPUtils{
   static void saveUserData(String jsonEncode) {
     prefs?.setString("userData", jsonEncode);
   }
-  static void saveSelectedLibrary(LibraryBean? librasyBean){
+  static void saveSelectedLibrary(Library? librasyBean){
     prefs?.setString("selectedLibrary", jsonEncode(librasyBean));
   }
-  static LibraryBean? getSelectedLibrary(){
+  static Library? getSelectedLibrary(){
     var json = prefs?.getString("selectedLibrary");
     if(json==null||json.isEmpty) {
       return null;
@@ -36,14 +36,14 @@ class SPUtils{
     if(bean==null){
       return null;
     }else{
-      return LibraryBean.fromJson(bean);
+      return Library.fromJson(bean);
     }
   }
 
   static void saveLastAllLibraries(LibraryItemsBean? libraryItemsBean){
     prefs?.setString("lastAllLibraryCached", jsonEncode(libraryItemsBean));
   }
-  static AllLibraryBean? getLastAllLibraries(){
+  static AllLibrary? getLastAllLibraries(){
     var json = prefs?.getString("lastAllLibraryCached");
     if(json==null||json.isEmpty) {
       return null;
@@ -52,7 +52,7 @@ class SPUtils{
     if(bean==null){
       return null;
     }else{
-      return AllLibraryBean.fromJson(bean);
+      return AllLibrary.fromJson(bean);
     }
   }
   static LoginBean? getUserData(){

@@ -1,10 +1,10 @@
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:flutter/material.dart';
 
-import '../../audiobook_api/beans/library_item_detail_bean.dart';
+import '../../audiobook_api/beans/library_item_detail.dart';
 
 class MediaDetailStatsView extends StatefulWidget {
-  LibraryItemDetailBean? libraryItemDetailBean;
+  LibraryItemDetail? libraryItemDetailBean;
   MediaDetailStatsView(this.libraryItemDetailBean,{Key? key}) : super(key: key);
 
   @override

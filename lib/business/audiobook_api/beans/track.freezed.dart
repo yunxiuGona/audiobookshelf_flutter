@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Track {
 
-@JsonKey(name: 'index') int? get index;@JsonKey(name: 'ino') String? get ino;@JsonKey(name: 'metadata') AudioFileMetaDataBean? get metadata;@JsonKey(name: 'addedAt') int? get addedAt;@JsonKey(name: 'updatedAt') int? get updatedAt;@JsonKey(name: 'trackNumFromMeta') dynamic get trackNumFromMeta;@JsonKey(name: 'discNumFromMeta') dynamic get discNumFromMeta;@JsonKey(name: 'trackNumFromFilename') int? get trackNumFromFilename;@JsonKey(name: 'discNumFromFilename') dynamic get discNumFromFilename;@JsonKey(name: 'manuallyVerified') bool? get manuallyVerified;@JsonKey(name: 'exclude') bool? get exclude;@JsonKey(name: 'error') dynamic get error;@JsonKey(name: 'format') String? get format;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'bitRate') int? get bitRate;@JsonKey(name: 'language') String? get language;@JsonKey(name: 'codec') String? get codec;@JsonKey(name: 'timeBase') String? get timeBase;@JsonKey(name: 'channels') int? get channels;@JsonKey(name: 'channelLayout') String? get channelLayout;@JsonKey(name: 'chapters') List<dynamic>? get chapters;@JsonKey(name: 'embeddedCoverArt') dynamic get embeddedCoverArt;@JsonKey(name: 'metaTags') AudioFileMetaTagBean? get metaTags;@JsonKey(name: 'mimeType') String? get mimeType;@JsonKey(name: 'title') String? get title;@JsonKey(name: 'startOffset') int? get startOffset;@JsonKey(name: 'contentUrl') String? get contentUrl;
+@JsonKey(name: 'index') int? get index;@JsonKey(name: 'ino') String? get ino;@JsonKey(name: 'metadata') AudioFileMetaData? get metadata;@JsonKey(name: 'addedAt') int? get addedAt;@JsonKey(name: 'updatedAt') int? get updatedAt;@JsonKey(name: 'trackNumFromMeta') dynamic get trackNumFromMeta;@JsonKey(name: 'discNumFromMeta') dynamic get discNumFromMeta;@JsonKey(name: 'trackNumFromFilename') int? get trackNumFromFilename;@JsonKey(name: 'discNumFromFilename') dynamic get discNumFromFilename;@JsonKey(name: 'manuallyVerified') bool? get manuallyVerified;@JsonKey(name: 'exclude') bool? get exclude;@JsonKey(name: 'error') dynamic get error;@JsonKey(name: 'format') String? get format;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'bitRate') int? get bitRate;@JsonKey(name: 'language') String? get language;@JsonKey(name: 'codec') String? get codec;@JsonKey(name: 'timeBase') String? get timeBase;@JsonKey(name: 'channels') int? get channels;@JsonKey(name: 'channelLayout') String? get channelLayout;@JsonKey(name: 'chapters') List<dynamic>? get chapters;@JsonKey(name: 'embeddedCoverArt') dynamic get embeddedCoverArt;@JsonKey(name: 'metaTags') AudioFileMetaTag? get metaTags;@JsonKey(name: 'mimeType') String? get mimeType;@JsonKey(name: 'title') String? get title;@JsonKey(name: 'startOffset') int? get startOffset;@JsonKey(name: 'contentUrl') String? get contentUrl;
 /// Create a copy of Track
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $TrackCopyWith<$Res>  {
   factory $TrackCopyWith(Track value, $Res Function(Track) _then) = _$TrackCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'index') int? index,@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'trackNumFromMeta') dynamic trackNumFromMeta,@JsonKey(name: 'discNumFromMeta') dynamic discNumFromMeta,@JsonKey(name: 'trackNumFromFilename') int? trackNumFromFilename,@JsonKey(name: 'discNumFromFilename') dynamic discNumFromFilename,@JsonKey(name: 'manuallyVerified') bool? manuallyVerified,@JsonKey(name: 'exclude') bool? exclude,@JsonKey(name: 'error') dynamic error,@JsonKey(name: 'format') String? format,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'bitRate') int? bitRate,@JsonKey(name: 'language') String? language,@JsonKey(name: 'codec') String? codec,@JsonKey(name: 'timeBase') String? timeBase,@JsonKey(name: 'channels') int? channels,@JsonKey(name: 'channelLayout') String? channelLayout,@JsonKey(name: 'chapters') List<dynamic>? chapters,@JsonKey(name: 'embeddedCoverArt') dynamic embeddedCoverArt,@JsonKey(name: 'metaTags') AudioFileMetaTagBean? metaTags,@JsonKey(name: 'mimeType') String? mimeType,@JsonKey(name: 'title') String? title,@JsonKey(name: 'startOffset') int? startOffset,@JsonKey(name: 'contentUrl') String? contentUrl
+@JsonKey(name: 'index') int? index,@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'metadata') AudioFileMetaData? metadata,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'trackNumFromMeta') dynamic trackNumFromMeta,@JsonKey(name: 'discNumFromMeta') dynamic discNumFromMeta,@JsonKey(name: 'trackNumFromFilename') int? trackNumFromFilename,@JsonKey(name: 'discNumFromFilename') dynamic discNumFromFilename,@JsonKey(name: 'manuallyVerified') bool? manuallyVerified,@JsonKey(name: 'exclude') bool? exclude,@JsonKey(name: 'error') dynamic error,@JsonKey(name: 'format') String? format,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'bitRate') int? bitRate,@JsonKey(name: 'language') String? language,@JsonKey(name: 'codec') String? codec,@JsonKey(name: 'timeBase') String? timeBase,@JsonKey(name: 'channels') int? channels,@JsonKey(name: 'channelLayout') String? channelLayout,@JsonKey(name: 'chapters') List<dynamic>? chapters,@JsonKey(name: 'embeddedCoverArt') dynamic embeddedCoverArt,@JsonKey(name: 'metaTags') AudioFileMetaTag? metaTags,@JsonKey(name: 'mimeType') String? mimeType,@JsonKey(name: 'title') String? title,@JsonKey(name: 'startOffset') int? startOffset,@JsonKey(name: 'contentUrl') String? contentUrl
 });
 
 
-$AudioFileMetaDataBeanCopyWith<$Res>? get metadata;$AudioFileMetaTagBeanCopyWith<$Res>? get metaTags;
+$AudioFileMetaDataCopyWith<$Res>? get metadata;$AudioFileMetaTagCopyWith<$Res>? get metaTags;
 
 }
 /// @nodoc
@@ -70,7 +70,7 @@ class _$TrackCopyWithImpl<$Res>
 index: freezed == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
 as int?,ino: freezed == ino ? _self.ino : ino // ignore: cast_nullable_to_non_nullable
 as String?,metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as AudioFileMetaDataBean?,addedAt: freezed == addedAt ? _self.addedAt : addedAt // ignore: cast_nullable_to_non_nullable
+as AudioFileMetaData?,addedAt: freezed == addedAt ? _self.addedAt : addedAt // ignore: cast_nullable_to_non_nullable
 as int?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as int?,trackNumFromMeta: freezed == trackNumFromMeta ? _self.trackNumFromMeta : trackNumFromMeta // ignore: cast_nullable_to_non_nullable
 as dynamic,discNumFromMeta: freezed == discNumFromMeta ? _self.discNumFromMeta : discNumFromMeta // ignore: cast_nullable_to_non_nullable
@@ -90,7 +90,7 @@ as int?,channelLayout: freezed == channelLayout ? _self.channelLayout : channelL
 as String?,chapters: freezed == chapters ? _self.chapters : chapters // ignore: cast_nullable_to_non_nullable
 as List<dynamic>?,embeddedCoverArt: freezed == embeddedCoverArt ? _self.embeddedCoverArt : embeddedCoverArt // ignore: cast_nullable_to_non_nullable
 as dynamic,metaTags: freezed == metaTags ? _self.metaTags : metaTags // ignore: cast_nullable_to_non_nullable
-as AudioFileMetaTagBean?,mimeType: freezed == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
+as AudioFileMetaTag?,mimeType: freezed == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
 as String?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,startOffset: freezed == startOffset ? _self.startOffset : startOffset // ignore: cast_nullable_to_non_nullable
 as int?,contentUrl: freezed == contentUrl ? _self.contentUrl : contentUrl // ignore: cast_nullable_to_non_nullable
@@ -101,24 +101,24 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$AudioFileMetaDataBeanCopyWith<$Res>? get metadata {
+$AudioFileMetaDataCopyWith<$Res>? get metadata {
     if (_self.metadata == null) {
     return null;
   }
 
-  return $AudioFileMetaDataBeanCopyWith<$Res>(_self.metadata!, (value) {
+  return $AudioFileMetaDataCopyWith<$Res>(_self.metadata!, (value) {
     return _then(_self.copyWith(metadata: value));
   });
 }/// Create a copy of Track
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$AudioFileMetaTagBeanCopyWith<$Res>? get metaTags {
+$AudioFileMetaTagCopyWith<$Res>? get metaTags {
     if (_self.metaTags == null) {
     return null;
   }
 
-  return $AudioFileMetaTagBeanCopyWith<$Res>(_self.metaTags!, (value) {
+  return $AudioFileMetaTagCopyWith<$Res>(_self.metaTags!, (value) {
     return _then(_self.copyWith(metaTags: value));
   });
 }
@@ -203,7 +203,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaDataBean? metadata, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'trackNumFromMeta')  dynamic trackNumFromMeta, @JsonKey(name: 'discNumFromMeta')  dynamic discNumFromMeta, @JsonKey(name: 'trackNumFromFilename')  int? trackNumFromFilename, @JsonKey(name: 'discNumFromFilename')  dynamic discNumFromFilename, @JsonKey(name: 'manuallyVerified')  bool? manuallyVerified, @JsonKey(name: 'exclude')  bool? exclude, @JsonKey(name: 'error')  dynamic error, @JsonKey(name: 'format')  String? format, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'bitRate')  int? bitRate, @JsonKey(name: 'language')  String? language, @JsonKey(name: 'codec')  String? codec, @JsonKey(name: 'timeBase')  String? timeBase, @JsonKey(name: 'channels')  int? channels, @JsonKey(name: 'channelLayout')  String? channelLayout, @JsonKey(name: 'chapters')  List<dynamic>? chapters, @JsonKey(name: 'embeddedCoverArt')  dynamic embeddedCoverArt, @JsonKey(name: 'metaTags')  AudioFileMetaTagBean? metaTags, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'contentUrl')  String? contentUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaData? metadata, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'trackNumFromMeta')  dynamic trackNumFromMeta, @JsonKey(name: 'discNumFromMeta')  dynamic discNumFromMeta, @JsonKey(name: 'trackNumFromFilename')  int? trackNumFromFilename, @JsonKey(name: 'discNumFromFilename')  dynamic discNumFromFilename, @JsonKey(name: 'manuallyVerified')  bool? manuallyVerified, @JsonKey(name: 'exclude')  bool? exclude, @JsonKey(name: 'error')  dynamic error, @JsonKey(name: 'format')  String? format, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'bitRate')  int? bitRate, @JsonKey(name: 'language')  String? language, @JsonKey(name: 'codec')  String? codec, @JsonKey(name: 'timeBase')  String? timeBase, @JsonKey(name: 'channels')  int? channels, @JsonKey(name: 'channelLayout')  String? channelLayout, @JsonKey(name: 'chapters')  List<dynamic>? chapters, @JsonKey(name: 'embeddedCoverArt')  dynamic embeddedCoverArt, @JsonKey(name: 'metaTags')  AudioFileMetaTag? metaTags, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'contentUrl')  String? contentUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Track() when $default != null:
 return $default(_that.index,_that.ino,_that.metadata,_that.addedAt,_that.updatedAt,_that.trackNumFromMeta,_that.discNumFromMeta,_that.trackNumFromFilename,_that.discNumFromFilename,_that.manuallyVerified,_that.exclude,_that.error,_that.format,_that.duration,_that.bitRate,_that.language,_that.codec,_that.timeBase,_that.channels,_that.channelLayout,_that.chapters,_that.embeddedCoverArt,_that.metaTags,_that.mimeType,_that.title,_that.startOffset,_that.contentUrl);case _:
@@ -224,7 +224,7 @@ return $default(_that.index,_that.ino,_that.metadata,_that.addedAt,_that.updated
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaDataBean? metadata, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'trackNumFromMeta')  dynamic trackNumFromMeta, @JsonKey(name: 'discNumFromMeta')  dynamic discNumFromMeta, @JsonKey(name: 'trackNumFromFilename')  int? trackNumFromFilename, @JsonKey(name: 'discNumFromFilename')  dynamic discNumFromFilename, @JsonKey(name: 'manuallyVerified')  bool? manuallyVerified, @JsonKey(name: 'exclude')  bool? exclude, @JsonKey(name: 'error')  dynamic error, @JsonKey(name: 'format')  String? format, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'bitRate')  int? bitRate, @JsonKey(name: 'language')  String? language, @JsonKey(name: 'codec')  String? codec, @JsonKey(name: 'timeBase')  String? timeBase, @JsonKey(name: 'channels')  int? channels, @JsonKey(name: 'channelLayout')  String? channelLayout, @JsonKey(name: 'chapters')  List<dynamic>? chapters, @JsonKey(name: 'embeddedCoverArt')  dynamic embeddedCoverArt, @JsonKey(name: 'metaTags')  AudioFileMetaTagBean? metaTags, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'contentUrl')  String? contentUrl)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaData? metadata, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'trackNumFromMeta')  dynamic trackNumFromMeta, @JsonKey(name: 'discNumFromMeta')  dynamic discNumFromMeta, @JsonKey(name: 'trackNumFromFilename')  int? trackNumFromFilename, @JsonKey(name: 'discNumFromFilename')  dynamic discNumFromFilename, @JsonKey(name: 'manuallyVerified')  bool? manuallyVerified, @JsonKey(name: 'exclude')  bool? exclude, @JsonKey(name: 'error')  dynamic error, @JsonKey(name: 'format')  String? format, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'bitRate')  int? bitRate, @JsonKey(name: 'language')  String? language, @JsonKey(name: 'codec')  String? codec, @JsonKey(name: 'timeBase')  String? timeBase, @JsonKey(name: 'channels')  int? channels, @JsonKey(name: 'channelLayout')  String? channelLayout, @JsonKey(name: 'chapters')  List<dynamic>? chapters, @JsonKey(name: 'embeddedCoverArt')  dynamic embeddedCoverArt, @JsonKey(name: 'metaTags')  AudioFileMetaTag? metaTags, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'contentUrl')  String? contentUrl)  $default,) {final _that = this;
 switch (_that) {
 case _Track():
 return $default(_that.index,_that.ino,_that.metadata,_that.addedAt,_that.updatedAt,_that.trackNumFromMeta,_that.discNumFromMeta,_that.trackNumFromFilename,_that.discNumFromFilename,_that.manuallyVerified,_that.exclude,_that.error,_that.format,_that.duration,_that.bitRate,_that.language,_that.codec,_that.timeBase,_that.channels,_that.channelLayout,_that.chapters,_that.embeddedCoverArt,_that.metaTags,_that.mimeType,_that.title,_that.startOffset,_that.contentUrl);case _:
@@ -244,7 +244,7 @@ return $default(_that.index,_that.ino,_that.metadata,_that.addedAt,_that.updated
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaDataBean? metadata, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'trackNumFromMeta')  dynamic trackNumFromMeta, @JsonKey(name: 'discNumFromMeta')  dynamic discNumFromMeta, @JsonKey(name: 'trackNumFromFilename')  int? trackNumFromFilename, @JsonKey(name: 'discNumFromFilename')  dynamic discNumFromFilename, @JsonKey(name: 'manuallyVerified')  bool? manuallyVerified, @JsonKey(name: 'exclude')  bool? exclude, @JsonKey(name: 'error')  dynamic error, @JsonKey(name: 'format')  String? format, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'bitRate')  int? bitRate, @JsonKey(name: 'language')  String? language, @JsonKey(name: 'codec')  String? codec, @JsonKey(name: 'timeBase')  String? timeBase, @JsonKey(name: 'channels')  int? channels, @JsonKey(name: 'channelLayout')  String? channelLayout, @JsonKey(name: 'chapters')  List<dynamic>? chapters, @JsonKey(name: 'embeddedCoverArt')  dynamic embeddedCoverArt, @JsonKey(name: 'metaTags')  AudioFileMetaTagBean? metaTags, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'contentUrl')  String? contentUrl)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'ino')  String? ino, @JsonKey(name: 'metadata')  AudioFileMetaData? metadata, @JsonKey(name: 'addedAt')  int? addedAt, @JsonKey(name: 'updatedAt')  int? updatedAt, @JsonKey(name: 'trackNumFromMeta')  dynamic trackNumFromMeta, @JsonKey(name: 'discNumFromMeta')  dynamic discNumFromMeta, @JsonKey(name: 'trackNumFromFilename')  int? trackNumFromFilename, @JsonKey(name: 'discNumFromFilename')  dynamic discNumFromFilename, @JsonKey(name: 'manuallyVerified')  bool? manuallyVerified, @JsonKey(name: 'exclude')  bool? exclude, @JsonKey(name: 'error')  dynamic error, @JsonKey(name: 'format')  String? format, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'bitRate')  int? bitRate, @JsonKey(name: 'language')  String? language, @JsonKey(name: 'codec')  String? codec, @JsonKey(name: 'timeBase')  String? timeBase, @JsonKey(name: 'channels')  int? channels, @JsonKey(name: 'channelLayout')  String? channelLayout, @JsonKey(name: 'chapters')  List<dynamic>? chapters, @JsonKey(name: 'embeddedCoverArt')  dynamic embeddedCoverArt, @JsonKey(name: 'metaTags')  AudioFileMetaTag? metaTags, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'contentUrl')  String? contentUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _Track() when $default != null:
 return $default(_that.index,_that.ino,_that.metadata,_that.addedAt,_that.updatedAt,_that.trackNumFromMeta,_that.discNumFromMeta,_that.trackNumFromFilename,_that.discNumFromFilename,_that.manuallyVerified,_that.exclude,_that.error,_that.format,_that.duration,_that.bitRate,_that.language,_that.codec,_that.timeBase,_that.channels,_that.channelLayout,_that.chapters,_that.embeddedCoverArt,_that.metaTags,_that.mimeType,_that.title,_that.startOffset,_that.contentUrl);case _:
@@ -264,7 +264,7 @@ class _Track implements Track {
 
 @override@JsonKey(name: 'index') final  int? index;
 @override@JsonKey(name: 'ino') final  String? ino;
-@override@JsonKey(name: 'metadata') final  AudioFileMetaDataBean? metadata;
+@override@JsonKey(name: 'metadata') final  AudioFileMetaData? metadata;
 @override@JsonKey(name: 'addedAt') final  int? addedAt;
 @override@JsonKey(name: 'updatedAt') final  int? updatedAt;
 @override@JsonKey(name: 'trackNumFromMeta') final  dynamic trackNumFromMeta;
@@ -292,7 +292,7 @@ class _Track implements Track {
 }
 
 @override@JsonKey(name: 'embeddedCoverArt') final  dynamic embeddedCoverArt;
-@override@JsonKey(name: 'metaTags') final  AudioFileMetaTagBean? metaTags;
+@override@JsonKey(name: 'metaTags') final  AudioFileMetaTag? metaTags;
 @override@JsonKey(name: 'mimeType') final  String? mimeType;
 @override@JsonKey(name: 'title') final  String? title;
 @override@JsonKey(name: 'startOffset') final  int? startOffset;
@@ -331,11 +331,11 @@ abstract mixin class _$TrackCopyWith<$Res> implements $TrackCopyWith<$Res> {
   factory _$TrackCopyWith(_Track value, $Res Function(_Track) _then) = __$TrackCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'index') int? index,@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'trackNumFromMeta') dynamic trackNumFromMeta,@JsonKey(name: 'discNumFromMeta') dynamic discNumFromMeta,@JsonKey(name: 'trackNumFromFilename') int? trackNumFromFilename,@JsonKey(name: 'discNumFromFilename') dynamic discNumFromFilename,@JsonKey(name: 'manuallyVerified') bool? manuallyVerified,@JsonKey(name: 'exclude') bool? exclude,@JsonKey(name: 'error') dynamic error,@JsonKey(name: 'format') String? format,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'bitRate') int? bitRate,@JsonKey(name: 'language') String? language,@JsonKey(name: 'codec') String? codec,@JsonKey(name: 'timeBase') String? timeBase,@JsonKey(name: 'channels') int? channels,@JsonKey(name: 'channelLayout') String? channelLayout,@JsonKey(name: 'chapters') List<dynamic>? chapters,@JsonKey(name: 'embeddedCoverArt') dynamic embeddedCoverArt,@JsonKey(name: 'metaTags') AudioFileMetaTagBean? metaTags,@JsonKey(name: 'mimeType') String? mimeType,@JsonKey(name: 'title') String? title,@JsonKey(name: 'startOffset') int? startOffset,@JsonKey(name: 'contentUrl') String? contentUrl
+@JsonKey(name: 'index') int? index,@JsonKey(name: 'ino') String? ino,@JsonKey(name: 'metadata') AudioFileMetaData? metadata,@JsonKey(name: 'addedAt') int? addedAt,@JsonKey(name: 'updatedAt') int? updatedAt,@JsonKey(name: 'trackNumFromMeta') dynamic trackNumFromMeta,@JsonKey(name: 'discNumFromMeta') dynamic discNumFromMeta,@JsonKey(name: 'trackNumFromFilename') int? trackNumFromFilename,@JsonKey(name: 'discNumFromFilename') dynamic discNumFromFilename,@JsonKey(name: 'manuallyVerified') bool? manuallyVerified,@JsonKey(name: 'exclude') bool? exclude,@JsonKey(name: 'error') dynamic error,@JsonKey(name: 'format') String? format,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'bitRate') int? bitRate,@JsonKey(name: 'language') String? language,@JsonKey(name: 'codec') String? codec,@JsonKey(name: 'timeBase') String? timeBase,@JsonKey(name: 'channels') int? channels,@JsonKey(name: 'channelLayout') String? channelLayout,@JsonKey(name: 'chapters') List<dynamic>? chapters,@JsonKey(name: 'embeddedCoverArt') dynamic embeddedCoverArt,@JsonKey(name: 'metaTags') AudioFileMetaTag? metaTags,@JsonKey(name: 'mimeType') String? mimeType,@JsonKey(name: 'title') String? title,@JsonKey(name: 'startOffset') int? startOffset,@JsonKey(name: 'contentUrl') String? contentUrl
 });
 
 
-@override $AudioFileMetaDataBeanCopyWith<$Res>? get metadata;@override $AudioFileMetaTagBeanCopyWith<$Res>? get metaTags;
+@override $AudioFileMetaDataCopyWith<$Res>? get metadata;@override $AudioFileMetaTagCopyWith<$Res>? get metaTags;
 
 }
 /// @nodoc
@@ -353,7 +353,7 @@ class __$TrackCopyWithImpl<$Res>
 index: freezed == index ? _self.index : index // ignore: cast_nullable_to_non_nullable
 as int?,ino: freezed == ino ? _self.ino : ino // ignore: cast_nullable_to_non_nullable
 as String?,metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as AudioFileMetaDataBean?,addedAt: freezed == addedAt ? _self.addedAt : addedAt // ignore: cast_nullable_to_non_nullable
+as AudioFileMetaData?,addedAt: freezed == addedAt ? _self.addedAt : addedAt // ignore: cast_nullable_to_non_nullable
 as int?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as int?,trackNumFromMeta: freezed == trackNumFromMeta ? _self.trackNumFromMeta : trackNumFromMeta // ignore: cast_nullable_to_non_nullable
 as dynamic,discNumFromMeta: freezed == discNumFromMeta ? _self.discNumFromMeta : discNumFromMeta // ignore: cast_nullable_to_non_nullable
@@ -373,7 +373,7 @@ as int?,channelLayout: freezed == channelLayout ? _self.channelLayout : channelL
 as String?,chapters: freezed == chapters ? _self._chapters : chapters // ignore: cast_nullable_to_non_nullable
 as List<dynamic>?,embeddedCoverArt: freezed == embeddedCoverArt ? _self.embeddedCoverArt : embeddedCoverArt // ignore: cast_nullable_to_non_nullable
 as dynamic,metaTags: freezed == metaTags ? _self.metaTags : metaTags // ignore: cast_nullable_to_non_nullable
-as AudioFileMetaTagBean?,mimeType: freezed == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
+as AudioFileMetaTag?,mimeType: freezed == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
 as String?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,startOffset: freezed == startOffset ? _self.startOffset : startOffset // ignore: cast_nullable_to_non_nullable
 as int?,contentUrl: freezed == contentUrl ? _self.contentUrl : contentUrl // ignore: cast_nullable_to_non_nullable
@@ -385,24 +385,24 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$AudioFileMetaDataBeanCopyWith<$Res>? get metadata {
+$AudioFileMetaDataCopyWith<$Res>? get metadata {
     if (_self.metadata == null) {
     return null;
   }
 
-  return $AudioFileMetaDataBeanCopyWith<$Res>(_self.metadata!, (value) {
+  return $AudioFileMetaDataCopyWith<$Res>(_self.metadata!, (value) {
     return _then(_self.copyWith(metadata: value));
   });
 }/// Create a copy of Track
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$AudioFileMetaTagBeanCopyWith<$Res>? get metaTags {
+$AudioFileMetaTagCopyWith<$Res>? get metaTags {
     if (_self.metaTags == null) {
     return null;
   }
 
-  return $AudioFileMetaTagBeanCopyWith<$Res>(_self.metaTags!, (value) {
+  return $AudioFileMetaTagCopyWith<$Res>(_self.metaTags!, (value) {
     return _then(_self.copyWith(metaTags: value));
   });
 }

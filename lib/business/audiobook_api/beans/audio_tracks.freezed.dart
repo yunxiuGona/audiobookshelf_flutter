@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AudioTracks {
 
-@JsonKey(name: 'index') int? get index;@JsonKey(name: 'startOffset') int? get startOffset;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'title') String? get title;@JsonKey(name: 'contentUrl') String? get contentUrl;@JsonKey(name: 'mimeType') String? get mimeType;@JsonKey(name: 'metadata') AudioFileMetaDataBean? get metadata;
+@JsonKey(name: 'index') int? get index;@JsonKey(name: 'startOffset') int? get startOffset;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'title') String? get title;@JsonKey(name: 'contentUrl') String? get contentUrl;@JsonKey(name: 'mimeType') String? get mimeType;@JsonKey(name: 'metadata') AudioFileMetaData? get metadata;
 /// Create a copy of AudioTracks
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $AudioTracksCopyWith<$Res>  {
   factory $AudioTracksCopyWith(AudioTracks value, $Res Function(AudioTracks) _then) = _$AudioTracksCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'index') int? index,@JsonKey(name: 'startOffset') int? startOffset,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'title') String? title,@JsonKey(name: 'contentUrl') String? contentUrl,@JsonKey(name: 'mimeType') String? mimeType,@JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata
+@JsonKey(name: 'index') int? index,@JsonKey(name: 'startOffset') int? startOffset,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'title') String? title,@JsonKey(name: 'contentUrl') String? contentUrl,@JsonKey(name: 'mimeType') String? mimeType,@JsonKey(name: 'metadata') AudioFileMetaData? metadata
 });
 
 
-$AudioFileMetaDataBeanCopyWith<$Res>? get metadata;
+$AudioFileMetaDataCopyWith<$Res>? get metadata;
 
 }
 /// @nodoc
@@ -74,19 +74,19 @@ as double?,title: freezed == title ? _self.title : title // ignore: cast_nullabl
 as String?,contentUrl: freezed == contentUrl ? _self.contentUrl : contentUrl // ignore: cast_nullable_to_non_nullable
 as String?,mimeType: freezed == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
 as String?,metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as AudioFileMetaDataBean?,
+as AudioFileMetaData?,
   ));
 }
 /// Create a copy of AudioTracks
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$AudioFileMetaDataBeanCopyWith<$Res>? get metadata {
+$AudioFileMetaDataCopyWith<$Res>? get metadata {
     if (_self.metadata == null) {
     return null;
   }
 
-  return $AudioFileMetaDataBeanCopyWith<$Res>(_self.metadata!, (value) {
+  return $AudioFileMetaDataCopyWith<$Res>(_self.metadata!, (value) {
     return _then(_self.copyWith(metadata: value));
   });
 }
@@ -171,7 +171,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'contentUrl')  String? contentUrl, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'metadata')  AudioFileMetaDataBean? metadata)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'contentUrl')  String? contentUrl, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'metadata')  AudioFileMetaData? metadata)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AudioTracks() when $default != null:
 return $default(_that.index,_that.startOffset,_that.duration,_that.title,_that.contentUrl,_that.mimeType,_that.metadata);case _:
@@ -192,7 +192,7 @@ return $default(_that.index,_that.startOffset,_that.duration,_that.title,_that.c
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'contentUrl')  String? contentUrl, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'metadata')  AudioFileMetaDataBean? metadata)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'contentUrl')  String? contentUrl, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'metadata')  AudioFileMetaData? metadata)  $default,) {final _that = this;
 switch (_that) {
 case _AudioTracks():
 return $default(_that.index,_that.startOffset,_that.duration,_that.title,_that.contentUrl,_that.mimeType,_that.metadata);case _:
@@ -212,7 +212,7 @@ return $default(_that.index,_that.startOffset,_that.duration,_that.title,_that.c
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'contentUrl')  String? contentUrl, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'metadata')  AudioFileMetaDataBean? metadata)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'index')  int? index, @JsonKey(name: 'startOffset')  int? startOffset, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'title')  String? title, @JsonKey(name: 'contentUrl')  String? contentUrl, @JsonKey(name: 'mimeType')  String? mimeType, @JsonKey(name: 'metadata')  AudioFileMetaData? metadata)?  $default,) {final _that = this;
 switch (_that) {
 case _AudioTracks() when $default != null:
 return $default(_that.index,_that.startOffset,_that.duration,_that.title,_that.contentUrl,_that.mimeType,_that.metadata);case _:
@@ -236,7 +236,7 @@ class _AudioTracks implements AudioTracks {
 @override@JsonKey(name: 'title') final  String? title;
 @override@JsonKey(name: 'contentUrl') final  String? contentUrl;
 @override@JsonKey(name: 'mimeType') final  String? mimeType;
-@override@JsonKey(name: 'metadata') final  AudioFileMetaDataBean? metadata;
+@override@JsonKey(name: 'metadata') final  AudioFileMetaData? metadata;
 
 /// Create a copy of AudioTracks
 /// with the given fields replaced by the non-null parameter values.
@@ -271,11 +271,11 @@ abstract mixin class _$AudioTracksCopyWith<$Res> implements $AudioTracksCopyWith
   factory _$AudioTracksCopyWith(_AudioTracks value, $Res Function(_AudioTracks) _then) = __$AudioTracksCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'index') int? index,@JsonKey(name: 'startOffset') int? startOffset,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'title') String? title,@JsonKey(name: 'contentUrl') String? contentUrl,@JsonKey(name: 'mimeType') String? mimeType,@JsonKey(name: 'metadata') AudioFileMetaDataBean? metadata
+@JsonKey(name: 'index') int? index,@JsonKey(name: 'startOffset') int? startOffset,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'title') String? title,@JsonKey(name: 'contentUrl') String? contentUrl,@JsonKey(name: 'mimeType') String? mimeType,@JsonKey(name: 'metadata') AudioFileMetaData? metadata
 });
 
 
-@override $AudioFileMetaDataBeanCopyWith<$Res>? get metadata;
+@override $AudioFileMetaDataCopyWith<$Res>? get metadata;
 
 }
 /// @nodoc
@@ -297,7 +297,7 @@ as double?,title: freezed == title ? _self.title : title // ignore: cast_nullabl
 as String?,contentUrl: freezed == contentUrl ? _self.contentUrl : contentUrl // ignore: cast_nullable_to_non_nullable
 as String?,mimeType: freezed == mimeType ? _self.mimeType : mimeType // ignore: cast_nullable_to_non_nullable
 as String?,metadata: freezed == metadata ? _self.metadata : metadata // ignore: cast_nullable_to_non_nullable
-as AudioFileMetaDataBean?,
+as AudioFileMetaData?,
   ));
 }
 
@@ -305,12 +305,12 @@ as AudioFileMetaDataBean?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$AudioFileMetaDataBeanCopyWith<$Res>? get metadata {
+$AudioFileMetaDataCopyWith<$Res>? get metadata {
     if (_self.metadata == null) {
     return null;
   }
 
-  return $AudioFileMetaDataBeanCopyWith<$Res>(_self.metadata!, (value) {
+  return $AudioFileMetaDataCopyWith<$Res>(_self.metadata!, (value) {
     return _then(_self.copyWith(metadata: value));
   });
 }

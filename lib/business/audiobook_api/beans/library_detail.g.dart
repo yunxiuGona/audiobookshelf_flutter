@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'library_detail_bean.dart';
+part of 'library_detail.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_LibraryDetailBean _$LibraryDetailBeanFromJson(Map<String, dynamic> json) =>
-    _LibraryDetailBean(
+_LibraryDetail _$LibraryDetailFromJson(Map<String, dynamic> json) =>
+    _LibraryDetail(
       filterdata: json['filterdata'] == null
           ? null
           : Filterdata.fromJson(json['filterdata'] as Map<String, dynamic>),
@@ -15,10 +15,10 @@ _LibraryDetailBean _$LibraryDetailBeanFromJson(Map<String, dynamic> json) =>
       numUserPlaylists: (json['numUserPlaylists'] as num?)?.toInt(),
       library: json['library'] == null
           ? null
-          : LibraryBean.fromJson(json['library'] as Map<String, dynamic>),
+          : Library.fromJson(json['library'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$LibraryDetailBeanToJson(_LibraryDetailBean instance) =>
+Map<String, dynamic> _$LibraryDetailToJson(_LibraryDetail instance) =>
     <String, dynamic>{
       'filterdata': instance.filterdata,
       'issues': instance.issues,

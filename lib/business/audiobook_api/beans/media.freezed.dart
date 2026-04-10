@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Media {
 
-@JsonKey(name: 'id') String? get id;@JsonKey(name: 'libraryItemId') String? get libraryItemId;@JsonKey(name: 'metadata') MediaMetaDataBean? get metadata;@JsonKey(name: 'coverPath') String? get coverPath;@JsonKey(name: 'tags') List<String>? get tags;@JsonKey(name: 'episodes') List<Episodes>? get episodes;@JsonKey(name: 'chapters') List<Chapter>? get chapters;@JsonKey(name: 'audioFiles') List<AudioFileMetaDataBean>? get audioFiles;@JsonKey(name: 'tracks') List<Track>? get tracks;@JsonKey(name: 'autoDownloadEpisodes') bool? get autoDownloadEpisodes;@JsonKey(name: 'autoDownloadSchedule') String? get autoDownloadSchedule;@JsonKey(name: 'lastEpisodeCheck') int? get lastEpisodeCheck;@JsonKey(name: 'maxEpisodesToKeep') int? get maxEpisodesToKeep;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'maxNewEpisodesToDownload') int? get maxNewEpisodesToDownload;@JsonKey(name: 'size') int? get size;
+@JsonKey(name: 'id') String? get id;@JsonKey(name: 'libraryItemId') String? get libraryItemId;@JsonKey(name: 'metadata') MediaMetaDataBean? get metadata;@JsonKey(name: 'coverPath') String? get coverPath;@JsonKey(name: 'tags') List<String>? get tags;@JsonKey(name: 'episodes') List<Episodes>? get episodes;@JsonKey(name: 'chapters') List<Chapter>? get chapters;@JsonKey(name: 'audioFiles') List<AudioFileMetaData>? get audioFiles;@JsonKey(name: 'tracks') List<Track>? get tracks;@JsonKey(name: 'autoDownloadEpisodes') bool? get autoDownloadEpisodes;@JsonKey(name: 'autoDownloadSchedule') String? get autoDownloadSchedule;@JsonKey(name: 'lastEpisodeCheck') int? get lastEpisodeCheck;@JsonKey(name: 'maxEpisodesToKeep') int? get maxEpisodesToKeep;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'maxNewEpisodesToDownload') int? get maxNewEpisodesToDownload;@JsonKey(name: 'size') int? get size;
 /// Create a copy of Media
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $MediaCopyWith<$Res>  {
   factory $MediaCopyWith(Media value, $Res Function(Media) _then) = _$MediaCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'id') String? id,@JsonKey(name: 'libraryItemId') String? libraryItemId,@JsonKey(name: 'metadata') MediaMetaDataBean? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<String>? tags,@JsonKey(name: 'episodes') List<Episodes>? episodes,@JsonKey(name: 'chapters') List<Chapter>? chapters,@JsonKey(name: 'audioFiles') List<AudioFileMetaDataBean>? audioFiles,@JsonKey(name: 'tracks') List<Track>? tracks,@JsonKey(name: 'autoDownloadEpisodes') bool? autoDownloadEpisodes,@JsonKey(name: 'autoDownloadSchedule') String? autoDownloadSchedule,@JsonKey(name: 'lastEpisodeCheck') int? lastEpisodeCheck,@JsonKey(name: 'maxEpisodesToKeep') int? maxEpisodesToKeep,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'maxNewEpisodesToDownload') int? maxNewEpisodesToDownload,@JsonKey(name: 'size') int? size
+@JsonKey(name: 'id') String? id,@JsonKey(name: 'libraryItemId') String? libraryItemId,@JsonKey(name: 'metadata') MediaMetaDataBean? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<String>? tags,@JsonKey(name: 'episodes') List<Episodes>? episodes,@JsonKey(name: 'chapters') List<Chapter>? chapters,@JsonKey(name: 'audioFiles') List<AudioFileMetaData>? audioFiles,@JsonKey(name: 'tracks') List<Track>? tracks,@JsonKey(name: 'autoDownloadEpisodes') bool? autoDownloadEpisodes,@JsonKey(name: 'autoDownloadSchedule') String? autoDownloadSchedule,@JsonKey(name: 'lastEpisodeCheck') int? lastEpisodeCheck,@JsonKey(name: 'maxEpisodesToKeep') int? maxEpisodesToKeep,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'maxNewEpisodesToDownload') int? maxNewEpisodesToDownload,@JsonKey(name: 'size') int? size
 });
 
 
@@ -75,7 +75,7 @@ as String?,tags: freezed == tags ? _self.tags : tags // ignore: cast_nullable_to
 as List<String>?,episodes: freezed == episodes ? _self.episodes : episodes // ignore: cast_nullable_to_non_nullable
 as List<Episodes>?,chapters: freezed == chapters ? _self.chapters : chapters // ignore: cast_nullable_to_non_nullable
 as List<Chapter>?,audioFiles: freezed == audioFiles ? _self.audioFiles : audioFiles // ignore: cast_nullable_to_non_nullable
-as List<AudioFileMetaDataBean>?,tracks: freezed == tracks ? _self.tracks : tracks // ignore: cast_nullable_to_non_nullable
+as List<AudioFileMetaData>?,tracks: freezed == tracks ? _self.tracks : tracks // ignore: cast_nullable_to_non_nullable
 as List<Track>?,autoDownloadEpisodes: freezed == autoDownloadEpisodes ? _self.autoDownloadEpisodes : autoDownloadEpisodes // ignore: cast_nullable_to_non_nullable
 as bool?,autoDownloadSchedule: freezed == autoDownloadSchedule ? _self.autoDownloadSchedule : autoDownloadSchedule // ignore: cast_nullable_to_non_nullable
 as String?,lastEpisodeCheck: freezed == lastEpisodeCheck ? _self.lastEpisodeCheck : lastEpisodeCheck // ignore: cast_nullable_to_non_nullable
@@ -180,7 +180,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<String>? tags, @JsonKey(name: 'episodes')  List<Episodes>? episodes, @JsonKey(name: 'chapters')  List<Chapter>? chapters, @JsonKey(name: 'audioFiles')  List<AudioFileMetaDataBean>? audioFiles, @JsonKey(name: 'tracks')  List<Track>? tracks, @JsonKey(name: 'autoDownloadEpisodes')  bool? autoDownloadEpisodes, @JsonKey(name: 'autoDownloadSchedule')  String? autoDownloadSchedule, @JsonKey(name: 'lastEpisodeCheck')  int? lastEpisodeCheck, @JsonKey(name: 'maxEpisodesToKeep')  int? maxEpisodesToKeep, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'maxNewEpisodesToDownload')  int? maxNewEpisodesToDownload, @JsonKey(name: 'size')  int? size)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<String>? tags, @JsonKey(name: 'episodes')  List<Episodes>? episodes, @JsonKey(name: 'chapters')  List<Chapter>? chapters, @JsonKey(name: 'audioFiles')  List<AudioFileMetaData>? audioFiles, @JsonKey(name: 'tracks')  List<Track>? tracks, @JsonKey(name: 'autoDownloadEpisodes')  bool? autoDownloadEpisodes, @JsonKey(name: 'autoDownloadSchedule')  String? autoDownloadSchedule, @JsonKey(name: 'lastEpisodeCheck')  int? lastEpisodeCheck, @JsonKey(name: 'maxEpisodesToKeep')  int? maxEpisodesToKeep, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'maxNewEpisodesToDownload')  int? maxNewEpisodesToDownload, @JsonKey(name: 'size')  int? size)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Media() when $default != null:
 return $default(_that.id,_that.libraryItemId,_that.metadata,_that.coverPath,_that.tags,_that.episodes,_that.chapters,_that.audioFiles,_that.tracks,_that.autoDownloadEpisodes,_that.autoDownloadSchedule,_that.lastEpisodeCheck,_that.maxEpisodesToKeep,_that.duration,_that.maxNewEpisodesToDownload,_that.size);case _:
@@ -201,7 +201,7 @@ return $default(_that.id,_that.libraryItemId,_that.metadata,_that.coverPath,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<String>? tags, @JsonKey(name: 'episodes')  List<Episodes>? episodes, @JsonKey(name: 'chapters')  List<Chapter>? chapters, @JsonKey(name: 'audioFiles')  List<AudioFileMetaDataBean>? audioFiles, @JsonKey(name: 'tracks')  List<Track>? tracks, @JsonKey(name: 'autoDownloadEpisodes')  bool? autoDownloadEpisodes, @JsonKey(name: 'autoDownloadSchedule')  String? autoDownloadSchedule, @JsonKey(name: 'lastEpisodeCheck')  int? lastEpisodeCheck, @JsonKey(name: 'maxEpisodesToKeep')  int? maxEpisodesToKeep, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'maxNewEpisodesToDownload')  int? maxNewEpisodesToDownload, @JsonKey(name: 'size')  int? size)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<String>? tags, @JsonKey(name: 'episodes')  List<Episodes>? episodes, @JsonKey(name: 'chapters')  List<Chapter>? chapters, @JsonKey(name: 'audioFiles')  List<AudioFileMetaData>? audioFiles, @JsonKey(name: 'tracks')  List<Track>? tracks, @JsonKey(name: 'autoDownloadEpisodes')  bool? autoDownloadEpisodes, @JsonKey(name: 'autoDownloadSchedule')  String? autoDownloadSchedule, @JsonKey(name: 'lastEpisodeCheck')  int? lastEpisodeCheck, @JsonKey(name: 'maxEpisodesToKeep')  int? maxEpisodesToKeep, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'maxNewEpisodesToDownload')  int? maxNewEpisodesToDownload, @JsonKey(name: 'size')  int? size)  $default,) {final _that = this;
 switch (_that) {
 case _Media():
 return $default(_that.id,_that.libraryItemId,_that.metadata,_that.coverPath,_that.tags,_that.episodes,_that.chapters,_that.audioFiles,_that.tracks,_that.autoDownloadEpisodes,_that.autoDownloadSchedule,_that.lastEpisodeCheck,_that.maxEpisodesToKeep,_that.duration,_that.maxNewEpisodesToDownload,_that.size);case _:
@@ -221,7 +221,7 @@ return $default(_that.id,_that.libraryItemId,_that.metadata,_that.coverPath,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<String>? tags, @JsonKey(name: 'episodes')  List<Episodes>? episodes, @JsonKey(name: 'chapters')  List<Chapter>? chapters, @JsonKey(name: 'audioFiles')  List<AudioFileMetaDataBean>? audioFiles, @JsonKey(name: 'tracks')  List<Track>? tracks, @JsonKey(name: 'autoDownloadEpisodes')  bool? autoDownloadEpisodes, @JsonKey(name: 'autoDownloadSchedule')  String? autoDownloadSchedule, @JsonKey(name: 'lastEpisodeCheck')  int? lastEpisodeCheck, @JsonKey(name: 'maxEpisodesToKeep')  int? maxEpisodesToKeep, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'maxNewEpisodesToDownload')  int? maxNewEpisodesToDownload, @JsonKey(name: 'size')  int? size)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  String? id, @JsonKey(name: 'libraryItemId')  String? libraryItemId, @JsonKey(name: 'metadata')  MediaMetaDataBean? metadata, @JsonKey(name: 'coverPath')  String? coverPath, @JsonKey(name: 'tags')  List<String>? tags, @JsonKey(name: 'episodes')  List<Episodes>? episodes, @JsonKey(name: 'chapters')  List<Chapter>? chapters, @JsonKey(name: 'audioFiles')  List<AudioFileMetaData>? audioFiles, @JsonKey(name: 'tracks')  List<Track>? tracks, @JsonKey(name: 'autoDownloadEpisodes')  bool? autoDownloadEpisodes, @JsonKey(name: 'autoDownloadSchedule')  String? autoDownloadSchedule, @JsonKey(name: 'lastEpisodeCheck')  int? lastEpisodeCheck, @JsonKey(name: 'maxEpisodesToKeep')  int? maxEpisodesToKeep, @JsonKey(name: 'duration')  double? duration, @JsonKey(name: 'maxNewEpisodesToDownload')  int? maxNewEpisodesToDownload, @JsonKey(name: 'size')  int? size)?  $default,) {final _that = this;
 switch (_that) {
 case _Media() when $default != null:
 return $default(_that.id,_that.libraryItemId,_that.metadata,_that.coverPath,_that.tags,_that.episodes,_that.chapters,_that.audioFiles,_that.tracks,_that.autoDownloadEpisodes,_that.autoDownloadSchedule,_that.lastEpisodeCheck,_that.maxEpisodesToKeep,_that.duration,_that.maxNewEpisodesToDownload,_that.size);case _:
@@ -236,7 +236,7 @@ return $default(_that.id,_that.libraryItemId,_that.metadata,_that.coverPath,_tha
 @JsonSerializable()
 
 class _Media implements Media {
-  const _Media({@JsonKey(name: 'id') this.id, @JsonKey(name: 'libraryItemId') this.libraryItemId, @JsonKey(name: 'metadata') this.metadata, @JsonKey(name: 'coverPath') this.coverPath, @JsonKey(name: 'tags') final  List<String>? tags, @JsonKey(name: 'episodes') final  List<Episodes>? episodes, @JsonKey(name: 'chapters') final  List<Chapter>? chapters, @JsonKey(name: 'audioFiles') final  List<AudioFileMetaDataBean>? audioFiles, @JsonKey(name: 'tracks') final  List<Track>? tracks, @JsonKey(name: 'autoDownloadEpisodes') this.autoDownloadEpisodes, @JsonKey(name: 'autoDownloadSchedule') this.autoDownloadSchedule, @JsonKey(name: 'lastEpisodeCheck') this.lastEpisodeCheck, @JsonKey(name: 'maxEpisodesToKeep') this.maxEpisodesToKeep, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'maxNewEpisodesToDownload') this.maxNewEpisodesToDownload, @JsonKey(name: 'size') this.size}): _tags = tags,_episodes = episodes,_chapters = chapters,_audioFiles = audioFiles,_tracks = tracks;
+  const _Media({@JsonKey(name: 'id') this.id, @JsonKey(name: 'libraryItemId') this.libraryItemId, @JsonKey(name: 'metadata') this.metadata, @JsonKey(name: 'coverPath') this.coverPath, @JsonKey(name: 'tags') final  List<String>? tags, @JsonKey(name: 'episodes') final  List<Episodes>? episodes, @JsonKey(name: 'chapters') final  List<Chapter>? chapters, @JsonKey(name: 'audioFiles') final  List<AudioFileMetaData>? audioFiles, @JsonKey(name: 'tracks') final  List<Track>? tracks, @JsonKey(name: 'autoDownloadEpisodes') this.autoDownloadEpisodes, @JsonKey(name: 'autoDownloadSchedule') this.autoDownloadSchedule, @JsonKey(name: 'lastEpisodeCheck') this.lastEpisodeCheck, @JsonKey(name: 'maxEpisodesToKeep') this.maxEpisodesToKeep, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'maxNewEpisodesToDownload') this.maxNewEpisodesToDownload, @JsonKey(name: 'size') this.size}): _tags = tags,_episodes = episodes,_chapters = chapters,_audioFiles = audioFiles,_tracks = tracks;
   factory _Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
 
 @override@JsonKey(name: 'id') final  String? id;
@@ -270,8 +270,8 @@ class _Media implements Media {
   return EqualUnmodifiableListView(value);
 }
 
- final  List<AudioFileMetaDataBean>? _audioFiles;
-@override@JsonKey(name: 'audioFiles') List<AudioFileMetaDataBean>? get audioFiles {
+ final  List<AudioFileMetaData>? _audioFiles;
+@override@JsonKey(name: 'audioFiles') List<AudioFileMetaData>? get audioFiles {
   final value = _audioFiles;
   if (value == null) return null;
   if (_audioFiles is EqualUnmodifiableListView) return _audioFiles;
@@ -329,7 +329,7 @@ abstract mixin class _$MediaCopyWith<$Res> implements $MediaCopyWith<$Res> {
   factory _$MediaCopyWith(_Media value, $Res Function(_Media) _then) = __$MediaCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'id') String? id,@JsonKey(name: 'libraryItemId') String? libraryItemId,@JsonKey(name: 'metadata') MediaMetaDataBean? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<String>? tags,@JsonKey(name: 'episodes') List<Episodes>? episodes,@JsonKey(name: 'chapters') List<Chapter>? chapters,@JsonKey(name: 'audioFiles') List<AudioFileMetaDataBean>? audioFiles,@JsonKey(name: 'tracks') List<Track>? tracks,@JsonKey(name: 'autoDownloadEpisodes') bool? autoDownloadEpisodes,@JsonKey(name: 'autoDownloadSchedule') String? autoDownloadSchedule,@JsonKey(name: 'lastEpisodeCheck') int? lastEpisodeCheck,@JsonKey(name: 'maxEpisodesToKeep') int? maxEpisodesToKeep,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'maxNewEpisodesToDownload') int? maxNewEpisodesToDownload,@JsonKey(name: 'size') int? size
+@JsonKey(name: 'id') String? id,@JsonKey(name: 'libraryItemId') String? libraryItemId,@JsonKey(name: 'metadata') MediaMetaDataBean? metadata,@JsonKey(name: 'coverPath') String? coverPath,@JsonKey(name: 'tags') List<String>? tags,@JsonKey(name: 'episodes') List<Episodes>? episodes,@JsonKey(name: 'chapters') List<Chapter>? chapters,@JsonKey(name: 'audioFiles') List<AudioFileMetaData>? audioFiles,@JsonKey(name: 'tracks') List<Track>? tracks,@JsonKey(name: 'autoDownloadEpisodes') bool? autoDownloadEpisodes,@JsonKey(name: 'autoDownloadSchedule') String? autoDownloadSchedule,@JsonKey(name: 'lastEpisodeCheck') int? lastEpisodeCheck,@JsonKey(name: 'maxEpisodesToKeep') int? maxEpisodesToKeep,@JsonKey(name: 'duration') double? duration,@JsonKey(name: 'maxNewEpisodesToDownload') int? maxNewEpisodesToDownload,@JsonKey(name: 'size') int? size
 });
 
 
@@ -356,7 +356,7 @@ as String?,tags: freezed == tags ? _self._tags : tags // ignore: cast_nullable_t
 as List<String>?,episodes: freezed == episodes ? _self._episodes : episodes // ignore: cast_nullable_to_non_nullable
 as List<Episodes>?,chapters: freezed == chapters ? _self._chapters : chapters // ignore: cast_nullable_to_non_nullable
 as List<Chapter>?,audioFiles: freezed == audioFiles ? _self._audioFiles : audioFiles // ignore: cast_nullable_to_non_nullable
-as List<AudioFileMetaDataBean>?,tracks: freezed == tracks ? _self._tracks : tracks // ignore: cast_nullable_to_non_nullable
+as List<AudioFileMetaData>?,tracks: freezed == tracks ? _self._tracks : tracks // ignore: cast_nullable_to_non_nullable
 as List<Track>?,autoDownloadEpisodes: freezed == autoDownloadEpisodes ? _self.autoDownloadEpisodes : autoDownloadEpisodes // ignore: cast_nullable_to_non_nullable
 as bool?,autoDownloadSchedule: freezed == autoDownloadSchedule ? _self.autoDownloadSchedule : autoDownloadSchedule // ignore: cast_nullable_to_non_nullable
 as String?,lastEpisodeCheck: freezed == lastEpisodeCheck ? _self.lastEpisodeCheck : lastEpisodeCheck // ignore: cast_nullable_to_non_nullable
