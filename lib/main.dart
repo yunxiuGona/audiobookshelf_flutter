@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Just Listen',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.white),
         fontFamily: "AlibabaPuHuiTiSC",
@@ -119,14 +119,16 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
     _player.playerStateStream.listen((state) {
       final playing = state.playing;
       final processingState = state.processingState;
-      print("是否播放: $playing");
-      print("状态: $processingState");
-      eventBus?.fire(PlayStatusEvent(state: state));
+      print("当前播放状态>>>>>  是否播放:$playing  状态:$processingState}");
+      eventBus.fire(PlayStatusEvent(state: state));
     });
-    // mediaItem.add(_item);
-    // _player.setAudioSource(AudioSource.uri(Uri.parse(_item.id)));
   }
 
+  bool isPlaying(){
+    var playing = _player.playing;
+    print("获取当前播放状态>>>>>  是否播放:$playing}");
+    return playing;
+  }
   void setMediaItem(MediaItem item) {
     mediaItem.add(item);
     _player.setAudioSource(AudioSource.uri(Uri.parse(item.id)));

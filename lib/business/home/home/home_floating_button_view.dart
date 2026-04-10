@@ -1,6 +1,8 @@
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:flutter/material.dart';
 
+import '../../../main.dart';
+
 class HomeFloatingButtonView extends StatefulWidget {
   const HomeFloatingButtonView({Key? key}) : super(key: key);
 
@@ -14,6 +16,11 @@ class _HomeFloatingButtonViewState extends State<HomeFloatingButtonView> with Wi
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    Future.delayed(Duration(milliseconds: 100),(){
+      setState(() {
+        playStatus = (audioHandler?.isPlaying()??false) ? PlayButtonState.playing : PlayButtonState.paused;
+      });
+    });
   }
   @override
   Widget build(BuildContext context) {

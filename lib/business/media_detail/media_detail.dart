@@ -165,7 +165,7 @@ class _MediaDetailState extends State<MediaDetail> {
     });
     libraryItemDetailBean = await AudiobookshelfApi().libraryItemDetail(widget.libraryid);
     mediaProgressBean = await AudiobookshelfApi().mediaProgress(widget.libraryid);
-    if(libraryItemDetailBean==null||mediaProgressBean==null){
+    if(libraryItemDetailBean==null){
       ToastUtils.showError(context, "加载失败");
     }
     setState(() {
