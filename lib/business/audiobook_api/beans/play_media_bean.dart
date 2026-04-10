@@ -4,7 +4,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'audio_file_meta_tag_bean.dart';
 import 'audio_tracks.dart';
+import 'deviceInfo.dart';
 import 'library_file.dart';
+import 'library_item.dart';
 import 'media.dart';
 
 part 'play_media_bean.freezed.dart';
@@ -41,53 +43,6 @@ abstract class PlayMediaBean with _$PlayMediaBean {
   }) = _PlayMediaBean;
 
   factory PlayMediaBean.fromJson(Map<String, Object?> json) => _$PlayMediaBeanFromJson(json);
-}
-
-@freezed
-abstract class LibraryItem with _$LibraryItem {
-  const factory LibraryItem({
-    @JsonKey(name: 'id') String? id,
-    @JsonKey(name: 'ino') String? ino,
-    @JsonKey(name: 'libraryId') String? libraryId,
-    @JsonKey(name: 'folderId') String? folderId,
-    @JsonKey(name: 'path') String? path,
-    @JsonKey(name: 'relPath') String? relPath,
-    @JsonKey(name: 'isFile') bool? isFile,
-    @JsonKey(name: 'mtimeMs') int? mtimeMs,
-    @JsonKey(name: 'ctimeMs') int? ctimeMs,
-    @JsonKey(name: 'birthtimeMs') int? birthtimeMs,
-    @JsonKey(name: 'addedAt') int? addedAt,
-    @JsonKey(name: 'updatedAt') int? updatedAt,
-    @JsonKey(name: 'lastScan') int? lastScan,
-    @JsonKey(name: 'scanVersion') String? scanVersion,
-    @JsonKey(name: 'isMissing') bool? isMissing,
-    @JsonKey(name: 'isInvalid') bool? isInvalid,
-    @JsonKey(name: 'mediaType') String? mediaType,
-    @JsonKey(name: 'media') Media? media,
-    @JsonKey(name: 'libraryFiles') List<LibraryFile>? libraryFiles,
-    @JsonKey(name: 'size') int? size,
-  }) = _LibraryItem;
-
-  factory LibraryItem.fromJson(Map<String, Object?> json) => _$LibraryItemFromJson(json);
-}
-
-
-
-
-
-
-
-
-
-@freezed
-abstract class DeviceInfo with _$DeviceInfo {
-  const factory DeviceInfo({
-    @JsonKey(name: 'ipAddress') String? ipAddress,
-    @JsonKey(name: 'clientVersion') String? clientVersion,
-    @JsonKey(name: 'serverVersion') String? serverVersion,
-  }) = _DeviceInfo;
-
-  factory DeviceInfo.fromJson(Map<String, Object?> json) => _$DeviceInfoFromJson(json);
 }
 
 
