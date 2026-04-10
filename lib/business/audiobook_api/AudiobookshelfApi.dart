@@ -93,7 +93,7 @@ class AudiobookshelfApi extends GetConnect{
     return "${C.HOST}/audiobookshelf/api/items/${mediaID}/cover";
   }
   String getMediaFileURL(String libraryid,String fileid){
-    return "${C.HOST}/audiobookshelf/api/items/${libraryid}/file/${fileid}";
+    return "${C.HOST}/audiobookshelf/api/items/${libraryid}/file/${fileid}?token=${SPUtils.getUserData()?.user?.token}";
   }
   initUserInfo(){
     if((headers==null||headers!.isEmpty) && SPUtils.getUserData()!=null){

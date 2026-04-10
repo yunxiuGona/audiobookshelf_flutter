@@ -10,9 +10,10 @@ class MediaDetailBottomView extends StatefulWidget {
   LibraryItemDetail? libraryItemDetailBean;
   MediaProgress? mediaProgress;
   bool loading;
+  bool playing;
 
   Function(PlayButtonState? state)? onPlayTap;
-  MediaDetailBottomView(this.libraryItemDetailBean, this.mediaProgress, {Key? key,this.loading=false,this.onPlayTap}) : super(key: key);
+  MediaDetailBottomView(this.libraryItemDetailBean, this.mediaProgress, {Key? key,this.loading=false,this.onPlayTap,this.playing=false}) : super(key: key);
 
   @override
   _MediaDetailBottomViewState createState() => _MediaDetailBottomViewState();
@@ -24,13 +25,19 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
   @override
   Widget build(BuildContext context) {
     String text = "";
-    if(widget.loading){
-      text = "加载中";
+    if(widget.playing){
+      text="暂停";
+      state = PlayButtonState.playing;
     }else{
-      var p = widget.mediaProgress?.progress??0.0;
+      if(widget.loading){
+        text = "加载中";
+      }else{
+        var p = widget.mediaProgress?.progress??0.0;
         text = p>0?"继续播放 ${(p*100).roundToDouble()}%":"从头播放";
+      }
+      state = widget.loading?PlayButtonState.loading:PlayButtonState.paused;
     }
-    state = widget.loading?PlayButtonState.loading:PlayButtonState.paused;
+
 
     return Container(
       height: 120,
