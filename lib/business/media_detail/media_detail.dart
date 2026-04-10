@@ -1,14 +1,14 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
-import 'package:audio_book/business/home/media_detail/media_detail_bottom_view.dart';
-import 'package:audio_book/business/home/media_detail/media_detail_header_view.dart';
 import 'package:audio_book/business/services/AudioPlayerService.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../audiobook_api/beans/library_item_detail.dart';
-import '../../audiobook_api/beans/media.dart';
+import '../audiobook_api/beans/library_item_detail.dart';
+import '../audiobook_api/beans/media.dart';
+import 'media_detail_bottom_view.dart';
 import 'media_detail_description_view.dart';
+import 'media_detail_header_view.dart';
 import 'media_detail_stats_view.dart';
 import 'media_detail_tag_view.dart';
 

@@ -1,10 +1,9 @@
 import 'package:audio_book/business/audiobook_api/beans/library_item.dart';
-import 'package:audio_book/business/home/media_detail/media_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../audiobook_api/AudiobookshelfApi.dart';
-import '../../audiobook_api/beans/library_items_bean.dart';
+import '../../media_detail/media_detail.dart';
 import '../../utils/string_utils.dart';
 
 class HomeMainMediaItemView extends StatelessWidget {

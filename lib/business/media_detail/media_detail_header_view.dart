@@ -1,8 +1,7 @@
 import 'package:audio_book/business/audiobook_api/beans/library_item_detail.dart';
-import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:flutter/material.dart';
 
-import '../../audiobook_api/AudiobookshelfApi.dart';
+import '../audiobook_api/AudiobookshelfApi.dart';
 
 class MediaDetailHeaderView extends StatelessWidget {
   LibraryItemDetail? libraryItemDetailBean;
