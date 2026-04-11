@@ -100,6 +100,26 @@ class AudiobookshelfApi extends GetConnect{
     }
   }
 
+  var lastSyncSecond = 0;
+  var lastLibraryItemID="";
+  Future syncLibraryItemPlayDuration(String libraryItemID,double duration) async{
+    initUserInfo();
+    var timeListened = 0;
+    if(lastLibraryItemID!=libraryItemID){
+      lastSyncSecond = 0;
+    }
+    if(timeListened>0){
+      var currentSecond = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+      timeListened =currentSecond  - lastSyncSecond;
+      lastSyncSecond = currentSecond;
+    }
+    var resp = await post(headers: headers,"/api/session/$libraryItemID/sync", {"currentTime":duration,"timeListened":timeListened});
+    if(resp.status.code==OK){
+      return true;
+    }else{
+      return false;
+    }
+  }
   String getMediaCoverUrl(String mediaID){
     return "${C.HOST}/audiobookshelf/api/items/${mediaID}/cover";
   }
