@@ -15,11 +15,15 @@ class _HomeFloatingButtonViewState extends State<HomeFloatingButtonView> with Wi
   @override
   void initState() {
     super.initState();
+    initPlayerStatus();
     WidgetsBinding.instance.addObserver(this);
-    Future.delayed(Duration(milliseconds: 100),(){
-      setState(() {
-        playStatus = (audioHandler?.isPlaying()??false) ? PlayButtonState.playing : PlayButtonState.paused;
-      });
+  }
+
+  initPlayerStatus(){
+    player.playerStateStream.listen((state) {
+        setState(() {
+          playStatus = state.playing?PlayButtonState.playing:PlayButtonState.paused;
+        });
     });
   }
   @override

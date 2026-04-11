@@ -6,6 +6,8 @@ import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:audio_book/main.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
+import 'dart:async';
 import '../audiobook_api/beans/library_item_detail.dart';
 import '../audiobook_api/beans/media.dart';
 import '../audiobook_api/beans/media_progress.dart';
@@ -36,11 +38,32 @@ class _MediaDetailState extends State<MediaDetail> {
 
   MediaProgress? mediaProgressBean;
   LibraryItemDetail? libraryItemDetailBean;
+  StreamSubscription? _playStatusSubscription;
 
   @override
   void initState() {
     super.initState();
     initMediaStatus();
+    _setupPlayStatusListener();
+  }
+
+  void _setupPlayStatusListener() {
+    _playStatusSubscription = eventBus.on<PlayStatusEvent>().listen((event) {
+      if (event.state.playing && mounted) {
+        setState(() {
+          if (buttonloading) {
+            playing = true;
+            buttonloading = false;
+          }
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _playStatusSubscription?.cancel();
+    super.dispose();
   }
 
   @override
@@ -107,14 +130,17 @@ class _MediaDetailState extends State<MediaDetail> {
                     onPlayTap: (status) async {
                       if (status == PlayButtonState.paused) {
                         // 播放
-                        doPlay();
+                        doPlay(mediaProgressBean?.currentTime ?? 0.0);
                       }
                       if (status == PlayButtonState.playing) {
                         //暂停
-                        audioHandler?.pause();
-                        setState(() {
-                          playing = false;
-                        });
+                        // audioHandler?.pause();
+                        player.pause();
+                        if (mounted) {
+                          setState(() {
+                            playing = false;
+                          });
+                        }
                       }
                     },
                     onChapterTap: () {
@@ -127,11 +153,11 @@ class _MediaDetailState extends State<MediaDetail> {
     );
   }
 
-  void doPlay() {
+  void doPlay(double playedDuration) async{
     setState(() {
       buttonloading = true;
     });
-    var playedDuration = mediaProgressBean?.currentTime ?? 0.0;
+    // var playedDuration = mediaProgressBean?.currentTime ?? 0.0;
     var currentIndex = getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles,playedDuration);
     var curMedia = libraryItemDetailBean?.media;
     var files = libraryItemDetailBean?.media?.audioFiles;
@@ -141,38 +167,22 @@ class _MediaDetailState extends State<MediaDetail> {
       currentIndex = 0;
       curFile = files?.elementAt(currentIndex);
     }
-    // var mp3URL = AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", curFile?.ino ?? "");
-    // var mediaItem = MediaItem(
-    //   id: mp3URL,
-    //   album: AudiobookshelfApi().getMediaCoverUrl(curMedia?.id ?? ""),
-    //   title: "${media?.metadata?.title}",
-    //   artist: curFile?.metadata?.filename ?? "",
-    //   duration: Duration(milliseconds: (curFile?.duration ?? 0.0).toInt()),
-    //   artUri: Uri.parse(mp3URL),
-    // );
     var listFiles = getRemainingAudioFiles(files,currentIndex);
-    var mediaItems = listFiles.map((e) {
-      return MediaItem(
-        id: AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", e.ino ?? ""),
-        album: AudiobookshelfApi().getMediaCoverUrl(curMedia?.id ?? ""),
-        title: "${media?.metadata?.title}",
-        artist: e.metadata?.filename ?? "",
-        duration: Duration(milliseconds: (e.duration ?? 0.0).toInt()),
-        artUri: Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", e.ino ?? "")),
-      );
-    }).toList();
-    audioHandler?.setMediaItems(mediaItems);
-    eventBus.on<PlayStatusEvent>().listen((event) {
-      if (event.state.playing) {
-        setState(() {
-          if (buttonloading) {
-            playing = true;
-            buttonloading = false;
-          }
-        });
-      }
-    });
-    audioHandler?.play();
+    var audio_source_list = listFiles.map((f)=>AudioSource.uri(
+        Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
+        tag: MediaItem(
+          id: "${media?.libraryItemId}_${f.ino}",
+          album: "${media?.metadata?.title}",
+          title: "${media?.metadata?.title}",
+          artist: f.metadata?.filename ?? "",
+          artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
+    ))).toList();
+    await player.setAudioSource(
+      ConcatenatingAudioSource(
+        children: audio_source_list,
+      ),
+    );
+    player.play();
   }
 
   void initMediaStatus() async {
@@ -221,57 +231,12 @@ class _MediaDetailState extends State<MediaDetail> {
       });
       return;
     }
-
-    // 找到对应的音频文件
-    var audioFiles = libraryItemDetailBean?.media?.audioFiles;
-    var currentIndex = 0;
-    var tmpAddDuration = 0.0;
-    for (int i = 0; i < (audioFiles?.length ?? 0); i++) {
-      var file = audioFiles?.elementAt(i);
-      tmpAddDuration = tmpAddDuration + (file?.duration ?? 0.0);
-      if (tmpAddDuration > (chapter.start ?? 0) / 1000) {
-        break;
-      } else {
-        currentIndex++;
-      }
+    var playedDuration=0.0;
+    var files = libraryItemDetailBean?.media?.audioFiles;
+    for(int i=0;i<chapterIndex;i++){
+      playedDuration=playedDuration+(files?.elementAt(i).duration ?? 0.0);
     }
-
-    var curMedia = libraryItemDetailBean?.media;
-    var curFile = audioFiles?.elementAt(currentIndex >= audioFiles.length ? (audioFiles.length - 1) : currentIndex);
-    if (curFile == null) {
-      ToastUtils.showInfo(context, "从头开始播放");
-      currentIndex = 0;
-      curFile = audioFiles?.elementAt(currentIndex);
-    }
-
-    var mp3URL = AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", curFile?.ino ?? "");
-    var mediaItem = MediaItem(
-      id: mp3URL,
-      album: AudiobookshelfApi().getMediaCoverUrl(curMedia?.id ?? ""),
-      title: "${media?.metadata?.title}",
-      artist: curFile?.metadata?.filename ?? "",
-      duration: Duration(milliseconds: (curFile?.duration ?? 0.0).toInt()),
-      artUri: Uri.parse(mp3URL),
-    );
-
-    audioHandler?.setMediaItems([mediaItem]);
-    // 设置播放位置到章节开始
-    if (chapter.start != null) {
-      audioHandler?.seek(Duration(milliseconds: chapter.start!));
-    }
-
-    eventBus.on<PlayStatusEvent>().listen((event) {
-      if (event.state.playing) {
-        setState(() {
-          if (buttonloading) {
-            playing = true;
-            buttonloading = false;
-          }
-        });
-      }
-    });
-
-    audioHandler?.play();
+    doPlay(playedDuration);
   }
 
 
