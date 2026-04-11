@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import '../../audiobook_api/beans/my_library_items.dart';
+import '../../media_detail/media_detail.dart';
 import 'home_user_history_item_view.dart';
 
 class HomeUserHistoryView extends StatefulWidget {
@@ -35,7 +38,10 @@ class _HomeUserHistoryViewState extends State<HomeUserHistoryView> {
         scrollDirection: Axis.horizontal,
         itemCount: widget._myLibrary!.libraryItems!.length,
         itemBuilder: (context, index) {
-          return HomeUserHistoryItemView(widget._myLibrary, index);
+          return HomeUserHistoryItemView(widget._myLibrary, index,onIndexTap: (index){
+            var id = widget._myLibrary?.libraryItems?.elementAt(index).id;
+            Get.to(MediaDetail(id??""));
+          },);
         },
       ),
     );

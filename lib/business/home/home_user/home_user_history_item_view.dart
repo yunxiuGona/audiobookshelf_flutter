@@ -6,7 +6,8 @@ import '../../audiobook_api/beans/my_library_items.dart';
 class HomeUserHistoryItemView extends StatefulWidget {
   MyLibraryItems? _myLibrary;
   int position;
-  HomeUserHistoryItemView(this._myLibrary,this.position,{Key? key}) : super(key: key);
+  Function(int)? onIndexTap;
+  HomeUserHistoryItemView(this._myLibrary,this.position,{Key? key,this.onIndexTap}) : super(key: key);
 
   @override
   _HomeUserHistoryItemViewState createState() => _HomeUserHistoryItemViewState();
@@ -16,7 +17,7 @@ class _HomeUserHistoryItemViewState extends State<HomeUserHistoryItemView> {
   @override
   Widget build(BuildContext context) {
     var library = widget._myLibrary!.libraryItems![widget.position];
-    return Container(
+    return InkWell(child: Container(
       width: 150,
       margin: EdgeInsets.only(right: 12),
       child: Column(
@@ -51,6 +52,10 @@ class _HomeUserHistoryItemViewState extends State<HomeUserHistoryItemView> {
           ),
         ],
       ),
-    );
+    ),onTap: (){
+      if(widget.onIndexTap!=null){
+        widget.onIndexTap!(widget.position);
+      }
+    },);
   }
 }

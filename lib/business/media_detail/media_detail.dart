@@ -141,16 +141,27 @@ class _MediaDetailState extends State<MediaDetail> {
       currentIndex = 0;
       curFile = files?.elementAt(currentIndex);
     }
-    var mp3URL = AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", curFile?.ino ?? "");
-    var mediaItem = MediaItem(
-      id: mp3URL,
-      album: AudiobookshelfApi().getMediaCoverUrl(curMedia?.id ?? ""),
-      title: "${media?.metadata?.title}",
-      artist: curFile?.metadata?.filename ?? "",
-      duration: Duration(milliseconds: (curFile?.duration ?? 0.0).toInt()),
-      artUri: Uri.parse(mp3URL),
-    );
-    audioHandler?.setMediaItems([mediaItem]);
+    // var mp3URL = AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", curFile?.ino ?? "");
+    // var mediaItem = MediaItem(
+    //   id: mp3URL,
+    //   album: AudiobookshelfApi().getMediaCoverUrl(curMedia?.id ?? ""),
+    //   title: "${media?.metadata?.title}",
+    //   artist: curFile?.metadata?.filename ?? "",
+    //   duration: Duration(milliseconds: (curFile?.duration ?? 0.0).toInt()),
+    //   artUri: Uri.parse(mp3URL),
+    // );
+    var listFiles = getRemainingAudioFiles(files,currentIndex);
+    var mediaItems = listFiles.map((e) {
+      return MediaItem(
+        id: AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", e.ino ?? ""),
+        album: AudiobookshelfApi().getMediaCoverUrl(curMedia?.id ?? ""),
+        title: "${media?.metadata?.title}",
+        artist: e.metadata?.filename ?? "",
+        duration: Duration(milliseconds: (e.duration ?? 0.0).toInt()),
+        artUri: Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", e.ino ?? "")),
+      );
+    }).toList();
+    audioHandler?.setMediaItems(mediaItems);
     eventBus.on<PlayStatusEvent>().listen((event) {
       if (event.state.playing) {
         setState(() {
@@ -187,7 +198,7 @@ class _MediaDetailState extends State<MediaDetail> {
           height: MediaQuery.of(context).size.height * 0.7,
           child: MediaChapterList(
             chapters: libraryItemDetailBean?.media?.chapters,
-            indexProcessing: getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles, mediaProgressBean?.duration),
+            indexProcessing: getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles, mediaProgressBean?.currentTime),
             onChapterTap: (index) {
               Navigator.pop(context);
               _playChapter(index);
@@ -264,20 +275,26 @@ class _MediaDetailState extends State<MediaDetail> {
   }
 
 
-  int getCurrentFileIndexInProgress(List<AudioFile>? audiofileList,double? duration){
-    if(audiofileList==null||duration==null)
+  int getCurrentFileIndexInProgress(List<AudioFile>? audiofileList,double? currentTime){
+    if(audiofileList==null||currentTime==null)
       return 0;
     var currentIndex = 0;
     var tmpAddDuration = 0.0;
     for (int i = 0; i < (audiofileList.length ?? 0); i++) {
       var file = audiofileList.elementAt(i);
       tmpAddDuration = tmpAddDuration + (file.duration ?? 0.0);
-      if (tmpAddDuration > duration) {
+      if (tmpAddDuration > currentTime) {
         break;
       } else {
         currentIndex++;
       }
     }
     return currentIndex;
+  }
+
+  List<AudioFile> getRemainingAudioFiles(List<AudioFile>? audiofileList,int currentIndex){
+    if(audiofileList==null||currentIndex<0||currentIndex>=audiofileList.length)
+      return [];
+    return audiofileList.sublist(currentIndex);
   }
 }

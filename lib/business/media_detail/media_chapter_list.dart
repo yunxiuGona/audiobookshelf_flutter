@@ -19,6 +19,30 @@ class _MediaChapterListState extends State<MediaChapterList> {
   final ScrollController _scrollController = ScrollController();
 
   @override
+  void initState() {
+    super.initState();
+    // 初始滚动到indexProcessing位置
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToIndex(widget.indexProcessing ?? 0);
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant MediaChapterList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // 当indexProcessing变化时滚动到新位置
+    if (oldWidget.indexProcessing != widget.indexProcessing) {
+      _scrollToIndex(widget.indexProcessing ?? 0);
+    }
+  }
+
+  void _scrollToIndex(int index) {
+    if (index >= 0 && index < (widget.chapters?.length ?? 0)) {
+      _scrollController.jumpTo(index * 56.0);
+    }
+  }
+
+  @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
@@ -51,7 +75,12 @@ class _MediaChapterListState extends State<MediaChapterList> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                      Text(chapter.title ?? '未知章节'),
+                      Text(
+                        chapter.title ?? '未知章节',
+                        style: TextStyle(
+                          color: _getTextColor(index),
+                        ),
+                      ),
                     ],),),onTap: (){
                           if (widget.onChapterTap != null) {
                             widget.onChapterTap!(index);
@@ -78,6 +107,17 @@ class _MediaChapterListState extends State<MediaChapterList> {
         ],
       ),
     );
+  }
+
+  Color _getTextColor(int index) {
+    int currentIndex = widget.indexProcessing ?? 0;
+    if (index < currentIndex) {
+      return Colors.grey;
+    } else if (index == currentIndex) {
+      return Colors.orange;
+    } else {
+      return Colors.black;
+    }
   }
 
   String _formatDuration(int milliseconds) {
