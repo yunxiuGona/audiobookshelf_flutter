@@ -129,9 +129,11 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
     print("获取当前播放状态>>>>>  是否播放:$playing}");
     return playing;
   }
-  void setMediaItem(MediaItem item) {
-    mediaItem.add(item);
-    _player.setAudioSource(AudioSource.uri(Uri.parse(item.id)));
+  void setMediaItems(List<MediaItem> items) {
+    for(int i=0;i<items.length;i++){
+      mediaItem.add(items[i]);
+    }
+    _player.setAudioSource(AudioSource.uri(Uri.parse(items.elementAt(0).id)));
   }
 
   // In this simple example, we handle only 4 actions: play, pause, seek and
