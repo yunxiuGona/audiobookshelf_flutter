@@ -41,17 +41,19 @@ class _MediaChapterListState extends State<MediaChapterList> {
                   itemExtent: 56.0, // 固定项高，便于计算滚动位置
                   itemBuilder: (context, index) {
                     var chapter = widget.chapters![index];
-                    return ListTile(
-                      title: Text(chapter.title ?? '未知章节'),
-                      subtitle: chapter.start != null
-                          ? Text('${_formatDuration(chapter.start!)}')
-                          : null,
-                      onTap: () {
-                        if (widget.onChapterTap != null) {
-                          widget.onChapterTap!(index);
-                        }
-                      },
-                    );
+                    return InkWell(child: Container(
+                      padding: EdgeInsets.only(left: 5,top: 5,bottom: 5,right: 35),
+                      child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                      Text(chapter.title ?? '未知章节'),
+                    ],),),onTap: (){
+                          if (widget.onChapterTap != null) {
+                            widget.onChapterTap!(index);
+                          }
+                    },)
+                    ;
                   },
                 ),
                 if ((widget.chapters?.length ?? 0) > 0)
@@ -91,11 +93,27 @@ class _MediaChapterListState extends State<MediaChapterList> {
 class ChapterIndexBar extends StatelessWidget {
   final int itemCount;
   final Function(int) onIndexSelected;
+  static const int _displayCount = 20; // 固定显示20个数字
 
   const ChapterIndexBar({Key? key, required this.itemCount, required this.onIndexSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // 计算要显示的索引点
+    List<int> displayIndices = [];
+    if (itemCount <= _displayCount) {
+      // 如果章节数小于等于20，显示所有章节
+      for (int i = 0; i < itemCount; i++) {
+        displayIndices.add(i);
+      }
+    } else {
+      // 否则，平均分布20个点
+      for (int i = 0; i < _displayCount; i++) {
+        int index = (i * (itemCount - 1) / (_displayCount - 1)).round();
+        displayIndices.add(index);
+      }
+    }
+
     return GestureDetector(
       onVerticalDragUpdate: (details) {
         // 根据拖动位置计算章节索引
@@ -124,10 +142,10 @@ class ChapterIndexBar extends StatelessWidget {
         color: Colors.transparent,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: List.generate(itemCount, (index) => Text(
+          children: displayIndices.map((index) => Text(
             '${index + 1}',
             style: TextStyle(fontSize: 12, color: Colors.grey),
-          )),
+          )).toList(),
         ),
       ),
     );
