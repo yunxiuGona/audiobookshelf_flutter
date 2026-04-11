@@ -1,4 +1,5 @@
 import 'package:audio_book/business/widgets/animated_play_button.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../main.dart';
@@ -12,6 +13,7 @@ class HomeFloatingButtonView extends StatefulWidget {
 
 class _HomeFloatingButtonViewState extends State<HomeFloatingButtonView> with WidgetsBindingObserver{
   PlayButtonState playStatus = PlayButtonState.paused;
+  Widget? coverArt;
   @override
   void initState() {
     super.initState();
@@ -25,10 +27,33 @@ class _HomeFloatingButtonViewState extends State<HomeFloatingButtonView> with Wi
           playStatus = state.playing?PlayButtonState.playing:PlayButtonState.paused;
         });
     });
+
+    player.currentIndexStream.listen((index) {
+      if (index != null && index < player.sequence.length) {
+        final audioSource = player.sequence[index];
+        var mediaItem = audioSource.tag as MediaItem;
+        if (mediaItem.artUri != null) {
+          setState(() {
+            coverArt = Image.network(mediaItem.artUri!.toString());
+          });
+        } else {
+          setState(() {
+            coverArt = null;
+          });
+        }
+      } else {
+        setState(() {
+          coverArt = null;
+        });
+      }
+    });
   }
   @override
   Widget build(BuildContext context) {
-    return AnimatedPlayButton(state: playStatus);
+    return AnimatedPlayButton(
+      state: playStatus,
+      coverArt: coverArt,
+    );
   }
 
   @override

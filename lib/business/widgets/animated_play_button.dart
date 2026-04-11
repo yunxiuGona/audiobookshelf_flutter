@@ -10,6 +10,7 @@ class AnimatedPlayButton extends StatefulWidget {
   final Color color;
   final PlayButtonState state;
   final VoidCallback? onTap;
+  final Widget? coverArt;
 
   const AnimatedPlayButton({
     Key? key,
@@ -17,6 +18,7 @@ class AnimatedPlayButton extends StatefulWidget {
     this.color = Colors.orange,
     required this.state,
     this.onTap,
+    this.coverArt,
   }) : super(key: key);
 
   @override
@@ -25,51 +27,70 @@ class AnimatedPlayButton extends StatefulWidget {
 
 class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
     with SingleTickerProviderStateMixin {
-  late AnimationController _rotationController;
+  late AnimationController _coverRotationController;
   double _scale = 1.0;
 
   @override
   void initState() {
     super.initState();
 
-    _rotationController = AnimationController(
+    _coverRotationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 10),
+      lowerBound: 0,
+      upperBound: 1,
     );
 
-    _updateLoadingState();
+    _updateCoverRotationState();
   }
 
   @override
   void didUpdateWidget(covariant AnimatedPlayButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _updateLoadingState();
+    _updateCoverRotationState();
   }
 
-  void _updateLoadingState() {
-    if (widget.state == PlayButtonState.loading) {
-      _rotationController.repeat();
+
+  void _updateCoverRotationState() {
+    if (widget.state == PlayButtonState.playing && widget.coverArt != null) {
+      _coverRotationController.repeat();
     } else {
-      _rotationController.stop();
-      _rotationController.reset();
+      _coverRotationController.stop();
     }
   }
 
   @override
   void dispose() {
-    _rotationController.dispose();
+    _coverRotationController.dispose();
     super.dispose();
   }
 
   Widget _buildIcon() {
     switch (widget.state) {
       case PlayButtonState.playing:
-        return const Icon(Icons.pause, key: ValueKey('pause'));
+        if (widget.coverArt != null) {
+          return RotationTransition(
+            turns: _coverRotationController,
+            child: Container(
+              width: widget.size * 0.8,
+              height: widget.size * 0.8,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: widget.coverArt is Image ? (widget.coverArt as Image).image : NetworkImage(''),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          );
+        } else {
+          return const Icon(Icons.pause, key: ValueKey('pause'));
+        }
       case PlayButtonState.paused:
         return const Icon(Icons.play_arrow, key: ValueKey('play'));
       case PlayButtonState.loading:
         return RotationTransition(
-          turns: _rotationController,
+          turns: _coverRotationController,
           child: const Icon(Icons.sync, key: ValueKey('loading')),
         );
     }
