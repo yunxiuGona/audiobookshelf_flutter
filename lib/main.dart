@@ -122,18 +122,44 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
       print("当前播放状态>>>>>  是否播放:$playing  状态:$processingState}");
       eventBus.fire(PlayStatusEvent(state: state));
     });
+
+    _player.currentIndexStream.listen((index) {
+      if (index != null && queue.value.isNotEmpty) {
+        mediaItem.add(queue.value[index]);
+      }
+    });
+
   }
+
+  @override
+  Future<void> skipToNext() => _player.seekToNext();
+
+  @override
+  Future<void> skipToPrevious() => _player.seekToPrevious();
 
   bool isPlaying(){
     var playing = _player.playing;
     print("获取当前播放状态>>>>>  是否播放:$playing}");
     return playing;
   }
-  void setMediaItems(List<MediaItem> items) {
-    for(int i=0;i<items.length;i++){
-      mediaItem.add(items[i]);
-    }
-    _player.setAudioSource(AudioSource.uri(Uri.parse(items.elementAt(0).id)));
+  void setMediaItems(List<MediaItem> items) async{
+    //清空
+    queue.add([]);
+    // 1. 设置 queue（给系统用）
+    queue.add(items);
+
+    // 2. 构建播放列表
+    final playlist = ConcatenatingAudioSource(
+      children: items.map((item) {
+        return AudioSource.uri(
+          Uri.parse(item.id),
+          tag: item, // 👈 关键：绑定 MediaItem
+        );
+      }).toList(),
+    );
+
+    // 3. 设置播放源
+    await _player.setAudioSource(playlist);
   }
 
   // In this simple example, we handle only 4 actions: play, pause, seek and
@@ -176,6 +202,7 @@ class AudioPlayerHandler extends BaseAudioHandler with SeekHandler {
       }[_player.processingState]!,
       playing: _player.playing,
       updatePosition: _player.position,
+      updateTime: DateTime.now(),
       bufferedPosition: _player.bufferedPosition,
       speed: _player.speed,
       queueIndex: event.currentIndex,
