@@ -28,7 +28,7 @@ class _MediaChapterListState extends State<MediaChapterList> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            '章节列表',
+            '所有章节',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
