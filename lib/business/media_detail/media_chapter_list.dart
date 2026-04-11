@@ -1,11 +1,15 @@
 import 'package:audio_book/business/audiobook_api/beans/chapter.dart';
 import 'package:flutter/material.dart';
 
+import '../audiobook_api/beans/media_progress.dart';
+
 class MediaChapterList extends StatefulWidget {
   final List<Chapter>? chapters;
   final Function(int)? onChapterTap;
+  final int? indexProcessing;
 
-  const MediaChapterList({Key? key, this.chapters, this.onChapterTap}) : super(key: key);
+
+  const MediaChapterList({Key? key, this.chapters, this.onChapterTap,this.indexProcessing=0}) : super(key: key);
 
   @override
   _MediaChapterListState createState() => _MediaChapterListState();

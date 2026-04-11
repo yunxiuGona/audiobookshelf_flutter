@@ -1,4 +1,5 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
+import 'package:audio_book/business/audiobook_api/beans/audio_file.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
@@ -131,17 +132,7 @@ class _MediaDetailState extends State<MediaDetail> {
       buttonloading = true;
     });
     var playedDuration = mediaProgressBean?.currentTime ?? 0.0;
-    var currentIndex = 0;
-    var tmpAddDuration = 0.0;
-    for (int i = 0; i < (libraryItemDetailBean?.media?.audioFiles?.length ?? 0); i++) {
-      var file = libraryItemDetailBean?.media?.audioFiles?.elementAt(i);
-      tmpAddDuration = tmpAddDuration + (file?.duration ?? 0.0);
-      if (tmpAddDuration > playedDuration) {
-        break;
-      } else {
-        currentIndex++;
-      }
-    }
+    var currentIndex = getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles,playedDuration);
     var curMedia = libraryItemDetailBean?.media;
     var files = libraryItemDetailBean?.media?.audioFiles;
     var curFile = files?.elementAt(currentIndex >= files.length ? (files.length - 1) : currentIndex);
@@ -196,6 +187,7 @@ class _MediaDetailState extends State<MediaDetail> {
           height: MediaQuery.of(context).size.height * 0.7,
           child: MediaChapterList(
             chapters: libraryItemDetailBean?.media?.chapters,
+            indexProcessing: getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles, mediaProgressBean?.duration),
             onChapterTap: (index) {
               Navigator.pop(context);
               _playChapter(index);
@@ -269,5 +261,23 @@ class _MediaDetailState extends State<MediaDetail> {
     });
 
     audioHandler?.play();
+  }
+
+
+  int getCurrentFileIndexInProgress(List<AudioFile>? audiofileList,double? duration){
+    if(audiofileList==null||duration==null)
+      return 0;
+    var currentIndex = 0;
+    var tmpAddDuration = 0.0;
+    for (int i = 0; i < (audiofileList.length ?? 0); i++) {
+      var file = audiofileList.elementAt(i);
+      tmpAddDuration = tmpAddDuration + (file.duration ?? 0.0);
+      if (tmpAddDuration > duration) {
+        break;
+      } else {
+        currentIndex++;
+      }
+    }
+    return currentIndex;
   }
 }
