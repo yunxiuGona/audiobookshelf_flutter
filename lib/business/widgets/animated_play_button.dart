@@ -1,3 +1,5 @@
+import 'package:audio_book/main.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 enum PlayButtonState {
   playing,
@@ -10,7 +12,6 @@ class AnimatedPlayButton extends StatefulWidget {
   final Color color;
   final PlayButtonState state;
   final VoidCallback? onTap;
-  final Widget? coverArt;
 
   const AnimatedPlayButton({
     Key? key,
@@ -18,7 +19,6 @@ class AnimatedPlayButton extends StatefulWidget {
     this.color = Colors.orange,
     required this.state,
     this.onTap,
-    this.coverArt,
   }) : super(key: key);
 
   @override
@@ -30,6 +30,7 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
   late AnimationController _coverRotationController;
   double _scale = 1.0;
 
+  Widget? coverArt=null;
   @override
   void initState() {
     super.initState();
@@ -42,6 +43,26 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
     );
 
     _updateCoverRotationState();
+
+    player.currentIndexStream.listen((index) {
+      if (index != null && index < player.sequence.length) {
+        final audioSource = player.sequence[index];
+        var mediaItem = audioSource.tag as MediaItem;
+        if (mediaItem.artUri != null) {
+          setState(() {
+            coverArt = Image.network(mediaItem.artUri!.toString());
+          });
+        } else {
+          setState(() {
+            coverArt = null;
+          });
+        }
+      } else {
+        setState(() {
+          coverArt = null;
+        });
+      }
+    });
   }
 
   @override
@@ -52,7 +73,7 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
 
 
   void _updateCoverRotationState() {
-    if (widget.state == PlayButtonState.playing && widget.coverArt != null) {
+    if (widget.state == PlayButtonState.playing && coverArt != null) {
       _coverRotationController.repeat();
     } else {
       _coverRotationController.stop();
@@ -68,7 +89,7 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
   Widget _buildIcon() {
     switch (widget.state) {
       case PlayButtonState.playing:
-        if (widget.coverArt != null) {
+        if (coverArt != null) {
           return RotationTransition(
             turns: _coverRotationController,
             child: Container(
@@ -77,7 +98,7 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: widget.coverArt is Image ? (widget.coverArt as Image).image : NetworkImage(''),
+                  image: coverArt is Image ? (coverArt as Image).image : NetworkImage(''),
                   fit: BoxFit.cover,
                 ),
               ),

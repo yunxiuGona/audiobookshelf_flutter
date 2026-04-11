@@ -3,6 +3,7 @@ import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
 import '../audiobook_api/beans/library_item_detail.dart';
 
 class MediaDetailBottomView extends StatefulWidget {
@@ -21,22 +22,26 @@ class MediaDetailBottomView extends StatefulWidget {
 }
 
 class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
-  PlayButtonState state = PlayButtonState.paused;
+  PlayButtonState playStatus = PlayButtonState.paused;
 
+  @override
+  void initState() {
+    super.initState();
+    initPlayerStatus();
+  }
+  initPlayerStatus(){
+    player.playerStateStream.listen((state) {
+      setState(() {
+        playStatus = state.playing?PlayButtonState.playing:PlayButtonState.paused;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     String text = "";
-    if (widget.playing) {
-      text = "暂停";
-      state = PlayButtonState.playing;
-    } else {
-      if (widget.loading) {
-        text = "加载中";
-      } else {
-        var p = widget.mediaProgress?.progress ?? 0.0;
-        text = p > 0 ? "继续播放 ${(p * 100).roundToDouble()}%" : "从头播放";
-      }
-      state = widget.loading ? PlayButtonState.loading : PlayButtonState.paused;
+    if(playStatus!= PlayButtonState.playing){
+      var p = widget.mediaProgress?.progress ?? 0.0;
+      text = p > 0 ? "继续播放 ${(p * 100).roundToDouble()}%" : "从头播放";
     }
 
     return Container(
@@ -61,13 +66,13 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AnimatedPlayButton(
-                      state: state,
+                      state: playStatus,
                       onTap: () {
                         if (widget.loading) {
                           return;
                         }
                         if (widget.onPlayTap != null) {
-                          widget.onPlayTap!(state);
+                          widget.onPlayTap!(playStatus);
                         }
                       },
                     ),
