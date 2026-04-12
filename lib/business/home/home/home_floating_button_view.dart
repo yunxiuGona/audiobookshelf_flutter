@@ -31,6 +31,13 @@ class _HomeFloatingButtonViewState extends State<HomeFloatingButtonView> with Wi
   Widget build(BuildContext context) {
     return AnimatedPlayButton(
       state: playStatus,
+      onTap: (){
+        if(playStatus == PlayButtonState.playing){
+          player.pause();
+        }else{
+          player.play();
+        }
+      },
     );
   }
 
