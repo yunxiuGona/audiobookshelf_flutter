@@ -23,7 +23,7 @@ class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
       listString.add(e.name ?? "");
     });
     return Container(
-      height: 40,
+      height: 50,
       color: Colors.white,
       child: DropdownButtonHideUnderline(
         child: DropdownButton2<String>(

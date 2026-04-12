@@ -58,28 +58,43 @@ class _HomeMainState extends State<HomeMain> {
             enablePullDown: true,
             header: WaterDropHeader(),
             controller: _refreshController,
-            child: ListView.builder(
-              itemBuilder: (_, index) {
-                if (index == 0) {
-                  return HomeMainLibraryFilterView(
-                    allLibraries,
-                    valueListenable: valueListenable,
-                    onChanged: (value) {
-                      valueListenable.value = value;
-                      SPUtils.saveSelectedLibrary(findLibraryFromData(value));
-                      _refreshController.requestRefresh();
-                    },
-                  );
-                } else {
-                  var listIndex = index--;
-                  var length = libraryItems?.results?.length ?? 0;
-                  if (listIndex < length) {
-                    var result = libraryItems?.results?.elementAt(listIndex);
-                    return HomeMainMediaItemView(result);
-                  }
-                }
-                return null;
-              },
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Container(
+                    width: double.infinity,
+                    child: HomeMainLibraryFilterView(
+                      allLibraries,
+                      valueListenable: valueListenable,
+                      onChanged: (value) {
+                        valueListenable.value = value;
+                        SPUtils.saveSelectedLibrary(findLibraryFromData(value));
+                        _refreshController.requestRefresh();
+                      },
+                    ),
+                  ),
+                ),
+                SliverGrid(
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: MediaQuery.of(context).size.width / 2, // 每行显示2个卡片
+                    mainAxisExtent: 300, // 固定卡片高度为200px
+                    crossAxisSpacing: 4,
+                    mainAxisSpacing: 4,
+                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    var length = libraryItems?.results?.length ?? 0;
+                    if (index < length) {
+                      var result = libraryItems?.results?.elementAt(index);
+                      return Card(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        elevation: 4,
+                        child: HomeMainMediaItemView(result),
+                      );
+                    }
+                    return null;
+                  }, childCount: libraryItems?.results?.length ?? 0),
+                ),
+              ],
             ),
             onRefresh: () async {
               await netLoadLibraries();
