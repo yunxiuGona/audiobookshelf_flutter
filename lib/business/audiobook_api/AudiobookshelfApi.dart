@@ -102,14 +102,19 @@ class AudiobookshelfApi extends GetConnect{
 
   var lastSyncSecond = 0;
   var lastLibraryItemID="";
-  Future syncLibraryItemPlayDuration(String libraryItemID,double duration) async{
+  Future syncLibraryItemPlayDuration(String libraryItemID,int duration) async{
     initUserInfo();
     var timeListened = 0;
     if(lastLibraryItemID!=libraryItemID){
       lastSyncSecond = 0;
     }
+    var currentSecond = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    //每隔一分钟传一次
+    if(lastSyncSecond!=0&&(currentSecond-lastSyncSecond)<=10*1){
+      return;
+    }
     if(timeListened>0){
-      var currentSecond = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+
       timeListened =currentSecond  - lastSyncSecond;
       lastSyncSecond = currentSecond;
     }

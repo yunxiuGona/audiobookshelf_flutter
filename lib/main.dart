@@ -1,3 +1,4 @@
+import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/events/play_status_event.dart';
 import 'package:audio_book/business/login/login.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
@@ -14,14 +15,23 @@ import 'business/home/home/home.dart';
 
 EventBus eventBus = EventBus();
 final player = AudioPlayer();
+
 void main() async {
   eventBus = EventBus();
-  await JustAudioBackground.init(
-    androidNotificationChannelId: 'com.justlisten.listener',
-    androidNotificationChannelName: 'Audio playback',
-    androidNotificationOngoing: true,
-  );
-
+  await JustAudioBackground.init(androidNotificationChannelId: 'com.justlisten.listener', androidNotificationChannelName: 'Audio playback', androidNotificationOngoing: true);
+  /**
+   * 监听播放进度
+   */
+  player.positionStream.listen((position) {
+    try {
+      final current = player.sequenceState.currentSource;
+      final mediaItem = current?.tag as MediaItem?;
+      var libraryid = mediaItem?.id.split("_")[0];
+      AudiobookshelfApi().syncLibraryItemPlayDuration(libraryid!, position.inSeconds.toInt());
+    } catch (e) {
+      print(e);
+    }
+  });
   SPUtils.prefs = await SharedPreferences.getInstance();
   CacheUtils.prefs = await SharedPreferences.getInstance();
   SPUtils.getUserData();
@@ -45,6 +55,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 //
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -67,33 +78,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .inversePrimary,
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: Text(widget.title)),
       body: Center(
         child: Column(
           mainAxisAlignment: .center,
           children: [
             const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headlineMedium,
-            ),
+            Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: FloatingActionButton(onPressed: _incrementCounter, tooltip: 'Increment', child: const Icon(Icons.add)),
     );
   }
 }

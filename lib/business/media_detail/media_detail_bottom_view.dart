@@ -45,16 +45,22 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
     }
 
     return Container(
-      height: 120,
+      height: 180,
+      padding: EdgeInsets.only(top: 20),
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [
-            Colors.white,
-            Colors.white10, // 逐渐透明
-          ],
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            spreadRadius: 0,
+            blurRadius: 10,
+            offset: Offset(0, -2),
+          ),
+        ],
       ),
       child: Stack(
         children: [
