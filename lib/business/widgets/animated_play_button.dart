@@ -75,6 +75,8 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
   void _updateCoverRotationState() {
     if (widget.state == PlayButtonState.playing && coverArt != null) {
       _coverRotationController.repeat();
+    } else if (widget.state == PlayButtonState.loading) {
+      _coverRotationController.repeat();
     } else {
       _coverRotationController.stop();
     }

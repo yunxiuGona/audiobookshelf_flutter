@@ -80,9 +80,9 @@ class AudiobookshelfApi extends GetConnect{
     }
   }
 
-  Future<PlayMedia?> playMedia(String id) async{
+  Future<PlayMedia?> playMedia(String libraryItemID) async{
     initUserInfo();
-    var resp = await post(headers: headers,"/api/items/${id}/play", {});
+    var resp = await post(headers: headers,"/audiobookshelf/api/items/${libraryItemID}/play", {});
     if(resp.status.code==OK){
       return PlayMedia.fromJson(resp.body);
     }else{
@@ -101,11 +101,11 @@ class AudiobookshelfApi extends GetConnect{
   }
 
   var lastSyncSecond = 0;
-  var lastLibraryItemID="";
-  Future syncLibraryItemPlayDuration(String libraryItemID,int duration) async{
+  var playItemID="";
+  Future syncLibraryItemPlayDuration(String playItemID,int duration) async{
     initUserInfo();
     var timeListened = 0;
-    if(lastLibraryItemID!=libraryItemID){
+    if(playItemID!=playItemID){
       lastSyncSecond = 0;
     }
     var currentSecond = DateTime.now().millisecondsSinceEpoch ~/ 1000;
@@ -118,7 +118,7 @@ class AudiobookshelfApi extends GetConnect{
       timeListened =currentSecond  - lastSyncSecond;
       lastSyncSecond = currentSecond;
     }
-    var resp = await post(headers: headers,"/api/session/$libraryItemID/sync", {"currentTime":duration,"timeListened":timeListened});
+    var resp = await post(headers: headers,"/audiobookshelf/api/session/$playItemID/sync", {"currentTime":duration,"timeListened":timeListened});
     if(resp.status.code==OK){
       return true;
     }else{

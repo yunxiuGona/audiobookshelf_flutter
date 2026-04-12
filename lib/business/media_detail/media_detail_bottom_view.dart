@@ -39,9 +39,13 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
   @override
   Widget build(BuildContext context) {
     String text = "";
-    if(playStatus!= PlayButtonState.playing){
-      var p = widget.mediaProgress?.progress ?? 0.0;
-      text = p > 0 ? "继续播放 ${(p * 100).roundToDouble()}%" : "从头播放";
+    if(widget.loading){
+      playStatus=PlayButtonState.loading;
+    }else{
+      if(playStatus!= PlayButtonState.playing){
+        var p = widget.mediaProgress?.progress ?? 0.0;
+        text = p > 0 ? "继续播放 ${(p * 100).roundToDouble()}%" : "从头播放";
+      }
     }
 
     return Container(

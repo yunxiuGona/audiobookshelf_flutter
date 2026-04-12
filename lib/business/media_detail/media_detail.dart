@@ -167,11 +167,23 @@ class _MediaDetailState extends State<MediaDetail> {
       currentIndex = 0;
       curFile = files?.elementAt(currentIndex);
     }
+
+    setState(() {
+      buttonloading=true;
+    });
+    var playMedia = await AudiobookshelfApi().playMedia(media?.libraryItemId??"");
+    setState(() {
+      buttonloading=false;
+    });
+    if(playMedia==null){
+      ToastUtils.showError(context, "播放失败");
+      return;
+    }
     var listFiles = getRemainingAudioFiles(files,currentIndex);
     var audio_source_list = listFiles.map((f)=>AudioSource.uri(
         Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
         tag: MediaItem(
-          id: "${media?.libraryItemId}_${f.ino}",
+          id: "${media?.libraryItemId}_${playMedia.id}_${f.ino}",
           album: "${media?.metadata?.title}",
           title: "${media?.metadata?.title}",
           artist: f.metadata?.filename ?? "",

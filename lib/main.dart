@@ -26,8 +26,8 @@ void main() async {
     try {
       final current = player.sequenceState.currentSource;
       final mediaItem = current?.tag as MediaItem?;
-      var libraryid = mediaItem?.id.split("_")[0];
-      AudiobookshelfApi().syncLibraryItemPlayDuration(libraryid!, position.inSeconds.toInt());
+      var playItemID = mediaItem?.id.split("_")[1];
+      AudiobookshelfApi().syncLibraryItemPlayDuration((playItemID??""), position.inSeconds.toInt());
     } catch (e) {
       print(e);
     }
