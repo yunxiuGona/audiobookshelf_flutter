@@ -35,20 +35,24 @@ class _HomeUserHistoryItemViewState extends State<HomeUserHistoryItemView> {
                 height: ITEM_HEIGHT,
                 width: ITEM_WIDTH,
                 decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
-                child: ClipRect(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8),
+                  ),
                   child: Image.network(AudiobookshelfApi().getMediaCoverUrl(library.id ?? ""), fit: BoxFit.cover),
                 ),
               ),
               SizedBox(height: 16),
               // 标题
               Container(
+                padding: EdgeInsets.only(left: 5, right: 5),
                 child: Text(
                   library.media?.metadata?.title ?? "未知",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                padding: EdgeInsets.only(left: 5, right: 5),
               ),
             ],
           ),
