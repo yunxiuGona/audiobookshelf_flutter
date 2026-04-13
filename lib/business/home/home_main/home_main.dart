@@ -129,6 +129,7 @@ class _HomeMainState extends State<HomeMain> {
     }
     setState(() {
       allLibraries = _resp_allLibraries;
+      CacheUtils.saveLibraiesCache(allLibraries);
     });
     var libraryLastSelected = SPUtils.getSelectedLibrary();
     var libraeySelected = allLibraries?.libraries?.first;
@@ -145,8 +146,8 @@ class _HomeMainState extends State<HomeMain> {
         return;
       } else {
         setState(() {
-          CacheUtils.saveMediasCache(libraryItems);
           libraryItems = _resp_libraryItems;
+          CacheUtils.saveMediasCache(libraryItems);
         });
       }
     }

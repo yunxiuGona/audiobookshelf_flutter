@@ -71,8 +71,8 @@ class _MediaChapterListState extends State<MediaChapterList> {
                     var chapter = widget.chapters![index];
                     return InkWell(child: Container(
                       height: ITEM_HEIGHT,
-                      padding: EdgeInsets.only(left: 5,right: 35),
                       alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.only(left: 5,right: 35),
                       child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,

@@ -184,14 +184,10 @@ class _MediaDetailState extends State<MediaDetail> {
     var audio_source_list = listFiles.map((f)=>AudioSource.uri(
         Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
         tag: MediaItem(
-          id: "${media?.libraryItemId}_${f.ino}", //ID:播放项（Library）ID_文件ino
+          id: "${media?.libraryItemId}_${playMedia.id}_${getAccumulatedDurationBeforeIno(f.ino ?? "")}${f.ino}",
           album: "${media?.metadata?.title}",
           title: "${media?.metadata?.title}",
           artist: f.metadata?.filename ?? "",
-          extras: {
-            "chapterStartDuration":media?.chapters?[currentIndex].start??0.0,//当前章节开始时间
-            "playItemID":playMedia.id,//当前播放项ID
-          },
           artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
     ))).toList();
     await player.setAudioSource(
@@ -284,5 +280,26 @@ class _MediaDetailState extends State<MediaDetail> {
     if(audiofileList==null||currentIndex<0||currentIndex>=audiofileList.length)
       return [];
     return audiofileList.sublist(currentIndex);
+  }
+
+  double getAccumulatedDurationBeforeIno(String ino) {
+    if (libraryItemDetailBean?.media?.audioFiles == null) {
+      return 0.0;
+    }
+    
+    double accumulatedDuration = 0.0;
+    List<AudioFile> audioFiles = libraryItemDetailBean!.media!.audioFiles!;
+    
+    for (int i = 0; i < audioFiles.length; i++) {
+      AudioFile file = audioFiles[i];
+      if (file.ino == ino) {
+        // 找到对应ino的元素，停止累加并返回
+        break;
+      }
+      // 累加当前元素的duration
+      accumulatedDuration += file.duration ?? 0.0;
+    }
+    
+    return accumulatedDuration;
   }
 }

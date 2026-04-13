@@ -24,8 +24,8 @@ class CacheUtils{
     }
   }
 
-  static void saveLibraiesCache(LibraryItemsBean? libraryItemsBean){
-    prefs?.setString("cache_libraies", jsonEncode(libraryItemsBean));
+  static void saveLibraiesCache(AllLibrary? allLibrary){
+    prefs?.setString("cache_libraies", jsonEncode(allLibrary));
   }
   static AllLibrary? getLibraiesCache(){
     var json = prefs?.getString("cache_libraies");
