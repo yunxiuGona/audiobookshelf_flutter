@@ -125,30 +125,26 @@ class _MediaDetailState extends State<MediaDetail> {
                   child: MediaDetailBottomView(
                     libraryItemDetailBean,
                     mediaProgressBean,
-                    loading: buttonloading,
-                    playing: playing,
                     onPlayTap: (status) async {
                       if(status == PlayButtonState.playing){
                         player.pause();
                       }else{
                         doPlay(mediaProgressBean?.currentTime ?? 0.0);
                       }
-
-
-                      if (status == PlayButtonState.paused) {
-                        // 播放
-                        doPlay(mediaProgressBean?.currentTime ?? 0.0);
-                      }
-                      if (status == PlayButtonState.playing) {
-                        //暂停
-                        // audioHandler?.pause();
-                        player.pause();
-                        if (mounted) {
-                          setState(() {
-                            playing = false;
-                          });
-                        }
-                      }
+                      // if (status == PlayButtonState.paused) {
+                      //   // 播放
+                      //   doPlay(mediaProgressBean?.currentTime ?? 0.0);
+                      // }
+                      // if (status == PlayButtonState.playing) {
+                      //   //暂停
+                      //   // audioHandler?.pause();
+                      //   player.pause();
+                      //   if (mounted) {
+                      //     setState(() {
+                      //       playing = false;
+                      //     });
+                      //   }
+                      // }
                     },
                     onChapterTap: () {
                       _showChapterList();
@@ -161,9 +157,6 @@ class _MediaDetailState extends State<MediaDetail> {
   }
 
   void doPlay(double playedDuration) async{
-    setState(() {
-      buttonloading = true;
-    });
     // var playedDuration = mediaProgressBean?.currentTime ?? 0.0;
     var currentIndex = getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles,playedDuration);
     var curMedia = libraryItemDetailBean?.media;
@@ -174,14 +167,7 @@ class _MediaDetailState extends State<MediaDetail> {
       currentIndex = 0;
       curFile = files?.elementAt(currentIndex);
     }
-
-    setState(() {
-      buttonloading=true;
-    });
     var playMedia = await AudiobookshelfApi().playMedia(media?.libraryItemId??"");
-    setState(() {
-      buttonloading=false;
-    });
     if(playMedia==null){
       ToastUtils.showError(context, "播放失败");
       return;

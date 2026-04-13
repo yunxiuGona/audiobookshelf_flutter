@@ -115,9 +115,10 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with SingleTick
         Center(
           child: Container(
             decoration: BoxDecoration(
+              shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withOpacity(coverArt==null?0.0:0.2),
                   blurRadius: 8,
                   spreadRadius: 1,
                   offset: Offset(0, 2),
