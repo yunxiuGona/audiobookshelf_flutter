@@ -7,55 +7,65 @@ class HomeUserHistoryItemView extends StatefulWidget {
   MyLibraryItems? _myLibrary;
   int position;
   Function(int)? onIndexTap;
-  HomeUserHistoryItemView(this._myLibrary,this.position,{Key? key,this.onIndexTap}) : super(key: key);
+
+  HomeUserHistoryItemView(this._myLibrary, this.position, {Key? key, this.onIndexTap}) : super(key: key);
 
   @override
   _HomeUserHistoryItemViewState createState() => _HomeUserHistoryItemViewState();
 }
 
 class _HomeUserHistoryItemViewState extends State<HomeUserHistoryItemView> {
+  final ITEM_WIDTH = 120.0;
+  final ITEM_HEIGHT = 100.0;
+
   @override
   Widget build(BuildContext context) {
     var library = widget._myLibrary!.libraryItems![widget.position];
-    return InkWell(child: Container(
-      width: 150,
-      margin: EdgeInsets.only(right: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 图片
-          Container(
-            height: 120,
-            width: 150,
-            decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
-            child: Image.network(AudiobookshelfApi().getMediaCoverUrl(library.id ?? ""), fit: BoxFit.cover),
+    return InkWell(
+      child: Card(
+        elevation: 3,
+        child: Container(
+          width: ITEM_WIDTH,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // 图片
+              Container(
+                height: ITEM_HEIGHT,
+                width: ITEM_WIDTH,
+                decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(8)),
+                child: ClipRect(
+                  child: Image.network(AudiobookshelfApi().getMediaCoverUrl(library.id ?? ""), fit: BoxFit.cover),
+                ),
+              ),
+              SizedBox(height: 16),
+              // 标题
+              Container(
+                child: Text(
+                  library.media?.metadata?.title ?? "未知",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                padding: EdgeInsets.only(left: 5, right: 5),
+              ),
+            ],
           ),
-          SizedBox(height: 8),
-          // 标题
-          Text(
-            library.media?.metadata?.title ?? "未知",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          SizedBox(height: 4),
-          // 进度条
-          Container(
-            height: 4,
-            width: 150,
-            decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(2)),
-            child: Container(
-              width: 60, // 模拟进度
-              height: 4,
-              decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(2)),
-            ),
-          ),
-        ],
+        ),
       ),
-    ),onTap: (){
-      if(widget.onIndexTap!=null){
-        widget.onIndexTap!(widget.position);
-      }
-    },);
+      onTap: () {
+        if (widget.onIndexTap != null) {
+          widget.onIndexTap!(widget.position);
+        }
+      },
+    );
+  }
+
+  double getProgressWidth() {
+    var library = widget._myLibrary!.libraryItems![widget.position];
+    var media = library.media;
+    var processWidth = (media?.duration ?? 0.0) / (media?.size ?? 1.0) * ITEM_WIDTH;
+    return processWidth;
   }
 }

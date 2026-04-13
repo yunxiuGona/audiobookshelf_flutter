@@ -10,7 +10,7 @@ part 'my_library_items.g.dart';
 @freezed
 abstract class MyLibraryItems with _$MyLibraryItems {
   const factory MyLibraryItems({
-    @JsonKey(name: 'libraryItems') List<LibraryItems>? libraryItems,
+    @JsonKey(name: 'libraryItems') List<LibraryItems>? libraryItems, //The in progress library items. They have extra attributes which are described below.
   }) = _MyLibraryItems;
 
   factory MyLibraryItems.fromJson(Map<String, Object?> json) => _$MyLibraryItemsFromJson(json);
@@ -35,10 +35,10 @@ abstract class LibraryItems with _$LibraryItems {
     @JsonKey(name: 'isInvalid') bool? isInvalid,
     @JsonKey(name: 'mediaType') String? mediaType,
     @JsonKey(name: 'media') Media? media,
-    @JsonKey(name: 'numFiles') int? numFiles,
-    @JsonKey(name: 'size') int? size,
-    @JsonKey(name: 'recentEpisode') RecentEpisode? recentEpisode,
-    @JsonKey(name: 'progressLastUpdate') int? progressLastUpdate,
+    @JsonKey(name: 'numFiles') int? numFiles,//The number of library files for the library item.
+    @JsonKey(name: 'size') int? size,//	The total size (in bytes) of the library item.
+    @JsonKey(name: 'recentEpisode') RecentEpisode? recentEpisode,// Object	If the library item is for a podcast, the media progress's corresponding podcast episode. Will not exist for book library items.
+    @JsonKey(name: 'progressLastUpdate') int? progressLastUpdate,//The time (in ms since POSIX epoch) when the corresponding media progress was last updated.
   }) = _LibraryItems;
 
   factory LibraryItems.fromJson(Map<String, Object?> json) => _$LibraryItemsFromJson(json);

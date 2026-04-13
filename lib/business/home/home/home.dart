@@ -34,10 +34,14 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: AnimatedBottomNavigationBar(
         icons: [Icons.home_filled, Icons.person],
         activeIndex: _bottomNavIndex,
+        iconSize: 30,
+        activeColor:Colors.orange,
+        inactiveColor:Colors.black87,
+        backgroundColor: Colors.white,
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.verySmoothEdge,
-        leftCornerRadius: 32,
-        rightCornerRadius: 32,
+        leftCornerRadius: 0,
+        rightCornerRadius: 0,
         onTap: (index) => setState(() => _bottomNavIndex = index),
         //other params
       ),

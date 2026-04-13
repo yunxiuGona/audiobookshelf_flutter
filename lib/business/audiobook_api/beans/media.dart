@@ -27,9 +27,9 @@ abstract class Media with _$Media {
     @JsonKey(name: 'autoDownloadSchedule') String? autoDownloadSchedule,
     @JsonKey(name: 'lastEpisodeCheck') int? lastEpisodeCheck,
     @JsonKey(name: 'maxEpisodesToKeep') int? maxEpisodesToKeep,
-    @JsonKey(name: 'duration') double? duration,
+    @JsonKey(name: 'duration') double? duration,//The total length (in seconds) of the book.
     @JsonKey(name: 'maxNewEpisodesToDownload') int? maxNewEpisodesToDownload,
-    @JsonKey(name: 'size') int? size,
+    @JsonKey(name: 'size') int? size,//The total size (in bytes) of the book.
   }) = _Media;
 
   factory Media.fromJson(Map<String, Object?> json) => _$MediaFromJson(json);
