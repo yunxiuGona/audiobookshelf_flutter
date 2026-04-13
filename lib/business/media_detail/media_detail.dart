@@ -48,16 +48,16 @@ class _MediaDetailState extends State<MediaDetail> {
   }
 
   void _setupPlayStatusListener() {
-    _playStatusSubscription = eventBus.on<PlayStatusEvent>().listen((event) {
-      if (event.state.playing && mounted) {
-        setState(() {
-          if (buttonloading) {
-            playing = true;
-            buttonloading = false;
-          }
-        });
-      }
-    });
+    // _playStatusSubscription = eventBus.on<PlayStatusEvent>().listen((event) {
+    //   if (event.state.playing && mounted) {
+    //     setState(() {
+    //       if (buttonloading) {
+    //         playing = true;
+    //         buttonloading = false;
+    //       }
+    //     });
+    //   }
+    // });
   }
 
   @override
@@ -128,6 +128,13 @@ class _MediaDetailState extends State<MediaDetail> {
                     loading: buttonloading,
                     playing: playing,
                     onPlayTap: (status) async {
+                      if(status == PlayButtonState.playing){
+                        player.pause();
+                      }else{
+                        doPlay(mediaProgressBean?.currentTime ?? 0.0);
+                      }
+
+
                       if (status == PlayButtonState.paused) {
                         // 播放
                         doPlay(mediaProgressBean?.currentTime ?? 0.0);

@@ -49,7 +49,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
     }
 
     return Container(
-      height: 180,
+      height: 130,
       padding: EdgeInsets.only(top: 20),
       decoration: const BoxDecoration(
         color: Colors.white,

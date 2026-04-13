@@ -1,11 +1,10 @@
+import 'dart:async';
+
 import 'package:audio_book/main.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
-enum PlayButtonState {
-  playing,
-  paused,
-  loading,
-}
+
+enum PlayButtonState { playing, paused, loading }
 
 class AnimatedPlayButton extends StatefulWidget {
   final double size;
@@ -13,54 +12,49 @@ class AnimatedPlayButton extends StatefulWidget {
   final PlayButtonState state;
   final VoidCallback? onTap;
 
-  const AnimatedPlayButton({
-    Key? key,
-    this.size = 64,
-    this.color = Colors.orange,
-    required this.state,
-    this.onTap,
-  }) : super(key: key);
+  const AnimatedPlayButton({Key? key, this.size = 64, this.color = Colors.orange, required this.state, this.onTap}) : super(key: key);
 
   @override
   State<AnimatedPlayButton> createState() => _AnimatedPlayButtonState();
 }
 
-class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
-    with SingleTickerProviderStateMixin {
+class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with SingleTickerProviderStateMixin {
   late AnimationController _coverRotationController;
   double _scale = 1.0;
+  StreamSubscription? _indexStreamSubscription;
 
-  Widget? coverArt=null;
+  Widget? coverArt = null;
+
   @override
   void initState() {
     super.initState();
-
-    _coverRotationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 10),
-      lowerBound: 0,
-      upperBound: 1,
-    );
+    _coverRotationController = AnimationController(vsync: this, duration: Duration(seconds: 10), lowerBound: 0, upperBound: 1);
 
     _updateCoverRotationState();
 
-    player.currentIndexStream.listen((index) {
+    _indexStreamSubscription = player.currentIndexStream.listen((index) {
       if (index != null && index < player.sequence.length) {
         final audioSource = player.sequence[index];
         var mediaItem = audioSource.tag as MediaItem;
         if (mediaItem.artUri != null) {
-          setState(() {
-            coverArt = Image.network(mediaItem.artUri!.toString());
-          });
+          if (mounted) {
+            setState(() {
+              coverArt = Image.network(mediaItem.artUri!.toString());
+            });
+          }
         } else {
+          if (mounted) {
+            setState(() {
+              coverArt = null;
+            });
+          }
+        }
+      } else {
+        if (mounted) {
           setState(() {
             coverArt = null;
           });
         }
-      } else {
-        setState(() {
-          coverArt = null;
-        });
       }
     });
   }
@@ -70,7 +64,6 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
     super.didUpdateWidget(oldWidget);
     _updateCoverRotationState();
   }
-
 
   void _updateCoverRotationState() {
     if (widget.state == PlayButtonState.playing && coverArt != null) {
@@ -84,39 +77,58 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
 
   @override
   void dispose() {
+    _indexStreamSubscription?.cancel();
     _coverRotationController.dispose();
     super.dispose();
   }
 
   Widget _buildIcon() {
+    var iconData = Icons.pause;
     switch (widget.state) {
       case PlayButtonState.playing:
-        if (coverArt != null) {
-          return RotationTransition(
+        iconData = Icons.pause;
+        break;
+      case PlayButtonState.paused:
+        iconData = Icons.play_arrow;
+        break;
+      case PlayButtonState.loading:
+        iconData = Icons.sync;
+        break;
+    }
+    return Stack(
+      children: [
+        coverArt != null
+            ? Center(
+          child: RotationTransition(
             turns: _coverRotationController,
             child: Container(
               width: widget.size * 0.8,
               height: widget.size * 0.8,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: coverArt is Image ? (coverArt as Image).image : NetworkImage(''),
-                  fit: BoxFit.cover,
-                ),
+                image: DecorationImage(image: coverArt is Image ? (coverArt as Image).image : NetworkImage(''), fit: BoxFit.cover),
               ),
             ),
-          );
-        } else {
-          return const Icon(Icons.pause, key: ValueKey('pause'));
-        }
-      case PlayButtonState.paused:
-        return const Icon(Icons.play_arrow, key: ValueKey('play'));
-      case PlayButtonState.loading:
-        return RotationTransition(
-          turns: _coverRotationController,
-          child: const Icon(Icons.sync, key: ValueKey('loading')),
-        );
-    }
+          ),
+        )
+            : Container(),
+        Center(
+          child: Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 8,
+                  spreadRadius: 1,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Icon(iconData),
+          ),
+        ),
+      ],
+    );
   }
 
   void _onTapDown(_) {
@@ -147,13 +159,7 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
           decoration: BoxDecoration(
             color: widget.color,
             shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: widget.color.withOpacity(0.4),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
-              ),
-            ],
+            boxShadow: [BoxShadow(color: widget.color.withOpacity(0.4), blurRadius: 8, offset: const Offset(0, 4))],
           ),
           child: Center(
             child: AnimatedSwitcher(
@@ -161,17 +167,11 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
               transitionBuilder: (child, animation) {
                 return ScaleTransition(
                   scale: animation,
-                  child: FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  ),
+                  child: FadeTransition(opacity: animation, child: child),
                 );
               },
               child: IconTheme(
-                data: IconThemeData(
-                  color: Colors.white,
-                  size: widget.size * 0.5,
-                ),
+                data: IconThemeData(color: Colors.white, size: widget.size * 0.5),
                 child: _buildIcon(),
               ),
             ),

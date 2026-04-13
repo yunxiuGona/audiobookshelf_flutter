@@ -22,6 +22,9 @@ class _HomeFloatingButtonViewState extends State<HomeFloatingButtonView> with Wi
 
   initPlayerStatus(){
     player.playerStateStream.listen((state) {
+      if(!mounted) {
+        return;
+      }
         setState(() {
           playStatus = state.playing?PlayButtonState.playing:PlayButtonState.paused;
         });
