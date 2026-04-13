@@ -1,7 +1,8 @@
+import 'package:audio_book/TAG.dart';
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
-import 'package:audio_book/business/events/play_status_event.dart';
 import 'package:audio_book/business/login/login.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
+import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +27,13 @@ void main() async {
     try {
       final current = player.sequenceState.currentSource;
       final mediaItem = current?.tag as MediaItem?;
-      var playItemID = mediaItem?.id.split("_")[1];
-      AudiobookshelfApi().syncLibraryItemPlayDuration((playItemID??""), position.inSeconds.toInt());
+      var map = mediaItem?.extras;
+      if(map!=null){
+        var playItemID=map["playItemID"] ?? "";
+        var chapterStartDuration=map["chapterStartDuration"] as double;
+        var currentSyncDuration = chapterStartDuration+position.inSeconds.toDouble();
+        AudiobookshelfApi().syncLibraryItemPlayDuration(playItemID, currentSyncDuration);
+      }
     } catch (e) {
       print(e);
     }

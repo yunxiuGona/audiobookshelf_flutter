@@ -180,13 +180,18 @@ class _MediaDetailState extends State<MediaDetail> {
       return;
     }
     var listFiles = getRemainingAudioFiles(files,currentIndex);
+    var listFilesPased = getPasedAudioFiles(files,currentIndex);
     var audio_source_list = listFiles.map((f)=>AudioSource.uri(
         Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
         tag: MediaItem(
-          id: "${media?.libraryItemId}_${playMedia.id}_${f.ino}",
+          id: "${media?.libraryItemId}_${f.ino}", //ID:播放项（Library）ID_文件ino
           album: "${media?.metadata?.title}",
           title: "${media?.metadata?.title}",
           artist: f.metadata?.filename ?? "",
+          extras: {
+            "chapterStartDuration":media?.chapters?[currentIndex].start??0.0,//当前章节开始时间
+            "playItemID":playMedia.id,//当前播放项ID
+          },
           artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
     ))).toList();
     await player.setAudioSource(
@@ -267,6 +272,12 @@ class _MediaDetailState extends State<MediaDetail> {
       }
     }
     return currentIndex;
+  }
+
+  List<AudioFile> getPasedAudioFiles(List<AudioFile>? audiofileList,int currentIndex){
+    if(audiofileList==null||currentIndex<0||currentIndex>=audiofileList.length)
+      return [];
+    return audiofileList.sublist(0,currentIndex);
   }
 
   List<AudioFile> getRemainingAudioFiles(List<AudioFile>? audiofileList,int currentIndex){

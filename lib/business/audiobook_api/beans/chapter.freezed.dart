@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Chapter {
 
-@JsonKey(name: 'id') int? get id;@JsonKey(name: 'start') int? get start;@JsonKey(name: 'end') double? get end;@JsonKey(name: 'title') String? get title;
+@JsonKey(name: 'id') int? get id;@JsonKey(name: 'start') double? get start;@JsonKey(name: 'end') double? get end;@JsonKey(name: 'title') String? get title;
 /// Create a copy of Chapter
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $ChapterCopyWith<$Res>  {
   factory $ChapterCopyWith(Chapter value, $Res Function(Chapter) _then) = _$ChapterCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'id') int? id,@JsonKey(name: 'start') int? start,@JsonKey(name: 'end') double? end,@JsonKey(name: 'title') String? title
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'start') double? start,@JsonKey(name: 'end') double? end,@JsonKey(name: 'title') String? title
 });
 
 
@@ -69,7 +69,7 @@ class _$ChapterCopyWithImpl<$Res>
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,start: freezed == start ? _self.start : start // ignore: cast_nullable_to_non_nullable
-as int?,end: freezed == end ? _self.end : end // ignore: cast_nullable_to_non_nullable
+as double?,end: freezed == end ? _self.end : end // ignore: cast_nullable_to_non_nullable
 as double?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -156,7 +156,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  int? id, @JsonKey(name: 'start')  int? start, @JsonKey(name: 'end')  double? end, @JsonKey(name: 'title')  String? title)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  int? id, @JsonKey(name: 'start')  double? start, @JsonKey(name: 'end')  double? end, @JsonKey(name: 'title')  String? title)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Chapter() when $default != null:
 return $default(_that.id,_that.start,_that.end,_that.title);case _:
@@ -177,7 +177,7 @@ return $default(_that.id,_that.start,_that.end,_that.title);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  int? id, @JsonKey(name: 'start')  int? start, @JsonKey(name: 'end')  double? end, @JsonKey(name: 'title')  String? title)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id')  int? id, @JsonKey(name: 'start')  double? start, @JsonKey(name: 'end')  double? end, @JsonKey(name: 'title')  String? title)  $default,) {final _that = this;
 switch (_that) {
 case _Chapter():
 return $default(_that.id,_that.start,_that.end,_that.title);case _:
@@ -197,7 +197,7 @@ return $default(_that.id,_that.start,_that.end,_that.title);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  int? id, @JsonKey(name: 'start')  int? start, @JsonKey(name: 'end')  double? end, @JsonKey(name: 'title')  String? title)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id')  int? id, @JsonKey(name: 'start')  double? start, @JsonKey(name: 'end')  double? end, @JsonKey(name: 'title')  String? title)?  $default,) {final _that = this;
 switch (_that) {
 case _Chapter() when $default != null:
 return $default(_that.id,_that.start,_that.end,_that.title);case _:
@@ -216,7 +216,7 @@ class _Chapter implements Chapter {
   factory _Chapter.fromJson(Map<String, dynamic> json) => _$ChapterFromJson(json);
 
 @override@JsonKey(name: 'id') final  int? id;
-@override@JsonKey(name: 'start') final  int? start;
+@override@JsonKey(name: 'start') final  double? start;
 @override@JsonKey(name: 'end') final  double? end;
 @override@JsonKey(name: 'title') final  String? title;
 
@@ -253,7 +253,7 @@ abstract mixin class _$ChapterCopyWith<$Res> implements $ChapterCopyWith<$Res> {
   factory _$ChapterCopyWith(_Chapter value, $Res Function(_Chapter) _then) = __$ChapterCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'id') int? id,@JsonKey(name: 'start') int? start,@JsonKey(name: 'end') double? end,@JsonKey(name: 'title') String? title
+@JsonKey(name: 'id') int? id,@JsonKey(name: 'start') double? start,@JsonKey(name: 'end') double? end,@JsonKey(name: 'title') String? title
 });
 
 
@@ -274,7 +274,7 @@ class __$ChapterCopyWithImpl<$Res>
   return _then(_Chapter(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,start: freezed == start ? _self.start : start // ignore: cast_nullable_to_non_nullable
-as int?,end: freezed == end ? _self.end : end // ignore: cast_nullable_to_non_nullable
+as double?,end: freezed == end ? _self.end : end // ignore: cast_nullable_to_non_nullable
 as double?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

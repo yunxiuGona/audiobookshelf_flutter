@@ -8,7 +8,7 @@ part 'chapter.g.dart';
 abstract class Chapter with _$Chapter {
   const factory Chapter({
     @JsonKey(name: 'id') int? id,
-    @JsonKey(name: 'start') int? start,
+    @JsonKey(name: 'start') double? start,
     @JsonKey(name: 'end') double? end,
     @JsonKey(name: 'title') String? title,
   }) = _Chapter;

@@ -18,6 +18,7 @@ class MediaChapterList extends StatefulWidget {
 class _MediaChapterListState extends State<MediaChapterList> {
   final ScrollController _scrollController = ScrollController();
 
+  final ITEM_HEIGHT=56.0;
   @override
   void initState() {
     super.initState();
@@ -38,7 +39,7 @@ class _MediaChapterListState extends State<MediaChapterList> {
 
   void _scrollToIndex(int index) {
     if (index >= 0 && index < (widget.chapters?.length ?? 0)) {
-      _scrollController.jumpTo(index * 56.0);
+      _scrollController.jumpTo(index *ITEM_HEIGHT);
     }
   }
 
@@ -66,11 +67,12 @@ class _MediaChapterListState extends State<MediaChapterList> {
                 ListView.builder(
                   controller: _scrollController,
                   itemCount: widget.chapters?.length ?? 0,
-                  itemExtent: 56.0, // 固定项高，便于计算滚动位置
                   itemBuilder: (context, index) {
                     var chapter = widget.chapters![index];
                     return InkWell(child: Container(
-                      padding: EdgeInsets.only(left: 5,top: 5,bottom: 5,right: 35),
+                      height: ITEM_HEIGHT,
+                      padding: EdgeInsets.only(left: 5,right: 35),
+                      alignment: Alignment.centerLeft,
                       child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -81,6 +83,9 @@ class _MediaChapterListState extends State<MediaChapterList> {
                           color: _getTextColor(index),
                         ),
                       ),
+                        Container(height: 3,),
+                        Text(formatSecondsToMinutes((chapter.end??0.0)-(chapter.start??0.0)),style: TextStyle(color: Colors.black54,fontSize: 10),)
+                        // Text("${chapter.end-chapter.start}")
                     ],),),onTap: (){
                           if (widget.onChapterTap != null) {
                             widget.onChapterTap!(index);
@@ -97,7 +102,7 @@ class _MediaChapterListState extends State<MediaChapterList> {
                     child: ChapterIndexBar(
                       itemCount: widget.chapters!.length,
                       onIndexSelected: (index) {
-                        _scrollController.jumpTo(index * 56.0);
+                        _scrollController.jumpTo(index * ITEM_HEIGHT);
                       },
                     ),
                   ),
@@ -120,16 +125,15 @@ class _MediaChapterListState extends State<MediaChapterList> {
     }
   }
 
-  String _formatDuration(int milliseconds) {
-    Duration duration = Duration(milliseconds: milliseconds);
-    int hours = duration.inHours;
-    int minutes = duration.inMinutes.remainder(60);
-    int seconds = duration.inSeconds.remainder(60);
+  String formatSecondsToMinutes(double? seconds) {
+    int totalSeconds = seconds?.toInt() ?? 0.toInt();
+    int minutes = totalSeconds ~/ 60;
+    int remainingSeconds = totalSeconds % 60;
     
-    if (hours > 0) {
-      return '$hours:$minutes:$seconds';
+    if (minutes > 0) {
+      return '$minutes分${remainingSeconds}秒';
     } else {
-      return '$minutes:$seconds';
+      return '${remainingSeconds}秒';
     }
   }
 }

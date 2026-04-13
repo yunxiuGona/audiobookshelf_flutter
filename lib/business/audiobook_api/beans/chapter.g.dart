@@ -8,7 +8,7 @@ part of 'chapter.dart';
 
 _Chapter _$ChapterFromJson(Map<String, dynamic> json) => _Chapter(
   id: (json['id'] as num?)?.toInt(),
-  start: (json['start'] as num?)?.toInt(),
+  start: (json['start'] as num?)?.toDouble(),
   end: (json['end'] as num?)?.toDouble(),
   title: json['title'] as String?,
 );
