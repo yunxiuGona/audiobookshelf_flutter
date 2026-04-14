@@ -1,6 +1,7 @@
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
@@ -21,9 +22,23 @@ class MediaDetailBottomView extends StatefulWidget {
 }
 
 class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
+  bool showNext = false;
+  bool showPre = false;
+
   @override
   void initState() {
     super.initState();
+    player.currentIndexStream.listen((index) {
+      if (player.playing) {
+        setState(() {
+          showNext = player.hasNext;
+          showPre = player.hasPrevious;
+        });
+      } else {
+        showNext = false;
+        showPre = false;
+      }
+    });
   }
 
   @override
@@ -36,7 +51,9 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
     } else if (widget.playStatus == PlayButtonState.loading) {
       text = "加载中...";
     } else if (widget.playStatus == PlayButtonState.playing) {
-      text = "播放中";
+      final current = player.sequenceState.currentSource;
+      final mediaItem = current?.tag as MediaItem?;
+      text = "播放中:${mediaItem?.artist}";
     } else if (widget.playStatus == PlayButtonState.paused) {
       text = "已暂停";
     }
@@ -54,36 +71,71 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            Expanded(child: viewLeft()),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AnimatedPlayButton(
-                  state: widget.playStatus,
-                  onTap: () {
-                    if (widget.onPlayTap != null) {
-                      widget.onPlayTap!();
-                    }
-                  },
-                ),
-                Container(height: 10),
-                Text(text, style: TextStyle(color: Colors.black54, fontSize: 13)),
-              ],
-            ),
-            Expanded(child: viewRight()),
-          ],),
+              Expanded(child: viewLeft()),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AnimatedPlayButton(
+                    state: widget.playStatus,
+                    onTap: () {
+                      if (widget.onPlayTap != null) {
+                        widget.onPlayTap!();
+                      }
+                    },
+                  ),
+                  Container(height: 10),
+                  Text(text, style: TextStyle(color: Colors.black54, fontSize: 13)),
+                ],
+              ),
+              Expanded(child: viewRight()),
+            ],
+          ),
           Container(width: double.infinity, height: double.infinity, padding: EdgeInsets.only(top: 15, right: 20), alignment: Alignment.topRight, child: viewChapters()),
         ],
       ),
     );
   }
 
-  Widget viewLeft(){
-    return Container(color: Colors.red,height: 65,);
+  Widget viewLeft() {
+    return SizedBox(
+      height: 65,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(child: Container()),
+          (showPre) ? viewPre() : Container(),
+          Container(width: 20),
+        ],
+      ),
+    );
   }
-  Widget viewRight(){
-    return Container(color: Colors.red,height: 65,);
+
+  Widget viewRight() {
+    return SizedBox(
+      height: 65,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(width: 20),
+          (showNext) ? viewNext() : Container(),
+          Expanded(child: Container()),
+        ],
+      ),
+    );
   }
+
+  Widget viewPre() {
+    return InkWell(child: Icon(Icons.first_page_rounded, color: Colors.orange, size: 40),onTap: (){
+      player.seekToPrevious();
+    },);
+  }
+
+  Widget viewNext() {
+    return InkWell(child: Icon(Icons.last_page_rounded, color: Colors.orange, size: 40),onTap: (){
+      player.seekToNext();
+    },);
+  }
+
   Widget viewChapters() {
     return InkWell(
       onTap: () {
@@ -91,7 +143,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
           widget.onChapterTap!();
         }
       },
-      child: Icon(Icons.list,size: 40,color: Colors.orange,),
+      child: Icon(Icons.list, size: 40, color: Colors.orange),
     );
   }
 }
