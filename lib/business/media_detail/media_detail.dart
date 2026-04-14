@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/audio_file.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
@@ -179,6 +181,7 @@ class _MediaDetailState extends State<MediaDetail> {
                 "chapterStartDuration": media?.chapters?[currentIndex].start ?? 0.0, //当前章节开始时间
                 "playItemID": playMedia.id, //当前播放项ID
                 "seedDuration": (f.ino==curFile?.ino)?(playedDuration-(media?.chapters?[currentIndex].start??0.0) ?? 0.0):0.0, //当前播放项ID
+                "currentChapterInfo": json.encode(media?.chapters?[currentIndex]??""), //当前播放项ID
               },
               artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
             ),

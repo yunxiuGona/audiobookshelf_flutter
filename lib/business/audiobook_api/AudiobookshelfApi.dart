@@ -10,6 +10,8 @@ import 'package:audio_book/business/audiobook_api/beans/my_library_items.dart';
 import 'package:audio_book/business/audiobook_api/beans/play_media.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
+import 'package:audio_book/main.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
 
@@ -83,7 +85,15 @@ class AudiobookshelfApi extends GetConnect {
 
   Future<PlayMedia?> playMedia(String libraryItemID) async {
     initUserInfo();
-    var resp = await post(headers: headers, "/audiobookshelf/api/items/${libraryItemID}/play", {});
+    /**
+     * Example
+     * {"deviceInfo":{"clientName":"Abs Web","deviceId":"oyc-W0YFLph1OVZbjroCt"},"supportedMimeTypes":["audio/flac","audio/mpeg","audio/mp4","audio/ogg","audio/aac","audio/webm"],"mediaPlayer":"html5","forceTranscode":false,"forceDirectPlay":false}
+     */
+    var resp = await post(headers: headers, "/audiobookshelf/api/items/${libraryItemID}/play", {
+      "forceTranscode":false, //Whether to force the server to transcode the audio.
+      "forceDirectPlay":true,//Whether to force direct play of the library item.
+      "supportedMimeTypes":["audio/flac","audio/mpeg","audio/mpeg3","audio/mp4","audio/wav","audio/ogg","audio/aac","audio/webm"] //	The MIME types that are supported by the client. If the MIME type of the audio file is not in this list, the server will transcode it.
+    });
     if (resp.status.code == OK) {
       return PlayMedia.fromJson(resp.body);
     } else {
@@ -116,7 +126,6 @@ class AudiobookshelfApi extends GetConnect {
       return;
     }
     if(lastSyncSecond==0){
-      lastSyncSecond = currentSecond;
       timeListened = 0;
     }else{
       timeListened = currentSecond-lastSyncSecond;
@@ -126,7 +135,10 @@ class AudiobookshelfApi extends GetConnect {
       lastSyncSecond = currentSecond;
       var resp = await post(headers: headers, "/audiobookshelf/api/session/$playItemID/sync", {"currentTime": duration, "timeListened": timeListened});
 
-      LogUtils.log(TAG.AUDIO_API_SYNC, "同步播放进度${resp.statusCode}：playItemID=$playItemID,currentTime=$duration,timeListened=$timeListened");
+      final current = player.sequenceState.currentSource;
+      final mediaItem = current?.tag as MediaItem?;
+      var chapterInfo = mediaItem?.extras?["currentChapterInfo"] as String?;
+      LogUtils.log(TAG.AUDIO_API_SYNC, "同步播放进度${resp.statusCode}\nplayItemID=$playItemID\ncurrentTime=$duration\ntimeListened=$timeListened\n文件=${mediaItem?.artist}\n章节信息=${chapterInfo}");
       if (resp.status.code == OK) {
         return true;
       } else {
