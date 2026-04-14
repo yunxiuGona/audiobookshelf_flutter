@@ -1,5 +1,6 @@
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
+import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
@@ -25,19 +26,26 @@ class MediaDetailBottomView extends StatefulWidget {
 class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
   bool showNext = false;
   bool showPre = false;
+  bool showSpeed = false;
 
+  var speed = 1.0;
   @override
   void initState() {
     super.initState();
+    setState(() {
+      speed = SPUtils.getPlaySpeed();
+    });
     player.currentIndexStream.listen((index) {
       if (player.playing) {
         setState(() {
           showNext = player.hasNext;
           showPre = player.hasPrevious;
+          showSpeed = true;
         });
       } else {
         showNext = false;
         showPre = false;
+        showSpeed = false;
       }
     });
   }
@@ -86,7 +94,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
                   ),
                   Container(height: 10),
                   Container(
-                    width: 100,
+                    width: 80,
                     alignment: Alignment.center,
                     child: Marquee(
                       animationDuration: Duration(seconds: 5),
@@ -100,7 +108,6 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
               Expanded(child: viewRight()),
             ],
           ),
-          Container(width: double.infinity, height: double.infinity, padding: EdgeInsets.only(top: 15, right: 20), alignment: Alignment.topRight, child: viewChapters()),
         ],
       ),
     );
@@ -114,7 +121,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
         children: [
           Expanded(child: Container()),
           (showPre) ? viewPre() : Container(),
-          Container(width: 20),
+          Container(width: 10),
         ],
       ),
     );
@@ -126,14 +133,41 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(width: 20),
+          Container(width: 10),
           (showNext) ? viewNext() : Container(),
           Expanded(child: Container()),
+          viewSpeed(),
+          Container(width: 10,),
+          viewChapters(),
+          Container(width: 10,)
         ],
       ),
     );
   }
 
+  Widget viewSpeed(){
+    return InkWell(child: Container(child: Text("X${speed}",style: TextStyle(color: Colors.orange,fontSize: 17),),padding: EdgeInsets.all(5),),onTap: (){
+      if(speed==1.0){
+        speed=1.5;
+      }
+      if(speed==1.5){
+        speed=2.0;
+      }
+      if(speed==2.0){
+        speed=2.5;
+      }
+      if(speed==2.5){
+        speed==3.0;
+      }
+      if(speed==3.0){
+        speed=1.0;
+      }
+      SPUtils.savePlaySpeed(speed);
+      player.setSpeed(speed);
+      setState(() {
+      });
+    },);
+  }
   Widget viewPre() {
     return InkWell(
       child: Icon(Icons.first_page_rounded, color: Colors.orange, size: 40),
