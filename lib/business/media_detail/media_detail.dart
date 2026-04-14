@@ -39,25 +39,21 @@ class _MediaDetailState extends State<MediaDetail> {
   MediaProgress? mediaProgressBean;
   LibraryItemDetail? libraryItemDetailBean;
   StreamSubscription? _playStatusSubscription;
+  PlayButtonState playStatus = PlayButtonState.none;
 
   @override
   void initState() {
     super.initState();
     initMediaStatus();
-    _setupPlayStatusListener();
+    initPlayerStatus();
   }
 
-  void _setupPlayStatusListener() {
-    // _playStatusSubscription = eventBus.on<PlayStatusEvent>().listen((event) {
-    //   if (event.state.playing && mounted) {
-    //     setState(() {
-    //       if (buttonloading) {
-    //         playing = true;
-    //         buttonloading = false;
-    //       }
-    //     });
-    //   }
-    // });
+  initPlayerStatus() {
+    player.playerStateStream.listen((state) {
+      setState(() {
+        playStatus = state.playing ? PlayButtonState.playing : PlayButtonState.paused;
+      });
+    });
   }
 
   @override
@@ -125,26 +121,16 @@ class _MediaDetailState extends State<MediaDetail> {
                   child: MediaDetailBottomView(
                     libraryItemDetailBean,
                     mediaProgressBean,
-                    onPlayTap: (status) async {
-                      if(status == PlayButtonState.playing){
+                    playStatus,
+                    onPlayTap: () async {
+                      if(playStatus==loading){
+                        return;
+                      }
+                      if (playStatus == PlayButtonState.playing) {
                         player.pause();
-                      }else{
+                      } else {
                         doPlay(mediaProgressBean?.currentTime ?? 0.0);
                       }
-                      // if (status == PlayButtonState.paused) {
-                      //   // 播放
-                      //   doPlay(mediaProgressBean?.currentTime ?? 0.0);
-                      // }
-                      // if (status == PlayButtonState.playing) {
-                      //   //暂停
-                      //   // audioHandler?.pause();
-                      //   player.pause();
-                      //   if (mounted) {
-                      //     setState(() {
-                      //       playing = false;
-                      //     });
-                      //   }
-                      // }
                     },
                     onChapterTap: () {
                       _showChapterList();
@@ -156,9 +142,12 @@ class _MediaDetailState extends State<MediaDetail> {
     );
   }
 
-  void doPlay(double playedDuration) async{
+  void doPlay(double playedDuration) async {
     // var playedDuration = mediaProgressBean?.currentTime ?? 0.0;
-    var currentIndex = getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles,playedDuration);
+    setState(() {
+      playStatus = PlayButtonState.loading;
+    });
+    var currentIndex = getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles, playedDuration);
     var curMedia = libraryItemDetailBean?.media;
     var files = libraryItemDetailBean?.media?.audioFiles;
     var curFile = files?.elementAt(currentIndex >= files.length ? (files.length - 1) : currentIndex);
@@ -167,27 +156,32 @@ class _MediaDetailState extends State<MediaDetail> {
       currentIndex = 0;
       curFile = files?.elementAt(currentIndex);
     }
-    var playMedia = await AudiobookshelfApi().playMedia(media?.libraryItemId??"");
-    if(playMedia==null){
+    var playMedia = await AudiobookshelfApi().playMedia(media?.libraryItemId ?? "");
+    if (playMedia == null) {
       ToastUtils.showError(context, "播放失败");
       return;
     }
-    var listFiles = getRemainingAudioFiles(files,currentIndex);
-    var listFilesPased = getPasedAudioFiles(files,currentIndex);
-    var audio_source_list = listFiles.map((f)=>AudioSource.uri(
-        Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
-        tag: MediaItem(
-          id: "${media?.libraryItemId}_${playMedia.id}_${getAccumulatedDurationBeforeIno(f.ino ?? "")}${f.ino}",
-          album: "${media?.metadata?.title}",
-          title: "${media?.metadata?.title}",
-          artist: f.metadata?.filename ?? "",
-          artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
-    ))).toList();
-    await player.setAudioSource(
-      ConcatenatingAudioSource(
-        children: audio_source_list,
-      ),
-    );
+    var listFiles = getRemainingAudioFiles(files, currentIndex);
+    var listFilesPased = getPasedAudioFiles(files, currentIndex);
+    var audio_source_list = listFiles
+        .map(
+          (f) => AudioSource.uri(
+            Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
+            tag: MediaItem(
+              id: "${media?.libraryItemId}_${playMedia.id}_${getAccumulatedDurationBeforeIno(f.ino ?? "")}${f.ino}",
+              album: "${media?.metadata?.title}",
+              title: "${media?.metadata?.title}",
+              artist: f.metadata?.filename ?? "",
+              extras: {
+                "chapterStartDuration":media?.chapters?[currentIndex].start??0.0,//当前章节开始时间
+                "playItemID":playMedia.id,//当前播放项ID
+              },
+              artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
+            ),
+          ),
+        )
+        .toList();
+    await player.setAudioSource(ConcatenatingAudioSource(children: audio_source_list));
     player.play();
   }
 
@@ -237,18 +231,16 @@ class _MediaDetailState extends State<MediaDetail> {
       });
       return;
     }
-    var playedDuration=0.0;
+    var playedDuration = 0.0;
     var files = libraryItemDetailBean?.media?.audioFiles;
-    for(int i=0;i<chapterIndex;i++){
-      playedDuration=playedDuration+(files?.elementAt(i).duration ?? 0.0);
+    for (int i = 0; i < chapterIndex; i++) {
+      playedDuration = playedDuration + (files?.elementAt(i).duration ?? 0.0);
     }
     doPlay(playedDuration);
   }
 
-
-  int getCurrentFileIndexInProgress(List<AudioFile>? audiofileList,double? currentTime){
-    if(audiofileList==null||currentTime==null)
-      return 0;
+  int getCurrentFileIndexInProgress(List<AudioFile>? audiofileList, double? currentTime) {
+    if (audiofileList == null || currentTime == null) return 0;
     var currentIndex = 0;
     var tmpAddDuration = 0.0;
     for (int i = 0; i < (audiofileList.length ?? 0); i++) {
@@ -263,15 +255,13 @@ class _MediaDetailState extends State<MediaDetail> {
     return currentIndex;
   }
 
-  List<AudioFile> getPasedAudioFiles(List<AudioFile>? audiofileList,int currentIndex){
-    if(audiofileList==null||currentIndex<0||currentIndex>=audiofileList.length)
-      return [];
-    return audiofileList.sublist(0,currentIndex);
+  List<AudioFile> getPasedAudioFiles(List<AudioFile>? audiofileList, int currentIndex) {
+    if (audiofileList == null || currentIndex < 0 || currentIndex >= audiofileList.length) return [];
+    return audiofileList.sublist(0, currentIndex);
   }
 
-  List<AudioFile> getRemainingAudioFiles(List<AudioFile>? audiofileList,int currentIndex){
-    if(audiofileList==null||currentIndex<0||currentIndex>=audiofileList.length)
-      return [];
+  List<AudioFile> getRemainingAudioFiles(List<AudioFile>? audiofileList, int currentIndex) {
+    if (audiofileList == null || currentIndex < 0 || currentIndex >= audiofileList.length) return [];
     return audiofileList.sublist(currentIndex);
   }
 
@@ -279,10 +269,10 @@ class _MediaDetailState extends State<MediaDetail> {
     if (libraryItemDetailBean?.media?.audioFiles == null) {
       return 0.0;
     }
-    
+
     double accumulatedDuration = 0.0;
     List<AudioFile> audioFiles = libraryItemDetailBean!.media!.audioFiles!;
-    
+
     for (int i = 0; i < audioFiles.length; i++) {
       AudioFile file = audioFiles[i];
       if (file.ino == ino) {
@@ -292,7 +282,7 @@ class _MediaDetailState extends State<MediaDetail> {
       // 累加当前元素的duration
       accumulatedDuration += file.duration ?? 0.0;
     }
-    
+
     return accumulatedDuration;
   }
 }

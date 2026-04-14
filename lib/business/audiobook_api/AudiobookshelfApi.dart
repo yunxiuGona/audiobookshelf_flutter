@@ -101,7 +101,7 @@ class AudiobookshelfApi extends GetConnect {
     }
   }
 
-  var lastSyncSecond = 0;
+  static var lastSyncSecond = 0;
   var playItemID = "";
 
   Future syncLibraryItemPlayDuration(String playItemID, double duration) async {
@@ -115,10 +115,18 @@ class AudiobookshelfApi extends GetConnect {
     if (lastSyncSecond != 0 && (currentSecond - lastSyncSecond) <= 10 * 1) {
       return;
     }
-    timeListened = currentSecond - lastSyncSecond;
+    if(lastSyncSecond==0){
+      lastSyncSecond = currentSecond;
+      timeListened = 0;
+    }else{
+      timeListened = currentSecond-lastSyncSecond;
+    }
+    if(timeListened<60)  //每分钟上报一次
+      return;
     lastSyncSecond = currentSecond;
-    LogUtils.log(TAG.AUDIO_API, "同步播放进度：playItemID=$playItemID,currentTime=$duration,timeListened=$timeListened");
     var resp = await post(headers: headers, "/audiobookshelf/api/session/$playItemID/sync", {"currentTime": duration, "timeListened": timeListened});
+
+    LogUtils.log(TAG.AUDIO_API, "同步播放进度${resp.statusCode}：playItemID=$playItemID,currentTime=$duration,timeListened=$timeListened");
     if (resp.status.code == OK) {
       return true;
     } else {

@@ -4,7 +4,7 @@ import 'package:audio_book/main.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 
-enum PlayButtonState { playing, paused, loading }
+enum PlayButtonState { none,playing, paused, loading }
 
 class AnimatedPlayButton extends StatefulWidget {
   final double size;
@@ -93,6 +93,9 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with SingleTick
         break;
       case PlayButtonState.loading:
         iconData = Icons.sync;
+        break;
+      case PlayButtonState.none:
+        iconData = Icons.play_arrow;
         break;
     }
     return Stack(

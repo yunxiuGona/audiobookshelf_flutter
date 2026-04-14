@@ -10,58 +10,44 @@ class MediaDetailBottomView extends StatefulWidget {
   LibraryItemDetail? libraryItemDetailBean;
   MediaProgress? mediaProgress;
 
-  Function(PlayButtonState? state)? onPlayTap;
-  Function()? onChapterTap;  //return true ： 执行播放
+  Function()? onPlayTap;
+  Function()? onChapterTap; //return true ： 执行播放
+  PlayButtonState playStatus = PlayButtonState.none;
 
-  MediaDetailBottomView(this.libraryItemDetailBean, this.mediaProgress, {Key? key,  this.onPlayTap, this.onChapterTap}) : super(key: key);
+  MediaDetailBottomView(this.libraryItemDetailBean, this.mediaProgress, this.playStatus, {Key? key, this.onPlayTap, this.onChapterTap}) : super(key: key);
 
   @override
   _MediaDetailBottomViewState createState() => _MediaDetailBottomViewState();
 }
 
 class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
-  PlayButtonState playStatus = PlayButtonState.paused;
-
   @override
   void initState() {
     super.initState();
-    initPlayerStatus();
   }
-  initPlayerStatus(){
-    player.playerStateStream.listen((state) {
-      setState(() {
-        playStatus = state.playing?PlayButtonState.playing:PlayButtonState.paused;
-      });
-    });
-  }
+
   @override
   Widget build(BuildContext context) {
     String text = "";
 
-      if(playStatus!= PlayButtonState.playing){
-        var p = widget.mediaProgress?.progress ?? 0.0;
-        text = p > 0 ? "继续播放" : "从头播放";
-      }else{
-        text="播放中";
-      }
+    if (widget.playStatus == PlayButtonState.none) {
+      var p = widget.mediaProgress?.progress ?? 0.0;
+      text = p > 0 ? "继续播放" : "从头播放";
+    } else if (widget.playStatus != PlayButtonState.loading) {
+      text = "加载中...";
+    } else if (widget.playStatus != PlayButtonState.playing) {
+      text = "播放中";
+    } else if (widget.playStatus != PlayButtonState.paused) {
+      text = "已暂停";
+    }
 
     return Container(
       height: 130,
       padding: EdgeInsets.only(top: 20),
       decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            spreadRadius: 0,
-            blurRadius: 10,
-            offset: Offset(0, -2),
-          ),
-        ],
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        boxShadow: [BoxShadow(color: Colors.black12, spreadRadius: 0, blurRadius: 10, offset: Offset(0, -2))],
       ),
       child: Stack(
         children: [
@@ -73,10 +59,10 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AnimatedPlayButton(
-                      state: playStatus,
+                      state: widget.playStatus,
                       onTap: () {
                         if (widget.onPlayTap != null) {
-                          widget.onPlayTap!(playStatus);
+                          widget.onPlayTap!();
                         }
                       },
                     ),
@@ -87,23 +73,20 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
               ],
             ),
           ),
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            padding: EdgeInsets.only(top: 20,right: 20),
-            alignment: Alignment.topRight,
-            child: viewChapters(),
-          ),
+          Container(width: double.infinity, height: double.infinity, padding: EdgeInsets.only(top: 20, right: 20), alignment: Alignment.topRight, child: viewChapters()),
         ],
       ),
     );
   }
 
-  Widget viewChapters(){
-    return InkWell(onTap: (){
-      if (widget.onChapterTap != null) {
-        widget.onChapterTap!();
-      }
-    },child: Text("所有章节",style: TextStyle(color: Colors.orange,fontSize: 20),),);
+  Widget viewChapters() {
+    return InkWell(
+      onTap: () {
+        if (widget.onChapterTap != null) {
+          widget.onChapterTap!();
+        }
+      },
+      child: Text("所有章节", style: TextStyle(color: Colors.orange, fontSize: 20)),
+    );
   }
 }
