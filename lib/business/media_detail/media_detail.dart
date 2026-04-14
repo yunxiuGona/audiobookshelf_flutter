@@ -173,7 +173,7 @@ class _MediaDetailState extends State<MediaDetail> {
           (f) => AudioSource.uri(
             Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
             tag: MediaItem(
-              id: "${media?.libraryItemId}_${playMedia.id}_${getAccumulatedDurationBeforeIno(f.ino ?? "")}${f.ino}",
+              id: "${media?.libraryItemId}_${playMedia.id}_${f.ino}",
               album: "${media?.metadata?.title}",
               title: "${media?.metadata?.title}",
               artist: f.metadata?.filename ?? "",
@@ -272,24 +272,4 @@ class _MediaDetailState extends State<MediaDetail> {
     return audiofileList.sublist(currentIndex);
   }
 
-  double getAccumulatedDurationBeforeIno(String ino) {
-    if (libraryItemDetailBean?.media?.audioFiles == null) {
-      return 0.0;
-    }
-
-    double accumulatedDuration = 0.0;
-    List<AudioFile> audioFiles = libraryItemDetailBean!.media!.audioFiles!;
-
-    for (int i = 0; i < audioFiles.length; i++) {
-      AudioFile file = audioFiles[i];
-      if (file.ino == ino) {
-        // 找到对应ino的元素，停止累加并返回
-        break;
-      }
-      // 累加当前元素的duration
-      accumulatedDuration += file.duration ?? 0.0;
-    }
-
-    return accumulatedDuration;
-  }
 }
