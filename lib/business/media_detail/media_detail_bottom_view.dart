@@ -136,7 +136,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
           Container(width: 10),
           (showNext) ? viewNext() : Container(),
           Expanded(child: Container()),
-          viewSpeed(),
+          (showSpeed) ?viewSpeed():Container(),
           Container(width: 10,),
           viewChapters(),
           Container(width: 10,)
@@ -147,20 +147,22 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
 
   Widget viewSpeed(){
     return InkWell(child: Container(child: Text("X${speed}",style: TextStyle(color: Colors.orange,fontSize: 17),),padding: EdgeInsets.all(5),),onTap: (){
-      if(speed==1.0){
-        speed=1.5;
-      }
-      if(speed==1.5){
-        speed=2.0;
-      }
-      if(speed==2.0){
-        speed=2.5;
-      }
-      if(speed==2.5){
-        speed==3.0;
-      }
-      if(speed==3.0){
-        speed=1.0;
+      switch(speed){
+        case 1.0:
+          speed=1.5;
+          break;
+        case 1.5:
+          speed=2.0;
+          break;
+        case 2.0:
+          speed=2.5;
+          break;
+        case 2.5:
+          speed=3.0;
+          break;
+        default:
+          speed=1.0;
+          break;
       }
       SPUtils.savePlaySpeed(speed);
       player.setSpeed(speed);
