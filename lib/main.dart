@@ -38,7 +38,7 @@ void main() async {
       print(e);
     }
   });
-  player.setSpeed(1.0);
+  player.setSpeed(SPUtils.getPlaySpeed());
   SPUtils.prefs = await SharedPreferences.getInstance();
   CacheUtils.prefs = await SharedPreferences.getInstance();
   SPUtils.getUserData();

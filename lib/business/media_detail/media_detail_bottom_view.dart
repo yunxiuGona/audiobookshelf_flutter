@@ -3,6 +3,7 @@ import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:marquee_widget/marquee_widget.dart';
 
 import '../../main.dart';
 import '../audiobook_api/beans/library_item_detail.dart';
@@ -84,7 +85,16 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
                     },
                   ),
                   Container(height: 10),
-                  Text(text, style: TextStyle(color: Colors.black54, fontSize: 13)),
+                  Container(
+                    width: 100,
+                    alignment: Alignment.center,
+                    child: Marquee(
+                      animationDuration: Duration(seconds: 5),
+                      pauseDuration: Duration(seconds: 1),
+                      directionMarguee: DirectionMarguee.oneDirection,
+                      child: Text(text, style: TextStyle(color: Colors.black54, fontSize: 13)),
+                    ),
+                  ),
                 ],
               ),
               Expanded(child: viewRight()),
@@ -125,15 +135,21 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
   }
 
   Widget viewPre() {
-    return InkWell(child: Icon(Icons.first_page_rounded, color: Colors.orange, size: 40),onTap: (){
-      player.seekToPrevious();
-    },);
+    return InkWell(
+      child: Icon(Icons.first_page_rounded, color: Colors.orange, size: 40),
+      onTap: () {
+        player.seekToPrevious();
+      },
+    );
   }
 
   Widget viewNext() {
-    return InkWell(child: Icon(Icons.last_page_rounded, color: Colors.orange, size: 40),onTap: (){
-      player.seekToNext();
-    },);
+    return InkWell(
+      child: Icon(Icons.last_page_rounded, color: Colors.orange, size: 40),
+      onTap: () {
+        player.seekToNext();
+      },
+    );
   }
 
   Widget viewChapters() {

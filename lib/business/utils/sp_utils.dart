@@ -71,4 +71,13 @@ class SPUtils{
       return LoginBean.fromJson(jmap);
     }
   }
+
+
+  static savePlaySpeed(double playSpeed){
+    prefs?.setDouble("playSpeed", playSpeed);
+  }
+  static double getPlaySpeed(){
+    return prefs?.getDouble("playSpeed")??1.0;
+  }
+
 }
