@@ -1,21 +1,21 @@
-import 'package:logger/logger.dart';
+
+import 'package:flutter_logcat/flutter_logcat.dart';
 
 class LogUtils {
-  static var logger = Logger();
 
   static void log(String tag, String msg) {
-    logger.i("$tag>>>>>$msg");
+    Log.i(msg,tag: tag);
   }
 
   static void loge(String tag, String msg) {
-    logger.e("$tag>>>>>$msg");
+    Log.e(msg,tag: tag);
   }
 
   static void logd(String tag, String msg) {
-    logger.d("$tag>>>>>$msg");
+    Log.d(msg,tag: tag);
   }
 
   static void logw(String tag, String msg) {
-    logger.w("$tag>>>>>$msg");
+    Log.w(msg,tag: tag);
   }
 }

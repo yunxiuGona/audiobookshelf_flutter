@@ -3,6 +3,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../main.dart';
+import '../../events/play_status_event.dart';
 
 class HomeFloatingButtonView extends StatefulWidget {
   const HomeFloatingButtonView({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class HomeFloatingButtonView extends StatefulWidget {
 }
 
 class _HomeFloatingButtonViewState extends State<HomeFloatingButtonView> with WidgetsBindingObserver{
-  PlayButtonState playStatus = PlayButtonState.paused;
+  PlayButtonState _playStatus = PlayButtonState.paused;
   @override
   void initState() {
     super.initState();
@@ -21,21 +22,23 @@ class _HomeFloatingButtonViewState extends State<HomeFloatingButtonView> with Wi
   }
 
   initPlayerStatus(){
-    player.playerStateStream.listen((state) {
-      if(!mounted) {
-        return;
-      }
+    setState(() {
+      _playStatus = playStatus;
+    });
+    eventBus.on<PlayStatusEvent>().listen((event) {
+      if(mounted){
         setState(() {
-          playStatus = state.playing?PlayButtonState.playing:PlayButtonState.paused;
+          _playStatus = event.state;
         });
+      }
     });
   }
   @override
   Widget build(BuildContext context) {
     return AnimatedPlayButton(
-      state: playStatus,
+      state: _playStatus,
       onTap: (){
-        if(playStatus == PlayButtonState.playing){
+        if(_playStatus == PlayButtonState.playing){
           player.pause();
         }else{
           player.play();

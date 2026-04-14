@@ -1,5 +1,6 @@
 import 'package:audio_book/TAG.dart';
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
+import 'package:audio_book/business/events/play_status_event.dart';
 import 'package:audio_book/business/login/login.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
@@ -13,9 +14,11 @@ import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
 import 'C.dart';
 import 'business/home/home/home.dart';
+import 'business/widgets/animated_play_button.dart';
 
 EventBus eventBus = EventBus();
 final player = AudioPlayer();
+var playStatus = PlayButtonState.none;
 
 void main() async {
   eventBus = EventBus();
@@ -38,6 +41,32 @@ void main() async {
       print(e);
     }
   });
+  player.playerStateStream.listen((state) {
+    LogUtils.log(TAG.PLAYER_STATUS, "播放状态变更为："+player.playerState.toString());
+    if(state.playing){
+      playStatus = PlayButtonState.playing;
+    }else{
+      switch (state.processingState) {
+        case ProcessingState.idle:
+          playStatus = PlayButtonState.none;
+          break;
+        case ProcessingState.loading:
+          playStatus = PlayButtonState.loading;
+          break;
+        case ProcessingState.buffering:
+          playStatus = PlayButtonState.loading;
+          break;
+        case ProcessingState.ready:
+          playStatus = PlayButtonState.paused;
+          break;
+        case ProcessingState.completed:
+          playStatus = PlayButtonState.none;
+          break;
+      }
+    }
+    eventBus.fire(PlayStatusEvent(state: playStatus));
+  });
+
   player.setSpeed(SPUtils.getPlaySpeed());
   SPUtils.prefs = await SharedPreferences.getInstance();
   CacheUtils.prefs = await SharedPreferences.getInstance();

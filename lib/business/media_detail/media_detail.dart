@@ -38,8 +38,8 @@ class _MediaDetailState extends State<MediaDetail> {
 
   MediaProgress? mediaProgressBean;
   LibraryItemDetail? libraryItemDetailBean;
-  StreamSubscription? _playStatusSubscription;
-  PlayButtonState playStatus = PlayButtonState.none;
+  StreamSubscription? __playStatusSubscription;
+  PlayButtonState _playStatus = PlayButtonState.none;
 
   @override
   void initState() {
@@ -49,37 +49,21 @@ class _MediaDetailState extends State<MediaDetail> {
   }
 
   initPlayerStatus() {
-    player.playerStateStream.listen((state) {
-      setState(() {
-        if (state.playing) {
-          playStatus = PlayButtonState.playing;
-        } else {
-          switch (state.processingState) {
-            case ProcessingState.idle:
-              playStatus = PlayButtonState.none;
-              break;
-            case ProcessingState.loading:
-              playStatus = PlayButtonState.loading;
-              break;
-            case ProcessingState.buffering:
-              playStatus = PlayButtonState.loading;
-              break;
-            case ProcessingState.ready:
-              playStatus = PlayButtonState.loading;
-              break;
-            case ProcessingState.completed:
-              playStatus = PlayButtonState.none;
-              break;
-          }
-        }
-        // playStatus = state.playing ? PlayButtonState.playing : playStatus;
-      });
+    setState(() {
+      _playStatus = playStatus;
+    });
+    eventBus.on<PlayStatusEvent>().listen((event) {
+      if(mounted){
+        setState(() {
+          _playStatus = event.state;
+        });
+      }
     });
   }
 
   @override
   void dispose() {
-    _playStatusSubscription?.cancel();
+    __playStatusSubscription?.cancel();
     super.dispose();
   }
 
@@ -142,12 +126,12 @@ class _MediaDetailState extends State<MediaDetail> {
                   child: MediaDetailBottomView(
                     libraryItemDetailBean,
                     mediaProgressBean,
-                    playStatus,
+                    _playStatus,
                     onPlayTap: () async {
-                      if (playStatus == loading) {
+                      if (_playStatus == loading) {
                         return;
                       }
-                      if (playStatus == PlayButtonState.playing) {
+                      if (_playStatus == PlayButtonState.playing) {
                         player.pause();
                       } else {
                         doPlay(mediaProgressBean?.currentTime ?? 0.0);
@@ -165,7 +149,7 @@ class _MediaDetailState extends State<MediaDetail> {
 
   void doPlay(double playedDuration) async {
     setState(() {
-      playStatus = PlayButtonState.loading;
+      _playStatus = PlayButtonState.loading;
     });
     var currentIndex = getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles, playedDuration);
     var curMedia = libraryItemDetailBean?.media;

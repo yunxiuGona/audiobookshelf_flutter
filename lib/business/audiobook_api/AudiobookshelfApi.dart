@@ -121,17 +121,19 @@ class AudiobookshelfApi extends GetConnect {
     }else{
       timeListened = currentSecond-lastSyncSecond;
     }
-    if(timeListened<60)  //每分钟上报一次
-      return;
-    lastSyncSecond = currentSecond;
-    var resp = await post(headers: headers, "/audiobookshelf/api/session/$playItemID/sync", {"currentTime": duration, "timeListened": timeListened});
+    if(timeListened>60||lastSyncSecond==0)  //每分钟上报一次 or 第一次上报
+      {
+      lastSyncSecond = currentSecond;
+      var resp = await post(headers: headers, "/audiobookshelf/api/session/$playItemID/sync", {"currentTime": duration, "timeListened": timeListened});
 
-    LogUtils.log(TAG.AUDIO_API, "同步播放进度${resp.statusCode}：playItemID=$playItemID,currentTime=$duration,timeListened=$timeListened");
-    if (resp.status.code == OK) {
-      return true;
-    } else {
-      return false;
+      LogUtils.log(TAG.AUDIO_API, "同步播放进度${resp.statusCode}：playItemID=$playItemID,currentTime=$duration,timeListened=$timeListened");
+      if (resp.status.code == OK) {
+        return true;
+      } else {
+        return false;
+      }
     }
+
   }
 
   String getMediaCoverUrl(String mediaID) {
