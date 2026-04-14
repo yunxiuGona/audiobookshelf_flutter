@@ -18,8 +18,9 @@ class AnimatedPlayButton extends StatefulWidget {
   State<AnimatedPlayButton> createState() => _AnimatedPlayButtonState();
 }
 
-class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with SingleTickerProviderStateMixin {
+class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with TickerProviderStateMixin {
   late AnimationController _coverRotationController;
+  late AnimationController _iconRotationController;
   double _scale = 1.0;
   StreamSubscription? _indexStreamSubscription;
 
@@ -29,6 +30,7 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with SingleTick
   void initState() {
     super.initState();
     _coverRotationController = AnimationController(vsync: this, duration: Duration(seconds: 10), lowerBound: 0, upperBound: 1);
+    _iconRotationController = AnimationController(vsync: this, duration: Duration(seconds: 5), lowerBound: 0, upperBound: 1);
 
     _updateCoverRotationState();
 
@@ -68,10 +70,15 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with SingleTick
   void _updateCoverRotationState() {
     if (widget.state == PlayButtonState.playing && coverArt != null) {
       _coverRotationController.repeat();
+      _iconRotationController.stop();
+      _iconRotationController.reset();
     } else if (widget.state == PlayButtonState.loading) {
-      _coverRotationController.repeat();
+      _coverRotationController.stop();
+      _iconRotationController.repeat();
     } else {
       _coverRotationController.stop();
+      _iconRotationController.stop();
+      _iconRotationController.reset();
     }
   }
 
@@ -79,6 +86,7 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with SingleTick
   void dispose() {
     _indexStreamSubscription?.cancel();
     _coverRotationController.dispose();
+    _iconRotationController.dispose();
     super.dispose();
   }
 
@@ -128,7 +136,11 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with SingleTick
                 ),
               ],
             ),
-            child: Icon(iconData),
+            child: RotationTransition(
+              turns: _iconRotationController,
+              child: Icon(iconData),
+            )
+            // Icon(iconData),
           ),
         ),
       ],

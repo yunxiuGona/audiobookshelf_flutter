@@ -182,7 +182,6 @@ class _MediaDetailState extends State<MediaDetail> {
       return;
     }
     var listFiles = getRemainingAudioFiles(files, currentIndex);
-    var listFilesPased = getPasedAudioFiles(files, currentIndex);
     var audio_source_list = listFiles
         .map(
           (f) => AudioSource.uri(
@@ -195,6 +194,7 @@ class _MediaDetailState extends State<MediaDetail> {
               extras: {
                 "chapterStartDuration": media?.chapters?[currentIndex].start ?? 0.0, //当前章节开始时间
                 "playItemID": playMedia.id, //当前播放项ID
+                "seedDuration": (f.ino==curFile?.ino)?(playedDuration-(media?.chapters?[currentIndex].start??0.0) ?? 0.0):0.0, //当前播放项ID
               },
               artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
             ),

@@ -51,34 +51,39 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
       ),
       child: Stack(
         children: [
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+            Expanded(child: viewLeft()),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AnimatedPlayButton(
-                      state: widget.playStatus,
-                      onTap: () {
-                        if (widget.onPlayTap != null) {
-                          widget.onPlayTap!();
-                        }
-                      },
-                    ),
-                    Container(height: 10),
-                    Text(text, style: TextStyle(color: Colors.black54, fontSize: 13)),
-                  ],
+                AnimatedPlayButton(
+                  state: widget.playStatus,
+                  onTap: () {
+                    if (widget.onPlayTap != null) {
+                      widget.onPlayTap!();
+                    }
+                  },
                 ),
+                Container(height: 10),
+                Text(text, style: TextStyle(color: Colors.black54, fontSize: 13)),
               ],
             ),
-          ),
-          Container(width: double.infinity, height: double.infinity, padding: EdgeInsets.only(top: 20, right: 20), alignment: Alignment.topRight, child: viewChapters()),
+            Expanded(child: viewRight()),
+          ],),
+          Container(width: double.infinity, height: double.infinity, padding: EdgeInsets.only(top: 15, right: 20), alignment: Alignment.topRight, child: viewChapters()),
         ],
       ),
     );
   }
 
+  Widget viewLeft(){
+    return Container(color: Colors.red,height: 65,);
+  }
+  Widget viewRight(){
+    return Container(color: Colors.red,height: 65,);
+  }
   Widget viewChapters() {
     return InkWell(
       onTap: () {
@@ -86,7 +91,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
           widget.onChapterTap!();
         }
       },
-      child: Text("所有章节", style: TextStyle(color: Colors.orange, fontSize: 20)),
+      child: Icon(Icons.list,size: 40,color: Colors.orange,),
     );
   }
 }
