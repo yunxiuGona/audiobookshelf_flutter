@@ -126,7 +126,7 @@ class AudiobookshelfApi extends GetConnect {
       lastSyncSecond = currentSecond;
       var resp = await post(headers: headers, "/audiobookshelf/api/session/$playItemID/sync", {"currentTime": duration, "timeListened": timeListened});
 
-      LogUtils.log(TAG.AUDIO_API, "同步播放进度${resp.statusCode}：playItemID=$playItemID,currentTime=$duration,timeListened=$timeListened");
+      LogUtils.log(TAG.AUDIO_API_SYNC, "同步播放进度${resp.statusCode}：playItemID=$playItemID,currentTime=$duration,timeListened=$timeListened");
       if (resp.status.code == OK) {
         return true;
       } else {
