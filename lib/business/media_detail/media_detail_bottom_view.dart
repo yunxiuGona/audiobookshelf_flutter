@@ -33,11 +33,11 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
     if (widget.playStatus == PlayButtonState.none) {
       var p = widget.mediaProgress?.progress ?? 0.0;
       text = p > 0 ? "继续播放" : "从头播放";
-    } else if (widget.playStatus != PlayButtonState.loading) {
+    } else if (widget.playStatus == PlayButtonState.loading) {
       text = "加载中...";
-    } else if (widget.playStatus != PlayButtonState.playing) {
+    } else if (widget.playStatus == PlayButtonState.playing) {
       text = "播放中";
-    } else if (widget.playStatus != PlayButtonState.paused) {
+    } else if (widget.playStatus == PlayButtonState.paused) {
       text = "已暂停";
     }
 

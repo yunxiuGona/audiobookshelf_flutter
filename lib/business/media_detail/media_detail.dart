@@ -51,7 +51,28 @@ class _MediaDetailState extends State<MediaDetail> {
   initPlayerStatus() {
     player.playerStateStream.listen((state) {
       setState(() {
-        playStatus = state.playing ? PlayButtonState.playing : PlayButtonState.paused;
+        if (state.playing) {
+          playStatus = PlayButtonState.playing;
+        } else {
+          switch (state.processingState) {
+            case ProcessingState.idle:
+              playStatus = PlayButtonState.none;
+              break;
+            case ProcessingState.loading:
+              playStatus = PlayButtonState.loading;
+              break;
+            case ProcessingState.buffering:
+              playStatus = PlayButtonState.loading;
+              break;
+            case ProcessingState.ready:
+              playStatus = PlayButtonState.loading;
+              break;
+            case ProcessingState.completed:
+              playStatus = PlayButtonState.none;
+              break;
+          }
+        }
+        // playStatus = state.playing ? PlayButtonState.playing : playStatus;
       });
     });
   }
@@ -123,7 +144,7 @@ class _MediaDetailState extends State<MediaDetail> {
                     mediaProgressBean,
                     playStatus,
                     onPlayTap: () async {
-                      if(playStatus==loading){
+                      if (playStatus == loading) {
                         return;
                       }
                       if (playStatus == PlayButtonState.playing) {
@@ -143,7 +164,6 @@ class _MediaDetailState extends State<MediaDetail> {
   }
 
   void doPlay(double playedDuration) async {
-    // var playedDuration = mediaProgressBean?.currentTime ?? 0.0;
     setState(() {
       playStatus = PlayButtonState.loading;
     });
@@ -173,8 +193,8 @@ class _MediaDetailState extends State<MediaDetail> {
               title: "${media?.metadata?.title}",
               artist: f.metadata?.filename ?? "",
               extras: {
-                "chapterStartDuration":media?.chapters?[currentIndex].start??0.0,//当前章节开始时间
-                "playItemID":playMedia.id,//当前播放项ID
+                "chapterStartDuration": media?.chapters?[currentIndex].start ?? 0.0, //当前章节开始时间
+                "playItemID": playMedia.id, //当前播放项ID
               },
               artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
             ),
