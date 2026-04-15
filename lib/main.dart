@@ -33,9 +33,10 @@ void main() async {
       var map = mediaItem?.extras;
       if(map!=null){
         var playItemID=map["playItemID"] ?? "";
+        var fileIno=map["fileIno"] ?? "";
         var chapterStartDuration=map["chapterStartDuration"] as double;
         var currentSyncDuration = chapterStartDuration+position.inSeconds.toDouble();
-        AudiobookshelfApi().syncLibraryItemPlayDuration(playItemID, currentSyncDuration);
+        AudiobookshelfApi().syncLibraryItemPlayDuration(playItemID,fileIno, currentSyncDuration);
       }
     } catch (e) {
       print(e);

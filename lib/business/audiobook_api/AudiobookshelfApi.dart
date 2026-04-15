@@ -112,40 +112,47 @@ class AudiobookshelfApi extends GetConnect {
   }
 
   static var lastSyncSecond = 0;
-  var playItemID = "";
+  static String lastFileIno = "";
+  static String lastPlayItemID = "";
 
-  Future syncLibraryItemPlayDuration(String playItemID, double duration) async {
+  Future<bool> syncLibraryItemPlayDuration(String playItemID, String fileIno, double duration) async {
     initUserInfo();
-    var timeListened = 0;
-    if (playItemID != playItemID) {
-      lastSyncSecond = 0;
-    }
+    var timeListened = 0; // 可以根据实际情况计算
     var currentSecond = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-    //每隔一分钟传一次
-    if (lastSyncSecond != 0 && (currentSecond - lastSyncSecond) <= 10 * 1) {
-      return;
+    var shouldSync = false;
+    // 检查文件是否变化
+    if (!shouldSync && lastFileIno != fileIno) {
+      shouldSync = true;
+      lastFileIno = fileIno;
     }
-    if(lastSyncSecond==0){
-      timeListened = 0;
-    }else{
-      timeListened = currentSecond-lastSyncSecond;
+    // 检查播放项目是否变化
+    if (!shouldSync && lastPlayItemID != playItemID) {
+      shouldSync = true;
+      lastPlayItemID = playItemID;
     }
-    if(timeListened>60||lastSyncSecond==0)  //每分钟上报一次 or 第一次上报
-      {
+    // 检查是否首次调用
+    if (!shouldSync && lastSyncSecond == 0) {
+      shouldSync = true;
       lastSyncSecond = currentSecond;
-      var resp = await post(headers: headers, "/audiobookshelf/api/session/$playItemID/sync", {"currentTime": duration, "timeListened": timeListened});
-
-      final current = player.sequenceState.currentSource;
-      final mediaItem = current?.tag as MediaItem?;
-      var chapterInfo = mediaItem?.extras?["currentChapterInfo"] as String?;
-      LogUtils.log(TAG.AUDIO_API_SYNC, "同步播放进度${resp.statusCode}\nplayItemID=$playItemID\ncurrentTime=$duration\ntimeListened=$timeListened\n文件=${mediaItem?.artist}\n章节信息=${chapterInfo}");
-      if (resp.status.code == OK) {
-        return true;
-      } else {
-        return false;
-      }
     }
-
+    // 检查是否达到10秒间隔
+    if (!shouldSync && currentSecond - lastSyncSecond >= 10) {
+      shouldSync = true;
+    }
+    if (!shouldSync) {
+      return false;
+    }
+    lastSyncSecond = currentSecond;
+    var resp = await post(
+        headers: headers,
+        "/audiobookshelf/api/session/$playItemID/sync",
+        {"currentTime": duration, "timeListened": timeListened}
+    );
+    final current = player.sequenceState.currentSource;
+    final mediaItem = current?.tag as MediaItem?;
+    var chapterInfo = mediaItem?.extras?["currentChapterInfo"] as String?;
+    LogUtils.log(TAG.AUDIO_API_SYNC, "同步播放进度${resp.statusCode}\nplayItemID=$playItemID\ncurrentTime=$duration\ntimeListened=$timeListened\n文件=${mediaItem?.artist}\n章节信息=${chapterInfo}");
+    return resp.status.code == OK;
   }
 
   String getMediaCoverUrl(String mediaID) {

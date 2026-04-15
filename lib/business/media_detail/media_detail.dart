@@ -179,6 +179,7 @@ class _MediaDetailState extends State<MediaDetail> {
               artist: f.metadata?.filename ?? "",
               extras: {
                 "chapterStartDuration": media?.chapters?[currentIndex].start ?? 0.0, //当前章节开始时间
+                "fileIno": f.ino, //当前文件ID
                 "playItemID": playMedia.id, //当前播放项ID
                 "seedDuration": (f.ino==curFile?.ino)?(playedDuration-(media?.chapters?[currentIndex].start??0.0) ?? 0.0):0.0, //当前播放项ID
                 "currentChapterInfo": json.encode(media?.chapters?[currentIndex]??""), //当前播放项ID
