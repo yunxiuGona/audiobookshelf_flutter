@@ -117,7 +117,7 @@ class _MediaDetailState extends State<MediaDetail> {
 
                       /// 简介
                       MediaDetailDescriptionView(meta?.description ?? ""),
-                      const SizedBox(height: 140),
+                      const SizedBox(height: 240),
                     ],
                   ),
                 ),
@@ -135,7 +135,9 @@ class _MediaDetailState extends State<MediaDetail> {
                       }
                       if (_playStatus == PlayButtonState.playing) {
                         player.pause();
-                      } else {
+                      } else if(_playStatus == PlayButtonState.paused){
+                        player.play();
+                      }else{
                         doPlay(mediaProgressBean?.currentTime ?? 0.0);
                       }
                     },

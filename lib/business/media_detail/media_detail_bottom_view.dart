@@ -29,6 +29,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
   bool showSpeed = false;
 
   var speed = 1.0;
+
   @override
   void initState() {
     super.initState();
@@ -52,6 +53,45 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 20, bottom: 60),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        boxShadow: [BoxShadow(color: Colors.black12, spreadRadius: 0, blurRadius: 10, offset: Offset(0, -2))],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: 80,
+            child: Stack(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(child: viewLeft()),
+                    AnimatedPlayButton(
+                      state: widget.playStatus,
+                      onTap: () {
+                        if (widget.onPlayTap != null) {
+                          widget.onPlayTap!();
+                        }
+                      },
+                    ),
+                    Expanded(child: viewRight()),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Container(alignment: Alignment.center, height: 20, child: viewTitle()),
+        ],
+      ),
+    );
+  }
+
+  Widget viewTitle() {
     String text = "";
 
     if (widget.playStatus == PlayButtonState.none) {
@@ -66,49 +106,14 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
     } else if (widget.playStatus == PlayButtonState.paused) {
       text = "已暂停";
     }
-
     return Container(
-      height: 130,
-      padding: EdgeInsets.only(top: 20),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-        boxShadow: [BoxShadow(color: Colors.black12, spreadRadius: 0, blurRadius: 10, offset: Offset(0, -2))],
-      ),
-      child: Stack(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(child: viewLeft()),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AnimatedPlayButton(
-                    state: widget.playStatus,
-                    onTap: () {
-                      if (widget.onPlayTap != null) {
-                        widget.onPlayTap!();
-                      }
-                    },
-                  ),
-                  Container(height: 10),
-                  Container(
-                    width: 80,
-                    alignment: Alignment.center,
-                    child: Marquee(
-                      animationDuration: Duration(seconds: 5),
-                      pauseDuration: Duration(seconds: 1),
-                      directionMarguee: DirectionMarguee.oneDirection,
-                      child: Text(text, style: TextStyle(color: Colors.black54, fontSize: 13)),
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(child: viewRight()),
-            ],
-          ),
-        ],
+      width: 150,
+      alignment: Alignment.center,
+      child: Marquee(
+        animationDuration: Duration(seconds: 5),
+        pauseDuration: Duration(seconds: 1),
+        directionMarguee: DirectionMarguee.oneDirection,
+        child: Text(text, style: TextStyle(color: Colors.black54, fontSize: 13)),
       ),
     );
   }
@@ -136,40 +141,45 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
           Container(width: 10),
           (showNext) ? viewNext() : Container(),
           Expanded(child: Container()),
-          (showSpeed) ?viewSpeed():Container(),
-          Container(width: 10,),
+          (showSpeed) ? viewSpeed() : Container(),
+          Container(width: 10),
           viewChapters(),
-          Container(width: 10,)
+          Container(width: 10),
         ],
       ),
     );
   }
 
-  Widget viewSpeed(){
-    return InkWell(child: Container(child: Text("X${speed}",style: TextStyle(color: Colors.orange,fontSize: 17),),padding: EdgeInsets.all(5),),onTap: (){
-      switch(speed){
-        case 1.0:
-          speed=1.5;
-          break;
-        case 1.5:
-          speed=2.0;
-          break;
-        case 2.0:
-          speed=2.5;
-          break;
-        case 2.5:
-          speed=3.0;
-          break;
-        default:
-          speed=1.0;
-          break;
-      }
-      SPUtils.savePlaySpeed(speed);
-      player.setSpeed(speed);
-      setState(() {
-      });
-    },);
+  Widget viewSpeed() {
+    return InkWell(
+      child: Container(
+        child: Text("X${speed}", style: TextStyle(color: Colors.orange, fontSize: 17)),
+        padding: EdgeInsets.all(5),
+      ),
+      onTap: () {
+        switch (speed) {
+          case 1.0:
+            speed = 1.5;
+            break;
+          case 1.5:
+            speed = 2.0;
+            break;
+          case 2.0:
+            speed = 2.5;
+            break;
+          case 2.5:
+            speed = 2.75;
+          default:
+            speed = 1.0;
+            break;
+        }
+        SPUtils.savePlaySpeed(speed);
+        player.setSpeed(speed);
+        setState(() {});
+      },
+    );
   }
+
   Widget viewPre() {
     return InkWell(
       child: Icon(Icons.first_page_rounded, color: Colors.orange, size: 40),
