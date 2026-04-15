@@ -1,9 +1,13 @@
+import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import '../../../main.dart';
 import '../../events/play_status_event.dart';
+import '../../media_detail/media_detail.dart';
 
 class HomeFloatingButtonView extends StatefulWidget {
   const HomeFloatingButtonView({Key? key}) : super(key: key);
@@ -39,7 +43,7 @@ class _HomeFloatingButtonViewState extends State<HomeFloatingButtonView> with Wi
       state: _playStatus,
       onTap: (){
         if(_playStatus == PlayButtonState.playing){
-          player.pause();
+          Get.to(MediaDetail(PlayerUtils.getCurrentExtraMap()?["playItemLibraryID"]??""));
         }else{
           player.play();
         }

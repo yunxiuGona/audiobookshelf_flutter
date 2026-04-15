@@ -151,7 +151,11 @@ class AudiobookshelfApi extends GetConnect {
     final current = player.sequenceState.currentSource;
     final mediaItem = current?.tag as MediaItem?;
     var chapterInfo = mediaItem?.extras?["currentChapterInfo"] as String?;
-    LogUtils.log(TAG.AUDIO_API_SYNC, "同步播放进度${resp.statusCode}\nplayItemID=$playItemID\ncurrentTime=$duration\ntimeListened=$timeListened\n文件=${mediaItem?.artist}\n章节信息=${chapterInfo}");
+    var errorInfo="";
+    if(resp.status!=HttpStatus.ok){
+      errorInfo="\n错误信息："+resp.body;
+    }
+    LogUtils.log(TAG.AUDIO_API_SYNC, "同步播放进度${resp.statusCode}\nplayItemID=$playItemID\ncurrentTime=$duration\ntimeListened=$timeListened\n文件=${mediaItem?.artist}\n章节信息=${chapterInfo}$errorInfo");
     return resp.status.code == OK;
   }
 

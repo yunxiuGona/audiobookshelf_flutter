@@ -4,15 +4,15 @@ import 'package:audio_book/business/events/play_status_event.dart';
 import 'package:audio_book/business/login/login.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
+import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_awesome_logger/flutter_awesome_logger.dart';
 import 'package:get/get.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
-import 'C.dart';
 import 'business/events/play_position_event.dart';
 import 'business/home/home/home.dart';
 import 'business/widgets/animated_play_button.dart';
@@ -20,7 +20,8 @@ import 'business/widgets/animated_play_button.dart';
 EventBus eventBus = EventBus();
 final player = AudioPlayer();
 var playStatus = PlayButtonState.none;
-
+final navigatorKey = GlobalKey<NavigatorState>();
+var autoSeeking = 0.0;
 void main() async {
   eventBus = EventBus();
   await JustAudioBackground.init(androidNotificationChannelId: 'com.justlisten.listener', androidNotificationChannelName: 'Audio playback', androidNotificationOngoing: true);
@@ -29,16 +30,14 @@ void main() async {
    */
   player.positionStream.listen((position) {
     try {
-      final current = player.sequenceState.currentSource;
-      final mediaItem = current?.tag as MediaItem?;
-      var map = mediaItem?.extras;
+      var map = PlayerUtils.getCurrentExtraMap();
       if (map != null) {
         var playItemLibraryID = map["playItemLibraryID"] ?? "";
         var playItemMediaID = map["playItemMediaID"] ?? "";
         var fileIno = map["fileIno"] ?? "";
         var chapterStartDuration = map["chapterStartDuration"] as double;
         var currentSyncDuration = chapterStartDuration + position.inSeconds.toDouble();
-        eventBus.fire(PlayPositionEvent(playItemID: playItemMediaID, playItemLibraryID: playItemLibraryID, fileIno: fileIno, chapterStartDuration: chapterStartDuration, mediaItem: mediaItem, currentSyncDuration: currentSyncDuration));
+        eventBus.fire(PlayPositionEvent(playItemID: playItemMediaID, playItemLibraryID: playItemLibraryID, fileIno: fileIno, chapterStartDuration: chapterStartDuration, mediaItem: PlayerUtils.getCurrentMediaItem(), currentSyncDuration: currentSyncDuration));
         AudiobookshelfApi().syncLibraryItemPlayDuration(playItemMediaID, fileIno, currentSyncDuration);
       }
     } catch (e) {
@@ -46,7 +45,7 @@ void main() async {
     }
   });
   player.playerStateStream.listen((state) {
-    LogUtils.log(TAG.PLAYER_STATUS, "播放状态变更为：" + player.playerState.toString());
+    LogUtils.log(TAG.PLAYER_STATUS, "播放状态变更为：${player.playerState}");
     if (state.playing) {
       playStatus = PlayButtonState.playing;
     } else {
@@ -85,13 +84,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Just Listen',
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.white),
-        fontFamily: "AlibabaPuHuiTiSC",
+    return FlutterAwesomeLogger(
+      navigatorKey: navigatorKey, // Required if logger history page does not open on floating button press
+      child: GetMaterialApp(
+        title: 'Just Listen',
+        navigatorKey: navigatorKey,
+        theme: ThemeData(
+          colorScheme: .fromSeed(seedColor: Colors.white),
+          fontFamily: "AlibabaPuHuiTiSC",
+        ),
+        home: SPUtils.getUserData() != null ? Home() : Login(),
       ),
-      home: SPUtils.getUserData() != null ? Home() : Login(),
     );
   }
 }

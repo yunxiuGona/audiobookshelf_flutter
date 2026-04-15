@@ -1,21 +1,23 @@
 
-import 'package:flutter_logcat/flutter_logcat.dart';
+import 'package:flutter_awesome_logger/flutter_awesome_logger.dart';
 
 class LogUtils {
 
+  static final logger = FlutterAwesomeLogger.loggingUsingLogger;
+
   static void log(String tag, String msg) {
-    Log.i(msg,tag: tag);
+    logger.i(tag+">>"+msg);
   }
 
   static void loge(String tag, String msg) {
-    Log.e(msg,tag: tag);
+    logger.e(tag+">>"+msg);
   }
 
   static void logd(String tag, String msg) {
-    Log.d(msg,tag: tag);
+    logger.d(tag+">>"+msg);
   }
 
   static void logw(String tag, String msg) {
-    Log.w(msg,tag: tag);
+    logger.w(tag+">>"+msg);
   }
 }

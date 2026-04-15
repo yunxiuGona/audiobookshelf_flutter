@@ -182,28 +182,33 @@ class _MediaDetailState extends State<MediaDetail> {
     var listFiles = getRemainingAudioFiles(files, currentIndex);
     var audio_source_list = listFiles
         .map(
-          (f) => AudioSource.uri(
-            Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
-            tag: MediaItem(
-              id: "${media?.libraryItemId}_${playMedia.id}_${f.ino}",
-              album: "${media?.metadata?.title}",
-              title: "${media?.metadata?.title}",
-              artist: f.metadata?.filename ?? "",
-              extras: {
-                "chapterStartDuration": media?.chapters?[currentIndex].start ?? 0.0, //当前章节开始时间
-                "fileIno": f.ino, //当前文件ID
-                "playItemLibraryID": media?.libraryItemId, //当前播放项ID
-                "playItemMediaID": playMedia.id, //当前播放项ID
-                "seedDuration": (f.ino==curFile?.ino)?(playedDuration-(media?.chapters?[currentIndex].start??0.0) ?? 0.0):0.0, //当前播放项ID
-                "currentChapterInfo": json.encode(media?.chapters?[currentIndex]??""), //当前播放项ID
-              },
-              artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
-            ),
-          ),
+          (f){
+            autoSeeking = (f.ino == curFile?.ino)?(playedDuration-(media?.chapters?[currentIndex].start??0.0) ?? 0.0):0.0;
+            return AudioSource.uri(
+              Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
+              tag: MediaItem(
+                id: "${media?.libraryItemId}_${playMedia.id}_${f.ino}",
+                album: "${media?.metadata?.title}",
+                title: "${media?.metadata?.title}",
+                artist: f.metadata?.filename ?? "",
+                extras: {
+                  "chapterStartDuration": media?.chapters?[currentIndex].start ?? 0.0, //当前章节开始时间
+                  "fileIno": f.ino, //当前文件ID
+                  "playItemLibraryID": media?.libraryItemId, //当前播放项ID
+                  "playItemMediaID": playMedia.id, //当前播放项ID
+                  "seedDuration": (f.ino==curFile?.ino)?(playedDuration-(media?.chapters?[currentIndex].start??0.0) ?? 0.0):0.0, //当前播放项ID
+                  "currentChapterInfo": json.encode(media?.chapters?[currentIndex]??""), //当前播放项ID
+                },
+                artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
+              ),
+            );
+          },
         )
         .toList();
-    await player.setAudioSource(ConcatenatingAudioSource(children: audio_source_list));
-    player.play();
+    if(audio_source_list!=null){
+      await player.setAudioSource(ConcatenatingAudioSource(children: audio_source_list!));
+      player.play();
+    }
   }
 
   void initMediaStatus() async {
