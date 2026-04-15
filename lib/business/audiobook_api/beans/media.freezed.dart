@@ -15,7 +15,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Media {
 
-@JsonKey(name: 'id') String? get id;@JsonKey(name: 'libraryItemId') String? get libraryItemId;@JsonKey(name: 'metadata') MediaMetaData? get metadata;@JsonKey(name: 'coverPath') String? get coverPath;@JsonKey(name: 'tags') List<String>? get tags;@JsonKey(name: 'episodes') List<Episodes>? get episodes;@JsonKey(name: 'chapters') List<Chapter>? get chapters;@JsonKey(name: 'audioFiles') List<AudioFile>? get audioFiles;@JsonKey(name: 'tracks') List<Track>? get tracks;@JsonKey(name: 'autoDownloadEpisodes') bool? get autoDownloadEpisodes;@JsonKey(name: 'autoDownloadSchedule') String? get autoDownloadSchedule;@JsonKey(name: 'lastEpisodeCheck') int? get lastEpisodeCheck;@JsonKey(name: 'maxEpisodesToKeep') int? get maxEpisodesToKeep;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'maxNewEpisodesToDownload') int? get maxNewEpisodesToDownload;@JsonKey(name: 'size') int? get size;
+@JsonKey(name: 'id') String? get id;@JsonKey(name: 'libraryItemId') String? get libraryItemId;@JsonKey(name: 'metadata') MediaMetaData? get metadata;@JsonKey(name: 'coverPath') String? get coverPath;@JsonKey(name: 'tags') List<String>? get tags;@JsonKey(name: 'episodes') List<Episodes>? get episodes;@JsonKey(name: 'chapters') List<Chapter>? get chapters;@JsonKey(name: 'audioFiles') List<AudioFile>? get audioFiles;@JsonKey(name: 'tracks') List<Track>? get tracks;@JsonKey(name: 'autoDownloadEpisodes') bool? get autoDownloadEpisodes;@JsonKey(name: 'autoDownloadSchedule') String? get autoDownloadSchedule;@JsonKey(name: 'lastEpisodeCheck') int? get lastEpisodeCheck;@JsonKey(name: 'maxEpisodesToKeep') int? get maxEpisodesToKeep;@JsonKey(name: 'duration') double? get duration;//The total length (in seconds) of the book.
+@JsonKey(name: 'maxNewEpisodesToDownload') int? get maxNewEpisodesToDownload;@JsonKey(name: 'size') int? get size;
 /// Create a copy of Media
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -293,6 +294,7 @@ class _Media implements Media {
 @override@JsonKey(name: 'lastEpisodeCheck') final  int? lastEpisodeCheck;
 @override@JsonKey(name: 'maxEpisodesToKeep') final  int? maxEpisodesToKeep;
 @override@JsonKey(name: 'duration') final  double? duration;
+//The total length (in seconds) of the book.
 @override@JsonKey(name: 'maxNewEpisodesToDownload') final  int? maxNewEpisodesToDownload;
 @override@JsonKey(name: 'size') final  int? size;
 

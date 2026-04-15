@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:audio_book/main.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-enum PlayButtonState { none,playing, paused, loading }
+enum PlayButtonState { none,playing, paused, loading, buffing }
 
 class AnimatedPlayButton extends StatefulWidget {
   final double size;
@@ -72,7 +73,7 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with TickerProv
       _coverRotationController.repeat();
       _iconRotationController.stop();
       _iconRotationController.reset();
-    } else if (widget.state == PlayButtonState.loading) {
+    } else if (widget.state == PlayButtonState.loading || widget.state == PlayButtonState.buffing) {
       _coverRotationController.stop();
       _iconRotationController.repeat();
     } else {
@@ -100,7 +101,10 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with TickerProv
         iconData = Icons.play_arrow;
         break;
       case PlayButtonState.loading:
-        iconData = Icons.sync;
+        iconData = Icons.sync_sharp;
+        break;
+      case PlayButtonState.buffing:
+        iconData = Icons.sync_sharp;
         break;
       case PlayButtonState.none:
         iconData = Icons.play_arrow;

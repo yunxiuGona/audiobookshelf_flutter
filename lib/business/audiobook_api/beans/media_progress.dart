@@ -3,9 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'media_progress.freezed.dart';
 part 'media_progress.g.dart';
 
-@freezed
+@unfreezed
 abstract class MediaProgress with _$MediaProgress {
-  const factory MediaProgress({
+  factory MediaProgress({
     @JsonKey(name: 'id') String? id,
     @JsonKey(name: 'libraryItemId') String? libraryItemId,
     @JsonKey(name: 'episodeId') String? episodeId,

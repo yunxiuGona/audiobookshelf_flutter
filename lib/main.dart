@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
 import 'C.dart';
+import 'business/events/play_position_event.dart';
 import 'business/home/home/home.dart';
 import 'business/widgets/animated_play_button.dart';
 
@@ -31,22 +32,24 @@ void main() async {
       final current = player.sequenceState.currentSource;
       final mediaItem = current?.tag as MediaItem?;
       var map = mediaItem?.extras;
-      if(map!=null){
-        var playItemID=map["playItemID"] ?? "";
-        var fileIno=map["fileIno"] ?? "";
-        var chapterStartDuration=map["chapterStartDuration"] as double;
-        var currentSyncDuration = chapterStartDuration+position.inSeconds.toDouble();
-        AudiobookshelfApi().syncLibraryItemPlayDuration(playItemID,fileIno, currentSyncDuration);
+      if (map != null) {
+        var playItemLibraryID = map["playItemLibraryID"] ?? "";
+        var playItemMediaID = map["playItemMediaID"] ?? "";
+        var fileIno = map["fileIno"] ?? "";
+        var chapterStartDuration = map["chapterStartDuration"] as double;
+        var currentSyncDuration = chapterStartDuration + position.inSeconds.toDouble();
+        eventBus.fire(PlayPositionEvent(playItemID: playItemMediaID, playItemLibraryID: playItemLibraryID, fileIno: fileIno, chapterStartDuration: chapterStartDuration, mediaItem: mediaItem, currentSyncDuration: currentSyncDuration));
+        AudiobookshelfApi().syncLibraryItemPlayDuration(playItemMediaID, fileIno, currentSyncDuration);
       }
     } catch (e) {
       print(e);
     }
   });
   player.playerStateStream.listen((state) {
-    LogUtils.log(TAG.PLAYER_STATUS, "播放状态变更为："+player.playerState.toString());
-    if(state.playing){
+    LogUtils.log(TAG.PLAYER_STATUS, "播放状态变更为：" + player.playerState.toString());
+    if (state.playing) {
       playStatus = PlayButtonState.playing;
-    }else{
+    } else {
       switch (state.processingState) {
         case ProcessingState.idle:
           playStatus = PlayButtonState.none;

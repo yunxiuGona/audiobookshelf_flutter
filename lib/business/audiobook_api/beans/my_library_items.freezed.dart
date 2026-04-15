@@ -286,7 +286,10 @@ as List<LibraryItems>?,
 /// @nodoc
 mixin _$LibraryItems {
 
-@JsonKey(name: 'id') String? get id;@JsonKey(name: 'ino') String? get ino;@JsonKey(name: 'libraryId') String? get libraryId;@JsonKey(name: 'folderId') String? get folderId;@JsonKey(name: 'path') String? get path;@JsonKey(name: 'relPath') String? get relPath;@JsonKey(name: 'isFile') bool? get isFile;@JsonKey(name: 'mtimeMs') int? get mtimeMs;@JsonKey(name: 'ctimeMs') int? get ctimeMs;@JsonKey(name: 'birthtimeMs') int? get birthtimeMs;@JsonKey(name: 'addedAt') int? get addedAt;@JsonKey(name: 'updatedAt') int? get updatedAt;@JsonKey(name: 'isMissing') bool? get isMissing;@JsonKey(name: 'isInvalid') bool? get isInvalid;@JsonKey(name: 'mediaType') String? get mediaType;@JsonKey(name: 'media') Media? get media;@JsonKey(name: 'numFiles') int? get numFiles;@JsonKey(name: 'size') int? get size;@JsonKey(name: 'recentEpisode') RecentEpisode? get recentEpisode;@JsonKey(name: 'progressLastUpdate') int? get progressLastUpdate;
+@JsonKey(name: 'id') String? get id;@JsonKey(name: 'ino') String? get ino;@JsonKey(name: 'libraryId') String? get libraryId;@JsonKey(name: 'folderId') String? get folderId;@JsonKey(name: 'path') String? get path;@JsonKey(name: 'relPath') String? get relPath;@JsonKey(name: 'isFile') bool? get isFile;@JsonKey(name: 'mtimeMs') int? get mtimeMs;@JsonKey(name: 'ctimeMs') int? get ctimeMs;@JsonKey(name: 'birthtimeMs') int? get birthtimeMs;@JsonKey(name: 'addedAt') int? get addedAt;@JsonKey(name: 'updatedAt') int? get updatedAt;@JsonKey(name: 'isMissing') bool? get isMissing;@JsonKey(name: 'isInvalid') bool? get isInvalid;@JsonKey(name: 'mediaType') String? get mediaType;@JsonKey(name: 'media') Media? get media;@JsonKey(name: 'numFiles') int? get numFiles;//The number of library files for the library item.
+@JsonKey(name: 'size') int? get size;//	The total size (in bytes) of the library item.
+@JsonKey(name: 'recentEpisode') RecentEpisode? get recentEpisode;// Object	If the library item is for a podcast, the media progress's corresponding podcast episode. Will not exist for book library items.
+@JsonKey(name: 'progressLastUpdate') int? get progressLastUpdate;
 /// Create a copy of LibraryItems
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -543,8 +546,11 @@ class _LibraryItems implements LibraryItems {
 @override@JsonKey(name: 'mediaType') final  String? mediaType;
 @override@JsonKey(name: 'media') final  Media? media;
 @override@JsonKey(name: 'numFiles') final  int? numFiles;
+//The number of library files for the library item.
 @override@JsonKey(name: 'size') final  int? size;
+//	The total size (in bytes) of the library item.
 @override@JsonKey(name: 'recentEpisode') final  RecentEpisode? recentEpisode;
+// Object	If the library item is for a podcast, the media progress's corresponding podcast episode. Will not exist for book library items.
 @override@JsonKey(name: 'progressLastUpdate') final  int? progressLastUpdate;
 
 /// Create a copy of LibraryItems

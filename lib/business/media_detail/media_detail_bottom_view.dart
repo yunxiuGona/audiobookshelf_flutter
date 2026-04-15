@@ -54,7 +54,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 20, bottom: 60),
+      padding: EdgeInsets.only(top: 30, bottom: 90),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -63,7 +63,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
+          SizedBox(
             height: 80,
             child: Stack(
               children: [
@@ -144,7 +144,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
           (showSpeed) ? viewSpeed() : Container(),
           Container(width: 10),
           viewChapters(),
-          Container(width: 10),
+          Container(width: 15),
         ],
       ),
     );
@@ -182,7 +182,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
 
   Widget viewPre() {
     return InkWell(
-      child: Icon(Icons.first_page_rounded, color: Colors.orange, size: 40),
+      child: Icon(Icons.skip_previous_sharp, color: Colors.orange, size: 40),
       onTap: () {
         player.seekToPrevious();
       },
@@ -191,7 +191,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
 
   Widget viewNext() {
     return InkWell(
-      child: Icon(Icons.last_page_rounded, color: Colors.orange, size: 40),
+      child: Icon(Icons.skip_next_sharp, color: Colors.orange, size: 40),
       onTap: () {
         player.seekToNext();
       },

@@ -18,7 +18,7 @@ class MediaChapterList extends StatefulWidget {
 class _MediaChapterListState extends State<MediaChapterList> {
   final ScrollController _scrollController = ScrollController();
 
-  final ITEM_HEIGHT=56.0;
+  final ITEM_HEIGHT=60.0;
   @override
   void initState() {
     super.initState();

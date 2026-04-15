@@ -13,6 +13,7 @@ import 'dart:async';
 import '../audiobook_api/beans/library_item_detail.dart';
 import '../audiobook_api/beans/media.dart';
 import '../audiobook_api/beans/media_progress.dart';
+import '../events/play_position_event.dart';
 import '../events/play_status_event.dart';
 import '../widgets/loading_view.dart';
 import 'media_chapter_list.dart';
@@ -58,6 +59,15 @@ class _MediaDetailState extends State<MediaDetail> {
       if(mounted){
         setState(() {
           _playStatus = event.state;
+        });
+      }
+    });
+    eventBus.on<PlayPositionEvent>().listen((event) {
+      if(mounted){
+        if(event.playItemLibraryID?.isNotEmpty == true && event.playItemLibraryID == libraryItemDetailBean?.libraryId){
+          mediaProgressBean?.currentTime = event.currentSyncDuration;
+        }
+        setState(() {
         });
       }
     });
@@ -182,7 +192,8 @@ class _MediaDetailState extends State<MediaDetail> {
               extras: {
                 "chapterStartDuration": media?.chapters?[currentIndex].start ?? 0.0, //当前章节开始时间
                 "fileIno": f.ino, //当前文件ID
-                "playItemID": playMedia.id, //当前播放项ID
+                "playItemLibraryID": media?.libraryItemId, //当前播放项ID
+                "playItemMediaID": playMedia.id, //当前播放项ID
                 "seedDuration": (f.ino==curFile?.ino)?(playedDuration-(media?.chapters?[currentIndex].start??0.0) ?? 0.0):0.0, //当前播放项ID
                 "currentChapterInfo": json.encode(media?.chapters?[currentIndex]??""), //当前播放项ID
               },

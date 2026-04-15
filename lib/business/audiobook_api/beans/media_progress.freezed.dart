@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MediaProgress {
 
-@JsonKey(name: 'id') String? get id;@JsonKey(name: 'libraryItemId') String? get libraryItemId;@JsonKey(name: 'episodeId') String? get episodeId;@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'progress') double? get progress;@JsonKey(name: 'currentTime') double? get currentTime;@JsonKey(name: 'isFinished') bool? get isFinished;@JsonKey(name: 'hideFromContinueListening') bool? get hideFromContinueListening;@JsonKey(name: 'lastUpdate') int? get lastUpdate;@JsonKey(name: 'startedAt') int? get startedAt;@JsonKey(name: 'finishedAt') dynamic get finishedAt;
+@JsonKey(name: 'id') String? get id;@JsonKey(name: 'id') set id(String? value);@JsonKey(name: 'libraryItemId') String? get libraryItemId;@JsonKey(name: 'libraryItemId') set libraryItemId(String? value);@JsonKey(name: 'episodeId') String? get episodeId;@JsonKey(name: 'episodeId') set episodeId(String? value);@JsonKey(name: 'duration') double? get duration;@JsonKey(name: 'duration') set duration(double? value);@JsonKey(name: 'progress') double? get progress;@JsonKey(name: 'progress') set progress(double? value);@JsonKey(name: 'currentTime') double? get currentTime;@JsonKey(name: 'currentTime') set currentTime(double? value);@JsonKey(name: 'isFinished') bool? get isFinished;@JsonKey(name: 'isFinished') set isFinished(bool? value);@JsonKey(name: 'hideFromContinueListening') bool? get hideFromContinueListening;@JsonKey(name: 'hideFromContinueListening') set hideFromContinueListening(bool? value);@JsonKey(name: 'lastUpdate') int? get lastUpdate;@JsonKey(name: 'lastUpdate') set lastUpdate(int? value);@JsonKey(name: 'startedAt') int? get startedAt;@JsonKey(name: 'startedAt') set startedAt(int? value);@JsonKey(name: 'finishedAt') dynamic get finishedAt;@JsonKey(name: 'finishedAt') set finishedAt(dynamic value);
 /// Create a copy of MediaProgress
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,14 +26,7 @@ $MediaProgressCopyWith<MediaProgress> get copyWith => _$MediaProgressCopyWithImp
   Map<String, dynamic> toJson();
 
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MediaProgress&&(identical(other.id, id) || other.id == id)&&(identical(other.libraryItemId, libraryItemId) || other.libraryItemId == libraryItemId)&&(identical(other.episodeId, episodeId) || other.episodeId == episodeId)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.currentTime, currentTime) || other.currentTime == currentTime)&&(identical(other.isFinished, isFinished) || other.isFinished == isFinished)&&(identical(other.hideFromContinueListening, hideFromContinueListening) || other.hideFromContinueListening == hideFromContinueListening)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&const DeepCollectionEquality().equals(other.finishedAt, finishedAt));
-}
 
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,libraryItemId,episodeId,duration,progress,currentTime,isFinished,hideFromContinueListening,lastUpdate,startedAt,const DeepCollectionEquality().hash(finishedAt));
 
 @override
 String toString() {
@@ -219,20 +212,20 @@ return $default(_that.id,_that.libraryItemId,_that.episodeId,_that.duration,_tha
 @JsonSerializable()
 
 class _MediaProgress implements MediaProgress {
-  const _MediaProgress({@JsonKey(name: 'id') this.id, @JsonKey(name: 'libraryItemId') this.libraryItemId, @JsonKey(name: 'episodeId') this.episodeId, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'progress') this.progress, @JsonKey(name: 'currentTime') this.currentTime, @JsonKey(name: 'isFinished') this.isFinished, @JsonKey(name: 'hideFromContinueListening') this.hideFromContinueListening, @JsonKey(name: 'lastUpdate') this.lastUpdate, @JsonKey(name: 'startedAt') this.startedAt, @JsonKey(name: 'finishedAt') this.finishedAt});
+   _MediaProgress({@JsonKey(name: 'id') this.id, @JsonKey(name: 'libraryItemId') this.libraryItemId, @JsonKey(name: 'episodeId') this.episodeId, @JsonKey(name: 'duration') this.duration, @JsonKey(name: 'progress') this.progress, @JsonKey(name: 'currentTime') this.currentTime, @JsonKey(name: 'isFinished') this.isFinished, @JsonKey(name: 'hideFromContinueListening') this.hideFromContinueListening, @JsonKey(name: 'lastUpdate') this.lastUpdate, @JsonKey(name: 'startedAt') this.startedAt, @JsonKey(name: 'finishedAt') this.finishedAt});
   factory _MediaProgress.fromJson(Map<String, dynamic> json) => _$MediaProgressFromJson(json);
 
-@override@JsonKey(name: 'id') final  String? id;
-@override@JsonKey(name: 'libraryItemId') final  String? libraryItemId;
-@override@JsonKey(name: 'episodeId') final  String? episodeId;
-@override@JsonKey(name: 'duration') final  double? duration;
-@override@JsonKey(name: 'progress') final  double? progress;
-@override@JsonKey(name: 'currentTime') final  double? currentTime;
-@override@JsonKey(name: 'isFinished') final  bool? isFinished;
-@override@JsonKey(name: 'hideFromContinueListening') final  bool? hideFromContinueListening;
-@override@JsonKey(name: 'lastUpdate') final  int? lastUpdate;
-@override@JsonKey(name: 'startedAt') final  int? startedAt;
-@override@JsonKey(name: 'finishedAt') final  dynamic finishedAt;
+@override@JsonKey(name: 'id')  String? id;
+@override@JsonKey(name: 'libraryItemId')  String? libraryItemId;
+@override@JsonKey(name: 'episodeId')  String? episodeId;
+@override@JsonKey(name: 'duration')  double? duration;
+@override@JsonKey(name: 'progress')  double? progress;
+@override@JsonKey(name: 'currentTime')  double? currentTime;
+@override@JsonKey(name: 'isFinished')  bool? isFinished;
+@override@JsonKey(name: 'hideFromContinueListening')  bool? hideFromContinueListening;
+@override@JsonKey(name: 'lastUpdate')  int? lastUpdate;
+@override@JsonKey(name: 'startedAt')  int? startedAt;
+@override@JsonKey(name: 'finishedAt')  dynamic finishedAt;
 
 /// Create a copy of MediaProgress
 /// with the given fields replaced by the non-null parameter values.
@@ -245,14 +238,7 @@ Map<String, dynamic> toJson() {
   return _$MediaProgressToJson(this, );
 }
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MediaProgress&&(identical(other.id, id) || other.id == id)&&(identical(other.libraryItemId, libraryItemId) || other.libraryItemId == libraryItemId)&&(identical(other.episodeId, episodeId) || other.episodeId == episodeId)&&(identical(other.duration, duration) || other.duration == duration)&&(identical(other.progress, progress) || other.progress == progress)&&(identical(other.currentTime, currentTime) || other.currentTime == currentTime)&&(identical(other.isFinished, isFinished) || other.isFinished == isFinished)&&(identical(other.hideFromContinueListening, hideFromContinueListening) || other.hideFromContinueListening == hideFromContinueListening)&&(identical(other.lastUpdate, lastUpdate) || other.lastUpdate == lastUpdate)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&const DeepCollectionEquality().equals(other.finishedAt, finishedAt));
-}
 
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,id,libraryItemId,episodeId,duration,progress,currentTime,isFinished,hideFromContinueListening,lastUpdate,startedAt,const DeepCollectionEquality().hash(finishedAt));
 
 @override
 String toString() {
