@@ -4,11 +4,13 @@ import 'package:audio_book/business/audiobook_api/beans/all_library.dart';
 import 'package:audio_book/business/audiobook_api/beans/library.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/login_bean.dart';
+import 'package:audio_book/business/audiobook_api/beans/user_authorize.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SPUtils{
   static SharedPreferences? prefs;
   static LoginBean? userDatabean;
+  static UserAuthorize? userAuthInfoBean;
   static saveUserName(String userName){
     prefs?.setString("username", userName);
   }
@@ -69,6 +71,28 @@ class SPUtils{
     }else{
       userDatabean = LoginBean.fromJson(jmap);
       return LoginBean.fromJson(jmap);
+    }
+  }
+
+  static void saveUserAuthInfo(String jsonEncode) {
+    prefs?.setString("userAuthInfo", jsonEncode);
+    userAuthInfoBean = null;
+  }
+
+  static UserAuthorize? getUserAuthInfo() {
+    if (userAuthInfoBean != null) {
+      return userAuthInfoBean;
+    }
+    var json = prefs?.getString("userAuthInfo");
+    if (json == null || json.isEmpty) {
+      return null;
+    }
+    var jmap = jsonDecode(json);
+    if (jmap == null) {
+      return null;
+    } else {
+      userAuthInfoBean = UserAuthorize.fromJson(Map<String, Object?>.from(jmap));
+      return userAuthInfoBean;
     }
   }
 

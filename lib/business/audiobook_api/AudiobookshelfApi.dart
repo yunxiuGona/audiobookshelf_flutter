@@ -8,6 +8,7 @@ import 'package:audio_book/business/audiobook_api/beans/login_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
 import 'package:audio_book/business/audiobook_api/beans/my_library_items.dart';
 import 'package:audio_book/business/audiobook_api/beans/play_media.dart';
+import 'package:audio_book/business/audiobook_api/beans/user_authorize.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:audio_book/main.dart';
@@ -34,7 +35,7 @@ class AudiobookshelfApi extends GetConnect {
   }
 
   logout(String socketId) async {
-    var resp = await post(headers: headers, "/logout", {"socketId": socketId});
+    await post(headers: headers, "/logout", {"socketId": socketId});
   }
 
   Future<AllLibrary?> allLibrary() async {
@@ -106,6 +107,18 @@ class AudiobookshelfApi extends GetConnect {
     var resp = await get(headers: headers, "/api/me/items-in-progress");
     if (resp.status.code == OK) {
       return MyLibraryItems.fromJson(resp.body);
+    } else {
+      return null;
+    }
+  }
+
+  Future<UserAuthorize?> userAuthorize() async {
+    initUserInfo();
+    var resp = await post(headers: headers, "/audiobookshelf/api/authorize", {});
+    if (resp.status.code == OK && resp.body != null) {
+      final authInfo = UserAuthorize.fromJson(Map<String, dynamic>.from(resp.body));
+      SPUtils.saveUserAuthInfo(jsonEncode(authInfo));
+      return authInfo;
     } else {
       return null;
     }
