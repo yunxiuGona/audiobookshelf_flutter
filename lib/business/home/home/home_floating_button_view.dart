@@ -1,3 +1,4 @@
+import 'package:audio_book/business/player/player.dart';
 import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:audio_service/audio_service.dart';
@@ -43,7 +44,8 @@ class _HomeFloatingButtonViewState extends State<HomeFloatingButtonView> with Wi
       state: _playStatus,
       onTap: (){
         if(_playStatus == PlayButtonState.playing){
-          Get.to(MediaDetail(PlayerUtils.getCurrentExtraMap()?["playItemLibraryID"]??""));
+          // Get.to(MediaDetail(PlayerUtils.getCurrentExtraMap()?["playItemLibraryID"]??""));
+          Get.to(Player());
         }else{
           player.play();
         }
