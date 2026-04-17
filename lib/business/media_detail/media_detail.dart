@@ -84,7 +84,13 @@ class _MediaDetailState extends State<MediaDetail> {
     media = libraryItemDetailBean?.media;
     meta = libraryItemDetailBean?.media?.metadata;
     return Scaffold(
-      appBar: AppBar(title: Text("详情")),
+      backgroundColor: const Color(0xFFF6F7FB),
+      appBar: AppBar(
+        title: const Text("作品详情"),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+      ),
       body: loading
           ? LoadingView()
           : Stack(
@@ -93,40 +99,110 @@ class _MediaDetailState extends State<MediaDetail> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      /// 🔥 封面 + 基本信息
+                      const SizedBox(height: 8),
                       MediaDetailHeaderView(libraryItemDetailBean),
-                      SizedBox(height: 16),
-
-                      /// 📚 标题
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(meta?.title ?? "", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                      ),
-
-                      /// 副标题
-                      if ((meta?.subtitle ?? "").isNotEmpty)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: Text(meta!.subtitle!, style: const TextStyle(fontSize: 14, color: Colors.grey)),
-                        ),
-
-                      /// 作者 / 播音
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Text("作者：${meta?.authors.toString() ?? "-"}\n播音：${meta?.narrators.toString() ?? "-"}", style: const TextStyle(fontSize: 14)),
-                      ),
-                      const SizedBox(height: 12),
-
-                      /// 标签
-                      MediaDetailTagView(media?.tags ?? []),
-                      const SizedBox(height: 12),
-
-                      /// 数据信息
-                      MediaDetailStatsView(libraryItemDetailBean),
                       const SizedBox(height: 16),
 
-                      /// 简介
-                      MediaDetailDescriptionView(meta?.description ?? ""),
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 14,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              meta?.title ?? "",
+                              style: const TextStyle(
+                                fontSize: 22,
+                                height: 1.3,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFF1B1F2A),
+                              ),
+                            ),
+                            if ((meta?.subtitle ?? "").toString().isNotEmpty) ...[
+                              const SizedBox(height: 8),
+                              Text(
+                                (meta?.subtitle ?? "").toString(),
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  height: 1.4,
+                                  color: Color(0xFF6C7280),
+                                ),
+                              ),
+                            ],
+                            const SizedBox(height: 12),
+                            _buildMetaInfoRow(),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.03),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: MediaDetailTagView(media?.tags ?? []),
+                      ),
+                      const SizedBox(height: 12),
+
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.03),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: MediaDetailStatsView(libraryItemDetailBean),
+                      ),
+                      const SizedBox(height: 12),
+
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.03),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: MediaDetailDescriptionView(meta?.description ?? ""),
+                      ),
                       const SizedBox(height: 240),
                     ],
                   ),
@@ -135,29 +211,79 @@ class _MediaDetailState extends State<MediaDetail> {
                   width: double.infinity,
                   height: double.infinity,
                   alignment: Alignment.bottomCenter,
-                  child: MediaDetailBottomView(
-                    libraryItemDetailBean,
-                    mediaProgressBean,
-                    _playStatus,
-                    onPlayTap: () async {
-                      if (_playStatus == loading) {
-                        return;
-                      }
-                      if (_playStatus == PlayButtonState.playing) {
-                        player.pause();
-                      } else if(_playStatus == PlayButtonState.paused){
-                        player.play();
-                      }else{
-                        doPlay(mediaProgressBean?.currentTime ?? 0.0);
-                      }
-                    },
-                    onChapterTap: () {
-                      _showChapterList();
-                    },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.96),
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.08),
+                          blurRadius: 18,
+                          offset: const Offset(0, -4),
+                        ),
+                      ],
+                    ),
+                    child: MediaDetailBottomView(
+                      libraryItemDetailBean,
+                      mediaProgressBean,
+                      _playStatus,
+                      onPlayTap: () async {
+                        if (_playStatus == PlayButtonState.loading) {
+                          return;
+                        }
+                        if (_playStatus == PlayButtonState.playing) {
+                          player.pause();
+                        } else if(_playStatus == PlayButtonState.paused){
+                          player.play();
+                        }else{
+                          doPlay(mediaProgressBean?.currentTime ?? 0.0);
+                        }
+                      },
+                      onChapterTap: () {
+                        _showChapterList();
+                      },
+                    ),
                   ),
                 ),
               ],
             ),
+    );
+  }
+
+  Widget _buildMetaInfoRow() {
+    final authorNames = (meta?.authors ?? []).map((e) => e.name).whereType<String>().where((e) => e.isNotEmpty).join(" / ");
+    final narratorNames = (meta?.narrators ?? []).where((e) => e.isNotEmpty).join(" / ");
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(Icons.person_outline, size: 16, color: Color(0xFF8A93A6)),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Text(
+                "作者：${authorNames.isNotEmpty ? authorNames : "-"}",
+                style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(Icons.mic_none_outlined, size: 16, color: Color(0xFF8A93A6)),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Text(
+                "播音：${narratorNames.isNotEmpty ? narratorNames : "-"}",
+                style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -184,7 +310,7 @@ class _MediaDetailState extends State<MediaDetail> {
     var audio_source_list = listFiles
         .map(
           (f){
-            autoSeeking = (f.ino == curFile?.ino)?(playedDuration-(media?.chapters?[currentIndex].start??0.0) ?? 0.0):0.0;
+            autoSeeking = (f.ino == curFile?.ino) ? (playedDuration - (media?.chapters?[currentIndex].start ?? 0.0)) : 0.0;
             var a= AudioSource.uri(
               Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
               tag: MediaItem(
@@ -197,7 +323,7 @@ class _MediaDetailState extends State<MediaDetail> {
                   "fileIno": f.ino, //当前文件ID
                   "playItemLibraryID": media?.libraryItemId, //当前播放项ID
                   "playItemMediaID": playMedia.id, //当前播放项ID
-                  "seedDuration": (f.ino==curFile?.ino)?(playedDuration-(media?.chapters?[currentIndex].start??0.0) ?? 0.0):0.0, //当前播放项ID
+                  "seedDuration": (f.ino == curFile?.ino) ? (playedDuration - (media?.chapters?[currentIndex].start ?? 0.0)) : 0.0, //当前播放项ID
                   "currentChapterInfo": json.encode(media?.chapters?[indextmp]??""), //当前播放项ID
                 },
                 artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
@@ -208,10 +334,8 @@ class _MediaDetailState extends State<MediaDetail> {
           },
         )
         .toList();
-    if(audio_source_list!=null){
-      await player.setAudioSource(ConcatenatingAudioSource(children: audio_source_list!));
-      player.play();
-    }
+    await player.setAudioSource(ConcatenatingAudioSource(children: audio_source_list));
+    player.play();
   }
 
   void initMediaStatus() async {
@@ -272,7 +396,7 @@ class _MediaDetailState extends State<MediaDetail> {
     if (audiofileList == null || currentTime == null) return 0;
     var currentIndex = 0;
     var tmpAddDuration = 0.0;
-    for (int i = 0; i < (audiofileList.length ?? 0); i++) {
+    for (int i = 0; i < audiofileList.length; i++) {
       var file = audiofileList.elementAt(i);
       tmpAddDuration = tmpAddDuration + (file.duration ?? 0.0);
       if (tmpAddDuration > currentTime) {

@@ -54,7 +54,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 30, bottom: 90),
+      padding: EdgeInsets.only(top: 30, bottom: 30),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
