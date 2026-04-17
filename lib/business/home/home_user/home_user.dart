@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
 import '../../audiobook_api/beans/my_library_items.dart';
+import '../../audiobook_api/beans/user_collections_list.dart';
 import '../../audiobook_api/beans/user_authorize.dart';
 import '../../login/login.dart';
 import '../../utils/sp_utils.dart';
 import '../../utils/toast_utils.dart';
 import 'home_user_action_card.dart';
+import 'home_user_collections_view.dart';
 import 'home_user_history_card.dart';
 import 'home_user_profile_card.dart';
 import 'home_user_history_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../audiobook_api/AudiobookshelfApi.dart';
+import '../../audiobook_api/beans/user_collection_item.dart';
+import '../../collects/collects_in_set/collection_in_set.dart';
 
 class HomeUser extends StatefulWidget {
   const HomeUser({Key? key}) : super(key: key);
@@ -21,7 +25,9 @@ class HomeUser extends StatefulWidget {
 }
 
 class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
+  static const String _fallbackLibraryId = "26f127a9-c46e-499f-8bca-949c36baa607";
   MyLibraryItems? _myLibrary;
+  UserCollectionsList? _collections;
   UserAuthorize? _userAuthInfo;
   late RefreshController _refreshController;
 
@@ -31,6 +37,7 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     _refreshController = RefreshController(initialRefresh: false);
     _loadCache();
+    _loadCollections(showError: false);
   }
 
   @override
@@ -56,8 +63,13 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
   }
 
   Future<void> _onRefresh() async {
-    // 调用API获取最新的我的图书馆数据
-    var _resp_myLibrary = await AudiobookshelfApi().myLibraryItems();
+    await _loadCache();
+    // 并行刷新最近收听与收藏集
+    final results = await Future.wait([
+      AudiobookshelfApi().myLibraryItems(),
+      _loadCollections(showError: false),
+    ]);
+    final _resp_myLibrary = results[0] as MyLibraryItems?;
     if (_resp_myLibrary == null) {
       ToastUtils.showError(context, "获取我的图书馆数据失败");
       _refreshController.refreshFailed();
@@ -69,6 +81,21 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
       _loadCache();
     });
     _refreshController.refreshCompleted();
+  }
+
+  Future<void> _loadCollections({bool showError = true}) async {
+    final libraryId = _userAuthInfo?.userDefaultLibraryId ?? _fallbackLibraryId;
+    final resp = await AudiobookshelfApi().userCollectionsList(libraryId);
+    if (resp == null) {
+      if (showError && mounted) {
+        ToastUtils.showError(context, "获取收藏集失败");
+      }
+      return;
+    }
+    if (!mounted) return;
+    setState(() {
+      _collections = resp;
+    });
   }
 
   Future<void> _handleLogout() async {
@@ -101,7 +128,11 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
               HomeUserProfileCard(userAuthInfo: _userAuthInfo),
               const SizedBox(height: 14),
               HomeUserHistoryCard(child: HomeUserHistoryView(_myLibrary)),
-              Container(height: 100,),
+              const SizedBox(height: 14),
+              HomeUserCollectionsView(
+                collections: _collections,
+                onCollectionTap: _handleCollectionTap,
+              ),
               const SizedBox(height: 14),
               HomeUserActionCard(onLogoutTap: _handleLogout),
               const SizedBox(height: 14),
@@ -111,4 +142,9 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
       ),
     );
   }
+
+  void _handleCollectionTap(UserCollectionItem collection) {
+    Get.to(() => CollectionInSet(collection: collection));
+  }
+
 }

@@ -9,6 +9,7 @@ import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
 import 'package:audio_book/business/audiobook_api/beans/my_library_items.dart';
 import 'package:audio_book/business/audiobook_api/beans/play_media.dart';
 import 'package:audio_book/business/audiobook_api/beans/user_authorize.dart';
+import 'package:audio_book/business/audiobook_api/beans/user_collections_list.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:audio_book/main.dart';
@@ -59,6 +60,19 @@ class AudiobookshelfApi extends GetConnect {
     var resp = await get(headers: headers, "/api/libraries/${libraryID}/items");
     if (resp.status.code == OK) {
       return LibraryItemsBean.fromJson(resp.body);
+    } else {
+      return null;
+    }
+  }
+
+  Future<UserCollectionsList?> userCollectionsList(String libraryID) async {
+    initUserInfo();
+    var resp = await get(
+      headers: headers,
+      "/audiobookshelf/api/libraries/$libraryID/collections?limit=14&page=0&minified=1&include=rssfeed,numEpisodesIncomplete,share",
+    );
+    if (resp.status.code == OK && resp.body != null) {
+      return UserCollectionsList.fromJson(Map<String, dynamic>.from(resp.body));
     } else {
       return null;
     }
