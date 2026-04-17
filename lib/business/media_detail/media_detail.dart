@@ -56,19 +56,18 @@ class _MediaDetailState extends State<MediaDetail> {
       _playStatus = playStatus;
     });
     eventBus.on<PlayStatusEvent>().listen((event) {
-      if(mounted){
+      if (mounted) {
         setState(() {
           _playStatus = event.state;
         });
       }
     });
     eventBus.on<PlayPositionEvent>().listen((event) {
-      if(mounted){
-        if(event.playItemLibraryID?.isNotEmpty == true && event.playItemLibraryID == libraryItemDetailBean?.libraryId){
+      if (mounted) {
+        if (event.playItemLibraryID?.isNotEmpty == true && event.playItemLibraryID == libraryItemDetailBean?.libraryId) {
           mediaProgressBean?.currentTime = event.currentSyncDuration;
         }
-        setState(() {
-        });
+        setState(() {});
       }
     });
   }
@@ -85,12 +84,7 @@ class _MediaDetailState extends State<MediaDetail> {
     meta = libraryItemDetailBean?.media?.metadata;
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
-      appBar: AppBar(
-        title: const Text("作品详情"),
-        elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black87,
-      ),
+      appBar: AppBar(title: const Text("作品详情"), elevation: 0, backgroundColor: Colors.white, foregroundColor: Colors.black87),
       body: loading
           ? LoadingView()
           : Stack(
@@ -110,79 +104,51 @@ class _MediaDetailState extends State<MediaDetail> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.04),
-                              blurRadius: 14,
-                              offset: const Offset(0, 6),
-                            ),
-                          ],
+                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 14, offset: const Offset(0, 6))],
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               meta?.title ?? "",
-                              style: const TextStyle(
-                                fontSize: 22,
-                                height: 1.3,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFF1B1F2A),
-                              ),
+                              style: const TextStyle(fontSize: 22, height: 1.3, fontWeight: FontWeight.w700, color: Color(0xFF1B1F2A)),
                             ),
-                            if ((meta?.subtitle ?? "").toString().isNotEmpty) ...[
-                              const SizedBox(height: 8),
-                              Text(
-                                (meta?.subtitle ?? "").toString(),
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  height: 1.4,
-                                  color: Color(0xFF6C7280),
-                                ),
-                              ),
-                            ],
+                            if ((meta?.subtitle ?? "").toString().isNotEmpty) ...[const SizedBox(height: 8), Text((meta?.subtitle ?? "").toString(), style: const TextStyle(fontSize: 14, height: 1.4, color: Color(0xFF6C7280)))],
                             const SizedBox(height: 12),
                             _buildMetaInfoRow(),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      media?.tags?.isNotEmpty == true
+                          ? Container(
+                              padding: EdgeInsets.only(top: 12),
+                              child: Container(
+                                width: double.infinity,
+                                margin: const EdgeInsets.symmetric(horizontal: 12),
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 4))],
+                                ),
+                                child: MediaDetailTagView(media?.tags ?? []),
+                              ),
+                            )
+                          : Container(),
 
                       Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.symmetric(horizontal: 12),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.03),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
+                        padding: EdgeInsets.only(top: 12),
+                        child: Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.symmetric(horizontal: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 4))],
+                          ),
+                          child: MediaDetailStatsView(libraryItemDetailBean),
                         ),
-                        child: MediaDetailTagView(media?.tags ?? []),
-                      ),
-                      const SizedBox(height: 12),
-
-                      Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.symmetric(horizontal: 12),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.03),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: MediaDetailStatsView(libraryItemDetailBean),
                       ),
                       const SizedBox(height: 12),
 
@@ -193,13 +159,7 @@ class _MediaDetailState extends State<MediaDetail> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.03),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
+                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 4))],
                         ),
                         child: MediaDetailDescriptionView(meta?.description ?? ""),
                       ),
@@ -215,13 +175,7 @@ class _MediaDetailState extends State<MediaDetail> {
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.96),
                       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.08),
-                          blurRadius: 18,
-                          offset: const Offset(0, -4),
-                        ),
-                      ],
+                      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 18, offset: const Offset(0, -4))],
                     ),
                     child: MediaDetailBottomView(
                       libraryItemDetailBean,
@@ -233,9 +187,9 @@ class _MediaDetailState extends State<MediaDetail> {
                         }
                         if (_playStatus == PlayButtonState.playing) {
                           player.pause();
-                        } else if(_playStatus == PlayButtonState.paused){
+                        } else if (_playStatus == PlayButtonState.paused) {
                           player.play();
-                        }else{
+                        } else {
                           doPlay(mediaProgressBean?.currentTime ?? 0.0);
                         }
                       },
@@ -262,10 +216,7 @@ class _MediaDetailState extends State<MediaDetail> {
             const Icon(Icons.person_outline, size: 16, color: Color(0xFF8A93A6)),
             const SizedBox(width: 6),
             Expanded(
-              child: Text(
-                "作者：${authorNames.isNotEmpty ? authorNames : "-"}",
-                style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4),
-              ),
+              child: Text("作者：${authorNames.isNotEmpty ? authorNames : "-"}", style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4)),
             ),
           ],
         ),
@@ -276,10 +227,7 @@ class _MediaDetailState extends State<MediaDetail> {
             const Icon(Icons.mic_none_outlined, size: 16, color: Color(0xFF8A93A6)),
             const SizedBox(width: 6),
             Expanded(
-              child: Text(
-                "播音：${narratorNames.isNotEmpty ? narratorNames : "-"}",
-                style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4),
-              ),
+              child: Text("播音：${narratorNames.isNotEmpty ? narratorNames : "-"}", style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4)),
             ),
           ],
         ),
@@ -306,34 +254,30 @@ class _MediaDetailState extends State<MediaDetail> {
       return;
     }
     var listFiles = getRemainingAudioFiles(files, currentIndex);
-    var indextmp=currentIndex;
-    var audio_source_list = listFiles
-        .map(
-          (f){
-            autoSeeking = (f.ino == curFile?.ino) ? (playedDuration - (media?.chapters?[currentIndex].start ?? 0.0)) : 0.0;
-            var a= AudioSource.uri(
-              Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
-              tag: MediaItem(
-                id: "${media?.libraryItemId}_${playMedia.id}_${f.ino}",
-                album: "${media?.metadata?.title}",
-                title: "${media?.metadata?.title}",
-                artist: f.metadata?.filename ?? "",
-                extras: {
-                  "chapterStartDuration": media?.chapters?[indextmp].start ?? 0.0, //当前章节开始时间
-                  "fileIno": f.ino, //当前文件ID
-                  "playItemLibraryID": media?.libraryItemId, //当前播放项ID
-                  "playItemMediaID": playMedia.id, //当前播放项ID
-                  "seedDuration": (f.ino == curFile?.ino) ? (playedDuration - (media?.chapters?[currentIndex].start ?? 0.0)) : 0.0, //当前播放项ID
-                  "currentChapterInfo": json.encode(media?.chapters?[indextmp]??""), //当前播放项ID
-                },
-                artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
-              ),
-            );
-            indextmp++;
-            return a;
+    var indextmp = currentIndex;
+    var audio_source_list = listFiles.map((f) {
+      autoSeeking = (f.ino == curFile?.ino) ? (playedDuration - (media?.chapters?[currentIndex].start ?? 0.0)) : 0.0;
+      var a = AudioSource.uri(
+        Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
+        tag: MediaItem(
+          id: "${media?.libraryItemId}_${playMedia.id}_${f.ino}",
+          album: "${media?.metadata?.title}",
+          title: "${media?.metadata?.title}",
+          artist: f.metadata?.filename ?? "",
+          extras: {
+            "chapterStartDuration": media?.chapters?[indextmp].start ?? 0.0, //当前章节开始时间
+            "fileIno": f.ino, //当前文件ID
+            "playItemLibraryID": media?.libraryItemId, //当前播放项ID
+            "playItemMediaID": playMedia.id, //当前播放项ID
+            "seedDuration": (f.ino == curFile?.ino) ? (playedDuration - (media?.chapters?[currentIndex].start ?? 0.0)) : 0.0, //当前播放项ID
+            "currentChapterInfo": json.encode(media?.chapters?[indextmp] ?? ""), //当前播放项ID
           },
-        )
-        .toList();
+          artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
+        ),
+      );
+      indextmp++;
+      return a;
+    }).toList();
     await player.setAudioSource(ConcatenatingAudioSource(children: audio_source_list));
     player.play();
   }
@@ -417,5 +361,4 @@ class _MediaDetailState extends State<MediaDetail> {
     if (audiofileList == null || currentIndex < 0 || currentIndex >= audiofileList.length) return [];
     return audiofileList.sublist(currentIndex);
   }
-
 }
