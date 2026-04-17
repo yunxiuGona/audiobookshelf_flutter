@@ -1,0 +1,116 @@
+import 'package:flutter/material.dart';
+
+typedef LoginInputDecorationBuilder = InputDecoration Function({
+  required String label,
+  required IconData icon,
+  Widget? suffixIcon,
+});
+
+class LoginFormCard extends StatelessWidget {
+  const LoginFormCard({
+    super.key,
+    required this.usernameController,
+    required this.passwordController,
+    required this.obscurePassword,
+    required this.rememberMe,
+    required this.isLoading,
+    required this.inputDecorationBuilder,
+    required this.onTogglePasswordVisibility,
+    required this.onRememberMeChanged,
+    required this.onLoginPressed,
+  });
+
+  final TextEditingController usernameController;
+  final TextEditingController passwordController;
+  final bool obscurePassword;
+  final bool rememberMe;
+  final bool isLoading;
+  final LoginInputDecorationBuilder inputDecorationBuilder;
+  final VoidCallback onTogglePasswordVisibility;
+  final ValueChanged<bool> onRememberMeChanged;
+  final VoidCallback onLoginPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 18,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          TextField(
+            controller: usernameController,
+            keyboardType: TextInputType.name,
+            decoration: inputDecorationBuilder(label: "用户名", icon: Icons.person_outline_rounded),
+          ),
+          const SizedBox(height: 14),
+          TextField(
+            controller: passwordController,
+            obscureText: obscurePassword,
+            decoration: inputDecorationBuilder(
+              label: "密码",
+              icon: Icons.lock_outline_rounded,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                  color: Colors.grey.shade500,
+                ),
+                onPressed: onTogglePasswordVisibility,
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              Checkbox(
+                value: rememberMe,
+                activeColor: Colors.orange,
+                onChanged: (value) {
+                  onRememberMeChanged(value ?? false);
+                },
+              ),
+              const Text("记住密码"),
+            ],
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 50,
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: isLoading ? null : onLoginPressed,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                foregroundColor: Colors.white,
+                disabledBackgroundColor: Colors.orange.shade200,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                elevation: 0,
+              ),
+              child: isLoading
+                  ? const SizedBox(
+                      width: 22,
+                      height: 22,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.4,
+                        color: Colors.white,
+                      ),
+                    )
+                  : const Text(
+                      "登录",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
