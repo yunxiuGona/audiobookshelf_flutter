@@ -25,6 +25,7 @@ class _LoginState extends State<Login> {
   final TextEditingController _passwordController = TextEditingController();
   bool _rememberMe = false;
   bool _isLoading = false;
+  bool _isAutoAuthorizing = SPUtils.getUserData() != null;
   bool _obscurePassword = true;
 
   // 模拟网络登录函数
@@ -68,9 +69,44 @@ class _LoginState extends State<Login> {
     }
   }
 
+  Future<void> _autoAuthorizeIfNeeded() async {
+    if (SPUtils.getUserData() == null) {
+      _isAutoAuthorizing = false;
+      return;
+    }
+    _isAutoAuthorizing = true;
+    try {
+      final authInfo = await AudiobookshelfApi().userAuthorize();
+      if (!mounted) {
+        return;
+      }
+      if (authInfo != null) {
+        Get.off(() => Home());
+      } else {
+        ToastUtils.showError(context, "自动登录失败，请重新登录");
+        SPUtils.userDatabean = null;
+        SPUtils.saveUserData("");
+        setState(() {
+          _isAutoAuthorizing = false;
+        });
+      }
+    } catch (e) {
+      if (!mounted) {
+        return;
+      }
+      ToastUtils.showError(context, "自动登录失败: $e");
+      SPUtils.userDatabean = null;
+      SPUtils.saveUserData("");
+      setState(() {
+        _isAutoAuthorizing = false;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    _autoAuthorizeIfNeeded();
     Future.delayed(const Duration(milliseconds: 200), () {
       _usernameController.text = "wangyunxiu";
       _passwordController.text = "Wangyunxiu123";
@@ -126,25 +162,41 @@ class _LoginState extends State<Login> {
                   children: [
                     const LoginHeader(),
                     const SizedBox(height: 30),
-                    LoginFormCard(
-                      usernameController: _usernameController,
-                      passwordController: _passwordController,
-                      obscurePassword: _obscurePassword,
-                      rememberMe: _rememberMe,
-                      isLoading: _isLoading,
-                      inputDecorationBuilder: _inputDecoration,
-                      onTogglePasswordVisibility: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                      onRememberMeChanged: (value) {
-                        setState(() {
-                          _rememberMe = value;
-                        });
-                      },
-                      onLoginPressed: _handleLogin,
-                    ),
+                    if (_isAutoAuthorizing) ...[
+                      const SizedBox(height: 24),
+                      const Center(
+                        child: SizedBox(
+                          width: 34,
+                          height: 34,
+                          child: CircularProgressIndicator(strokeWidth: 2.8),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        "登录中，请稍候...",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
+                      ),
+                    ] else
+                      LoginFormCard(
+                        usernameController: _usernameController,
+                        passwordController: _passwordController,
+                        obscurePassword: _obscurePassword,
+                        rememberMe: _rememberMe,
+                        isLoading: _isLoading,
+                        inputDecorationBuilder: _inputDecoration,
+                        onTogglePasswordVisibility: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
+                        onRememberMeChanged: (value) {
+                          setState(() {
+                            _rememberMe = value;
+                          });
+                        },
+                        onLoginPressed: _handleLogin,
+                      ),
                     const SizedBox(height: 18),
                     const LoginAgreementText(),
                   ],

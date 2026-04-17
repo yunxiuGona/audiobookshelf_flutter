@@ -96,6 +96,17 @@ class SPUtils{
     }
   }
 
+  static void clearUserLoginInfo() {
+    userDatabean = null;
+    userAuthInfoBean = null;
+    prefs?.remove("userData");
+    prefs?.remove("userAuthInfo");
+    prefs?.remove("selectedLibrary");
+    prefs?.remove("lastAllLibraryCached");
+    prefs?.remove("username");
+    prefs?.remove("password");
+  }
+
 
   static savePlaySpeed(double playSpeed){
     prefs?.setDouble("playSpeed", playSpeed);

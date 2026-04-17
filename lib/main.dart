@@ -14,7 +14,6 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:just_audio/just_audio.dart';
 import 'business/events/play_position_event.dart';
-import 'business/home/home/home.dart';
 import 'business/widgets/animated_play_button.dart';
 
 EventBus eventBus = EventBus();
@@ -93,7 +92,7 @@ class MyApp extends StatelessWidget {
           colorScheme: .fromSeed(seedColor: Colors.white),
           fontFamily: "AlibabaPuHuiTiSC",
         ),
-        home: SPUtils.getUserData() != null ? Home() : Login(),
+        home: const Login(),
       ),
     );
   }

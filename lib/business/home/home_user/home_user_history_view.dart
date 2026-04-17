@@ -6,7 +6,7 @@ import '../../media_detail/media_detail.dart';
 import 'home_user_history_item_view.dart';
 
 class HomeUserHistoryView extends StatefulWidget {
-  MyLibraryItems? _myLibrary;
+  final MyLibraryItems? _myLibrary;
 
   HomeUserHistoryView(this._myLibrary, {Key? key}) : super(key: key);
 
@@ -21,8 +21,21 @@ class _HomeUserHistoryViewState extends State<HomeUserHistoryView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text("最近收听", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        SizedBox(height: 16),
+        Row(
+          children: [
+            Container(
+              width: 4,
+              height: 18,
+              decoration: BoxDecoration(
+                color: Colors.orange,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(width: 8),
+            const Text("最近收听", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          ],
+        ),
+        const SizedBox(height: 14),
         mianView(),
       ],
     );
@@ -30,7 +43,16 @@ class _HomeUserHistoryViewState extends State<HomeUserHistoryView> {
 
   Widget mianView() {
     if (widget._myLibrary?.libraryItems == null || widget._myLibrary!.libraryItems!.isEmpty) {
-      return Center(child: Text("暂无收听历史"));
+      return Container(
+        width: double.infinity,
+        height: 120,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.orange.withOpacity(0.06),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text("暂无收听历史", style: TextStyle(color: Colors.grey.shade700)),
+      );
     }
     return SizedBox(
       height: 200,
