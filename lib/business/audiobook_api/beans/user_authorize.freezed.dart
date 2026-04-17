@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'login_bean.dart';
+part of 'user_authorize.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'login_bean.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$LoginBean {
+mixin _$UserAuthorize {
 
 @JsonKey(name: 'user') User? get user;@JsonKey(name: 'userDefaultLibraryId') String? get userDefaultLibraryId;@JsonKey(name: 'serverSettings') ServerSettings? get serverSettings;@JsonKey(name: 'ereaderDevices') List<dynamic>? get ereaderDevices;@JsonKey(name: 'Source') String? get Source;
-/// Create a copy of LoginBean
+/// Create a copy of UserAuthorize
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$LoginBeanCopyWith<LoginBean> get copyWith => _$LoginBeanCopyWithImpl<LoginBean>(this as LoginBean, _$identity);
+$UserAuthorizeCopyWith<UserAuthorize> get copyWith => _$UserAuthorizeCopyWithImpl<UserAuthorize>(this as UserAuthorize, _$identity);
 
-  /// Serializes this LoginBean to a JSON map.
+  /// Serializes this UserAuthorize to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginBean&&(identical(other.user, user) || other.user == user)&&(identical(other.userDefaultLibraryId, userDefaultLibraryId) || other.userDefaultLibraryId == userDefaultLibraryId)&&(identical(other.serverSettings, serverSettings) || other.serverSettings == serverSettings)&&const DeepCollectionEquality().equals(other.ereaderDevices, ereaderDevices)&&(identical(other.Source, Source) || other.Source == Source));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserAuthorize&&(identical(other.user, user) || other.user == user)&&(identical(other.userDefaultLibraryId, userDefaultLibraryId) || other.userDefaultLibraryId == userDefaultLibraryId)&&(identical(other.serverSettings, serverSettings) || other.serverSettings == serverSettings)&&const DeepCollectionEquality().equals(other.ereaderDevices, ereaderDevices)&&(identical(other.Source, Source) || other.Source == Source));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,15 +37,15 @@ int get hashCode => Object.hash(runtimeType,user,userDefaultLibraryId,serverSett
 
 @override
 String toString() {
-  return 'LoginBean(user: $user, userDefaultLibraryId: $userDefaultLibraryId, serverSettings: $serverSettings, ereaderDevices: $ereaderDevices, Source: $Source)';
+  return 'UserAuthorize(user: $user, userDefaultLibraryId: $userDefaultLibraryId, serverSettings: $serverSettings, ereaderDevices: $ereaderDevices, Source: $Source)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $LoginBeanCopyWith<$Res>  {
-  factory $LoginBeanCopyWith(LoginBean value, $Res Function(LoginBean) _then) = _$LoginBeanCopyWithImpl;
+abstract mixin class $UserAuthorizeCopyWith<$Res>  {
+  factory $UserAuthorizeCopyWith(UserAuthorize value, $Res Function(UserAuthorize) _then) = _$UserAuthorizeCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'user') User? user,@JsonKey(name: 'userDefaultLibraryId') String? userDefaultLibraryId,@JsonKey(name: 'serverSettings') ServerSettings? serverSettings,@JsonKey(name: 'ereaderDevices') List<dynamic>? ereaderDevices,@JsonKey(name: 'Source') String? Source
@@ -56,14 +56,14 @@ $UserCopyWith<$Res>? get user;$ServerSettingsCopyWith<$Res>? get serverSettings;
 
 }
 /// @nodoc
-class _$LoginBeanCopyWithImpl<$Res>
-    implements $LoginBeanCopyWith<$Res> {
-  _$LoginBeanCopyWithImpl(this._self, this._then);
+class _$UserAuthorizeCopyWithImpl<$Res>
+    implements $UserAuthorizeCopyWith<$Res> {
+  _$UserAuthorizeCopyWithImpl(this._self, this._then);
 
-  final LoginBean _self;
-  final $Res Function(LoginBean) _then;
+  final UserAuthorize _self;
+  final $Res Function(UserAuthorize) _then;
 
-/// Create a copy of LoginBean
+/// Create a copy of UserAuthorize
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? user = freezed,Object? userDefaultLibraryId = freezed,Object? serverSettings = freezed,Object? ereaderDevices = freezed,Object? Source = freezed,}) {
   return _then(_self.copyWith(
@@ -75,7 +75,7 @@ as List<dynamic>?,Source: freezed == Source ? _self.Source : Source // ignore: c
 as String?,
   ));
 }
-/// Create a copy of LoginBean
+/// Create a copy of UserAuthorize
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ $UserCopyWith<$Res>? get user {
   return $UserCopyWith<$Res>(_self.user!, (value) {
     return _then(_self.copyWith(user: value));
   });
-}/// Create a copy of LoginBean
+}/// Create a copy of UserAuthorize
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -103,8 +103,8 @@ $ServerSettingsCopyWith<$Res>? get serverSettings {
 }
 
 
-/// Adds pattern-matching-related methods to [LoginBean].
-extension LoginBeanPatterns on LoginBean {
+/// Adds pattern-matching-related methods to [UserAuthorize].
+extension UserAuthorizePatterns on UserAuthorize {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -117,10 +117,10 @@ extension LoginBeanPatterns on LoginBean {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LoginBean value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _UserAuthorize value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _LoginBean() when $default != null:
+case _UserAuthorize() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -139,10 +139,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LoginBean value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _UserAuthorize value)  $default,){
 final _that = this;
 switch (_that) {
-case _LoginBean():
+case _UserAuthorize():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -160,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LoginBean value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _UserAuthorize value)?  $default,){
 final _that = this;
 switch (_that) {
-case _LoginBean() when $default != null:
+case _UserAuthorize() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -183,7 +183,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'user')  User? user, @JsonKey(name: 'userDefaultLibraryId')  String? userDefaultLibraryId, @JsonKey(name: 'serverSettings')  ServerSettings? serverSettings, @JsonKey(name: 'ereaderDevices')  List<dynamic>? ereaderDevices, @JsonKey(name: 'Source')  String? Source)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _LoginBean() when $default != null:
+case _UserAuthorize() when $default != null:
 return $default(_that.user,_that.userDefaultLibraryId,_that.serverSettings,_that.ereaderDevices,_that.Source);case _:
   return orElse();
 
@@ -204,7 +204,7 @@ return $default(_that.user,_that.userDefaultLibraryId,_that.serverSettings,_that
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'user')  User? user, @JsonKey(name: 'userDefaultLibraryId')  String? userDefaultLibraryId, @JsonKey(name: 'serverSettings')  ServerSettings? serverSettings, @JsonKey(name: 'ereaderDevices')  List<dynamic>? ereaderDevices, @JsonKey(name: 'Source')  String? Source)  $default,) {final _that = this;
 switch (_that) {
-case _LoginBean():
+case _UserAuthorize():
 return $default(_that.user,_that.userDefaultLibraryId,_that.serverSettings,_that.ereaderDevices,_that.Source);case _:
   throw StateError('Unexpected subclass');
 
@@ -224,7 +224,7 @@ return $default(_that.user,_that.userDefaultLibraryId,_that.serverSettings,_that
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'user')  User? user, @JsonKey(name: 'userDefaultLibraryId')  String? userDefaultLibraryId, @JsonKey(name: 'serverSettings')  ServerSettings? serverSettings, @JsonKey(name: 'ereaderDevices')  List<dynamic>? ereaderDevices, @JsonKey(name: 'Source')  String? Source)?  $default,) {final _that = this;
 switch (_that) {
-case _LoginBean() when $default != null:
+case _UserAuthorize() when $default != null:
 return $default(_that.user,_that.userDefaultLibraryId,_that.serverSettings,_that.ereaderDevices,_that.Source);case _:
   return null;
 
@@ -236,9 +236,9 @@ return $default(_that.user,_that.userDefaultLibraryId,_that.serverSettings,_that
 /// @nodoc
 @JsonSerializable()
 
-class _LoginBean implements LoginBean {
-  const _LoginBean({@JsonKey(name: 'user') this.user, @JsonKey(name: 'userDefaultLibraryId') this.userDefaultLibraryId, @JsonKey(name: 'serverSettings') this.serverSettings, @JsonKey(name: 'ereaderDevices') final  List<dynamic>? ereaderDevices, @JsonKey(name: 'Source') this.Source}): _ereaderDevices = ereaderDevices;
-  factory _LoginBean.fromJson(Map<String, dynamic> json) => _$LoginBeanFromJson(json);
+class _UserAuthorize implements UserAuthorize {
+  const _UserAuthorize({@JsonKey(name: 'user') this.user, @JsonKey(name: 'userDefaultLibraryId') this.userDefaultLibraryId, @JsonKey(name: 'serverSettings') this.serverSettings, @JsonKey(name: 'ereaderDevices') final  List<dynamic>? ereaderDevices, @JsonKey(name: 'Source') this.Source}): _ereaderDevices = ereaderDevices;
+  factory _UserAuthorize.fromJson(Map<String, dynamic> json) => _$UserAuthorizeFromJson(json);
 
 @override@JsonKey(name: 'user') final  User? user;
 @override@JsonKey(name: 'userDefaultLibraryId') final  String? userDefaultLibraryId;
@@ -254,20 +254,20 @@ class _LoginBean implements LoginBean {
 
 @override@JsonKey(name: 'Source') final  String? Source;
 
-/// Create a copy of LoginBean
+/// Create a copy of UserAuthorize
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$LoginBeanCopyWith<_LoginBean> get copyWith => __$LoginBeanCopyWithImpl<_LoginBean>(this, _$identity);
+_$UserAuthorizeCopyWith<_UserAuthorize> get copyWith => __$UserAuthorizeCopyWithImpl<_UserAuthorize>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$LoginBeanToJson(this, );
+  return _$UserAuthorizeToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginBean&&(identical(other.user, user) || other.user == user)&&(identical(other.userDefaultLibraryId, userDefaultLibraryId) || other.userDefaultLibraryId == userDefaultLibraryId)&&(identical(other.serverSettings, serverSettings) || other.serverSettings == serverSettings)&&const DeepCollectionEquality().equals(other._ereaderDevices, _ereaderDevices)&&(identical(other.Source, Source) || other.Source == Source));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserAuthorize&&(identical(other.user, user) || other.user == user)&&(identical(other.userDefaultLibraryId, userDefaultLibraryId) || other.userDefaultLibraryId == userDefaultLibraryId)&&(identical(other.serverSettings, serverSettings) || other.serverSettings == serverSettings)&&const DeepCollectionEquality().equals(other._ereaderDevices, _ereaderDevices)&&(identical(other.Source, Source) || other.Source == Source));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -276,15 +276,15 @@ int get hashCode => Object.hash(runtimeType,user,userDefaultLibraryId,serverSett
 
 @override
 String toString() {
-  return 'LoginBean(user: $user, userDefaultLibraryId: $userDefaultLibraryId, serverSettings: $serverSettings, ereaderDevices: $ereaderDevices, Source: $Source)';
+  return 'UserAuthorize(user: $user, userDefaultLibraryId: $userDefaultLibraryId, serverSettings: $serverSettings, ereaderDevices: $ereaderDevices, Source: $Source)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$LoginBeanCopyWith<$Res> implements $LoginBeanCopyWith<$Res> {
-  factory _$LoginBeanCopyWith(_LoginBean value, $Res Function(_LoginBean) _then) = __$LoginBeanCopyWithImpl;
+abstract mixin class _$UserAuthorizeCopyWith<$Res> implements $UserAuthorizeCopyWith<$Res> {
+  factory _$UserAuthorizeCopyWith(_UserAuthorize value, $Res Function(_UserAuthorize) _then) = __$UserAuthorizeCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'user') User? user,@JsonKey(name: 'userDefaultLibraryId') String? userDefaultLibraryId,@JsonKey(name: 'serverSettings') ServerSettings? serverSettings,@JsonKey(name: 'ereaderDevices') List<dynamic>? ereaderDevices,@JsonKey(name: 'Source') String? Source
@@ -295,17 +295,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$LoginBeanCopyWithImpl<$Res>
-    implements _$LoginBeanCopyWith<$Res> {
-  __$LoginBeanCopyWithImpl(this._self, this._then);
+class __$UserAuthorizeCopyWithImpl<$Res>
+    implements _$UserAuthorizeCopyWith<$Res> {
+  __$UserAuthorizeCopyWithImpl(this._self, this._then);
 
-  final _LoginBean _self;
-  final $Res Function(_LoginBean) _then;
+  final _UserAuthorize _self;
+  final $Res Function(_UserAuthorize) _then;
 
-/// Create a copy of LoginBean
+/// Create a copy of UserAuthorize
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? user = freezed,Object? userDefaultLibraryId = freezed,Object? serverSettings = freezed,Object? ereaderDevices = freezed,Object? Source = freezed,}) {
-  return _then(_LoginBean(
+  return _then(_UserAuthorize(
 user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as User?,userDefaultLibraryId: freezed == userDefaultLibraryId ? _self.userDefaultLibraryId : userDefaultLibraryId // ignore: cast_nullable_to_non_nullable
 as String?,serverSettings: freezed == serverSettings ? _self.serverSettings : serverSettings // ignore: cast_nullable_to_non_nullable
@@ -315,7 +315,7 @@ as String?,
   ));
 }
 
-/// Create a copy of LoginBean
+/// Create a copy of UserAuthorize
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -327,7 +327,7 @@ $UserCopyWith<$Res>? get user {
   return $UserCopyWith<$Res>(_self.user!, (value) {
     return _then(_self.copyWith(user: value));
   });
-}/// Create a copy of LoginBean
+}/// Create a copy of UserAuthorize
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
