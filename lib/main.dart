@@ -27,7 +27,6 @@ EventBus eventBus = EventBus();
 final player = AudioPlayer();
 var playStatus = PlayButtonState.none;
 final navigatorKey = GlobalKey<NavigatorState>();
-var autoSeeking = 0.0;
 void main() async {
   eventBus = EventBus();
   await JustAudioBackground.init(androidNotificationChannelId: 'com.justlisten.listener', androidNotificationChannelName: 'Audio playback', androidNotificationOngoing: true);

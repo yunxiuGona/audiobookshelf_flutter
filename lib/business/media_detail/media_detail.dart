@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/audio_file.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
 import 'package:audio_book/business/player/player.dart';
+import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:audio_book/main.dart';
@@ -241,46 +240,35 @@ class _MediaDetailState extends State<MediaDetail> {
     setState(() {
       _playStatus = PlayButtonState.loading;
     });
-    var currentIndex = getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles, playedDuration);
-    var curMedia = libraryItemDetailBean?.media;
-    var files = libraryItemDetailBean?.media?.audioFiles;
-    var curFile = files?.elementAt(currentIndex >= files.length ? (files.length - 1) : currentIndex);
+    final files = libraryItemDetailBean?.media?.audioFiles;
+    var currentIndex = PlayerUtils.audioFileIndexForPlaybackSeconds(files, playedDuration);
+    var curFile = PlayerUtils.clampedAudioFileAt(files, currentIndex);
     if (curFile == null) {
       ToastUtils.showInfo(context, "从头开始播放");
       currentIndex = 0;
-      curFile = files?.elementAt(currentIndex);
+      curFile = PlayerUtils.clampedAudioFileAt(files, currentIndex);
     }
-    var playMedia = await AudiobookshelfApi().playMedia(media?.libraryItemId ?? "");
+    final book = libraryItemDetailBean?.media;
+    if (book == null || curFile == null) {
+      ToastUtils.showError(context, "播放失败");
+      return;
+    }
+    final playMedia = await AudiobookshelfApi().playMedia(media?.libraryItemId ?? "");
     if (playMedia == null) {
       ToastUtils.showError(context, "播放失败");
       return;
     }
-    var listFiles = getRemainingAudioFiles(files, currentIndex);
-    var indextmp = currentIndex;
-    var audio_source_list = listFiles.map((f) {
-      autoSeeking = (f.ino == curFile?.ino) ? (playedDuration - (media?.chapters?[currentIndex].start ?? 0.0)) : 0.0;
-      var a = AudioSource.uri(
-        Uri.parse(AudiobookshelfApi().getMediaFileURL(libraryItemDetailBean?.id ?? "", f.ino ?? "")),
-        tag: MediaItem(
-          id: "${media?.libraryItemId}_${playMedia.id}_${f.ino}",
-          album: "${media?.metadata?.title}",
-          title: "${media?.metadata?.title}",
-          artist: f.metadata?.filename ?? "",
-          extras: {
-            "chapterStartDuration": media?.chapters?[indextmp].start ?? 0.0, //当前章节开始时间
-            "fileIno": f.ino, //当前文件ID
-            "playItemLibraryID": media?.libraryItemId, //当前播放项ID
-            "playItemMediaID": playMedia.id, //当前播放项ID
-            "seedDuration": (f.ino == curFile?.ino) ? (playedDuration - (media?.chapters?[currentIndex].start ?? 0.0)) : 0.0, //当前播放项ID
-            "currentChapterInfo": json.encode(media?.chapters?[indextmp] ?? ""), //当前播放项ID
-          },
-          artUri: Uri.parse(AudiobookshelfApi().getMediaCoverUrl(curMedia?.libraryItemId ?? "")),
-        ),
-      );
-      indextmp++;
-      return a;
-    }).toList();
-    await player.setAudioSource(ConcatenatingAudioSource(children: audio_source_list));
+    final listFiles = PlayerUtils.audioFilesFromIndex(files, currentIndex);
+    final built = PlayerUtils.buildAudiobookshelfPlaybackAudioSources(
+      media: book,
+      libraryItemIdForStreamUrls: libraryItemDetailBean?.id ?? '',
+      playSession: playMedia,
+      filesFromProgress: listFiles,
+      playlistStartFileIndex: currentIndex,
+      playedDurationSeconds: playedDuration,
+      currentFile: curFile,
+    );
+    await player.setAudioSource(ConcatenatingAudioSource(children: built.sources));
     player.play();
   }
 
@@ -307,7 +295,7 @@ class _MediaDetailState extends State<MediaDetail> {
           height: MediaQuery.of(context).size.height * 0.7,
           child: MediaChapterList(
             chapters: libraryItemDetailBean?.media?.chapters,
-            indexProcessing: getCurrentFileIndexInProgress(libraryItemDetailBean?.media?.audioFiles, mediaProgressBean?.currentTime),
+            indexProcessing: PlayerUtils.audioFileIndexForPlaybackSeconds(libraryItemDetailBean?.media?.audioFiles, mediaProgressBean?.currentTime),
             onChapterTap: (index) {
               Navigator.pop(context);
               _playChapter(index);
@@ -338,29 +326,4 @@ class _MediaDetailState extends State<MediaDetail> {
     doPlay(playedDuration);
   }
 
-  int getCurrentFileIndexInProgress(List<AudioFile>? audiofileList, double? currentTime) {
-    if (audiofileList == null || currentTime == null) return 0;
-    var currentIndex = 0;
-    var tmpAddDuration = 0.0;
-    for (int i = 0; i < audiofileList.length; i++) {
-      var file = audiofileList.elementAt(i);
-      tmpAddDuration = tmpAddDuration + (file.duration ?? 0.0);
-      if (tmpAddDuration > currentTime) {
-        break;
-      } else {
-        currentIndex++;
-      }
-    }
-    return currentIndex;
-  }
-
-  List<AudioFile> getPasedAudioFiles(List<AudioFile>? audiofileList, int currentIndex) {
-    if (audiofileList == null || currentIndex < 0 || currentIndex >= audiofileList.length) return [];
-    return audiofileList.sublist(0, currentIndex);
-  }
-
-  List<AudioFile> getRemainingAudioFiles(List<AudioFile>? audiofileList, int currentIndex) {
-    if (audiofileList == null || currentIndex < 0 || currentIndex >= audiofileList.length) return [];
-    return audiofileList.sublist(currentIndex);
-  }
 }
