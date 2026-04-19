@@ -51,6 +51,18 @@ class _HomeMainState extends State<HomeMain> {
     return Column(
       children: [
         HomeMainHeaderView(),
+        Container(
+          width: double.infinity,
+          child: HomeMainLibraryFilterView(
+            allLibraries,
+            valueListenable: valueListenable,
+            onChanged: (value) {
+              valueListenable.value = value;
+              SPUtils.saveSelectedLibrary(findLibraryFromData(value));
+              _refreshController.callRefresh();
+            },
+          ),
+        ),
         Expanded(
           child: EasyRefresh(
             controller: _refreshController,
@@ -65,20 +77,6 @@ class _HomeMainState extends State<HomeMain> {
             },
             child: CustomScrollView(
               slivers: [
-                SliverToBoxAdapter(
-                  child: Container(
-                    width: double.infinity,
-                    child: HomeMainLibraryFilterView(
-                      allLibraries,
-                      valueListenable: valueListenable,
-                      onChanged: (value) {
-                        valueListenable.value = value;
-                        SPUtils.saveSelectedLibrary(findLibraryFromData(value));
-                        _refreshController.callRefresh();
-                      },
-                    ),
-                  ),
-                ),
                 SliverGrid(
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: MediaQuery.of(context).size.width / 2, // 每行显示2个卡片

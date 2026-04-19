@@ -8,15 +8,13 @@ class HomeMainHeaderView extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 80,
+          height: 100,
           padding: EdgeInsets.only(top: 30),
-          color: Colors.white,
           alignment: Alignment.center,
           child: Container(
-            child: Text("JustListen", style: TextStyle(color: Colors.black54, fontSize: 20)),
+            child: Text("Just Listen", style: TextStyle(color: Colors.black54, fontSize: 20)),
           ),
         ),
-        Container(height: 1, color: Colors.grey.shade200),
       ],
     );
   }
