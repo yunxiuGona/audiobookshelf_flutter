@@ -6,6 +6,8 @@ import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
+import 'package:audio_book/business/widgets/foot_header/music_footer.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_awesome_logger/flutter_awesome_logger.dart';
@@ -15,6 +17,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:just_audio/just_audio.dart';
 import 'business/events/play_position_event.dart';
 import 'business/widgets/animated_play_button.dart';
+import 'business/widgets/foot_header/music_header.dart';
 
 EventBus eventBus = EventBus();
 final player = AudioPlayer();
@@ -73,6 +76,9 @@ void main() async {
   SPUtils.prefs = await SharedPreferences.getInstance();
   CacheUtils.prefs = await SharedPreferences.getInstance();
   SPUtils.getUserData();
+
+  EasyRefresh.defaultHeaderBuilder = () => MusicHeader();
+  EasyRefresh.defaultFooterBuilder = () => MusicFooter();
 
   runApp(const MyApp());
 }

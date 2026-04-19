@@ -1,3 +1,4 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
@@ -12,7 +13,6 @@ import 'home_user_collections_view.dart';
 import 'home_user_history_card.dart';
 import 'home_user_profile_card.dart';
 import 'home_user_history_view.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../audiobook_api/AudiobookshelfApi.dart';
 import '../../audiobook_api/beans/user_collection_item.dart';
 import '../../collects/collects_in_set/collection_in_set.dart';
@@ -29,13 +29,12 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
   MyLibraryItems? _myLibrary;
   UserCollectionsList? _collections;
   UserAuthorize? _userAuthInfo;
-  late RefreshController _refreshController;
+  EasyRefreshController _refreshController = EasyRefreshController(controlFinishRefresh: true, controlFinishLoad: true);
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _refreshController = RefreshController(initialRefresh: false);
     _loadCache();
     _loadCollections(showError: false);
   }
@@ -65,14 +64,11 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
   Future<void> _onRefresh() async {
     await _loadCache();
     // 并行刷新最近收听与收藏集
-    final results = await Future.wait([
-      AudiobookshelfApi().myLibraryItems(),
-      _loadCollections(showError: false),
-    ]);
+    final results = await Future.wait([AudiobookshelfApi().myLibraryItems(), _loadCollections(showError: false)]);
     final _resp_myLibrary = results[0] as MyLibraryItems?;
     if (_resp_myLibrary == null) {
       ToastUtils.showError(context, "获取我的图书馆数据失败");
-      _refreshController.refreshFailed();
+      _refreshController.resetHeader();
       return;
     }
     setState(() {
@@ -80,7 +76,7 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
       CacheUtils.saveMyLibraiesCache(_myLibrary);
       _loadCache();
     });
-    _refreshController.refreshCompleted();
+    _refreshController.finishRefresh();
   }
 
   Future<void> _loadCollections({bool showError = true}) async {
@@ -108,15 +104,9 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFFFFF8F2), Color(0xFFFFFFFF)],
-        ),
+        gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFFFFF8F2), Color(0xFFFFFFFF)]),
       ),
-      child: SmartRefresher(
-        enablePullDown: true,
-        header: const WaterDropHeader(),
+      child: EasyRefresh(
         controller: _refreshController,
         onRefresh: _onRefresh,
         child: SingleChildScrollView(
@@ -124,15 +114,12 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(height: 40,),
+              Container(height: 40),
               HomeUserProfileCard(userAuthInfo: _userAuthInfo),
               const SizedBox(height: 14),
               HomeUserHistoryCard(child: HomeUserHistoryView(_myLibrary)),
               const SizedBox(height: 14),
-              HomeUserCollectionsView(
-                collections: _collections,
-                onCollectionTap: _handleCollectionTap,
-              ),
+              HomeUserCollectionsView(collections: _collections, onCollectionTap: _handleCollectionTap),
               const SizedBox(height: 14),
               HomeUserActionCard(onLogoutTap: _handleLogout),
               const SizedBox(height: 14),
@@ -146,5 +133,4 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
   void _handleCollectionTap(UserCollectionItem collection) {
     Get.to(() => CollectionInSet(collection: collection));
   }
-
 }

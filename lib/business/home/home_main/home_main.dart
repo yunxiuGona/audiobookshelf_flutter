@@ -5,10 +5,8 @@ import 'package:audio_book/business/home/home_main/home_main_library_filter_view
 import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
-import 'package:audio_book/main.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-
 import '../../audiobook_api/AudiobookshelfApi.dart';
 import 'home_main_header_view.dart';
 import 'home_main_media_item_view.dart';
@@ -21,7 +19,7 @@ class HomeMain extends StatefulWidget {
 }
 
 class _HomeMainState extends State<HomeMain> {
-  late RefreshController _refreshController;
+  EasyRefreshController _refreshController = EasyRefreshController(controlFinishRefresh: true, controlFinishLoad: true);
   AllLibrary? allLibraries;
   LibraryItemsBean? libraryItems;
   final valueListenable = ValueNotifier<String?>(null);
@@ -29,7 +27,6 @@ class _HomeMainState extends State<HomeMain> {
   @override
   void initState() {
     super.initState();
-    _refreshController = RefreshController(initialRefresh: false);
     restoreCache();
   }
 
@@ -43,7 +40,7 @@ class _HomeMainState extends State<HomeMain> {
     var isMediasEmpty = libraryItems == null || libraryItems?.results == null || libraryItems!.results!.isEmpty;
     if (isLibrariesEmpty || isMediasEmpty) {
       Future.delayed(Duration(milliseconds: 200), () {
-        _refreshController.requestRefresh();
+        _refreshController.callRefresh();
       });
     }
   }
@@ -54,10 +51,17 @@ class _HomeMainState extends State<HomeMain> {
       children: [
         HomeMainHeaderView(),
         Expanded(
-          child: SmartRefresher(
-            enablePullDown: true,
-            header: WaterDropHeader(),
+          child: EasyRefresh(
             controller: _refreshController,
+            onRefresh: () async {
+              await netLoadLibraries();
+              if (allLibraries == null || allLibraries?.libraries == null || allLibraries!.libraries!.isEmpty || libraryItems == null || libraryItems?.results == null || libraryItems!.results!.isEmpty) {
+                _refreshController.finishRefresh();
+              } else {
+                _refreshController.finishRefresh();
+                _refreshController.finishRefresh();
+              }
+            },
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -69,7 +73,7 @@ class _HomeMainState extends State<HomeMain> {
                       onChanged: (value) {
                         valueListenable.value = value;
                         SPUtils.saveSelectedLibrary(findLibraryFromData(value));
-                        _refreshController.requestRefresh();
+                        _refreshController.callRefresh();
                       },
                     ),
                   ),
@@ -96,15 +100,6 @@ class _HomeMainState extends State<HomeMain> {
                 ),
               ],
             ),
-            onRefresh: () async {
-              await netLoadLibraries();
-              if (allLibraries == null || allLibraries?.libraries == null || allLibraries!.libraries!.isEmpty || libraryItems == null || libraryItems?.results == null || libraryItems!.results!.isEmpty) {
-                _refreshController.refreshFailed();
-              } else {
-                _refreshController.refreshCompleted();
-                _refreshController.refreshCompleted();
-              }
-            },
           ),
         ),
       ],
@@ -124,7 +119,7 @@ class _HomeMainState extends State<HomeMain> {
     var _resp_allLibraries = await AudiobookshelfApi().allLibrary();
     if (_resp_allLibraries == null) {
       ToastUtils.showError(context, "获取媒体库列表失败");
-      _refreshController.refreshFailed();
+      _refreshController.finishRefresh();
       return;
     }
     setState(() {
@@ -142,7 +137,7 @@ class _HomeMainState extends State<HomeMain> {
       var _resp_libraryItems = await AudiobookshelfApi().libraryItems(libraeySelected.id ?? '');
       if (_resp_libraryItems == null) {
         ToastUtils.showError(context, "获取图书列表失败");
-        _refreshController.refreshFailed();
+        _refreshController.finishRefresh();
         return;
       } else {
         setState(() {
