@@ -1,7 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
-import 'package:audio_book/main.dart';
+import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../audiobook_api/beans/my_library_items.dart';
@@ -50,15 +50,30 @@ class _HomeState extends State<Home> {
   }
 
   void initHistoryCache() async {
-    _myLibrary = await CacheUtils.getMyLibraiesCache();
+    _myLibrary = CacheUtils.getMyLibraiesCache();
     setState(() {});
-    var result = await AudiobookshelfApi().myLibraryItems();
+    final result = await AudiobookshelfApi().myLibraryItems();
     if (result != null) {
       CacheUtils.saveMyLibraiesCache(result);
-      if (_myLibrary == null) {
-        _myLibrary = result;
-        setState(() {});
-      }
+      _myLibrary = result;
+      setState(() {});
     }
+    await _preloadPausedQueueFromFirstLibraryItem(_myLibrary);
+  }
+
+  /// 与 MediaDetail 相同：拉详情 + 进度，把上次播放位置写入播放列表；此处不自动 [play]，由 Home 悬浮按钮开始。
+  Future<void> _preloadPausedQueueFromFirstLibraryItem(MyLibraryItems? items) async {
+    final list = items?.libraryItems;
+    if (list == null || list.isEmpty) return;
+    final id = list.first.id;
+    if (id == null || id.isEmpty) return;
+    final detail = await AudiobookshelfApi().libraryItemDetail(id);
+    if (detail == null) return;
+    final progress = await AudiobookshelfApi().mediaProgress(id);
+    await PlayerUtils.loadAudiobookshelfQueueFromDetail(
+      libraryItemDetail: detail,
+      playedDurationSeconds: progress?.currentTime ?? 0.0,
+      autoPlay: false,
+    );
   }
 }

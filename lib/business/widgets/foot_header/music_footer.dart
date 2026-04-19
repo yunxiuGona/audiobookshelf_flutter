@@ -36,10 +36,6 @@ class MusicFooter extends Footer {
 
   @override
   Widget build(BuildContext context, IndicatorState state) {
-    assert(
-      state.axis == Axis.vertical,
-      'MusicFooter only supports vertical scrolling.',
-    );
     return MusicRefreshIndicator(
       key: widgetKey,
       state: state,

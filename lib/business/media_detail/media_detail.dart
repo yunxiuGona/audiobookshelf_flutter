@@ -1,17 +1,12 @@
-import 'package:audio_book/TAG.dart';
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
-import 'package:audio_book/business/audiobook_api/beans/audio_file.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
 import 'package:audio_book/business/player/player.dart';
-import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:audio_book/main.dart';
-import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
 import 'dart:async';
 import '../audiobook_api/beans/library_item_detail.dart';
 import '../audiobook_api/beans/media.dart';
@@ -242,48 +237,24 @@ class _MediaDetailState extends State<MediaDetail> {
     setState(() {
       _playStatus = PlayButtonState.loading;
     });
-    final files = libraryItemDetailBean?.media?.audioFiles;
-    var currentIndex = PlayerUtils.audioFileIndexForPlaybackSeconds(files, playedDuration);
-    var curFile = PlayerUtils.clampedAudioFileAt(files, currentIndex);
-    if (curFile == null) {
-      ToastUtils.showInfo(context, "从头开始播放");
-      currentIndex = 0;
-      curFile = PlayerUtils.clampedAudioFileAt(files, currentIndex);
-    }
-    final book = libraryItemDetailBean?.media;
-    if (book == null || curFile == null) {
-      ToastUtils.showError(context, "播放失败");
+    final detail = libraryItemDetailBean;
+    if (detail == null) {
+      if (mounted) {
+        setState(() => _playStatus = PlayButtonState.none);
+        ToastUtils.showError(context, "播放失败");
+      }
       return;
     }
-    final playMedia = await AudiobookshelfApi().playMedia(media?.libraryItemId ?? "");
-    if (playMedia == null) {
-      ToastUtils.showError(context, "播放失败");
-      return;
-    }
-    final listFiles = PlayerUtils.audioFilesFromIndex(files, currentIndex);
-    final built = PlayerUtils.buildAudiobookshelfPlaybackAudioSources(
-      media: book,
-      libraryItemIdForStreamUrls: libraryItemDetailBean?.id ?? '',
-      playSession: playMedia,
-      filesFromProgress: listFiles,
-      playlistStartFileIndex: currentIndex,
+    final ok = await PlayerUtils.loadAudiobookshelfQueueFromDetail(
+      libraryItemDetail: detail,
       playedDurationSeconds: playedDuration,
-      currentFile: curFile,
+      autoPlay: true,
     );
-    await player.setAudioSource(ConcatenatingAudioSource(children: built.sources));
-    // Offset within playlist[0], same timeline as [audioFileIndexForPlaybackSeconds] (file durations, not chapter.start).
-    var seekSec = built.initialSeekWithinCurrentFileSeconds;
-    if (seekSec < 0) seekSec = 0;
-    final fileDur = curFile.duration;
-    if (fileDur != null && fileDur > 0 && seekSec > fileDur) {
-      seekSec = fileDur;
+    if (!mounted) return;
+    if (!ok) {
+      setState(() => _playStatus = PlayButtonState.none);
+      ToastUtils.showError(context, "播放失败");
     }
-    if (seekSec > 0) {
-      var duration = Duration(milliseconds: (seekSec * 1000).round());
-      await player.seek(duration, index: 0);
-      LogUtils.logd(TAG.PLAYER, "自动Seek到:$duration");
-    }
-    await player.play();
   }
 
   void initMediaStatus() async {

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/audio_file.dart';
+import 'package:audio_book/business/audiobook_api/beans/library_item_detail.dart';
 import 'package:audio_book/business/audiobook_api/beans/media.dart';
 import 'package:audio_book/business/audiobook_api/beans/play_media.dart';
 import 'package:audio_service/audio_service.dart';
@@ -117,5 +118,58 @@ class PlayerUtils {
     }).toList();
 
     return (sources: sources, initialSeekWithinCurrentFileSeconds: initialSeek);
+  }
+
+  /// Loads Audiobookshelf stream session, [ConcatenatingAudioSource], and optional in-file seek — same as [MediaDetail.doPlay].
+  ///
+  /// When [autoPlay] is false, leaves the player paused at the resumed position (e.g. Home preloads continue listening).
+  static Future<bool> loadAudiobookshelfQueueFromDetail({
+    required LibraryItemDetail libraryItemDetail,
+    required double playedDurationSeconds,
+    bool autoPlay = true,
+  }) async {
+    final files = libraryItemDetail.media?.audioFiles;
+    var currentIndex = audioFileIndexForPlaybackSeconds(files, playedDurationSeconds);
+    var curFile = clampedAudioFileAt(files, currentIndex);
+    if (curFile == null) {
+      currentIndex = 0;
+      curFile = clampedAudioFileAt(files, currentIndex);
+    }
+    final book = libraryItemDetail.media;
+    if (book == null || curFile == null) {
+      return false;
+    }
+    final libraryItemId = book.libraryItemId ?? '';
+    if (libraryItemId.isEmpty) {
+      return false;
+    }
+    final playMedia = await AudiobookshelfApi().playMedia(libraryItemId);
+    if (playMedia == null) {
+      return false;
+    }
+    final listFiles = audioFilesFromIndex(files, currentIndex);
+    final built = buildAudiobookshelfPlaybackAudioSources(
+      media: book,
+      libraryItemIdForStreamUrls: libraryItemDetail.id ?? '',
+      playSession: playMedia,
+      filesFromProgress: listFiles,
+      playlistStartFileIndex: currentIndex,
+      playedDurationSeconds: playedDurationSeconds,
+      currentFile: curFile,
+    );
+    await player.setAudioSource(ConcatenatingAudioSource(children: built.sources));
+    var seekSec = built.initialSeekWithinCurrentFileSeconds;
+    if (seekSec < 0) seekSec = 0;
+    final fileDur = curFile.duration;
+    if (fileDur != null && fileDur > 0 && seekSec > fileDur) {
+      seekSec = fileDur;
+    }
+    if (seekSec > 0) {
+      await player.seek(Duration(milliseconds: (seekSec * 1000).round()), index: 0);
+    }
+    if (autoPlay) {
+      await player.play();
+    }
+    return true;
   }
 }

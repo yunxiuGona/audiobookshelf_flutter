@@ -38,10 +38,8 @@ class MusicHeader extends Header {
 
   @override
   Widget build(BuildContext context, IndicatorState state) {
-    assert(
-      state.axis == Axis.vertical,
-      'MusicHeader only supports vertical scrolling.',
-    );
+    // Nested horizontal scrollables (e.g. history strip) can make [state.axis] horizontal;
+    // [MusicRefreshIndicator] handles non-vertical with a safe placeholder.
     return MusicRefreshIndicator(
       key: widgetKey,
       state: state,
