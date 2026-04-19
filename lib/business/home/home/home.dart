@@ -28,6 +28,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: (_bottomNavIndex == 0) ? HomeMain() : HomeUser(), //destination screen
       floatingActionButton: HomeFloatingButtonView(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

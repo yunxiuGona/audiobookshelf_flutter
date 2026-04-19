@@ -68,6 +68,7 @@ class PlayerControlsSection extends StatelessWidget {
             const SizedBox(width: 12),
             AnimatedPlayButton(
               size: 74,
+              usePause: true,
               state: playState,
               onTap: onPlayPauseTap,
             ),

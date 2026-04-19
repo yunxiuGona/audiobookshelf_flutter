@@ -72,6 +72,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
                   children: [
                     Expanded(child: viewLeft()),
                     AnimatedPlayButton(
+                      usePause: false,
                       state: widget.playStatus,
                       onTap: () {
                         if (widget.onPlayTap != null) {

@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/audio_file.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
+import 'package:audio_book/business/player/player.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:audio_book/main.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:async';
 import '../audiobook_api/beans/library_item_detail.dart';
@@ -186,7 +188,7 @@ class _MediaDetailState extends State<MediaDetail> {
                           return;
                         }
                         if (_playStatus == PlayButtonState.playing) {
-                          player.pause();
+                          Get.to(Player());
                         } else if (_playStatus == PlayButtonState.paused) {
                           player.play();
                         } else {

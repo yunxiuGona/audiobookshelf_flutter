@@ -12,8 +12,9 @@ class AnimatedPlayButton extends StatefulWidget {
   final Color color;
   final PlayButtonState state;
   final VoidCallback? onTap;
+  final bool usePause;
 
-  const AnimatedPlayButton({Key? key, this.size = 64, this.color = Colors.orange, required this.state, this.onTap}) : super(key: key);
+  const AnimatedPlayButton({Key? key, this.size = 64, this.color = Colors.orange, required this.state, this.onTap,this.usePause = true}) : super(key: key);
 
   @override
   State<AnimatedPlayButton> createState() => _AnimatedPlayButtonState();
@@ -92,10 +93,10 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with TickerProv
   }
 
   Widget _buildIcon() {
-    var iconData = Icons.pause;
+    IconData? iconData = Icons.pause;
     switch (widget.state) {
       case PlayButtonState.playing:
-        iconData = Icons.pause;
+        iconData = widget.usePause?Icons.pause:null;
         break;
       case PlayButtonState.paused:
         iconData = Icons.play_arrow;
