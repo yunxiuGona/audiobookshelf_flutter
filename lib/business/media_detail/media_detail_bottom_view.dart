@@ -86,7 +86,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
               ],
             ),
           ),
-          Container(alignment: Alignment.center, height: 20, child: viewTitle()),
+          // Container(alignment: Alignment.center, height: 20, child: viewTitle()),
         ],
       ),
     );
@@ -144,7 +144,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
           Expanded(child: Container()),
           (showSpeed) ? viewSpeed() : Container(),
           Container(width: 10),
-          viewChapters(),
+          // viewChapters(),
           Container(width: 15),
         ],
       ),
@@ -199,14 +199,14 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
     );
   }
 
-  Widget viewChapters() {
-    return InkWell(
-      onTap: () {
-        if (widget.onChapterTap != null) {
-          widget.onChapterTap!();
-        }
-      },
-      child: Icon(Icons.list, size: 40, color: Colors.orange),
-    );
-  }
+  // Widget viewChapters() {
+  //   return InkWell(
+  //     onTap: () {
+  //       if (widget.onChapterTap != null) {
+  //         widget.onChapterTap!();
+  //       }
+  //     },
+  //     child: Icon(Icons.list, size: 40, color: Colors.orange),
+  //   );
+  // }
 }
