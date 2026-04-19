@@ -103,7 +103,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
     } else if (widget.playStatus == PlayButtonState.playing) {
       final current = player.sequenceState.currentSource;
       final mediaItem = current?.tag as MediaItem?;
-      text = "播放中:${mediaItem?.artist}";
+      text = "播放中:${mediaItem?.title}";
     } else if (widget.playStatus == PlayButtonState.paused) {
       text = "已暂停";
     }
