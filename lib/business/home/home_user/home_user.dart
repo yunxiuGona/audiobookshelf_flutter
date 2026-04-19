@@ -12,7 +12,6 @@ import '../../utils/toast_utils.dart';
 import 'home_user_action_card.dart';
 import 'home_user_collections_view.dart';
 import 'home_user_history_card.dart';
-import 'home_user_language_card.dart';
 import 'home_user_profile_card.dart';
 import 'home_user_history_view.dart';
 import '../../audiobook_api/AudiobookshelfApi.dart';
@@ -119,14 +118,12 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
               Container(height: 40),
               HomeUserProfileCard(userAuthInfo: _userAuthInfo),
               const SizedBox(height: 14),
-              const HomeUserLanguageCard(),
-              const SizedBox(height: 14),
               HomeUserHistoryCard(child: HomeUserHistoryView(_myLibrary)),
               const SizedBox(height: 14),
               HomeUserCollectionsView(collections: _collections, onCollectionTap: _handleCollectionTap),
               const SizedBox(height: 14),
               HomeUserActionCard(onLogoutTap: _handleLogout),
-              const SizedBox(height: 14),
+              const SizedBox(height: 164),
             ],
           ),
         ),

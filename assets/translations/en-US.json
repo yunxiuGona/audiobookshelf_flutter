@@ -100,6 +100,8 @@
   },
   "settings": {
     "language": "Language",
+    "language_subtitle": "App display language",
+    "choose_language": "Choose language",
     "chinese": "中文",
     "english": "English"
   }
