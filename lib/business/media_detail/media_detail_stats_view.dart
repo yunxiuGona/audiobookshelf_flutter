@@ -4,18 +4,24 @@ import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-/// 章节数 / 总时长统计；点击章节区域打开章节弹层。
+import 'media_detail_listen_action_buttons.dart';
+
+/// 章节数 / 总时长统计；点击章节区域打开章节弹层；下方提供与弹层一致的快速收听按钮。
 class MediaDetailStatsView extends StatelessWidget {
   const MediaDetailStatsView({
     super.key,
     required this.libraryItemDetail,
     required this.mediaProgress,
     required this.onOpenChapters,
+    required this.onListenFromStart,
+    required this.onListenContinue,
   });
 
   final LibraryItemDetail? libraryItemDetail;
   final MediaProgress? mediaProgress;
   final VoidCallback onOpenChapters;
+  final VoidCallback onListenFromStart;
+  final VoidCallback onListenContinue;
 
   String _heardSubtitle() {
     final t = mediaProgress?.currentTime ?? 0;
@@ -37,16 +43,84 @@ class MediaDetailStatsView extends StatelessWidget {
     final chapterCount = libraryItemDetail?.media?.chapters?.length ?? 0;
     final heard = _heardSubtitle();
 
+    final hasListenProgress = (mediaProgress?.currentTime ?? 0) > 0;
+
     // 不可使用 CrossAxisAlignment.stretch：父级在 SingleChildScrollView 中垂直约束为无限大，会导致布局异常。
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Expanded(
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: onOpenChapters,
-              borderRadius: BorderRadius.circular(12),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: onOpenChapters,
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.orange.shade50,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Icon(Icons.list_alt_rounded, size: 22, color: Colors.orange.shade700),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '$chapterCount',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 20,
+                                  color: Color(0xFF2E2E2E),
+                                  height: 1.1,
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                'media_detail.stats_chapters'.tr(),
+                                style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
+                              ),
+                              if (heard.isNotEmpty) ...[
+                                const SizedBox(height: 4),
+                                Text(
+                                  heard,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(color: Colors.orange.shade800, fontSize: 11, fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                              const SizedBox(height: 2),
+                              Text(
+                                'media_detail.tap_chapters'.tr(),
+                                style: TextStyle(color: Colors.grey.shade500, fontSize: 10),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icon(Icons.chevron_right_rounded, color: Colors.grey.shade400, size: 22),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: 1,
+              height: 76,
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              color: Colors.grey.shade200,
+            ),
+            Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
                 child: Row(
@@ -55,10 +129,10 @@ class MediaDetailStatsView extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Colors.orange.shade50,
+                        color: Colors.blueGrey.shade50,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Icon(Icons.list_alt_rounded, size: 22, color: Colors.orange.shade700),
+                      child: Icon(Icons.schedule_rounded, size: 22, color: Colors.blueGrey.shade600),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -66,7 +140,7 @@ class MediaDetailStatsView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '$chapterCount',
+                            _formatDuration(duration),
                             style: const TextStyle(
                               fontWeight: FontWeight.w800,
                               fontSize: 20,
@@ -76,78 +150,23 @@ class MediaDetailStatsView extends StatelessWidget {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'media_detail.stats_chapters'.tr(),
+                            'media_detail.stats_duration'.tr(),
                             style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
-                          ),
-                          if (heard.isNotEmpty) ...[
-                            const SizedBox(height: 4),
-                            Text(
-                              heard,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(color: Colors.orange.shade800, fontSize: 11, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                          const SizedBox(height: 2),
-                          Text(
-                            'media_detail.tap_chapters'.tr(),
-                            style: TextStyle(color: Colors.grey.shade500, fontSize: 10),
                           ),
                         ],
                       ),
                     ),
-                    Icon(Icons.chevron_right_rounded, color: Colors.grey.shade400, size: 22),
                   ],
                 ),
               ),
             ),
-          ),
+          ],
         ),
-        Container(
-          width: 1,
-          height: 76,
-          margin: const EdgeInsets.symmetric(horizontal: 8),
-          color: Colors.grey.shade200,
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.blueGrey.shade50,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(Icons.schedule_rounded, size: 22, color: Colors.blueGrey.shade600),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        _formatDuration(duration),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 20,
-                          color: Color(0xFF2E2E2E),
-                          height: 1.1,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        'media_detail.stats_duration'.tr(),
-                        style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+        const SizedBox(height: 14),
+        MediaDetailListenActionButtons(
+          hasProgress: hasListenProgress,
+          onListenFromStart: onListenFromStart,
+          onListenContinue: onListenContinue,
         ),
       ],
     );

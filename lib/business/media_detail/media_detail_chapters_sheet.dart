@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'media_chapter_list.dart';
+import 'media_detail_listen_action_buttons.dart';
 
 /// 作品详情：章节列表底部弹层（进度提示 + 收听入口 + 列表）。
 class MediaDetailChaptersSheet extends StatelessWidget {
@@ -110,46 +111,17 @@ class MediaDetailChaptersSheet extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: OutlinedButton(
-                                onPressed: onListenFromStart,
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: Colors.orange.shade800,
-                                  side: BorderSide(color: Colors.orange.shade300),
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                ),
-                                child: Text('media_detail.listen_from_start'.tr()),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: FilledButton(
-                                onPressed: onListenContinue,
-                                style: FilledButton.styleFrom(
-                                  backgroundColor: Colors.orange,
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                ),
-                                child: Text('media_detail.listen_continue'.tr()),
-                              ),
-                            ),
-                          ],
+                        MediaDetailListenActionButtons(
+                          hasProgress: true,
+                          onListenFromStart: onListenFromStart,
+                          onListenContinue: onListenContinue,
                         ),
                       ],
                     )
-                  : FilledButton(
-                      onPressed: onListenFromStart,
-                      style: FilledButton.styleFrom(
-                        backgroundColor: Colors.orange,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      ),
-                      child: Text('media_detail.listen_from_start'.tr()),
+                  : MediaDetailListenActionButtons(
+                      hasProgress: false,
+                      onListenFromStart: onListenFromStart,
+                      onListenContinue: onListenContinue,
                     ),
             ),
             Divider(height: 1, thickness: 1, color: Colors.grey.shade200),

@@ -122,6 +122,8 @@ class _MediaDetailState extends State<MediaDetail> {
         libraryItemDetail: libraryItemDetailBean,
         mediaProgress: mediaProgressBean,
         onOpenChaptersSheet: _openChaptersSheet,
+        onListenFromStart: () => doPlay(0),
+        onListenContinue: () => doPlay(mediaProgressBean?.currentTime ?? 0),
       ),
       bottomBar: Container(
         decoration: BoxDecoration(

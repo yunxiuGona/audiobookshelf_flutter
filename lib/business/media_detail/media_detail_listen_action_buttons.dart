@@ -1,0 +1,64 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+
+/// 与 [MediaDetailChaptersSheet] 内一致的「从头收听 / 继续收听」按钮区。
+class MediaDetailListenActionButtons extends StatelessWidget {
+  const MediaDetailListenActionButtons({
+    super.key,
+    required this.hasProgress,
+    required this.onListenFromStart,
+    required this.onListenContinue,
+  });
+
+  final bool hasProgress;
+  final VoidCallback onListenFromStart;
+  final VoidCallback onListenContinue;
+
+  @override
+  Widget build(BuildContext context) {
+    if (hasProgress) {
+      return Row(
+        children: [
+          Expanded(
+            child: OutlinedButton(
+              onPressed: onListenFromStart,
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.orange.shade800,
+                side: BorderSide(color: Colors.orange.shade300),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              child: Text('media_detail.listen_from_start'.tr()),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: FilledButton(
+              onPressed: onListenContinue,
+              style: FilledButton.styleFrom(
+                backgroundColor: Colors.orange,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              child: Text('media_detail.listen_continue'.tr()),
+            ),
+          ),
+        ],
+      );
+    }
+    return SizedBox(
+      width: double.infinity,
+      child: FilledButton(
+        onPressed: onListenFromStart,
+        style: FilledButton.styleFrom(
+          backgroundColor: Colors.orange,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+        child: Text('media_detail.listen_from_start'.tr()),
+      ),
+    );
+  }
+}

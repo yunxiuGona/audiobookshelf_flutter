@@ -19,6 +19,8 @@ class MediaDetailScrollContent extends StatelessWidget {
     required this.libraryItemDetail,
     required this.mediaProgress,
     required this.onOpenChaptersSheet,
+    required this.onListenFromStart,
+    required this.onListenContinue,
   });
 
   final double heroHeight;
@@ -27,6 +29,8 @@ class MediaDetailScrollContent extends StatelessWidget {
   final LibraryItemDetail? libraryItemDetail;
   final MediaProgress? mediaProgress;
   final VoidCallback onOpenChaptersSheet;
+  final VoidCallback onListenFromStart;
+  final VoidCallback onListenContinue;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +70,8 @@ class MediaDetailScrollContent extends StatelessWidget {
               libraryItemDetail: libraryItemDetail,
               mediaProgress: mediaProgress,
               onOpenChapters: onOpenChaptersSheet,
+              onListenFromStart: onListenFromStart,
+              onListenContinue: onListenContinue,
             ),
           ),
         ),
