@@ -1,7 +1,9 @@
+import 'package:audio_book/TAG.dart';
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/audio_file.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
 import 'package:audio_book/business/player/player.dart';
+import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
@@ -269,7 +271,19 @@ class _MediaDetailState extends State<MediaDetail> {
       currentFile: curFile,
     );
     await player.setAudioSource(ConcatenatingAudioSource(children: built.sources));
-    player.play();
+    // Offset within playlist[0], same timeline as [audioFileIndexForPlaybackSeconds] (file durations, not chapter.start).
+    var seekSec = built.initialSeekWithinCurrentFileSeconds;
+    if (seekSec < 0) seekSec = 0;
+    final fileDur = curFile.duration;
+    if (fileDur != null && fileDur > 0 && seekSec > fileDur) {
+      seekSec = fileDur;
+    }
+    if (seekSec > 0) {
+      var duration = Duration(milliseconds: (seekSec * 1000).round());
+      await player.seek(duration, index: 0);
+      LogUtils.logd(TAG.PLAYER, "自动Seek到:$duration");
+    }
+    await player.play();
   }
 
   void initMediaStatus() async {

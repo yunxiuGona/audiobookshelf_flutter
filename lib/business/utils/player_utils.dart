@@ -54,6 +54,19 @@ class PlayerUtils {
     return files[i];
   }
 
+  /// Book timeline position (seconds) at the start of `audioFiles[fileIndex]`: sum of prior files' [AudioFile.duration].
+  ///
+  /// This matches [audioFileIndexForPlaybackSeconds] and must not use [Media.chapters] start times, which can differ from file boundaries.
+  static double cumulativeDurationSecondsBeforeFileIndex(List<AudioFile>? files, int fileIndex) {
+    if (files == null || fileIndex <= 0) return 0.0;
+    double sum = 0.0;
+    final end = fileIndex > files.length ? files.length : fileIndex;
+    for (var i = 0; i < end; i++) {
+      sum += files[i].duration ?? 0.0;
+    }
+    return sum;
+  }
+
   /// Builds [AudioSource.uri] entries for Audiobookshelf streaming and notification metadata.
   ///
   /// [playlistStartFileIndex] is the index of the first entry in [filesFromProgress] within [media.audioFiles]
@@ -72,12 +85,14 @@ class PlayerUtils {
     final coverUri = Uri.parse(api.getMediaCoverUrl(media.libraryItemId ?? ''));
     var chapterCursor = playlistStartFileIndex;
     double initialSeek = 0.0;
+    final fullFiles = media.audioFiles;
+    final bookTimeAtCurrentFileStart = cumulativeDurationSecondsBeforeFileIndex(fullFiles, playlistStartFileIndex);
+    initialSeek = playedDurationSeconds - bookTimeAtCurrentFileStart;
+    if (initialSeek < 0) initialSeek = 0.0;
 
     final sources = filesFromProgress.map((f) {
       final isCurrentFile = f.ino == currentFile.ino;
-      if (isCurrentFile) {
-        initialSeek = playedDurationSeconds - (media.chapters?[playlistStartFileIndex].start ?? 0.0);
-      }
+      final bookTimeAtThisFileStart = cumulativeDurationSecondsBeforeFileIndex(fullFiles, chapterCursor);
       final source = AudioSource.uri(
         Uri.parse(api.getMediaFileURL(libraryItemIdForStreamUrls, f.ino ?? '')),
         tag: MediaItem(
@@ -86,11 +101,12 @@ class PlayerUtils {
           title: title,
           artist: f.metadata?.filename ?? '',
           extras: {
-            'chapterStartDuration': media.chapters?[chapterCursor].start ?? 0.0,
+            // Same timeline as [audioFileIndexForPlaybackSeconds] / server progress (sum of file durations).
+            'chapterStartDuration': bookTimeAtThisFileStart,
             'fileIno': f.ino,
             'playItemLibraryID': media.libraryItemId,
             'playItemMediaID': playSession.id,
-            'seedDuration': isCurrentFile ? (playedDurationSeconds - (media.chapters?[playlistStartFileIndex].start ?? 0.0)) : 0.0,
+            'seedDuration': isCurrentFile ? (playedDurationSeconds - bookTimeAtCurrentFileStart) : 0.0,
             'currentChapterInfo': json.encode(media.chapters?[chapterCursor] ?? ''),
           },
           artUri: coverUri,
