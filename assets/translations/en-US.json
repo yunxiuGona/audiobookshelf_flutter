@@ -34,7 +34,11 @@
     "expand": "Show more",
     "collapse": "Show less",
     "stats_chapters": "Chapters",
-    "stats_duration": "Duration"
+    "stats_duration": "Duration",
+    "current_progress": "Now at: {title}",
+    "listen_from_start": "From the start",
+    "listen_continue": "Continue",
+    "tap_chapters": "Browse chapters"
   },
   "duration": {
     "hours_minutes": "{hours} h {minutes} min",

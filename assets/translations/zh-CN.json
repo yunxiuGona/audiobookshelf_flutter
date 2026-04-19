@@ -34,7 +34,11 @@
     "expand": "展开",
     "collapse": "收起",
     "stats_chapters": "章节",
-    "stats_duration": "时长"
+    "stats_duration": "时长",
+    "current_progress": "当前听到：{title}",
+    "listen_from_start": "从头收听",
+    "listen_continue": "继续收听",
+    "tap_chapters": "查看章节"
   },
   "duration": {
     "hours_minutes": "{hours}小时{minutes}分钟",

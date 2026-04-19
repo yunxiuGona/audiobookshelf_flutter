@@ -8,9 +8,16 @@ class MediaChapterList extends StatefulWidget {
   final List<Chapter>? chapters;
   final Function(int)? onChapterTap;
   final int? indexProcessing;
+  /// 为 false 时不显示顶部「所有章节」标题（由外层弹窗统一展示）。
+  final bool showHeading;
 
-
-  const MediaChapterList({Key? key, this.chapters, this.onChapterTap,this.indexProcessing=0}) : super(key: key);
+  const MediaChapterList({
+    super.key,
+    this.chapters,
+    this.onChapterTap,
+    this.indexProcessing = 0,
+    this.showHeading = true,
+  });
 
   @override
   _MediaChapterListState createState() => _MediaChapterListState();
@@ -57,11 +64,13 @@ class _MediaChapterListState extends State<MediaChapterList> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'chapter.all'.tr(),
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
+          if (widget.showHeading) ...[
+            Text(
+              'chapter.all'.tr(),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+          ],
           Expanded(
             child: Stack(
               children: [

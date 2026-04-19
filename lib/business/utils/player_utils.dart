@@ -99,8 +99,8 @@ class PlayerUtils {
         tag: MediaItem(
           id: '${media.libraryItemId}_${playSession.id}_${f.ino}',
           album: title,
-          title: title,
-          artist: f.metadata?.filename ?? '',
+          title: f.metadata?.filename ?? '',
+          artist: media.metadata?.narratorName??"",
           extras: {
             // Same timeline as [audioFileIndexForPlaybackSeconds] / server progress (sum of file durations).
             'chapterStartDuration': bookTimeAtThisFileStart,

@@ -1,6 +1,7 @@
 import 'package:audio_book/business/audiobook_api/beans/library_item_detail.dart';
 import 'package:audio_book/business/audiobook_api/beans/media.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
+import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
 import 'package:flutter/material.dart';
 
 import 'media_detail_description_view.dart';
@@ -16,12 +17,16 @@ class MediaDetailScrollContent extends StatelessWidget {
     required this.media,
     required this.meta,
     required this.libraryItemDetail,
+    required this.mediaProgress,
+    required this.onOpenChaptersSheet,
   });
 
   final double heroHeight;
   final Media? media;
   final MediaMetaData? meta;
   final LibraryItemDetail? libraryItemDetail;
+  final MediaProgress? mediaProgress;
+  final VoidCallback onOpenChaptersSheet;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +62,11 @@ class MediaDetailScrollContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 4))],
             ),
-            child: MediaDetailStatsView(libraryItemDetail),
+            child: MediaDetailStatsView(
+              libraryItemDetail: libraryItemDetail,
+              mediaProgress: mediaProgress,
+              onOpenChapters: onOpenChaptersSheet,
+            ),
           ),
         ),
         const SizedBox(height: 12),

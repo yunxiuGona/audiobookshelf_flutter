@@ -15,8 +15,8 @@ import '../audiobook_api/beans/media_progress.dart';
 import '../events/play_position_event.dart';
 import '../events/play_status_event.dart';
 import '../widgets/loading_view.dart';
-import 'media_chapter_list.dart';
 import 'media_detail_bottom_view.dart';
+import 'media_detail_chapters_sheet.dart';
 import 'media_detail_scroll_content.dart';
 import 'media_detail_scroll_layout.dart';
 
@@ -120,6 +120,8 @@ class _MediaDetailState extends State<MediaDetail> {
         media: media,
         meta: meta,
         libraryItemDetail: libraryItemDetailBean,
+        mediaProgress: mediaProgressBean,
+        onOpenChaptersSheet: _openChaptersSheet,
       ),
       bottomBar: Container(
         decoration: BoxDecoration(
@@ -143,7 +145,7 @@ class _MediaDetailState extends State<MediaDetail> {
               doPlay(mediaProgressBean?.currentTime ?? 0.0);
             }
           },
-          onChapterTap: _showChapterList,
+          onChapterTap: _openChaptersSheet,
         ),
       ),
     );
@@ -187,21 +189,29 @@ class _MediaDetailState extends State<MediaDetail> {
     });
   }
 
-  void _showChapterList() {
-    showModalBottomSheet(
+  void _openChaptersSheet() {
+    if (!mounted) return;
+    showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      builder: (context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.7,
-          child: MediaChapterList(
-            chapters: libraryItemDetailBean?.media?.chapters,
-            indexProcessing: PlayerUtils.audioFileIndexForPlaybackSeconds(libraryItemDetailBean?.media?.audioFiles, mediaProgressBean?.currentTime),
-            onChapterTap: (index) {
-              Navigator.pop(context);
-              _playChapter(index);
-            },
-          ),
+      useSafeArea: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) {
+        return MediaDetailChaptersSheet(
+          libraryItemDetail: libraryItemDetailBean,
+          mediaProgress: mediaProgressBean,
+          onListenFromStart: () {
+            Navigator.of(ctx).pop();
+            doPlay(0);
+          },
+          onListenContinue: () {
+            Navigator.of(ctx).pop();
+            doPlay(mediaProgressBean?.currentTime ?? 0);
+          },
+          onChapterSelected: (index) {
+            Navigator.of(ctx).pop();
+            _playChapter(index);
+          },
         );
       },
     );
