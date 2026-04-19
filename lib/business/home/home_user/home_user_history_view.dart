@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -32,7 +33,7 @@ class _HomeUserHistoryViewState extends State<HomeUserHistoryView> {
               ),
             ),
             const SizedBox(width: 8),
-            const Text("最近收听", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text('home.recent_listening'.tr(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           ],
         ),
         const SizedBox(height: 14),
@@ -51,7 +52,7 @@ class _HomeUserHistoryViewState extends State<HomeUserHistoryView> {
           color: Colors.orange.withOpacity(0.06),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Text("暂无收听历史", style: TextStyle(color: Colors.grey.shade700)),
+        child: Text('home.no_history'.tr(), style: TextStyle(color: Colors.grey.shade700)),
       );
     }
     return SizedBox(

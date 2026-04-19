@@ -1,4 +1,5 @@
 import 'package:audio_book/business/audiobook_api/beans/chapter.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../audiobook_api/beans/media_progress.dart';
@@ -56,9 +57,9 @@ class _MediaChapterListState extends State<MediaChapterList> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            '所有章节',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          Text(
+            'chapter.all'.tr(),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           Expanded(
@@ -78,7 +79,7 @@ class _MediaChapterListState extends State<MediaChapterList> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                       Text(
-                        chapter.title ?? '未知章节',
+                        chapter.title ?? 'chapter.unknown'.tr(),
                         style: TextStyle(
                           color: _getTextColor(index),
                         ),
@@ -131,9 +132,9 @@ class _MediaChapterListState extends State<MediaChapterList> {
     int remainingSeconds = totalSeconds % 60;
     
     if (minutes > 0) {
-      return '$minutes分${remainingSeconds}秒';
+      return 'duration.minutes_seconds'.tr(namedArgs: {'minutes': '$minutes', 'seconds': '$remainingSeconds'});
     } else {
-      return '${remainingSeconds}秒';
+      return 'duration.seconds_only'.tr(namedArgs: {'seconds': '$remainingSeconds'});
     }
   }
 }

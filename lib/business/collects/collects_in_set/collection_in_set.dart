@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../audiobook_api/beans/user_collection_item.dart';
@@ -18,12 +19,12 @@ class _CollectionInSetState extends State<CollectionInSet> {
     final books = widget.collection.books ?? [];
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.collection.name?.isNotEmpty == true ? widget.collection.name! : "收藏集"),
+        title: Text(widget.collection.name?.isNotEmpty == true ? widget.collection.name! : 'collection.default_name'.tr()),
       ),
       body: books.isEmpty
           ? Center(
               child: Text(
-                "该收藏集暂无作品",
+                'collection.empty_hint'.tr(),
                 style: TextStyle(color: Colors.grey.shade700),
               ),
             )

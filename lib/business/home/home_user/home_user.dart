@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 import 'package:audio_book/business/utils/cahce_utils.dart';
 import '../../audiobook_api/beans/my_library_items.dart';
 import '../../audiobook_api/beans/user_collections_list.dart';
@@ -11,6 +12,7 @@ import '../../utils/toast_utils.dart';
 import 'home_user_action_card.dart';
 import 'home_user_collections_view.dart';
 import 'home_user_history_card.dart';
+import 'home_user_language_card.dart';
 import 'home_user_profile_card.dart';
 import 'home_user_history_view.dart';
 import '../../audiobook_api/AudiobookshelfApi.dart';
@@ -67,7 +69,7 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
     final results = await Future.wait([AudiobookshelfApi().myLibraryItems(), _loadCollections(showError: false)]);
     final _resp_myLibrary = results[0] as MyLibraryItems?;
     if (_resp_myLibrary == null) {
-      ToastUtils.showError(context, "获取我的图书馆数据失败");
+      ToastUtils.showError(context, 'errors.my_library'.tr());
       _refreshController.resetHeader();
       return;
     }
@@ -84,7 +86,7 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
     final resp = await AudiobookshelfApi().userCollectionsList(libraryId);
     if (resp == null) {
       if (showError && mounted) {
-        ToastUtils.showError(context, "获取收藏集失败");
+        ToastUtils.showError(context, 'errors.collections'.tr());
       }
       return;
     }
@@ -96,7 +98,7 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
 
   Future<void> _handleLogout() async {
     SPUtils.clearUserLoginInfo();
-    ToastUtils.showSuccess(context, "已退出登录");
+    ToastUtils.showSuccess(context, 'success.logged_out'.tr());
     Get.offAll(() => const Login());
   }
 
@@ -116,6 +118,8 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
             children: [
               Container(height: 40),
               HomeUserProfileCard(userAuthInfo: _userAuthInfo),
+              const SizedBox(height: 14),
+              const HomeUserLanguageCard(),
               const SizedBox(height: 14),
               HomeUserHistoryCard(child: HomeUserHistoryView(_myLibrary)),
               const SizedBox(height: 14),

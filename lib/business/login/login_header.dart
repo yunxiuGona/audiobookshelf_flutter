@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class LoginHeader extends StatelessWidget {
@@ -11,14 +12,14 @@ class LoginHeader extends StatelessWidget {
         const SizedBox(height: 16),
         Icon(Icons.headset_rounded, size: 68, color: Colors.orange.shade400),
         const SizedBox(height: 14),
-        const Text(
-          "欢迎回来",
+        Text(
+          'login.welcome_back'.tr(),
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: Color(0xFF2E2E2E)),
+          style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: Color(0xFF2E2E2E)),
         ),
         const SizedBox(height: 8),
         Text(
-          "登录后继续你的有声书旅程",
+          'login.subtitle'.tr(),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
         ),

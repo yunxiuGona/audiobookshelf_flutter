@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 typedef LoginInputDecorationBuilder = InputDecoration Function({
@@ -50,14 +51,14 @@ class LoginFormCard extends StatelessWidget {
           TextField(
             controller: usernameController,
             keyboardType: TextInputType.name,
-            decoration: inputDecorationBuilder(label: "用户名", icon: Icons.person_outline_rounded),
+            decoration: inputDecorationBuilder(label: 'login.username'.tr(), icon: Icons.person_outline_rounded),
           ),
           const SizedBox(height: 14),
           TextField(
             controller: passwordController,
             obscureText: obscurePassword,
             decoration: inputDecorationBuilder(
-              label: "密码",
+              label: 'login.password'.tr(),
               icon: Icons.lock_outline_rounded,
               suffixIcon: IconButton(
                 icon: Icon(
@@ -78,7 +79,7 @@ class LoginFormCard extends StatelessWidget {
                   onRememberMeChanged(value ?? false);
                 },
               ),
-              const Text("记住密码"),
+              Text('login.remember_password'.tr()),
             ],
           ),
           const SizedBox(height: 10),
@@ -103,9 +104,9 @@ class LoginFormCard extends StatelessWidget {
                         color: Colors.white,
                       ),
                     )
-                  : const Text(
-                      "登录",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  : Text(
+                      'login.submit'.tr(),
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../audiobook_api/beans/library_item_detail.dart';
@@ -24,8 +25,8 @@ class _MediaDetailStatsViewState extends State<MediaDetailStatsView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _item("章节", "${widget.libraryItemDetailBean?.media?.chapters?.length}"),
-          _item("时长", _formatDuration(duration)),
+          _item('media_detail.stats_chapters'.tr(), "${widget.libraryItemDetailBean?.media?.chapters?.length}"),
+          _item('media_detail.stats_duration'.tr(), _formatDuration(duration)),
         ],
       ),
     );
@@ -55,6 +56,6 @@ class _MediaDetailStatsViewState extends State<MediaDetailStatsView> {
     final d = Duration(seconds: seconds.toInt());
     final h = d.inHours;
     final m = d.inMinutes % 60;
-    return "${h}小时${m}分钟";
+    return 'duration.hours_minutes'.tr(namedArgs: {'hours': '$h', 'minutes': '$m'});
   }
 }

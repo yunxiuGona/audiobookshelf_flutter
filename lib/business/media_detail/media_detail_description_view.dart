@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_html_css/simple_html_css.dart';
 
@@ -29,9 +30,9 @@ class _MediaDetailDescriptionViewState extends State<MediaDetailDescriptionView>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "作品简介",
-              style: TextStyle(
+            Text(
+              'media_detail.description_title'.tr(),
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
@@ -52,7 +53,7 @@ class _MediaDetailDescriptionViewState extends State<MediaDetailDescriptionView>
             // ),
             const SizedBox(height: 6),
             Text(
-              expanded ? "收起" : "展开",
+              expanded ? 'media_detail.collapse'.tr() : 'media_detail.expand'.tr(),
               style: const TextStyle(color: Colors.blue),
             )
           ],

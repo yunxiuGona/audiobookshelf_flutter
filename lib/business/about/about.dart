@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class About extends StatefulWidget {
@@ -14,7 +15,7 @@ class _AboutState extends State<About> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("关于软件"),
+        title: Text('about.title'.tr()),
         elevation: 0,
       ),
       body: ListView(
@@ -30,20 +31,20 @@ class _AboutState extends State<About> {
               ],
             ),
             child: Column(
-              children: const [
-                Icon(Icons.headset_rounded, size: 56, color: Colors.orange),
-                SizedBox(height: 12),
-                Text("Just Listen", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
-                SizedBox(height: 6),
-                Text("专注于有声书播放与收听体验", style: TextStyle(fontSize: 14, color: Colors.black54)),
+              children: [
+                const Icon(Icons.headset_rounded, size: 56, color: Colors.orange),
+                const SizedBox(height: 12),
+                const Text('Just Listen', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
+                const SizedBox(height: 6),
+                Text('about.tagline'.tr(), style: const TextStyle(fontSize: 14, color: Colors.black54)),
               ],
             ),
           ),
           const SizedBox(height: 14),
           _buildSection(
-            title: "应用信息",
-            children: const [
-              _InfoRow(label: "当前版本", value: "v1.0.0"),
+            title: 'about.app_info'.tr(),
+            children: [
+              _InfoRow(label: 'about.current_version'.tr(), value: 'about.version_value'.tr()),
             ],
           ),
 

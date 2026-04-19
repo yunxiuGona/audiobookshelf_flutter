@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../audiobook_api/AudiobookshelfApi.dart';
@@ -48,7 +49,7 @@ class _HomeUserHistoryItemViewState extends State<HomeUserHistoryItemView> {
               Container(
                 padding: EdgeInsets.only(left: 5, right: 5),
                 child: Text(
-                  library.media?.metadata?.title ?? "未知",
+                  library.media?.metadata?.title ?? 'fallback.unknown'.tr(),
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

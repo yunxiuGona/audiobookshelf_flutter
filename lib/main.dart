@@ -8,14 +8,16 @@ import 'package:audio_book/business/player/player.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/player_utils.dart';
+import 'package:audio_book/business/utils/app_locale.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:audio_book/business/widgets/foot_header/music_footer.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_awesome_logger/flutter_awesome_logger.dart';
 import 'package:audio_service/audio_service.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:just_audio/just_audio.dart';
@@ -28,6 +30,8 @@ final player = AudioPlayer();
 var playStatus = PlayButtonState.none;
 final navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   eventBus = EventBus();
   await JustAudioBackground.init(androidNotificationChannelId: 'com.justlisten.listener', androidNotificationChannelName: 'Audio playback', androidNotificationOngoing: true);
   /**
@@ -83,7 +87,16 @@ void main() async {
   EasyRefresh.defaultHeaderBuilder = () => MusicHeader();
   EasyRefresh.defaultFooterBuilder = () => MusicFooter();
 
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: AppLocale.supported,
+      path: 'assets/translations',
+      fallbackLocale: AppLocale.enUS,
+      startLocale: AppLocale.fromPlatform(),
+      saveLocale: true,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -120,6 +133,9 @@ class _MyAppState extends State<MyApp> {
       child: GetMaterialApp(
         title: 'Just Listen',
         navigatorKey: navigatorKey,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
           fontFamily: "AlibabaPuHuiTiSC",

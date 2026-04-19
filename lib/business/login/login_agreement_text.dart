@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class LoginAgreementText extends StatelessWidget {
@@ -6,7 +7,7 @@ class LoginAgreementText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "登录即代表你同意平台服务协议与隐私政策",
+      'login.agreement'.tr(),
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
     );

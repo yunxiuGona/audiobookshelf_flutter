@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+
 import '../../audiobook_api/beans/books.dart';
 import '../../utils/string_utils.dart';
 
@@ -9,9 +11,9 @@ class CollectionInSetSubtitleUtils {
     }
     final author = book.media?.metadata?.authorName;
     if (author != null && author.isNotEmpty) {
-      return "作者: $author";
+      return 'collection.author_line'.tr(namedArgs: {'name': author});
     }
     final description = StringUtils().htmlToPlainText(book.media?.metadata?.subtitle ?? "");
-    return description.isNotEmpty ? description : "暂无副标题";
+    return description.isNotEmpty ? description : 'fallback.no_subtitle'.tr();
   }
 }

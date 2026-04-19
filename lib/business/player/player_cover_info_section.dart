@@ -1,4 +1,5 @@
 import 'package:audio_service/audio_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class PlayerCoverInfoSection extends StatelessWidget {
@@ -8,8 +9,8 @@ class PlayerCoverInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final albumName = (mediaItem?.album?.trim().isNotEmpty ?? false) ? mediaItem!.album!.trim() : "未知专辑";
-    final trackName = (mediaItem?.title.trim().isNotEmpty ?? false) ? mediaItem!.title.trim() : "暂无播放内容";
+    final albumName = (mediaItem?.album?.trim().isNotEmpty ?? false) ? mediaItem!.album!.trim() : 'fallback.unknown_album'.tr();
+    final trackName = (mediaItem?.title.trim().isNotEmpty ?? false) ? mediaItem!.title.trim() : 'fallback.no_playing_content'.tr();
     final coverUri = mediaItem?.artUri?.toString();
     return Column(
       children: [

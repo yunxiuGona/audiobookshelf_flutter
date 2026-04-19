@@ -1,6 +1,7 @@
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
@@ -97,15 +98,15 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
 
     if (widget.playStatus == PlayButtonState.none) {
       var p = widget.mediaProgress?.progress ?? 0.0;
-      text = p > 0 ? "继续播放" : "从头播放";
+      text = p > 0 ? 'player.continue_playback'.tr() : 'player.play_from_start'.tr();
     } else if (widget.playStatus == PlayButtonState.loading) {
-      text = "加载中...";
+      text = 'player.loading'.tr();
     } else if (widget.playStatus == PlayButtonState.playing) {
       final current = player.sequenceState.currentSource;
       final mediaItem = current?.tag as MediaItem?;
-      text = "播放中:${mediaItem?.title}";
+      text = 'player.playing_title'.tr(namedArgs: {'title': mediaItem?.title ?? ''});
     } else if (widget.playStatus == PlayButtonState.paused) {
-      text = "已暂停";
+      text = 'player.paused'.tr();
     }
     return Container(
       width: 150,

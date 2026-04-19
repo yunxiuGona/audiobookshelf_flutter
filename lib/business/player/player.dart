@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_book/business/player/player_controls_section.dart';
 import 'package:audio_book/business/player/player_cover_info_section.dart';
@@ -113,7 +114,7 @@ class _PlayerState extends State<Player> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('播放中')),
+      appBar: AppBar(title: Text('player.now_playing'.tr())),
       body: StreamBuilder<SequenceState?>(
         stream: player.sequenceStateStream,
         builder: (context, sequenceSnapshot) {

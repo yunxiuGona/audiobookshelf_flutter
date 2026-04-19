@@ -5,8 +5,9 @@ import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:audio_book/business/widgets/animated_play_button.dart';
 import 'package:audio_book/main.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 import 'dart:async';
 import '../audiobook_api/beans/library_item_detail.dart';
 import '../audiobook_api/beans/media.dart';
@@ -99,7 +100,7 @@ class _MediaDetailState extends State<MediaDetail> {
     meta = libraryItemDetailBean?.media?.metadata;
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
-      appBar: AppBar(title: const Text("作品详情"), elevation: 0, backgroundColor: Colors.white, foregroundColor: Colors.black87),
+      appBar: AppBar(title: Text('media_detail.title'.tr()), elevation: 0, backgroundColor: Colors.white, foregroundColor: Colors.black87),
       body: loading ? LoadingView() : _buildScrollBodyWithCover(context),
     );
   }
@@ -156,7 +157,7 @@ class _MediaDetailState extends State<MediaDetail> {
     if (detail == null) {
       if (mounted) {
         setState(() => _playStatus = PlayButtonState.none);
-        ToastUtils.showError(context, "播放失败");
+        ToastUtils.showError(context, 'errors.play_failed'.tr());
       }
       return;
     }
@@ -168,7 +169,7 @@ class _MediaDetailState extends State<MediaDetail> {
     if (!mounted) return;
     if (!ok) {
       setState(() => _playStatus = PlayButtonState.none);
-      ToastUtils.showError(context, "播放失败");
+      ToastUtils.showError(context, 'errors.play_failed'.tr());
     }
   }
 
@@ -179,7 +180,7 @@ class _MediaDetailState extends State<MediaDetail> {
     libraryItemDetailBean = await AudiobookshelfApi().libraryItemDetail(widget.libraryid);
     mediaProgressBean = await AudiobookshelfApi().mediaProgress(widget.libraryid);
     if (libraryItemDetailBean == null) {
-      ToastUtils.showError(context, "加载失败");
+      ToastUtils.showError(context, 'errors.load_failed'.tr());
     }
     setState(() {
       loading = false;
@@ -212,7 +213,7 @@ class _MediaDetailState extends State<MediaDetail> {
     });
     var chapter = libraryItemDetailBean?.media?.chapters?.elementAt(chapterIndex);
     if (chapter == null) {
-      ToastUtils.showError(context, "章节信息错误");
+      ToastUtils.showError(context, 'errors.chapter_info'.tr());
       setState(() {
         buttonloading = false;
       });

@@ -1,4 +1,5 @@
 import 'package:audio_book/business/widgets/animated_play_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -88,7 +89,7 @@ class PlayerControlsSection extends StatelessWidget {
             TextButton.icon(
               onPressed: onQueueTap,
               icon: const Icon(Icons.queue_music, color: Colors.orange),
-              label: const Text("播放列表", style: TextStyle(color: Colors.orange)),
+              label: Text('player.playlist'.tr(), style: const TextStyle(color: Colors.orange)),
             ),
             InkWell(
               onTap: onSpeedTap,
@@ -102,7 +103,7 @@ class PlayerControlsSection extends StatelessWidget {
               onPressed: onLoopTap,
               icon: Icon(_loopIcon()),
               color: _loopColor(),
-              tooltip: "循环模式",
+              tooltip: 'player.loop_mode'.tr(),
             ),
           ],
         ),

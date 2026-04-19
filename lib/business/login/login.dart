@@ -3,8 +3,9 @@ import 'dart:convert';
 
 import 'package:audio_book/business/home/home/home.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 
 import 'login_agreement_text.dart';
 import 'login_background.dart';
@@ -40,7 +41,7 @@ class _LoginState extends State<Login> {
       username,
       password,
     );
-    ToastUtils.showSuccess(context, "登录成功");
+    ToastUtils.showSuccess(context, 'login.success'.tr());
     SPUtils.saveUserData(jsonEncode(loginResponse));
     Get.to(Home());
   }
@@ -54,14 +55,14 @@ class _LoginState extends State<Login> {
       final username = _usernameController.text.trim();
       final password = _passwordController.text;
       if (username.isEmpty || password.isEmpty) {
-        ToastUtils.showError(context, "请输入用户名和密码");
+        ToastUtils.showError(context, 'login.need_credentials'.tr());
         return;
       }
       await netlogin(username, password);
       // 登录成功后的处理
     } catch (e) {
       // 登录失败后的处理
-      ToastUtils.showError(context, "登录失败: $e");
+      ToastUtils.showError(context, 'login.failed'.tr(namedArgs: {'error': '$e'}));
     } finally {
       setState(() {
         _isLoading = false;
@@ -83,7 +84,7 @@ class _LoginState extends State<Login> {
       if (authInfo != null) {
         Get.off(() => Home());
       } else {
-        ToastUtils.showError(context, "自动登录失败，请重新登录");
+        ToastUtils.showError(context, 'login.auto_failed'.tr());
         SPUtils.userDatabean = null;
         SPUtils.saveUserData("");
         setState(() {
@@ -94,7 +95,7 @@ class _LoginState extends State<Login> {
       if (!mounted) {
         return;
       }
-      ToastUtils.showError(context, "自动登录失败: $e");
+      ToastUtils.showError(context, 'login.auto_failed_error'.tr(namedArgs: {'error': '$e'}));
       SPUtils.userDatabean = null;
       SPUtils.saveUserData("");
       setState(() {
@@ -173,7 +174,7 @@ class _LoginState extends State<Login> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        "登录中，请稍候...",
+                        'login.logging_in'.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
                       ),

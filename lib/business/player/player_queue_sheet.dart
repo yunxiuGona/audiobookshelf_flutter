@@ -1,5 +1,6 @@
 import 'package:audio_book/main.dart';
 import 'package:audio_service/audio_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class PlayerQueueSheet extends StatelessWidget {
@@ -21,7 +22,7 @@ class PlayerQueueSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          const Text("播放列表", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+          Text('player.playlist'.tr(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
           const Divider(height: 20),
           Expanded(
             child: StreamBuilder<int?>(
@@ -31,7 +32,7 @@ class PlayerQueueSheet extends StatelessWidget {
                 final currentIndex = indexSnapshot.data ?? -1;
                 final sequence = player.sequence;
                 if (sequence.isEmpty) {
-                  return const Center(child: Text("当前播放列表为空"));
+                  return Center(child: Text('player.queue_empty'.tr()));
                 }
                 return ListView.separated(
                   itemCount: sequence.length,
@@ -44,7 +45,7 @@ class PlayerQueueSheet extends StatelessWidget {
                       selected: isCurrent,
                       selectedTileColor: Colors.orange.withOpacity(0.08),
                       title: Text(
-                        mediaItem?.title ?? "未知章节",
+                        mediaItem?.title ?? 'chapter.unknown'.tr(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

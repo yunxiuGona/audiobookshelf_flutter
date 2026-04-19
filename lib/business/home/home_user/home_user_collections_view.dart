@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../audiobook_api/beans/user_collection_item.dart';
@@ -40,7 +41,7 @@ class HomeUserCollectionsView extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              const Text("收藏集", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text('home.collections'.tr(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ],
           ),
           const SizedBox(height: 12),
@@ -53,7 +54,7 @@ class HomeUserCollectionsView extends StatelessWidget {
                 color: Colors.orange.withOpacity(0.06),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Text("暂无收藏集", style: TextStyle(color: Colors.grey.shade700)),
+              child: Text('home.no_collections'.tr(), style: TextStyle(color: Colors.grey.shade700)),
             )
           else
             ...items.map(
@@ -78,7 +79,7 @@ class HomeUserCollectionsView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "${item.books?.length ?? 0} 本",
+                      'home.book_count'.tr(namedArgs: {'count': '${item.books?.length ?? 0}'}),
                       style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
                     ),
                   ],

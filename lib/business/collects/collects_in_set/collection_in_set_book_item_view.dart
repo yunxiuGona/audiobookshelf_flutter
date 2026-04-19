@@ -1,5 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Trans;
 
 import '../../audiobook_api/AudiobookshelfApi.dart';
 import '../../audiobook_api/beans/books.dart';
@@ -13,7 +14,7 @@ class CollectionInSetBookItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = book.media?.metadata?.title ?? "未知标题";
+    final title = book.media?.metadata?.title ?? 'fallback.unknown_title'.tr();
     final subtitle = CollectionInSetSubtitleUtils.buildSubtitle(book);
     return InkWell(
       borderRadius: BorderRadius.circular(12),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../audiobook_api/beans/user_authorize.dart';
@@ -11,10 +12,9 @@ class HomeUserProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = userAuthInfo?.user;
     final server = userAuthInfo?.serverSettings;
-    final username = user?.username ?? "未登录用户";
-    final userType = user?.type ?? "游客";
+    final username = user?.username ?? 'profile.guest_user'.tr();
+    final userType = user?.type ?? 'profile.visitor'.tr();
     final isActive = user?.isActive ?? false;
-    final tokenText = (user?.token?.isNotEmpty ?? false) ? "已授权" : "未授权";
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -47,7 +47,10 @@ class HomeUserProfileCard extends StatelessWidget {
                     Text(username, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                     const SizedBox(height: 4),
                     Text(
-                      "身份: $userType  |  状态: ${isActive ? "已激活" : "未激活"}",
+                      'profile.identity_status'.tr(namedArgs: {
+                        'identity': userType,
+                        'status': isActive ? 'profile.activated'.tr() : 'profile.not_activated'.tr(),
+                      }),
                       style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
                     ),
                   ],
@@ -60,7 +63,7 @@ class HomeUserProfileCard extends StatelessWidget {
             spacing: 8,
             runSpacing: 8,
             children: [
-              _InfoChip(title: "服务端版本", value: server?.version ?? "--"),
+              _InfoChip(title: 'profile.server_version'.tr(), value: server?.version ?? '--'),
             ],
           ),
         ],

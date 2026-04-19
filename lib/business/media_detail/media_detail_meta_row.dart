@@ -1,4 +1,5 @@
 import 'package:audio_book/business/audiobook_api/beans/media_meta_data.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 /// 作者 / 播音 两行信息。
@@ -20,7 +21,7 @@ class MediaDetailMetaRow extends StatelessWidget {
             const Icon(Icons.person_outline, size: 16, color: Color(0xFF8A93A6)),
             const SizedBox(width: 6),
             Expanded(
-              child: Text("作者：${authorNames.isNotEmpty ? authorNames : "-"}", style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4)),
+              child: Text('media_detail.author'.tr(namedArgs: {'name': authorNames.isNotEmpty ? authorNames : '-'}), style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4)),
             ),
           ],
         ),
@@ -31,7 +32,7 @@ class MediaDetailMetaRow extends StatelessWidget {
             const Icon(Icons.mic_none_outlined, size: 16, color: Color(0xFF8A93A6)),
             const SizedBox(width: 6),
             Expanded(
-              child: Text("播音：${narratorNames.isNotEmpty ? narratorNames : "-"}", style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4)),
+              child: Text('media_detail.narrator'.tr(namedArgs: {'name': narratorNames.isNotEmpty ? narratorNames : '-'}), style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4)),
             ),
           ],
         ),

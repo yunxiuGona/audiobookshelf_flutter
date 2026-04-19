@@ -5,6 +5,7 @@ import 'package:audio_book/business/home/home_main/home_main_library_filter_view
 import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import '../../audiobook_api/AudiobookshelfApi.dart';
@@ -118,7 +119,7 @@ class _HomeMainState extends State<HomeMain> {
   Future netLoadLibraries() async {
     var _resp_allLibraries = await AudiobookshelfApi().allLibrary();
     if (_resp_allLibraries == null) {
-      ToastUtils.showError(context, "获取媒体库列表失败");
+      ToastUtils.showError(context, 'errors.library_list'.tr());
       _refreshController.finishRefresh();
       return;
     }
@@ -136,7 +137,7 @@ class _HomeMainState extends State<HomeMain> {
       valueListenable.value = libraeySelected.name ?? "";
       var _resp_libraryItems = await AudiobookshelfApi().libraryItems(libraeySelected.id ?? '');
       if (_resp_libraryItems == null) {
-        ToastUtils.showError(context, "获取图书列表失败");
+        ToastUtils.showError(context, 'errors.book_list'.tr());
         _refreshController.finishRefresh();
         return;
       } else {

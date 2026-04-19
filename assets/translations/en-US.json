@@ -1,0 +1,106 @@
+{
+  "login": {
+    "welcome_back": "Welcome back",
+    "subtitle": "Sign in to continue your audiobook journey",
+    "username": "Username",
+    "password": "Password",
+    "remember_password": "Remember password",
+    "submit": "Sign in",
+    "agreement": "By signing in you agree to the Terms of Service and Privacy Policy",
+    "logging_in": "Signing in…",
+    "success": "Signed in successfully",
+    "need_credentials": "Please enter username and password",
+    "failed": "Sign-in failed: {error}",
+    "auto_failed": "Auto sign-in failed. Please sign in again.",
+    "auto_failed_error": "Auto sign-in failed: {error}"
+  },
+  "errors": {
+    "play_failed": "Playback failed",
+    "load_failed": "Failed to load",
+    "chapter_info": "Invalid chapter information",
+    "library_list": "Could not load library list",
+    "book_list": "Could not load book list",
+    "my_library": "Could not load My Library",
+    "collections": "Could not load collections"
+  },
+  "success": {
+    "logged_out": "Signed out"
+  },
+  "media_detail": {
+    "title": "Details",
+    "author": "Author: {name}",
+    "narrator": "Narrator: {name}",
+    "description_title": "Synopsis",
+    "expand": "Show more",
+    "collapse": "Show less",
+    "stats_chapters": "Chapters",
+    "stats_duration": "Duration"
+  },
+  "duration": {
+    "hours_minutes": "{hours} h {minutes} min",
+    "minutes_seconds": "{minutes} min {seconds} s",
+    "seconds_only": "{seconds} s"
+  },
+  "player": {
+    "now_playing": "Now playing",
+    "playlist": "Queue",
+    "queue_empty": "Queue is empty",
+    "loop_mode": "Repeat mode",
+    "continue_playback": "Resume",
+    "play_from_start": "Play from start",
+    "loading": "Loading…",
+    "playing_title": "Playing: {title}",
+    "paused": "Paused"
+  },
+  "chapter": {
+    "all": "All chapters",
+    "unknown": "Unknown chapter"
+  },
+  "fallback": {
+    "unknown": "Unknown",
+    "unknown_title": "Unknown title",
+    "unknown_album": "Unknown album",
+    "no_playing_content": "Nothing playing",
+    "no_subtitle": "No subtitle"
+  },
+  "home": {
+    "recent_listening": "Recently played",
+    "no_history": "No listening history yet",
+    "collections": "Collections",
+    "no_collections": "No collections",
+    "book_count": "{count} books"
+  },
+  "about": {
+    "title": "About",
+    "tagline": "Audiobook listening, focused and simple",
+    "app_info": "App information",
+    "current_version": "Version",
+    "version_value": "v1.0.0"
+  },
+  "profile": {
+    "guest_user": "Guest",
+    "visitor": "Guest",
+    "authorized": "Authorized",
+    "unauthorized": "Not authorized",
+    "identity_status": "Role: {identity}  |  Status: {status}",
+    "activated": "Active",
+    "not_activated": "Inactive",
+    "server_version": "Server version"
+  },
+  "actions": {
+    "about_title": "About",
+    "about_subtitle": "Version, features, and support",
+    "logout_title": "Sign out",
+    "logout_subtitle": "Clear local session and return to sign-in"
+  },
+  "collection": {
+    "default_name": "Collection",
+    "empty_hint": "This collection has no items",
+    "author_line": "Author: {name}"
+  },
+  "settings": {
+    "language": "Language",
+    "chinese": "中文",
+    "english": "English"
+  }
+}
