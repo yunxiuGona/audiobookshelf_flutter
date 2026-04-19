@@ -16,9 +16,8 @@ import '../events/play_status_event.dart';
 import '../widgets/loading_view.dart';
 import 'media_chapter_list.dart';
 import 'media_detail_bottom_view.dart';
-import 'media_detail_description_view.dart';
-import 'media_detail_stats_view.dart';
-import 'media_detail_tag_view.dart';
+import 'media_detail_scroll_content.dart';
+import 'media_detail_scroll_layout.dart';
 
 class MediaDetail extends StatefulWidget {
   final String libraryid;
@@ -26,7 +25,7 @@ class MediaDetail extends StatefulWidget {
   const MediaDetail(this.libraryid, {Key? key}) : super(key: key);
 
   @override
-  _MediaDetailState createState() => _MediaDetailState();
+  State<MediaDetail> createState() => _MediaDetailState();
 }
 
 class _MediaDetailState extends State<MediaDetail> {
@@ -58,13 +57,13 @@ class _MediaDetailState extends State<MediaDetail> {
   void _onScrollCoverOpacity() {
     const fadeDistance = 220.0;
     final o = _scrollController.offset;
-    final opacity = (1.0 - o / fadeDistance).clamp(1.0, 1.0);
+    final opacity = (1.0 - o / fadeDistance).clamp(0.0, 1.0);
     if ((_coverOpacity.value - opacity).abs() > 0.003) {
       _coverOpacity.value = opacity;
     }
   }
 
-  initPlayerStatus() {
+  void initPlayerStatus() {
     setState(() {
       _playStatus = playStatus;
     });
@@ -105,176 +104,47 @@ class _MediaDetailState extends State<MediaDetail> {
     );
   }
 
-  /// 全宽封面在底层；上滑渐隐、回顶渐显。
   Widget _buildScrollBodyWithCover(BuildContext context) {
     final screenW = MediaQuery.sizeOf(context).width;
     final heroH = screenW;
     final coverUrl = AudiobookshelfApi().getMediaCoverUrl(libraryItemDetailBean?.id ?? '');
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          height: heroH,
-          child: IgnorePointer(
-            child: ValueListenableBuilder<double>(
-              valueListenable: _coverOpacity,
-              builder: (context, opacity, _) {
-                return Opacity(
-                  opacity: opacity,
-                  child: Image.network(
-                    coverUrl,
-                    width: screenW,
-                    height: heroH,
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
-                  ),
-                );
-              },
-            ),
-          ),
+    return MediaDetailScrollLayout(
+      scrollController: _scrollController,
+      coverOpacity: _coverOpacity,
+      coverUrl: coverUrl,
+      heroHeight: heroH,
+      screenWidth: screenW,
+      scrollChild: MediaDetailScrollContent(
+        heroHeight: heroH,
+        media: media,
+        meta: meta,
+        libraryItemDetail: libraryItemDetailBean,
+      ),
+      bottomBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.96),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 18, offset: const Offset(0, -4))],
         ),
-        SingleChildScrollView(
-          controller: _scrollController,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: heroH),
-              const SizedBox(height: 8),
-              Container(
-                width: double.infinity,
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 14, offset: const Offset(0, 6))],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      meta?.title ?? "",
-                      style: const TextStyle(fontSize: 22, height: 1.3, fontWeight: FontWeight.w700, color: Color(0xFF1B1F2A)),
-                    ),
-                    if ((meta?.subtitle ?? "").toString().isNotEmpty) ...[const SizedBox(height: 8), Text((meta?.subtitle ?? "").toString(), style: const TextStyle(fontSize: 14, height: 1.4, color: Color(0xFF6C7280)))],
-                    const SizedBox(height: 12),
-                    _buildMetaInfoRow(),
-                  ],
-                ),
-              ),
-              media?.tags?.isNotEmpty == true
-                  ? Container(
-                      padding: const EdgeInsets.only(top: 12),
-                      child: Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.symmetric(horizontal: 12),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 4))],
-                        ),
-                        child: MediaDetailTagView(media?.tags ?? []),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
-              Container(
-                padding: const EdgeInsets.only(top: 12),
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 4))],
-                  ),
-                  child: MediaDetailStatsView(libraryItemDetailBean),
-                ),
-              ),
-              const SizedBox(height: 12),
-              Container(
-                width: double.infinity,
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 4))],
-                ),
-                child: MediaDetailDescriptionView(meta?.description ?? ""),
-              ),
-              const SizedBox(height: 240),
-            ],
-          ),
+        child: MediaDetailBottomView(
+          libraryItemDetailBean,
+          mediaProgressBean,
+          _playStatus,
+          onPlayTap: () async {
+            if (_playStatus == PlayButtonState.loading) {
+              return;
+            }
+            if (_playStatus == PlayButtonState.playing) {
+              Get.to(Player());
+            } else if (_playStatus == PlayButtonState.paused) {
+              player.play();
+            } else {
+              doPlay(mediaProgressBean?.currentTime ?? 0.0);
+            }
+          },
+          onChapterTap: _showChapterList,
         ),
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.96),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 18, offset: const Offset(0, -4))],
-            ),
-            child: MediaDetailBottomView(
-              libraryItemDetailBean,
-              mediaProgressBean,
-              _playStatus,
-              onPlayTap: () async {
-                if (_playStatus == PlayButtonState.loading) {
-                  return;
-                }
-                if (_playStatus == PlayButtonState.playing) {
-                  Get.to(Player());
-                } else if (_playStatus == PlayButtonState.paused) {
-                  player.play();
-                } else {
-                  doPlay(mediaProgressBean?.currentTime ?? 0.0);
-                }
-              },
-              onChapterTap: () {
-                _showChapterList();
-              },
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildMetaInfoRow() {
-    final authorNames = (meta?.authors ?? []).map((e) => e.name).whereType<String>().where((e) => e.isNotEmpty).join(" / ");
-    final narratorNames = (meta?.narrators ?? []).where((e) => e.isNotEmpty).join(" / ");
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Icon(Icons.person_outline, size: 16, color: Color(0xFF8A93A6)),
-            const SizedBox(width: 6),
-            Expanded(
-              child: Text("作者：${authorNames.isNotEmpty ? authorNames : "-"}", style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4)),
-            ),
-          ],
-        ),
-        const SizedBox(height: 6),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Icon(Icons.mic_none_outlined, size: 16, color: Color(0xFF8A93A6)),
-            const SizedBox(width: 6),
-            Expanded(
-              child: Text("播音：${narratorNames.isNotEmpty ? narratorNames : "-"}", style: const TextStyle(fontSize: 13, color: Color(0xFF4E5668), height: 1.4)),
-            ),
-          ],
-        ),
-      ],
+      ),
     );
   }
 
@@ -355,5 +225,4 @@ class _MediaDetailState extends State<MediaDetail> {
     }
     doPlay(playedDuration);
   }
-
 }
