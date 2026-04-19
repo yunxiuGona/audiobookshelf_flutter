@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:audio_book/TAG.dart';
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/events/play_status_event.dart';
 import 'package:audio_book/business/login/login.dart';
+import 'package:audio_book/business/player/player.dart';
 import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/player_utils.dart';
@@ -11,6 +14,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_awesome_logger/flutter_awesome_logger.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:get/get.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -83,10 +87,33 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  StreamSubscription<bool>? _notificationClickSub;
+
+  @override
+  void initState() {
+    super.initState();
+    _notificationClickSub = AudioService.notificationClicked.listen((clicked) {
+      if (!clicked) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Get.to(() => const Player());
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _notificationClickSub?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FlutterAwesomeLogger(
@@ -95,7 +122,7 @@ class MyApp extends StatelessWidget {
         title: 'Just Listen',
         navigatorKey: navigatorKey,
         theme: ThemeData(
-          colorScheme: .fromSeed(seedColor: Colors.white),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
           fontFamily: "AlibabaPuHuiTiSC",
         ),
         home: const Login(),

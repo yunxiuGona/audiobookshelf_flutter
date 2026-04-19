@@ -113,7 +113,7 @@ class _PlayerState extends State<Player> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('播放器')),
+      appBar: AppBar(title: const Text('播放中')),
       body: StreamBuilder<SequenceState?>(
         stream: player.sequenceStateStream,
         builder: (context, sequenceSnapshot) {
