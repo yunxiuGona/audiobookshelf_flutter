@@ -48,60 +48,83 @@ class _HomeMainState extends State<HomeMain> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        HomeMainHeaderView(),
-        Container(
-          width: double.infinity,
-          child: HomeMainLibraryFilterView(
-            allLibraries,
-            valueListenable: valueListenable,
-            onChanged: (value) {
-              valueListenable.value = value;
-              SPUtils.saveSelectedLibrary(findLibraryFromData(value));
-              _refreshController.callRefresh();
-            },
-          ),
-        ),
-        Expanded(
-          child: EasyRefresh(
-            controller: _refreshController,
-            onRefresh: () async {
-              await netLoadLibraries();
-              if (allLibraries == null || allLibraries?.libraries == null || allLibraries!.libraries!.isEmpty || libraryItems == null || libraryItems?.results == null || libraryItems!.results!.isEmpty) {
-                _refreshController.finishRefresh();
-              } else {
-                _refreshController.finishRefresh();
-                _refreshController.finishRefresh();
-              }
-            },
-            child: CustomScrollView(
-              slivers: [
-                SliverGrid(
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: MediaQuery.of(context).size.width / 2, // 每行显示2个卡片
-                    mainAxisExtent: 300, // 固定卡片高度为200px
-                    crossAxisSpacing: 4,
-                    mainAxisSpacing: 4,
-                  ),
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    var length = libraryItems?.results?.length ?? 0;
-                    if (index < length) {
-                      var result = libraryItems?.results?.elementAt(index);
-                      return Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        elevation: 4,
-                        child: HomeMainMediaItemView(result),
-                      );
-                    }
-                    return null;
-                  }, childCount: libraryItems?.results?.length ?? 0),
-                ),
-              ],
+    const pageBg = Color(0xFFF6F7FB);
+    final w = MediaQuery.sizeOf(context).width;
+    final pad = 16.0;
+    final gap = 12.0;
+    final maxExtent = (w - pad * 2 - gap) / 2;
+
+    return ColoredBox(
+      color: pageBg,
+      child: Column(
+        children: [
+          const HomeMainHeaderView(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+            child: HomeMainLibraryFilterView(
+              allLibraries,
+              valueListenable: valueListenable,
+              onChanged: (value) {
+                valueListenable.value = value;
+                SPUtils.saveSelectedLibrary(findLibraryFromData(value));
+                _refreshController.callRefresh();
+              },
             ),
           ),
-        ),
-      ],
+          Expanded(
+            child: EasyRefresh(
+              controller: _refreshController,
+              onRefresh: () async {
+                await netLoadLibraries();
+                if (allLibraries == null || allLibraries?.libraries == null || allLibraries!.libraries!.isEmpty || libraryItems == null || libraryItems?.results == null || libraryItems!.results!.isEmpty) {
+                  _refreshController.finishRefresh();
+                } else {
+                  _refreshController.finishRefresh();
+                  _refreshController.finishRefresh();
+                }
+              },
+              child: CustomScrollView(
+                slivers: [
+                  SliverPadding(
+                    padding: EdgeInsets.fromLTRB(pad, 0, pad, 24),
+                    sliver: SliverGrid(
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: maxExtent,
+                        mainAxisExtent: 296,
+                        crossAxisSpacing: gap,
+                        mainAxisSpacing: gap,
+                      ),
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final length = libraryItems?.results?.length ?? 0;
+                          if (index < length) {
+                            final result = libraryItems?.results?.elementAt(index);
+                            return DecoratedBox(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(14),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.07),
+                                    blurRadius: 14,
+                                    offset: const Offset(0, 5),
+                                  ),
+                                ],
+                              ),
+                              child: HomeMainMediaItemView(result),
+                            );
+                          }
+                          return null;
+                        },
+                        childCount: libraryItems?.results?.length ?? 0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
