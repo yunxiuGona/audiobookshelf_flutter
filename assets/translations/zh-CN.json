@@ -39,7 +39,8 @@
     "listen_from_start": "从头收听",
     "listen_continue": "继续收听",
     "tap_chapters": "查看章节",
-    "add_to_collection": "加入收藏夹"
+    "add_to_collection": "加入收藏夹",
+    "no_description": "No description for this media"
   },
   "duration": {
     "hours_minutes": "{hours}小时{minutes}分钟",

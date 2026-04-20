@@ -39,7 +39,8 @@
     "listen_from_start": "From the start",
     "listen_continue": "Continue",
     "tap_chapters": "Browse chapters",
-    "add_to_collection": "Add to collection"
+    "add_to_collection": "Add to collection",
+    "no_description": "No description for this media"
   },
   "duration": {
     "hours_minutes": "{hours} h {minutes} min",

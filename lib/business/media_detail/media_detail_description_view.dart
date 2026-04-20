@@ -17,7 +17,7 @@ class _MediaDetailDescriptionViewState extends State<MediaDetailDescriptionView>
   @override
   Widget build(BuildContext context) {
     if (widget.desc == null || widget.desc!.isEmpty) {
-      return Container();
+      return Center(child: Text('media_detail.no_description'.tr()),);
     }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -44,13 +44,6 @@ class _MediaDetailDescriptionViewState extends State<MediaDetailDescriptionView>
               expanded ? TextOverflow.visible : TextOverflow.ellipsis,
               maxLines: expanded ? null : 6,
             ),
-            // Text(
-            //   widget.desc?.trim() ?? "",
-            //   maxLines: expanded ? null : 6,
-            //   overflow:
-            //   expanded ? TextOverflow.visible : TextOverflow.ellipsis,
-            //   style: const TextStyle(fontSize: 14),
-            // ),
             const SizedBox(height: 6),
             Text(
               expanded ? 'media_detail.collapse'.tr() : 'media_detail.expand'.tr(),
