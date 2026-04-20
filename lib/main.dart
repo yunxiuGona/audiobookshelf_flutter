@@ -95,7 +95,7 @@ void main() async {
       path: 'assets/translations',
       fallbackLocale: AppLocale.enUS,
       startLocale: _resolveStartLocale(),
-      saveLocale: false,
+      saveLocale: true,
       child: const MyApp(),
     ),
   );
