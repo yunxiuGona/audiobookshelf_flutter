@@ -1,4 +1,3 @@
-import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:easy_localization/easy_localization.dart';

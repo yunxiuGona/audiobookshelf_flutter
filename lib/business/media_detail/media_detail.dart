@@ -115,7 +115,11 @@ class _MediaDetailState extends State<MediaDetail> {
             onPressed: loading
                 ? null
                 : () {
-                    Get.to(() => MediaMatchPage(libraryItemDetail: libraryItemDetailBean));
+                    Get.to(() => MediaMatchPage(libraryItemDetail: libraryItemDetailBean))?.then((onValue){
+                      if (onValue == true) {
+                        initMediaStatus();
+                      }
+                    });
                   },
           ),
           IconButton(

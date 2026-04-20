@@ -1,9 +1,9 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_item_detail.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart' hide Trans;
+import 'package:easy_localization/easy_localization.dart';
 import 'media_match_detail_page.dart';
 import 'media_match_provider_option.dart';
 import 'media_match_result_entry.dart';
@@ -153,6 +153,7 @@ class _MediaMatchPageState extends State<MediaMatchPage> {
     );
     if (saved == true && mounted) {
       ToastUtils.showSuccess(context, 'media_match.saved_refresh_hint'.tr());
+      Get.back(result: true);
     }
   }
 }
