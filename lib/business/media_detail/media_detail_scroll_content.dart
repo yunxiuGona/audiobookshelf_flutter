@@ -13,7 +13,6 @@ import 'media_detail_title_card.dart';
 class MediaDetailScrollContent extends StatelessWidget {
   const MediaDetailScrollContent({
     super.key,
-    required this.heroHeight,
     required this.media,
     required this.meta,
     required this.libraryItemDetail,
@@ -23,7 +22,6 @@ class MediaDetailScrollContent extends StatelessWidget {
     required this.onListenContinue,
   });
 
-  final double heroHeight;
   final Media? media;
   final MediaMetaData? meta;
   final LibraryItemDetail? libraryItemDetail;
@@ -37,7 +35,6 @@ class MediaDetailScrollContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: heroHeight),
         const SizedBox(height: 8),
         MediaDetailTitleCard(meta: meta),
         if (media?.tags?.isNotEmpty == true)

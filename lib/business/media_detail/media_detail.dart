@@ -117,7 +117,6 @@ class _MediaDetailState extends State<MediaDetail> {
       heroHeight: heroH,
       screenWidth: screenW,
       scrollChild: MediaDetailScrollContent(
-        heroHeight: heroH,
         media: media,
         meta: meta,
         libraryItemDetail: libraryItemDetailBean,
