@@ -9,7 +9,7 @@ import 'music_refresh_indicator.dart';
 class MusicHeader extends Header {
   final Key? widgetKey;
 
-  /// 主色，默认橙色 [kMusicRefreshAccentDefault]。
+  /// 主色，未传入时跟随当前主题主色。
   final Color? color;
 
   /// 音符图标大小。
@@ -44,7 +44,7 @@ class MusicHeader extends Header {
       key: widgetKey,
       state: state,
       slot: MusicIndicatorSlot.header,
-      accentColor: color ?? kMusicRefreshAccentDefault,
+      accentColor: color ?? Theme.of(context).colorScheme.primary,
       iconSize: iconSize,
     );
   }

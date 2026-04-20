@@ -3,18 +3,17 @@ import 'dart:async';
 import 'package:audio_book/main.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 enum PlayButtonState { none,playing, paused, loading, buffing }
 
 class AnimatedPlayButton extends StatefulWidget {
   final double size;
-  final Color color;
+  final Color? color;
   final PlayButtonState state;
   final VoidCallback? onTap;
   final bool usePause;
 
-  const AnimatedPlayButton({Key? key, this.size = 64, this.color = Colors.orange, required this.state, this.onTap,this.usePause = true}) : super(key: key);
+  const AnimatedPlayButton({Key? key, this.size = 64, this.color, required this.state, this.onTap,this.usePause = true}) : super(key: key);
 
   @override
   State<AnimatedPlayButton> createState() => _AnimatedPlayButtonState();
@@ -167,6 +166,7 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with TickerProv
 
   @override
   Widget build(BuildContext context) {
+    final resolvedColor = widget.color ?? Theme.of(context).colorScheme.primary;
     return GestureDetector(
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
@@ -178,9 +178,9 @@ class _AnimatedPlayButtonState extends State<AnimatedPlayButton> with TickerProv
           width: widget.size,
           height: widget.size,
           decoration: BoxDecoration(
-            color: widget.color,
+            color: resolvedColor,
             shape: BoxShape.circle,
-            boxShadow: [BoxShadow(color: widget.color.withOpacity(0.4), blurRadius: 8, offset: const Offset(0, 4))],
+            boxShadow: [BoxShadow(color: resolvedColor.withOpacity(0.4), blurRadius: 8, offset: const Offset(0, 4))],
           ),
           child: Center(
             child: AnimatedSwitcher(

@@ -13,6 +13,7 @@ class HomeUserCollectionsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     final items = collections?.results ?? [];
     return Stack(
       children: [
@@ -32,7 +33,7 @@ class HomeUserCollectionsView extends StatelessWidget {
                   Container(
                     width: 4,
                     height: 18,
-                    decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(2)),
+                    decoration: BoxDecoration(color: primary, borderRadius: BorderRadius.circular(2)),
                   ),
                   const SizedBox(width: 8),
                   Text('home.collections'.tr(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
@@ -44,7 +45,7 @@ class HomeUserCollectionsView extends StatelessWidget {
                   width: double.infinity,
                   height: 100,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: Colors.orange.withOpacity(0.06), borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(color: primary.withOpacity(0.06), borderRadius: BorderRadius.circular(12)),
                   child: Text('home.no_collections'.tr(), style: TextStyle(color: Colors.grey.shade700)),
                 )
               else
@@ -55,10 +56,10 @@ class HomeUserCollectionsView extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 10),
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                      decoration: BoxDecoration(color: Colors.orange.withOpacity(0.05), borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(color: primary.withOpacity(0.08), borderRadius: BorderRadius.circular(10)),
                       child: Row(
                         children: [
-                          const Icon(Icons.collections_bookmark_outlined, size: 18, color: Colors.orange),
+                          Icon(Icons.collections_bookmark_outlined, size: 18, color: primary),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(item.name ?? "-", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
@@ -75,25 +76,22 @@ class HomeUserCollectionsView extends StatelessWidget {
             ],
           ),
         ),
-        Container(child: viewEdit(),alignment: Alignment.topRight,)
+        if (onEditTap != null)
+          Positioned(
+            top: -4,
+            right: -4,
+            child: Material(
+              color: Colors.transparent,
+              child: IconButton(
+                tooltip: 'home.manage_collections'.tr(),
+                visualDensity: VisualDensity.compact,
+                padding: const EdgeInsets.all(8),
+                onPressed: onEditTap,
+                icon: Icon(Icons.edit_outlined, color: primary, size: 22),
+              ),
+            ),
+          ),
       ],
-    );
-  }
-
-  Widget viewEdit(){
-    return Positioned(
-      top: -4,
-      right: -4,
-      child: Material(
-        color: Colors.transparent,
-        child: IconButton(
-          tooltip: 'home.manage_collections'.tr(),
-          visualDensity: VisualDensity.compact,
-          padding: const EdgeInsets.all(8),
-          onPressed: onEditTap,
-          icon: const Icon(Icons.edit_outlined, color: Colors.orange, size: 22),
-        ),
-      ),
     );
   }
 }

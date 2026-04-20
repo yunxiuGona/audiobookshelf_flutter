@@ -18,6 +18,7 @@ class HomeUserHistoryView extends StatefulWidget {
 class _HomeUserHistoryViewState extends State<HomeUserHistoryView> {
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -28,7 +29,7 @@ class _HomeUserHistoryViewState extends State<HomeUserHistoryView> {
               width: 4,
               height: 18,
               decoration: BoxDecoration(
-                color: Colors.orange,
+                color: primary,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -43,13 +44,14 @@ class _HomeUserHistoryViewState extends State<HomeUserHistoryView> {
   }
 
   Widget mianView() {
+    final primary = Theme.of(context).colorScheme.primary;
     if (widget._myLibrary?.libraryItems == null || widget._myLibrary!.libraryItems!.isEmpty) {
       return Container(
         width: double.infinity,
         height: 120,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.orange.withOpacity(0.06),
+          color: primary.withOpacity(0.06),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text('home.no_history'.tr(), style: TextStyle(color: Colors.grey.shade700)),

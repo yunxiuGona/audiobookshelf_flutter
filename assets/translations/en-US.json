@@ -126,6 +126,14 @@
     "folder_subtitle": "Collection folder"
   },
   "settings": {
+    "theme": "Theme color",
+    "theme_subtitle": "Change app primary color",
+    "choose_theme": "Choose theme color",
+    "theme_orange": "Orange",
+    "theme_blue": "Blue",
+    "theme_green": "Green",
+    "theme_purple": "Purple",
+    "theme_teal": "Teal",
     "language": "Language",
     "language_subtitle": "App display language",
     "choose_language": "Choose language",

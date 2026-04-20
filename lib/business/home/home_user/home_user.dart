@@ -18,6 +18,7 @@ import '../../audiobook_api/AudiobookshelfApi.dart';
 import '../../audiobook_api/beans/user_collection_item.dart';
 import '../../collects/collect_manage_page.dart';
 import '../../collects/collects_in_set/collection_in_set.dart';
+import '../../utils/app_theme.dart';
 
 class HomeUser extends StatefulWidget {
   const HomeUser({Key? key}) : super(key: key);
@@ -104,9 +105,14 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFFFFF8F2), Color(0xFFFFFFFF)]),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [AppTheme.tint(primary, 0.44), Colors.white],
+        ),
       ),
       child: EasyRefresh(
         controller: _refreshController,

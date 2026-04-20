@@ -25,16 +25,17 @@ class PlayerProgressSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     final maxMs = duration.inMilliseconds > 0 ? duration.inMilliseconds.toDouble() : 1.0;
     final currentMs = position.inMilliseconds.clamp(0, maxMs.toInt()).toDouble();
     return Column(
       children: [
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
-            activeTrackColor: Colors.orange,
-            inactiveTrackColor: Colors.orange.withOpacity(0.2),
-            thumbColor: Colors.orange,
-            overlayColor: Colors.orange.withOpacity(0.2),
+            activeTrackColor: primary,
+            inactiveTrackColor: primary.withOpacity(0.2),
+            thumbColor: primary,
+            overlayColor: primary.withOpacity(0.2),
             trackHeight: 4,
           ),
           child: Slider(

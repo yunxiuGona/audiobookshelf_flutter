@@ -126,6 +126,14 @@
     "folder_subtitle": "收藏夹"
   },
   "settings": {
+    "theme": "主题颜色",
+    "theme_subtitle": "切换应用主色",
+    "choose_theme": "选择主题颜色",
+    "theme_orange": "橙色",
+    "theme_blue": "蓝色",
+    "theme_green": "绿色",
+    "theme_purple": "紫色",
+    "theme_teal": "青色",
     "language": "语言",
     "language_subtitle": "界面显示语言",
     "choose_language": "选择语言",

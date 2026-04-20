@@ -42,11 +42,11 @@ class PlayerControlsSection extends StatelessWidget {
     }
   }
 
-  Color _loopColor() {
+  Color _loopColor(Color primary) {
     if (loopMode == LoopMode.off) {
       return Colors.grey.shade600;
     }
-    return Colors.orange;
+    return primary;
   }
 
   String _speedText() {
@@ -55,6 +55,7 @@ class PlayerControlsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     return Column(
       children: [
         Row(
@@ -64,7 +65,7 @@ class PlayerControlsSection extends StatelessWidget {
               onPressed: hasPrevious ? onPreviousTap : null,
               icon: const Icon(Icons.skip_previous_sharp),
               iconSize: 38,
-              color: Colors.orange,
+              color: primary,
             ),
             const SizedBox(width: 12),
             AnimatedPlayButton(
@@ -78,7 +79,7 @@ class PlayerControlsSection extends StatelessWidget {
               onPressed: hasNext ? onNextTap : null,
               icon: const Icon(Icons.skip_next_sharp),
               iconSize: 38,
-              color: Colors.orange,
+              color: primary,
             ),
           ],
         ),
@@ -88,21 +89,21 @@ class PlayerControlsSection extends StatelessWidget {
           children: [
             TextButton.icon(
               onPressed: onQueueTap,
-              icon: const Icon(Icons.queue_music, color: Colors.orange),
-              label: Text('player.playlist'.tr(), style: const TextStyle(color: Colors.orange)),
+              icon: Icon(Icons.queue_music, color: primary),
+              label: Text('player.playlist'.tr(), style: TextStyle(color: primary)),
             ),
             InkWell(
               onTap: onSpeedTap,
               borderRadius: BorderRadius.circular(16),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                child: Text(_speedText(), style: const TextStyle(color: Colors.orange, fontSize: 17)),
+                child: Text(_speedText(), style: TextStyle(color: primary, fontSize: 17)),
               ),
             ),
             IconButton(
               onPressed: onLoopTap,
               icon: Icon(_loopIcon()),
-              color: _loopColor(),
+              color: _loopColor(primary),
               tooltip: 'player.loop_mode'.tr(),
             ),
           ],

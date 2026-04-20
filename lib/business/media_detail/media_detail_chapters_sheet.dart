@@ -1,5 +1,6 @@
 import 'package:audio_book/business/audiobook_api/beans/library_item_detail.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
+import 'package:audio_book/business/utils/app_theme.dart';
 import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,10 @@ class MediaDetailChaptersSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    final soft = AppTheme.tint(primary, 0.42);
+    final border = AppTheme.tint(primary, 0.34);
+    final deep = AppTheme.tint(primary, -0.08);
     final t = mediaProgress?.currentTime ?? 0;
     final hasProgress = t > 0;
     final files = libraryItemDetail?.media?.audioFiles;
@@ -84,16 +89,16 @@ class MediaDetailChaptersSheet extends StatelessWidget {
                       children: [
                         DecoratedBox(
                           decoration: BoxDecoration(
-                            color: Colors.orange.shade50,
+                            color: soft,
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.orange.shade100),
+                            border: Border.all(color: border),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(Icons.equalizer, color: Colors.orange.shade700, size: 22),
+                                Icon(Icons.equalizer, color: deep, size: 22),
                                 const SizedBox(width: 10),
                                 Expanded(
                                   child: Text(

@@ -2,8 +2,6 @@ import 'package:audio_book/business/audiobook_api/beans/chapter.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../audiobook_api/beans/media_progress.dart';
-
 class MediaChapterList extends StatefulWidget {
   final List<Chapter>? chapters;
   final Function(int)? onChapterTap;
@@ -59,6 +57,7 @@ class _MediaChapterListState extends State<MediaChapterList> {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -90,7 +89,7 @@ class _MediaChapterListState extends State<MediaChapterList> {
                       Text(
                         chapter.title ?? 'chapter.unknown'.tr(),
                         style: TextStyle(
-                          color: _getTextColor(index),
+                          color: _getTextColor(index, primary),
                         ),
                       ),
                         Container(height: 3,),
@@ -124,12 +123,12 @@ class _MediaChapterListState extends State<MediaChapterList> {
     );
   }
 
-  Color _getTextColor(int index) {
+  Color _getTextColor(int index, Color primary) {
     int currentIndex = widget.indexProcessing ?? 0;
     if (index < currentIndex) {
       return Colors.grey;
     } else if (index == currentIndex) {
-      return Colors.orange;
+      return primary;
     } else {
       return Colors.black;
     }

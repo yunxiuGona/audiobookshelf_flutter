@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:audio_book/business/utils/app_theme.dart';
 
 import '../../audiobook_api/beans/user_authorize.dart';
 
@@ -10,6 +11,7 @@ class HomeUserProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     final user = userAuthInfo?.user;
     final server = userAuthInfo?.serverSettings;
     final username = user?.username ?? 'profile.guest_user'.tr();
@@ -19,8 +21,8 @@ class HomeUserProfileCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFFFE2C3), Color(0xFFFFF4EA)],
+        gradient: LinearGradient(
+          colors: [AppTheme.tint(primary, 0.26), AppTheme.tint(primary, 0.43)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -36,7 +38,7 @@ class HomeUserProfileCard extends StatelessWidget {
                 backgroundColor: Colors.white,
                 child: Text(
                   username.isNotEmpty ? username.substring(0, 1).toUpperCase() : "U",
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.orange),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: primary),
                 ),
               ),
               const SizedBox(width: 12),

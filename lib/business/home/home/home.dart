@@ -27,6 +27,7 @@ class _HomeState extends State<Home> {
   }
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     return Scaffold(
       extendBody: true,
       body: (_bottomNavIndex == 0) ? HomeMain() : HomeUser(), //destination screen
@@ -36,7 +37,7 @@ class _HomeState extends State<Home> {
         icons: [Icons.home_filled, Icons.person],
         activeIndex: _bottomNavIndex,
         iconSize: 30,
-        activeColor:Colors.orange,
+        activeColor: primary,
         inactiveColor:Colors.black87,
         backgroundColor: Colors.white,
         gapLocation: GapLocation.center,

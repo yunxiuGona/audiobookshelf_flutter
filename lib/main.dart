@@ -9,6 +9,7 @@ import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/player_utils.dart';
 import 'package:audio_book/business/utils/app_locale.dart';
+import 'package:audio_book/business/utils/app_theme.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:audio_book/business/widgets/foot_header/music_footer.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -83,6 +84,7 @@ void main() async {
   SPUtils.prefs = await SharedPreferences.getInstance();
   CacheUtils.prefs = await SharedPreferences.getInstance();
   SPUtils.getUserData();
+  AppTheme.initFromPrefs();
 
   EasyRefresh.defaultHeaderBuilder = () => MusicHeader();
   EasyRefresh.defaultFooterBuilder = () => MusicFooter();
@@ -142,17 +144,17 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return FlutterAwesomeLogger(
       navigatorKey: navigatorKey, // Required if logger history page does not open on floating button press
-      child: GetMaterialApp(
-        title: 'Just Listen',
-        navigatorKey: navigatorKey,
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-          fontFamily: "AlibabaPuHuiTiSC",
+      child: ValueListenableBuilder<Color>(
+        valueListenable: AppTheme.currentColor,
+        builder: (context, seedColor, _) => GetMaterialApp(
+          title: 'Just Listen',
+          navigatorKey: navigatorKey,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          theme: AppTheme.buildTheme(seedColor),
+          home: const Login(),
         ),
-        home: const Login(),
       ),
     );
   }

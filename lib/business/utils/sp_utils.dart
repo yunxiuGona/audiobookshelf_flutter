@@ -134,4 +134,14 @@ class SPUtils{
     return s;
   }
 
+  static const String _keyAppThemeColor = 'app_theme_color';
+
+  static void saveAppThemeColor(int colorValue) {
+    prefs?.setInt(_keyAppThemeColor, colorValue);
+  }
+
+  static int? getAppThemeColor() {
+    return prefs?.getInt(_keyAppThemeColor);
+  }
+
 }

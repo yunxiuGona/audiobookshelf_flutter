@@ -1,10 +1,11 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/collect_list.dart';
+import 'package:audio_book/business/utils/app_theme.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-/// 收藏夹管理：新建（POST）、删除（DELETE）。橙色主题。
+/// 收藏夹管理：新建（POST）、删除（DELETE）。主题色跟随全局设置。
 class CollectManagePage extends StatefulWidget {
   const CollectManagePage({
     super.key,
@@ -14,10 +15,6 @@ class CollectManagePage extends StatefulWidget {
 
   final String libraryId;
   final String? seedLibraryItemId;
-
-  static const Color _orange = Color(0xFFFF9800);
-  static const Color _orangeDeep = Color(0xFFF57C00);
-  static const Color _surfaceTint = Color(0xFFFFF8F2);
 
   @override
   State<CollectManagePage> createState() => _CollectManagePageState();
@@ -44,6 +41,7 @@ class _CollectManagePageState extends State<CollectManagePage> {
   }
 
   Future<void> _onAdd() async {
+    final primary = Theme.of(context).colorScheme.primary;
     final nameController = TextEditingController();
     final ok = await showDialog<bool>(
       context: context,
@@ -54,10 +52,10 @@ class _CollectManagePageState extends State<CollectManagePage> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: CollectManagePage._orange.withOpacity(0.15),
+                color: primary.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Icon(Icons.create_new_folder_outlined, color: CollectManagePage._orange, size: 22),
+              child: Icon(Icons.create_new_folder_outlined, color: primary, size: 22),
             ),
             const SizedBox(width: 12),
             Expanded(child: Text('collect.add_collection'.tr(), style: const TextStyle(fontSize: 18))),
@@ -68,7 +66,7 @@ class _CollectManagePageState extends State<CollectManagePage> {
           decoration: InputDecoration(
             hintText: 'collect.name_hint'.tr(),
             filled: true,
-            fillColor: CollectManagePage._surfaceTint,
+            fillColor: AppTheme.tint(primary, 0.42),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide(color: Colors.grey.shade300),
@@ -79,7 +77,7 @@ class _CollectManagePageState extends State<CollectManagePage> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: CollectManagePage._orange, width: 2),
+              borderSide: BorderSide(color: primary, width: 2),
             ),
           ),
           autofocus: true,
@@ -91,7 +89,7 @@ class _CollectManagePageState extends State<CollectManagePage> {
           ),
           FilledButton(
             style: FilledButton.styleFrom(
-              backgroundColor: CollectManagePage._orangeDeep,
+              backgroundColor: primary,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -179,26 +177,29 @@ class _CollectManagePageState extends State<CollectManagePage> {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
+    final deep = AppTheme.tint(primary, -0.08);
+    final surfaceTint = AppTheme.tint(primary, 0.44);
     final items = _list?.results ?? [];
     return Scaffold(
-      backgroundColor: CollectManagePage._surfaceTint,
+      backgroundColor: surfaceTint,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black87,
-        surfaceTintColor: CollectManagePage._orange.withOpacity(0.12),
+        surfaceTintColor: primary.withOpacity(0.12),
         title: Text(
           'collect.manage_title'.tr(),
           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         ),
-        iconTheme: const IconThemeData(color: CollectManagePage._orangeDeep),
+        iconTheme: IconThemeData(color: deep),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(3),
           child: Container(
             height: 3,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [CollectManagePage._orange, CollectManagePage._orangeDeep],
+                colors: [primary, deep],
               ),
             ),
           ),
@@ -207,7 +208,7 @@ class _CollectManagePageState extends State<CollectManagePage> {
       floatingActionButton: (!_loading && items.isNotEmpty)
           ? FloatingActionButton.extended(
               elevation: 4,
-              backgroundColor: CollectManagePage._orangeDeep,
+              backgroundColor: deep,
               foregroundColor: Colors.white,
               onPressed: _onAdd,
               icon: const Icon(Icons.add_rounded),
@@ -215,11 +216,11 @@ class _CollectManagePageState extends State<CollectManagePage> {
             )
           : null,
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.white, CollectManagePage._surfaceTint],
+            colors: [Colors.white, surfaceTint],
           ),
         ),
         child: _loading
@@ -227,14 +228,14 @@ class _CollectManagePageState extends State<CollectManagePage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const CircularProgressIndicator(color: CollectManagePage._orangeDeep, strokeWidth: 3),
+                    CircularProgressIndicator(color: deep, strokeWidth: 3),
                     const SizedBox(height: 16),
                     Text('collect.loading'.tr(), style: TextStyle(color: Colors.grey.shade600, fontSize: 14)),
                   ],
                 ),
               )
             : items.isEmpty
-                ? _EmptyState(onCreate: _loading ? null : _onAdd)
+                ? _EmptyState(onCreate: _loading ? null : _onAdd, primary: primary, deep: deep)
                 : ListView.separated(
                     padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
                     itemCount: items.length,
@@ -242,6 +243,8 @@ class _CollectManagePageState extends State<CollectManagePage> {
                     itemBuilder: (_, i) {
                       final item = items[i];
                       return _CollectionTile(
+                        primary: primary,
+                        deep: deep,
                         name: item.name ?? '',
                         onDelete: () => _onDelete(item),
                       );
@@ -253,8 +256,10 @@ class _CollectManagePageState extends State<CollectManagePage> {
 }
 
 class _CollectionTile extends StatelessWidget {
-  const _CollectionTile({required this.name, required this.onDelete});
+  const _CollectionTile({required this.primary, required this.deep, required this.name, required this.onDelete});
 
+  final Color primary;
+  final Color deep;
   final String name;
   final VoidCallback onDelete;
 
@@ -268,8 +273,8 @@ class _CollectionTile extends StatelessWidget {
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         leading: CircleAvatar(
-          backgroundColor: CollectManagePage._orange.withOpacity(0.18),
-          child: const Icon(Icons.folder_special_outlined, color: CollectManagePage._orangeDeep, size: 24),
+          backgroundColor: primary.withOpacity(0.18),
+          child: Icon(Icons.folder_special_outlined, color: deep, size: 24),
         ),
         title: Text(
           name,
@@ -294,9 +299,11 @@ class _CollectionTile extends StatelessWidget {
 }
 
 class _EmptyState extends StatelessWidget {
-  const _EmptyState({required this.onCreate});
+  const _EmptyState({required this.onCreate, required this.primary, required this.deep});
 
   final VoidCallback? onCreate;
+  final Color primary;
+  final Color deep;
 
   @override
   Widget build(BuildContext context) {
@@ -309,10 +316,10 @@ class _EmptyState extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(22),
               decoration: BoxDecoration(
-                color: CollectManagePage._orange.withOpacity(0.12),
+                color: primary.withOpacity(0.12),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.collections_bookmark_outlined, size: 56, color: CollectManagePage._orangeDeep),
+              child: Icon(Icons.collections_bookmark_outlined, size: 56, color: deep),
             ),
             const SizedBox(height: 24),
             Text(
@@ -323,7 +330,7 @@ class _EmptyState extends StatelessWidget {
             const SizedBox(height: 28),
             FilledButton.icon(
               style: FilledButton.styleFrom(
-                backgroundColor: CollectManagePage._orangeDeep,
+                backgroundColor: deep,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),

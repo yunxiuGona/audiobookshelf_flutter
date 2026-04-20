@@ -40,7 +40,7 @@ class MusicFooter extends Footer {
       key: widgetKey,
       state: state,
       slot: MusicIndicatorSlot.footer,
-      accentColor: color ?? kMusicRefreshAccentDefault,
+      accentColor: color ?? Theme.of(context).colorScheme.primary,
       iconSize: iconSize,
     );
   }
