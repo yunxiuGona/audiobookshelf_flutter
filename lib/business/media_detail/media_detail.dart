@@ -15,6 +15,7 @@ import '../audiobook_api/beans/media_progress.dart';
 import '../events/play_position_event.dart';
 import '../events/play_status_event.dart';
 import '../widgets/loading_view.dart';
+import '../collects/media_detail_collect_flow.dart';
 import 'media_detail_bottom_view.dart';
 import 'media_detail_chapters_sheet.dart';
 import 'media_detail_scroll_content.dart';
@@ -101,7 +102,19 @@ class _MediaDetailState extends State<MediaDetail> {
     meta = libraryItemDetailBean?.media?.metadata;
     return Scaffold(
       backgroundColor: const Color(0xFFF6F7FB),
-      appBar: AppBar(title: Text('media_detail.title'.tr()), elevation: 0, backgroundColor: Colors.white, foregroundColor: Colors.black87),
+      appBar: AppBar(
+        title: Text('media_detail.title'.tr()),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+        actions: [
+          IconButton(
+            tooltip: 'media_detail.add_to_collection'.tr(),
+            icon: const Icon(Icons.bookmark_add_outlined),
+            onPressed: loading ? null : () => MediaDetailCollectFlow.start(context, libraryItemDetailBean),
+          ),
+        ],
+      ),
       body: loading ? LoadingView() : _buildScrollBodyWithCover(context),
     );
   }

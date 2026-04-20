@@ -38,7 +38,8 @@
     "current_progress": "Now at: {title}",
     "listen_from_start": "From the start",
     "listen_continue": "Continue",
-    "tap_chapters": "Browse chapters"
+    "tap_chapters": "Browse chapters",
+    "add_to_collection": "Add to collection"
   },
   "duration": {
     "hours_minutes": "{hours} h {minutes} min",
@@ -101,6 +102,25 @@
     "default_name": "Collection",
     "empty_hint": "This collection has no items",
     "author_line": "Author: {name}"
+  },
+  "collect": {
+    "pick_title": "Choose a collection",
+    "manage_title": "Manage collections",
+    "add_collection": "New collection",
+    "name_hint": "Collection name",
+    "name_required": "Please enter a name",
+    "create": "Create",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "delete_confirm": "Delete \"{name}\"?",
+    "saved": "Added to collection",
+    "created": "Collection created",
+    "deleted": "Collection deleted",
+    "create_failed": "Could not create collection",
+    "delete_failed": "Could not delete collection",
+    "add_failed": "Could not add to collection",
+    "load_failed": "Could not load collections",
+    "empty_manage_hint": "You have no collections yet. Tap the button below to create one."
   },
   "settings": {
     "language": "Language",

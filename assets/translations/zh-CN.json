@@ -38,7 +38,8 @@
     "current_progress": "当前听到：{title}",
     "listen_from_start": "从头收听",
     "listen_continue": "继续收听",
-    "tap_chapters": "查看章节"
+    "tap_chapters": "查看章节",
+    "add_to_collection": "加入收藏夹"
   },
   "duration": {
     "hours_minutes": "{hours}小时{minutes}分钟",
@@ -101,6 +102,25 @@
     "default_name": "收藏集",
     "empty_hint": "该收藏集暂无作品",
     "author_line": "作者：{name}"
+  },
+  "collect": {
+    "pick_title": "选择收藏夹",
+    "manage_title": "管理收藏夹",
+    "add_collection": "新建收藏夹",
+    "name_hint": "收藏夹名称",
+    "name_required": "请输入名称",
+    "create": "创建",
+    "cancel": "取消",
+    "delete": "删除",
+    "delete_confirm": "确定删除「{name}」？",
+    "saved": "已加入收藏夹",
+    "created": "收藏夹已创建",
+    "deleted": "收藏夹已删除",
+    "create_failed": "创建收藏夹失败",
+    "delete_failed": "删除收藏夹失败",
+    "add_failed": "加入收藏夹失败",
+    "load_failed": "获取收藏夹列表失败",
+    "empty_manage_hint": "暂无收藏夹，点击下方按钮新建。"
   },
   "settings": {
     "language": "语言",

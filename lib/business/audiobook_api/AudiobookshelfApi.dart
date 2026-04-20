@@ -9,6 +9,9 @@ import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
 import 'package:audio_book/business/audiobook_api/beans/my_library_items.dart';
 import 'package:audio_book/business/audiobook_api/beans/play_media.dart';
 import 'package:audio_book/business/audiobook_api/beans/user_authorize.dart';
+import 'package:audio_book/business/audiobook_api/beans/collect_add.dart';
+import 'package:audio_book/business/audiobook_api/beans/collect_floder_add.dart';
+import 'package:audio_book/business/audiobook_api/beans/collect_list.dart';
 import 'package:audio_book/business/audiobook_api/beans/user_collections_list.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
@@ -76,6 +79,91 @@ class AudiobookshelfApi extends GetConnect {
     } else {
       return null;
     }
+  }
+
+  /// 媒体库下的收藏夹列表（详情页收藏流程使用 [CollectList]）。
+  Future<CollectList?> libraryCollectionsList(String libraryId) async {
+    initUserInfo();
+    final resp = await get(
+      headers: headers,
+      "/audiobookshelf/api/libraries/$libraryId/collections",
+    );
+    if (resp.status.code == OK && resp.body != null) {
+      return CollectList.fromJson(Map<String, dynamic>.from(resp.body));
+    }
+    return null;
+  }
+
+  /// 新建收藏夹。 [bookIds] 为图书馆条目 id（library item id）。
+  Future<CollectFloderAdd?> createCollection({
+    required String libraryId,
+    required String name,
+    List<String> bookIds = const [],
+  }) async {
+    initUserInfo();
+    final resp = await post(headers: headers, "/audiobookshelf/api/collections", {
+      "libraryId": libraryId,
+      "name": name,
+      "books": bookIds,
+    });
+    if (resp.status.code == OK && resp.body != null) {
+      return CollectFloderAdd.fromJson(Map<String, dynamic>.from(resp.body));
+    }
+    return null;
+  }
+
+  /// 获取单个收藏夹详情（与接口文档一致：GET + `include=rssfeed`）。
+  Future<CollectAdd?> getCollectionDetail(String collectionId) async {
+    initUserInfo();
+    final resp = await get(
+      headers: headers,
+      "/audiobookshelf/api/collections/$collectionId?include=rssfeed",
+    );
+    if (resp.status.code == OK && resp.body != null) {
+      return CollectAdd.fromJson(Map<String, dynamic>.from(resp.body));
+    }
+    return null;
+  }
+
+  /// 将作品加入收藏夹：先 GET 详情，再 PATCH 合并 `books`（服务端需通过 PATCH 更新书目）。
+  Future<CollectAdd?> addLibraryItemToCollection({
+    required String collectionId,
+    required String libraryItemId,
+  }) async {
+    initUserInfo();
+    final detail = await getCollectionDetail(collectionId);
+    if (detail == null) return null;
+    final ids = <String>{};
+    for (final b in detail.books ?? []) {
+      final id = b.id;
+      if (id != null && id.isNotEmpty) ids.add(id);
+    }
+    ids.add(libraryItemId);
+    final payload = <String, dynamic>{
+      "libraryId": detail.libraryId,
+      "name": detail.name,
+      "description": detail.description,
+      "books": ids.toList(),
+    };
+    final resp = await patch(
+      headers: headers,
+      "/audiobookshelf/api/collections/$collectionId",
+      payload,
+    );
+    if (resp.status.code == OK && resp.body != null) {
+      return CollectAdd.fromJson(Map<String, dynamic>.from(resp.body));
+    }
+    if (resp.status.code == OK) {
+      return getCollectionDetail(collectionId);
+    }
+    return null;
+  }
+
+  Future<bool> deleteCollection(String collectionId) async {
+    initUserInfo();
+    final resp = await delete(headers: headers, "/audiobookshelf/api/collections/$collectionId");
+    final c = resp.status.code;
+    return c == OK || c == 204;
   }
 
   Future<LibraryItemDetail?> libraryItemDetail(String libraryID) async {
