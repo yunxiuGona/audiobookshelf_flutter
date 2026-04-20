@@ -55,9 +55,10 @@ class _MediaDetailState extends State<MediaDetail> {
   }
 
   /// 向上滚动（offset 增大）封面渐隐；向下滚回顶部渐显。
+  /// 顶部弹性 overscroll 时 offset 可能为负，仅按向下位移计算渐隐。
   void _onScrollCoverOpacity() {
     const fadeDistance = 220.0;
-    final o = _scrollController.offset;
+    final o = _scrollController.offset.clamp(0.0, double.infinity);
     final opacity = (1.0 - o / fadeDistance).clamp(0.0, 1.0);
     if ((_coverOpacity.value - opacity).abs() > 0.003) {
       _coverOpacity.value = opacity;
@@ -107,7 +108,7 @@ class _MediaDetailState extends State<MediaDetail> {
 
   Widget _buildScrollBodyWithCover(BuildContext context) {
     final screenW = MediaQuery.sizeOf(context).width;
-    final heroH = screenW;
+    final heroH = screenW/2;
     final coverUrl = AudiobookshelfApi().getMediaCoverUrl(libraryItemDetailBean?.id ?? '');
     return MediaDetailScrollLayout(
       scrollController: _scrollController,
