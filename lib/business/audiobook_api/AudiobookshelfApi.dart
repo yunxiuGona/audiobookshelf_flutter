@@ -12,6 +12,11 @@ import 'package:audio_book/business/audiobook_api/beans/user_authorize.dart';
 import 'package:audio_book/business/audiobook_api/beans/collect_add.dart';
 import 'package:audio_book/business/audiobook_api/beans/collect_floder_add.dart';
 import 'package:audio_book/business/audiobook_api/beans/collect_list.dart';
+import 'package:audio_book/business/audiobook_api/beans/custom_providers.dart';
+import 'package:audio_book/business/audiobook_api/beans/provider.dart';
+import 'package:audio_book/business/audiobook_api/beans/provider_list.dart';
+import 'package:audio_book/business/audiobook_api/beans/provider_meta_data_save.dart';
+import 'package:audio_book/business/audiobook_api/beans/provider_searched_meta_data.dart';
 import 'package:audio_book/business/audiobook_api/beans/user_collections_list.dart';
 import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
@@ -164,6 +169,102 @@ class AudiobookshelfApi extends GetConnect {
     final resp = await delete(headers: headers, "/audiobookshelf/api/collections/$collectionId");
     final c = resp.status.code;
     return c == OK || c == 204;
+  }
+
+  /// 获取用户自定义元数据提供程序。
+  Future<CustomProviders?> customMetadataProviders() async {
+    initUserInfo();
+    final resp = await get(
+      headers: headers,
+      "/audiobookshelf/api/custom-metadata-providers",
+    );
+    if (resp.status.code == OK && resp.body != null) {
+      return CustomProviders.fromJson(Map<String, dynamic>.from(resp.body));
+    }
+    return null;
+  }
+
+  /// 获取可用于图书匹配的 provider 列表（/api/search/providers -> providers.books）。
+  Future<List<Provider>> searchProvidersBooks() async {
+    initUserInfo();
+    final resp = await get(
+      headers: headers,
+      "/audiobookshelf/api/search/providers",
+    );
+    if (resp.status.code == OK && resp.body != null) {
+      final bean = ProviderList.fromJson(Map<String, dynamic>.from(resp.body));
+      return bean.providers?.books ?? const [];
+    }
+    return const [];
+  }
+
+  /// 调用 provider 搜索匹配元信息。
+  Future<List<ProviderSearchedMetaData>> searchProviderMetadata({
+    required String providerId,
+    required String title,
+    required String libraryItemId,
+    String? author,
+    bool fallbackTitleOnly = true,
+  }) async {
+    initUserInfo();
+    final params = <String, String>{
+      "provider": providerId,
+      "fallbackTitleOnly": fallbackTitleOnly ? "1" : "0",
+      "title": title,
+      "id": libraryItemId,
+    };
+    if (author != null && author.trim().isNotEmpty) {
+      params["author"] = author.trim();
+    }
+    final query = Uri(queryParameters: params).query;
+    final resp = await get(
+      headers: headers,
+      "/audiobookshelf/api/search/books?$query",
+    );
+    if (resp.status.code != OK || resp.body == null) return const [];
+    final body = resp.body;
+    if (body is List) {
+      return body
+          .whereType<Map>()
+          .map((e) => ProviderSearchedMetaData.fromJson(Map<String, dynamic>.from(e)))
+          .toList();
+    }
+    if (body is Map) {
+      final map = Map<String, dynamic>.from(body);
+      final results = map["results"];
+      if (results is List) {
+        return results
+            .whereType<Map>()
+            .map((e) => ProviderSearchedMetaData.fromJson(Map<String, dynamic>.from(e)))
+            .toList();
+      }
+      return [ProviderSearchedMetaData.fromJson(map)];
+    }
+    return const [];
+  }
+
+  /// 保存匹配后的媒体元信息（PATCH /api/items/{id}/media）。
+  Future<ProviderMetaDataSave?> saveProviderMetadata({
+    required String libraryItemId,
+    required Map<String, dynamic> metadata,
+    String? coverUrl,
+  }) async {
+    initUserInfo();
+    final payload = <String, dynamic>{
+      "metadata": metadata,
+    };
+    if (coverUrl != null && coverUrl.trim().isNotEmpty) {
+      payload["url"] = coverUrl.trim();
+    }
+    final resp = await patch(
+      headers: headers,
+      "/audiobookshelf/api/items/$libraryItemId/media",
+      payload,
+    );
+    if (resp.status.code == OK && resp.body != null) {
+      return ProviderMetaDataSave.fromJson(Map<String, dynamic>.from(resp.body));
+    }
+    return null;
   }
 
   Future<LibraryItemDetail?> libraryItemDetail(String libraryID) async {

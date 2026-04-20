@@ -12,6 +12,7 @@ import 'dart:async';
 import '../audiobook_api/beans/library_item_detail.dart';
 import '../audiobook_api/beans/media.dart';
 import '../audiobook_api/beans/media_progress.dart';
+import '../media_match/media_match_page.dart';
 import '../events/play_position_event.dart';
 import '../events/play_status_event.dart';
 import '../widgets/loading_view.dart';
@@ -108,6 +109,15 @@ class _MediaDetailState extends State<MediaDetail> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black87,
         actions: [
+          IconButton(
+            tooltip: 'media_match.title'.tr(),
+            icon: const Icon(Icons.manage_search_outlined),
+            onPressed: loading
+                ? null
+                : () {
+                    Get.to(() => MediaMatchPage(libraryItemDetail: libraryItemDetailBean));
+                  },
+          ),
           IconButton(
             tooltip: 'media_detail.add_to_collection'.tr(),
             icon: const Icon(Icons.bookmark_add_outlined),
