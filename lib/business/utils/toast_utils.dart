@@ -3,7 +3,10 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ToastUtils {
   /// 显示成功提示
+  ///
+
   static void showSuccess(BuildContext context, String message) {
+    final primary = Theme.of(context).colorScheme.primary;
     showToast(
       message,
       context: context,
@@ -11,7 +14,7 @@ class ToastUtils {
       reverseAnimation: StyledToastAnimation.fade,
       position: StyledToastPosition.bottom,
       duration: const Duration(seconds: 2),
-      backgroundColor: Colors.green,
+      backgroundColor: primary,
       textStyle: const TextStyle(color: Colors.white, fontSize: 14),
       borderRadius: BorderRadius.circular(8),
     );
@@ -19,6 +22,7 @@ class ToastUtils {
 
   /// 显示错误提示
   static void showError(BuildContext context, String message) {
+    final error = Theme.of(context).colorScheme.error;
     showToast(
       message,
       context: context,
@@ -26,7 +30,7 @@ class ToastUtils {
       reverseAnimation: StyledToastAnimation.fade,
       position: StyledToastPosition.bottom,
       duration: const Duration(seconds: 2),
-      backgroundColor: Colors.red,
+      backgroundColor: error,
       textStyle: const TextStyle(color: Colors.white, fontSize: 14),
       borderRadius: BorderRadius.circular(8),
     );
@@ -34,6 +38,7 @@ class ToastUtils {
 
   /// 显示信息提示
   static void showInfo(BuildContext context, String message) {
+    final onSecondary = Theme.of(context).colorScheme.onSecondary;
     showToast(
       message,
       context: context,
@@ -41,7 +46,7 @@ class ToastUtils {
       reverseAnimation: StyledToastAnimation.fade,
       position: StyledToastPosition.bottom,
       duration: const Duration(seconds: 2),
-      backgroundColor: Colors.blue,
+      backgroundColor: onSecondary,
       textStyle: const TextStyle(color: Colors.white, fontSize: 14),
       borderRadius: BorderRadius.circular(8),
     );

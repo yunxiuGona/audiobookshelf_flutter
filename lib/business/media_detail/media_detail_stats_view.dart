@@ -36,6 +36,7 @@ class MediaDetailStatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     var duration = 0.0;
     libraryItemDetail?.media?.audioFiles?.forEach((file) {
       duration = duration + (file.duration ?? 0.0);
@@ -66,10 +67,10 @@ class MediaDetailStatsView extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: Colors.orange.shade50,
+                            color: primary.withAlpha(30),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Icon(Icons.list_alt_rounded, size: 22, color: Colors.orange.shade700),
+                          child: Icon(Icons.list_alt_rounded, size: 22, color: primary),
                         ),
                         const SizedBox(width: 10),
                         Expanded(
@@ -96,7 +97,7 @@ class MediaDetailStatsView extends StatelessWidget {
                                   heard,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(color: Colors.orange.shade800, fontSize: 11, fontWeight: FontWeight.w500),
+                                  style: TextStyle(color:primary, fontSize: 11, fontWeight: FontWeight.w500),
                                 ),
                               ],
                               const SizedBox(height: 2),

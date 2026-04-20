@@ -12,10 +12,10 @@ class AppThemeOption {
 class AppTheme {
   AppTheme._();
 
-  static const Color defaultColor = Color(0xFFFF9800);
+  static const Color defaultColor = Color(0xFFFFB747);
 
   static const List<AppThemeOption> presets = [
-    AppThemeOption(key: 'settings.theme_orange', color: Color(0xFFFF9800)),
+    AppThemeOption(key: 'settings.theme_orange', color: Color(0xFFFFB747)),
     AppThemeOption(key: 'settings.theme_blue', color: Color(0xFF3B82F6)),
     AppThemeOption(key: 'settings.theme_green', color: Color(0xFF22C55E)),
     AppThemeOption(key: 'settings.theme_purple', color: Color(0xFFA855F7)),
@@ -41,15 +41,23 @@ class AppTheme {
   }
 
   static ThemeData buildTheme(Color seedColor) {
-    final scheme = ColorScheme.fromSeed(seedColor: seedColor);
+    // 1. 生成基础配色方案
+    final baseScheme = ColorScheme.fromSeed(seedColor: seedColor);
+    // 2. 🔥 强制覆盖 primary 为【你原来的色值】，永不改变
+    final scheme = baseScheme.copyWith(
+      primary: seedColor, // 核心：锁定主色=你传入的原始颜色
+      onPrimary: Colors.white, // 主色上的文字/图标颜色（适配浅色主色）
+    );
     return ThemeData(
       colorScheme: scheme,
       primaryColor: seedColor,
       useMaterial3: true,
+      brightness: Brightness.light,
       fontFamily: "AlibabaPuHuiTiSC",
     );
   }
 
+  // 静态工具方法：传入 原始颜色、提亮幅度，返回提亮后的新颜色
   static Color tint(Color color, double amount) {
     final hsl = HSLColor.fromColor(color);
     final next = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));

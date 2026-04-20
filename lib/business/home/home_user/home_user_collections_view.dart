@@ -59,7 +59,7 @@ class HomeUserCollectionsView extends StatelessWidget {
                       decoration: BoxDecoration(color: primary.withOpacity(0.08), borderRadius: BorderRadius.circular(10)),
                       child: Row(
                         children: [
-                          Icon(Icons.collections_bookmark_outlined, size: 18, color: primary),
+                          Icon(Icons.folder_special_outlined, size: 18, color: primary),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(item.name ?? "-", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),

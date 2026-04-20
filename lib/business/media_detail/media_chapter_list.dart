@@ -110,6 +110,7 @@ class _MediaChapterListState extends State<MediaChapterList> {
                     bottom: 0,
                     child: ChapterIndexBar(
                       itemCount: widget.chapters!.length,
+                      accentColor: primary,
                       onIndexSelected: (index) {
                         _scrollController.jumpTo(index * ITEM_HEIGHT);
                       },
@@ -150,9 +151,10 @@ class _MediaChapterListState extends State<MediaChapterList> {
 class ChapterIndexBar extends StatelessWidget {
   final int itemCount;
   final Function(int) onIndexSelected;
+  final Color accentColor;
   static const int _displayCount = 20; // 固定显示20个数字
 
-  const ChapterIndexBar({Key? key, required this.itemCount, required this.onIndexSelected}) : super(key: key);
+  const ChapterIndexBar({Key? key, required this.itemCount, required this.onIndexSelected, required this.accentColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +203,7 @@ class ChapterIndexBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: displayIndices.map((index) => Text(
             '${index + 1}',
-            style: TextStyle(fontSize: 12, color: Colors.grey),
+            style: TextStyle(fontSize: 12, color: accentColor.withOpacity(0.65)),
           )).toList(),
         ),
       ),

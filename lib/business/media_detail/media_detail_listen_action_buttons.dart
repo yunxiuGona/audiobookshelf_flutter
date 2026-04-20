@@ -16,6 +16,7 @@ class MediaDetailListenActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     if (hasProgress) {
       return Row(
         children: [
@@ -23,8 +24,8 @@ class MediaDetailListenActionButtons extends StatelessWidget {
             child: OutlinedButton(
               onPressed: onListenFromStart,
               style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.orange.shade800,
-                side: BorderSide(color: Colors.orange.shade300),
+                foregroundColor: primary,
+                side: BorderSide(color: primary),
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
@@ -36,7 +37,7 @@ class MediaDetailListenActionButtons extends StatelessWidget {
             child: FilledButton(
               onPressed: onListenContinue,
               style: FilledButton.styleFrom(
-                backgroundColor: Colors.orange,
+                backgroundColor: primary,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

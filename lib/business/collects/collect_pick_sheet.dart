@@ -12,6 +12,7 @@ Future<void> showCollectPickSheet({
   required String libraryItemId,
   required List<Results> collections,
 }) async {
+  final primary = Theme.of(context).colorScheme.primary;
   await showModalBottomSheet<void>(
     context: context,
     useSafeArea: true,
@@ -19,7 +20,7 @@ Future<void> showCollectPickSheet({
       borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
     builder: (sheetContext) {
-      final maxH = math.min(420.0, MediaQuery.sizeOf(sheetContext).height * 0.55);
+      final maxH = math.min(360.0, MediaQuery.sizeOf(sheetContext).height * 0.55);
       return SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -42,6 +43,7 @@ Future<void> showCollectPickSheet({
                   final c = collections[i];
                   return ListTile(
                     title: Text(c.name ?? ''),
+                    leading: Icon(Icons.folder_special_outlined,size: 26,color: primary,),
                     onTap: () async {
                       final id = c.id;
                       if (id == null || id.isEmpty) return;
