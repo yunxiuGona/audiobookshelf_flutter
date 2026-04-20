@@ -73,7 +73,8 @@
     "no_history": "暂无收听历史",
     "collections": "收藏集",
     "no_collections": "暂无收藏集",
-    "book_count": "{count} 本"
+    "book_count": "{count} 本",
+    "manage_collections": "管理收藏夹"
   },
   "about": {
     "title": "关于软件",
@@ -120,7 +121,9 @@
     "delete_failed": "删除收藏夹失败",
     "add_failed": "加入收藏夹失败",
     "load_failed": "获取收藏夹列表失败",
-    "empty_manage_hint": "暂无收藏夹，点击下方按钮新建。"
+    "empty_manage_hint": "暂无收藏夹，点击下方按钮新建。",
+    "loading": "加载中…",
+    "folder_subtitle": "收藏夹"
   },
   "settings": {
     "language": "语言",

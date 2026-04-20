@@ -7,87 +7,92 @@ import '../../audiobook_api/beans/user_collections_list.dart';
 class HomeUserCollectionsView extends StatelessWidget {
   final UserCollectionsList? collections;
   final ValueChanged<UserCollectionItem>? onCollectionTap;
+  final VoidCallback? onEditTap;
 
-  const HomeUserCollectionsView({super.key, required this.collections, this.onCollectionTap});
+  const HomeUserCollectionsView({super.key, required this.collections, this.onCollectionTap, this.onEditTap});
 
   @override
   Widget build(BuildContext context) {
     final items = collections?.results ?? [];
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 4))],
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 4,
-                height: 18,
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(2),
-                ),
+              Row(
+                children: [
+                  Container(
+                    width: 4,
+                    height: 18,
+                    decoration: BoxDecoration(color: Colors.orange, borderRadius: BorderRadius.circular(2)),
+                  ),
+                  const SizedBox(width: 8),
+                  Text('home.collections'.tr(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                ],
               ),
-              const SizedBox(width: 8),
-              Text('home.collections'.tr(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            ],
-          ),
-          const SizedBox(height: 12),
-          if (items.isEmpty)
-            Container(
-              width: double.infinity,
-              height: 100,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.06),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text('home.no_collections'.tr(), style: TextStyle(color: Colors.grey.shade700)),
-            )
-          else
-            ...items.map(
-              (item) => InkWell(
-                onTap: () => onCollectionTap?.call(item),
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.orange.withOpacity(0.05),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.collections_bookmark_outlined, size: 18, color: Colors.orange),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        item.name ?? "-",
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              const SizedBox(height: 12),
+              if (items.isEmpty)
+                Container(
+                  width: double.infinity,
+                  height: 100,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(color: Colors.orange.withOpacity(0.06), borderRadius: BorderRadius.circular(12)),
+                  child: Text('home.no_collections'.tr(), style: TextStyle(color: Colors.grey.shade700)),
+                )
+              else
+                ...items.map(
+                  (item) => InkWell(
+                    onTap: () => onCollectionTap?.call(item),
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                      decoration: BoxDecoration(color: Colors.orange.withOpacity(0.05), borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.collections_bookmark_outlined, size: 18, color: Colors.orange),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(item.name ?? "-", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                          ),
+                          Text(
+                            'home.book_count'.tr(namedArgs: {'count': '${item.books?.length ?? 0}'}),
+                            style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                      'home.book_count'.tr(namedArgs: {'count': '${item.books?.length ?? 0}'}),
-                      style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-              ),
-            ),
-        ],
+            ],
+          ),
+        ),
+        Container(child: viewEdit(),alignment: Alignment.topRight,)
+      ],
+    );
+  }
+
+  Widget viewEdit(){
+    return Positioned(
+      top: -4,
+      right: -4,
+      child: Material(
+        color: Colors.transparent,
+        child: IconButton(
+          tooltip: 'home.manage_collections'.tr(),
+          visualDensity: VisualDensity.compact,
+          padding: const EdgeInsets.all(8),
+          onPressed: onEditTap,
+          icon: const Icon(Icons.edit_outlined, color: Colors.orange, size: 22),
+        ),
       ),
     );
   }

@@ -16,6 +16,7 @@ import 'home_user_profile_card.dart';
 import 'home_user_history_view.dart';
 import '../../audiobook_api/AudiobookshelfApi.dart';
 import '../../audiobook_api/beans/user_collection_item.dart';
+import '../../collects/collect_manage_page.dart';
 import '../../collects/collects_in_set/collection_in_set.dart';
 
 class HomeUser extends StatefulWidget {
@@ -118,9 +119,14 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
               Container(height: 40),
               HomeUserProfileCard(userAuthInfo: _userAuthInfo),
               const SizedBox(height: 14),
-              HomeUserHistoryCard(child: HomeUserHistoryView(_myLibrary)),
+              HomeUserHistoryCard(
+                child: HomeUserHistoryView(_myLibrary),
+              ),
               const SizedBox(height: 14),
-              HomeUserCollectionsView(collections: _collections, onCollectionTap: _handleCollectionTap),
+              HomeUserCollectionsView(collections: _collections, onCollectionTap: _handleCollectionTap,onEditTap: (){
+                final libraryId = _userAuthInfo?.userDefaultLibraryId ?? _fallbackLibraryId;
+                Get.to(CollectManagePage(libraryId: libraryId));
+              },),
               const SizedBox(height: 14),
               HomeUserActionCard(onLogoutTap: _handleLogout),
               const SizedBox(height: 164),

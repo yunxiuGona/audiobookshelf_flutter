@@ -73,7 +73,8 @@
     "no_history": "No listening history yet",
     "collections": "Collections",
     "no_collections": "No collections",
-    "book_count": "{count} books"
+    "book_count": "{count} books",
+    "manage_collections": "Manage collections"
   },
   "about": {
     "title": "About",
@@ -120,7 +121,9 @@
     "delete_failed": "Could not delete collection",
     "add_failed": "Could not add to collection",
     "load_failed": "Could not load collections",
-    "empty_manage_hint": "You have no collections yet. Tap the button below to create one."
+    "empty_manage_hint": "You have no collections yet. Tap the button below to create one.",
+    "loading": "Loading…",
+    "folder_subtitle": "Collection folder"
   },
   "settings": {
     "language": "Language",
