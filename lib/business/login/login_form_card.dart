@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 
 typedef LoginInputDecorationBuilder = InputDecoration Function({
   required String label,
-  required IconData icon,
+  IconData icon,
   Widget? suffixIcon,
 });
 
 class LoginFormCard extends StatelessWidget {
   const LoginFormCard({
     super.key,
+    required this.serverScheme,
+    required this.onServerSchemeChanged,
+    required this.serverAddressController,
     required this.usernameController,
     required this.passwordController,
     required this.obscurePassword,
@@ -21,6 +24,9 @@ class LoginFormCard extends StatelessWidget {
     required this.onLoginPressed,
   });
 
+  final String serverScheme;
+  final ValueChanged<String> onServerSchemeChanged;
+  final TextEditingController serverAddressController;
   final TextEditingController usernameController;
   final TextEditingController passwordController;
   final bool obscurePassword;
@@ -49,6 +55,37 @@ class LoginFormCard extends StatelessWidget {
       ),
       child: Column(
         children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 110,
+                child: DropdownButtonFormField<String>(
+                  value: serverScheme,
+                  decoration: inputDecorationBuilder(label: 'login.server_protocol'.tr()),
+                  items: const [
+                    DropdownMenuItem(value: 'http', child: Text('http')),
+                    DropdownMenuItem(value: 'https', child: Text('https')),
+                  ],
+                  onChanged: (v) {
+                    if (v != null) onServerSchemeChanged(v);
+                  },
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: TextField(
+                  controller: serverAddressController,
+                  keyboardType: TextInputType.url,
+                  decoration: inputDecorationBuilder(
+                    label: 'login.server_address'.tr(),
+                    icon: Icons.dns_outlined,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
           TextField(
             controller: usernameController,
             keyboardType: TextInputType.name,

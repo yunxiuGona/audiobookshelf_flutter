@@ -8,20 +8,54 @@ import 'package:audio_book/business/audiobook_api/beans/user_authorize.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SPUtils{
+  static const String _keyUserName = "username";
+  static const String _keyPassword = "password";
+  static const String _keyRememberPassword = "remember_password";
+  static const String _keyServerScheme = "server_scheme";
+  static const String _keyServerAddress = "server_address";
+
   static SharedPreferences? prefs;
   static LoginBean? userDatabean;
   static UserAuthorize? userAuthInfoBean;
   static saveUserName(String userName){
-    prefs?.setString("username", userName);
+    prefs?.setString(_keyUserName, userName);
   }
   static String? getUserName(){
-    return prefs?.getString("username");
+    return prefs?.getString(_keyUserName);
   }
   static savePassword(String password){
-    prefs?.setString("password", password);
+    prefs?.setString(_keyPassword, password);
   }
   static String? getPassword(){
-    return prefs?.getString("password");
+    return prefs?.getString(_keyPassword);
+  }
+  static void saveRememberPassword(bool remember) {
+    prefs?.setBool(_keyRememberPassword, remember);
+  }
+  static bool getRememberPassword() {
+    return prefs?.getBool(_keyRememberPassword) ?? false;
+  }
+
+  static void saveServerScheme(String scheme) {
+    final normalized = scheme.toLowerCase() == 'https' ? 'https' : 'http';
+    prefs?.setString(_keyServerScheme, normalized);
+  }
+  static String getServerScheme() {
+    final s = prefs?.getString(_keyServerScheme);
+    return s?.toLowerCase() == 'https' ? 'https' : 'http';
+  }
+
+  static void saveServerAddress(String address) {
+    final normalized = address
+        .trim()
+        .replaceFirst(RegExp(r'^https?://', caseSensitive: false), '')
+        .replaceAll(RegExp(r'/*$'), '');
+    prefs?.setString(_keyServerAddress, normalized);
+  }
+  static String? getServerAddress() {
+    final s = prefs?.getString(_keyServerAddress);
+    if (s == null || s.trim().isEmpty) return null;
+    return s.trim();
   }
   static void saveUserData(String jsonEncode) {
     prefs?.setString("userData", jsonEncode);
@@ -103,8 +137,9 @@ class SPUtils{
     prefs?.remove("userAuthInfo");
     prefs?.remove("selectedLibrary");
     prefs?.remove("lastAllLibraryCached");
-    prefs?.remove("username");
-    prefs?.remove("password");
+    // 保留最近用户名与服务器配置，方便下次登录；清空密码与记住密码状态。
+    prefs?.remove(_keyPassword);
+    prefs?.remove(_keyRememberPassword);
   }
 
 

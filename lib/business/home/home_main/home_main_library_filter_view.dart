@@ -25,10 +25,14 @@ class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
     final listString = <String>[];
+    listString.clear();
     widget.allLibraries?.libraries?.forEach((e) {
-      listString.add(e.name ?? '');
+      setState(() {
+        listString.add(e.name ?? '');
+      });
     });
 
+    var emptyDragDown = (listString.isEmpty);
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -48,7 +52,7 @@ class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
           Icon(Icons.library_music_rounded, size: 22, color: primary),
           const SizedBox(width: 8),
           Expanded(
-            child: DropdownButtonHideUnderline(
+            child: emptyDragDown?Container():DropdownButtonHideUnderline(
               child: DropdownButton2<String>(
                 isExpanded: true,
                 buttonStyleData: ButtonStyleData(

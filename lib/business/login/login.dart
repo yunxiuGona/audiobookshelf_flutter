@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 
+import 'package:audio_book/C.dart';
 import 'package:audio_book/business/home/home/home.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -22,8 +23,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController _serverAddressController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String _serverScheme = 'http';
   bool _rememberMe = false;
   bool _isLoading = false;
   bool _isAutoAuthorizing = SPUtils.getUserData() != null;
@@ -31,7 +34,11 @@ class _LoginState extends State<Login> {
 
   // 模拟网络登录函数
   Future<void> netlogin(String username, String password) async {
+    _applyServerHostFromInput();
+    SPUtils.saveServerScheme(_serverScheme);
+    SPUtils.saveServerAddress(_serverAddressController.text);
     SPUtils.saveUserName(username);
+    SPUtils.saveRememberPassword(_rememberMe);
     if (_rememberMe) {
       SPUtils.savePassword(password);
     } else {
@@ -52,8 +59,16 @@ class _LoginState extends State<Login> {
     });
 
     try {
+      final serverAddress = _serverAddressController.text
+          .trim()
+          .replaceFirst(RegExp(r'^https?://', caseSensitive: false), '')
+          .replaceAll(RegExp(r'/*$'), '');
       final username = _usernameController.text.trim();
       final password = _passwordController.text;
+      if (serverAddress.isEmpty) {
+        ToastUtils.showError(context, 'login.need_server'.tr());
+        return;
+      }
       if (username.isEmpty || password.isEmpty) {
         ToastUtils.showError(context, 'login.need_credentials'.tr());
         return;
@@ -107,15 +122,34 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
+    _restoreSavedLoginInputs();
+    _applyServerHostFromInput();
     _autoAuthorizeIfNeeded();
-    Future.delayed(const Duration(milliseconds: 200), () {
-      _usernameController.text = "wangyunxiu";
-      _passwordController.text = "Wangyunxiu123";
-    });
+  }
+
+  void _restoreSavedLoginInputs() {
+    _serverScheme = SPUtils.getServerScheme();
+    _serverAddressController.text = SPUtils.getServerAddress() ?? C.HOST.replaceFirst(RegExp(r'^https?://'), '');
+    _usernameController.text = SPUtils.getUserName() ?? "";
+    _rememberMe = SPUtils.getRememberPassword();
+    _passwordController.text = _rememberMe ? (SPUtils.getPassword() ?? "") : "";
+  }
+
+  void _applyServerHostFromInput() {
+    final normalizedAddress = _serverAddressController.text
+        .trim()
+        .replaceFirst(RegExp(r'^https?://', caseSensitive: false), '')
+        .replaceAll(RegExp(r'/*$'), '');
+    if (normalizedAddress.isEmpty) return;
+    C.setHost(scheme: _serverScheme, serverAddress: normalizedAddress);
   }
 
   @override
   void dispose() {
+    SPUtils.saveServerScheme(_serverScheme);
+    SPUtils.saveServerAddress(_serverAddressController.text);
+    SPUtils.saveUserName(_usernameController.text.trim());
+    _serverAddressController.dispose();
     _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -123,12 +157,12 @@ class _LoginState extends State<Login> {
 
   InputDecoration _inputDecoration({
     required String label,
-    required IconData icon,
+    IconData? icon,
     Widget? suffixIcon,
   }) {
     return InputDecoration(
       labelText: label,
-      prefixIcon: Icon(icon, color: primary),
+      prefixIcon: icon==null?null:Icon(icon, color: primary),
       suffixIcon: suffixIcon,
       filled: true,
       fillColor: Colors.grey.shade50,
@@ -181,6 +215,15 @@ class _LoginState extends State<Login> {
                       ),
                     ] else
                       LoginFormCard(
+                        serverScheme: _serverScheme,
+                        onServerSchemeChanged: (value) {
+                          setState(() {
+                            _serverScheme = value;
+                          });
+                          _applyServerHostFromInput();
+                          SPUtils.saveServerScheme(value);
+                        },
+                        serverAddressController: _serverAddressController,
                         usernameController: _usernameController,
                         passwordController: _passwordController,
                         obscurePassword: _obscurePassword,

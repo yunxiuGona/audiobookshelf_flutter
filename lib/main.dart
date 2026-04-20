@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:audio_book/C.dart';
 import 'package:audio_book/TAG.dart';
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/events/play_status_event.dart';
@@ -84,6 +85,13 @@ void main() async {
   SPUtils.prefs = await SharedPreferences.getInstance();
   CacheUtils.prefs = await SharedPreferences.getInstance();
   SPUtils.getUserData();
+  final savedServerAddress = SPUtils.getServerAddress();
+  if (savedServerAddress != null && savedServerAddress.isNotEmpty) {
+    C.setHost(
+      scheme: SPUtils.getServerScheme(),
+      serverAddress: savedServerAddress,
+    );
+  }
   AppTheme.initFromPrefs();
 
   EasyRefresh.defaultHeaderBuilder = () => MusicHeader();

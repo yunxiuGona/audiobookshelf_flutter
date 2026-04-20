@@ -1,6 +1,17 @@
-import 'package:audio_service/audio_service.dart';
-
 class C{
-  static var HOST="http://yunxiu.xin:13378";
-  static var DEBUG_NETWORK=true;
+  static String HOST = "";
+  static bool DEBUG_NETWORK = true;
+
+  static void setHost({
+    required String scheme,
+    required String serverAddress,
+  }) {
+    final normalizedScheme = (scheme.toLowerCase() == 'https') ? 'https' : 'http';
+    final normalizedAddress = serverAddress
+        .trim()
+        .replaceFirst(RegExp(r'^https?://', caseSensitive: false), '')
+        .replaceAll(RegExp(r'/*$'), '');
+    if (normalizedAddress.isEmpty) return;
+    HOST = '$normalizedScheme://$normalizedAddress';
+  }
 }

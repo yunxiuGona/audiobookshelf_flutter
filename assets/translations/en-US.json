@@ -2,6 +2,8 @@
   "login": {
     "welcome_back": "Welcome back",
     "subtitle": "Sign in to continue your audiobook journey",
+    "server_protocol": "Protocol",
+    "server_address": "Server address",
     "username": "Username",
     "password": "Password",
     "remember_password": "Remember password",
@@ -9,6 +11,7 @@
     "agreement": "By signing in you agree to the Terms of Service and Privacy Policy",
     "logging_in": "Signing in…",
     "success": "Signed in successfully",
+    "need_server": "Please enter server address",
     "need_credentials": "Please enter username and password",
     "failed": "Sign-in failed: {error}",
     "auto_failed": "Auto sign-in failed. Please sign in again.",
