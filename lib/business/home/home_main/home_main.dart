@@ -35,7 +35,7 @@ class _HomeMainState extends State<HomeMain> {
     allLibraries = CacheUtils.getLibraiesCache();
     libraryItems = CacheUtils.getMediasCache();
     var libraryLastSelected = SPUtils.getSelectedLibrary();
-    valueListenable.value = libraryLastSelected?.name ?? "";
+    valueListenable.value = libraryLastSelected?.id ?? "";
     setState(() {});
     var isLibrariesEmpty = allLibraries == null || allLibraries?.libraries == null || allLibraries!.libraries!.isEmpty;
     var isMediasEmpty = libraryItems == null || libraryItems?.results == null || libraryItems!.results!.isEmpty;
@@ -66,7 +66,7 @@ class _HomeMainState extends State<HomeMain> {
               valueListenable: valueListenable,
               onChanged: (value) {
                 valueListenable.value = value;
-                SPUtils.saveSelectedLibrary(findLibraryFromData(value));
+                SPUtils.saveSelectedLibrary(findLibraryById(value));
                 _refreshController.callRefresh();
               },
             ),
@@ -128,9 +128,10 @@ class _HomeMainState extends State<HomeMain> {
     );
   }
 
-  Library? findLibraryFromData(String? value) {
+  Library? findLibraryById(String? id) {
+    if (id == null || id.isEmpty) return null;
     for (int i = 0; i < (allLibraries?.libraries?.length ?? 0); i++) {
-      if (allLibraries?.libraries?.elementAt(i).name == value) {
+      if (allLibraries?.libraries?.elementAt(i).id == id) {
         return allLibraries?.libraries?.elementAt(i);
       }
     }
@@ -150,12 +151,13 @@ class _HomeMainState extends State<HomeMain> {
     });
     var libraryLastSelected = SPUtils.getSelectedLibrary();
     var libraeySelected = allLibraries?.libraries?.first;
-    if (libraeySelected != null && findLibraryFromData(libraryLastSelected?.name) != null) {
-      libraeySelected = findLibraryFromData(libraeySelected.name);
+    final cachedSelected = findLibraryById(libraryLastSelected?.id);
+    if (cachedSelected != null) {
+      libraeySelected = cachedSelected;
     }
     if (libraeySelected != null) {
       SPUtils.saveSelectedLibrary(libraeySelected);
-      valueListenable.value = libraeySelected.name ?? "";
+      valueListenable.value = libraeySelected.id ?? "";
       var _resp_libraryItems = await AudiobookshelfApi().libraryItems(libraeySelected.id ?? '');
       if (_resp_libraryItems == null) {
         ToastUtils.showError(context, 'errors.book_list'.tr());

@@ -132,7 +132,7 @@ class _LoginState extends State<Login> {
     _serverAddressController.text = SPUtils.getServerAddress() ?? C.HOST.replaceFirst(RegExp(r'^https?://'), '');
     _usernameController.text = SPUtils.getUserName() ?? "";
     _rememberMe = SPUtils.getRememberPassword();
-    _passwordController.text = _rememberMe ? (SPUtils.getPassword() ?? "") : "";
+    _passwordController.text =  (SPUtils.getPassword() ?? "");
   }
 
   void _applyServerHostFromInput() {

@@ -1,3 +1,5 @@
+import 'package:audio_book/TAG.dart';
+import 'package:audio_book/business/utils/log_utils.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,7 @@ import '../../audiobook_api/beans/all_library.dart';
 class HomeMainLibraryFilterView extends StatefulWidget {
   final AllLibrary? allLibraries;
   final ValueListenable<String?>? valueListenable;
-  final Function(String value)? onChanged;
+  final ValueChanged<String>? onChanged;
 
   HomeMainLibraryFilterView(
     this.allLibraries, {
@@ -24,15 +26,32 @@ class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
   @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
-    final listString = <String>[];
-    listString.clear();
-    widget.allLibraries?.libraries?.forEach((e) {
-      setState(() {
-        listString.add(e.name ?? '');
-      });
-    });
+    final libraries = widget.allLibraries?.libraries ?? const [];
+    LogUtils.logd(TAG.HOME, "仓库列表IDS：${libraries.map((e) => "${e.id}:${e.name}\n").toList().toString()}");
+    final seenIds = <String>{};
+    List<DropdownItem<String>> items = libraries
+        .where((e) {
+          final id = e.id ?? '';
+          if (id.isEmpty) return false;
+          return seenIds.add(id);
+        })
+        .map((e) => DropdownItem<String>(
+              value: e.id!,
+              height: 44,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  (e.name == null || e.name!.isEmpty) ? '-' : e.name!,
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ))
+        .toList();
 
-    var emptyDragDown = (listString.isEmpty);
+
+    final emptyDragDown = items.isEmpty;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -52,7 +71,7 @@ class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
           Icon(Icons.library_music_rounded, size: 22, color: primary),
           const SizedBox(width: 8),
           Expanded(
-            child: emptyDragDown?Container():DropdownButtonHideUnderline(
+            child: emptyDragDown ? Container() : DropdownButtonHideUnderline(
               child: DropdownButton2<String>(
                 isExpanded: true,
                 buttonStyleData: ButtonStyleData(
@@ -81,26 +100,12 @@ class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
                 menuItemStyleData: const MenuItemStyleData(
                   padding: EdgeInsets.symmetric(horizontal: 12),
                 ),
-                items: listString
-                    .map(
-                      (String item) => DropdownItem<String>(
-                        value: item,
-                        height: 44,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            item,
-                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ),
-                    )
-                    .toList(),
+                items: items,
                 valueListenable: widget.valueListenable,
                 onChanged: (String? value) {
-                  widget.onChanged?.call(value ?? '');
+                  if (value != null && value.isNotEmpty) {
+                    widget.onChanged?.call(value);
+                  }
                 },
               ),
             ),
