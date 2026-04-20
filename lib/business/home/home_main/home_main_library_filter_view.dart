@@ -23,6 +23,7 @@ class HomeMainLibraryFilterView extends StatefulWidget {
 class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     final listString = <String>[];
     widget.allLibraries?.libraries?.forEach((e) {
       listString.add(e.name ?? '');
@@ -44,7 +45,7 @@ class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
       padding: const EdgeInsets.only(left: 12, right: 4),
       child: Row(
         children: [
-          Icon(Icons.library_music_rounded, size: 22, color: Colors.orange.shade400),
+          Icon(Icons.library_music_rounded, size: 22, color: primary),
           const SizedBox(width: 8),
           Expanded(
             child: DropdownButtonHideUnderline(
@@ -56,8 +57,8 @@ class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
                   decoration: const BoxDecoration(color: Colors.transparent),
                 ),
                 iconStyleData: IconStyleData(
-                  icon: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.grey.shade600, size: 22),
-                  openMenuIcon: Icon(Icons.keyboard_arrow_up_rounded, color: Colors.orange.shade700, size: 22),
+                  icon: Icon(Icons.keyboard_arrow_down_rounded, color: primary, size: 22),
+                  openMenuIcon: Icon(Icons.keyboard_arrow_up_rounded, color: primary, size: 22),
                 ),
                 dropdownStyleData: DropdownStyleData(
                   offset: const Offset(0, -4),

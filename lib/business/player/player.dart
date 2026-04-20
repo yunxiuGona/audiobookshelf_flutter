@@ -91,7 +91,7 @@ class _PlayerState extends State<Player> {
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
-      builder: (context) => const PlayerQueueSheet(),
+      builder: (context) =>  PlayerQueueSheet(),
     );
   }
 

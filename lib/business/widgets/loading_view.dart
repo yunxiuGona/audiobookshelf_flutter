@@ -11,9 +11,10 @@ class LoadingView extends StatefulWidget {
 class _LoadingViewState extends State<LoadingView> {
   @override
   Widget build(BuildContext context) {
+    var primary = Theme.of(context).colorScheme.primary;
     return Center(
       child: LoadingAnimationWidget.stretchedDots(
-        color: Colors.orange,
+        color: primary,
         size: 60,
       ),
     );

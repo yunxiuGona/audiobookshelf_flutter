@@ -6,11 +6,12 @@ class LoginHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const SizedBox(height: 16),
-        Icon(Icons.headset_rounded, size: 68, color: Colors.orange.shade400),
+        Icon(Icons.headset_rounded, size: 68, color: primary),
         const SizedBox(height: 14),
         Text(
           'login.welcome_back'.tr(),

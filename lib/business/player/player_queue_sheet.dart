@@ -4,10 +4,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class PlayerQueueSheet extends StatelessWidget {
-  const PlayerQueueSheet({super.key});
+  PlayerQueueSheet({super.key});
 
+  Color primary = Colors.orange;
   @override
   Widget build(BuildContext context) {
+    primary = Theme.of(context).colorScheme.primary;
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.72,
       child: Column(
@@ -49,7 +51,7 @@ class PlayerQueueSheet extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: isCurrent ? Colors.orange : Colors.black87,
+                          color: isCurrent ? primary : Colors.black87,
                           fontWeight: isCurrent ? FontWeight.w600 : FontWeight.w400,
                         ),
                       ),
@@ -58,7 +60,7 @@ class PlayerQueueSheet extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      trailing: isCurrent ? const Icon(Icons.volume_up, color: Colors.orange, size: 20) : null,
+                      trailing: isCurrent ? Icon(Icons.volume_up, color: primary, size: 20) : null,
                       onTap: () {
                         player.seek(Duration.zero, index: index);
                         if (!player.playing) {

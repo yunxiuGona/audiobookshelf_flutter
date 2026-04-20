@@ -11,8 +11,10 @@ class About extends StatefulWidget {
 }
 
 class _AboutState extends State<About> {
+
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     return Scaffold(
       appBar: AppBar(
         title: Text('about.title'.tr()),
@@ -32,7 +34,7 @@ class _AboutState extends State<About> {
             ),
             child: Column(
               children: [
-                const Icon(Icons.headset_rounded, size: 56, color: Colors.orange),
+                Icon(Icons.headset_rounded, size: 56, color: primary),
                 const SizedBox(height: 12),
                 const Text('Just Listen', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 6),
@@ -96,30 +98,6 @@ class _InfoRow extends StatelessWidget {
         children: [
           Expanded(child: Text(label, style: const TextStyle(color: Colors.black54))),
           Text(value, style: const TextStyle(fontWeight: FontWeight.w600)),
-        ],
-      ),
-    );
-  }
-}
-
-class _FeatureRow extends StatelessWidget {
-  const _FeatureRow({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 3),
-            child: Icon(Icons.check_circle, size: 14, color: Colors.orange),
-          ),
-          const SizedBox(width: 8),
-          Expanded(child: Text(text)),
         ],
       ),
     );

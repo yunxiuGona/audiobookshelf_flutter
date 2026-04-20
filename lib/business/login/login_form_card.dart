@@ -33,6 +33,7 @@ class LoginFormCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primary = Theme.of(context).colorScheme.primary;
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -74,7 +75,7 @@ class LoginFormCard extends StatelessWidget {
             children: [
               Checkbox(
                 value: rememberMe,
-                activeColor: Colors.orange,
+                activeColor: primary,
                 onChanged: (value) {
                   onRememberMeChanged(value ?? false);
                 },
@@ -89,9 +90,9 @@ class LoginFormCard extends StatelessWidget {
             child: ElevatedButton(
               onPressed: isLoading ? null : onLoginPressed,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
+                backgroundColor: primary,
                 foregroundColor: Colors.white,
-                disabledBackgroundColor: Colors.orange.shade200,
+                disabledBackgroundColor: primary.withAlpha(100),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 elevation: 0,
               ),

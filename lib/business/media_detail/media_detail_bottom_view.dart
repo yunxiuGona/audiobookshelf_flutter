@@ -31,8 +31,10 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
 
   var speed = 1.0;
 
+  Color primary = Colors.orange;
   @override
   void initState() {
+
     super.initState();
     setState(() {
       speed = SPUtils.getPlaySpeed();
@@ -54,6 +56,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
 
   @override
   Widget build(BuildContext context) {
+    primary = Theme.of(context).colorScheme.primary;
     return Container(
       padding: EdgeInsets.only(top: 20, bottom: 10),
       decoration: const BoxDecoration(
@@ -155,7 +158,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
   Widget viewSpeed() {
     return InkWell(
       child: Container(
-        child: Text("X${speed}", style: TextStyle(color: Colors.orange, fontSize: 17)),
+        child: Text("X${speed}", style: TextStyle(color: primary, fontSize: 17)),
         padding: EdgeInsets.all(5),
       ),
       onTap: () {
@@ -184,7 +187,7 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
 
   Widget viewPre() {
     return InkWell(
-      child: Icon(Icons.skip_previous_sharp, color: Colors.orange, size: 40),
+      child: Icon(Icons.skip_previous_sharp, color: primary, size: 40),
       onTap: () {
         player.seekToPrevious();
       },
@@ -193,21 +196,10 @@ class _MediaDetailBottomViewState extends State<MediaDetailBottomView> {
 
   Widget viewNext() {
     return InkWell(
-      child: Icon(Icons.skip_next_sharp, color: Colors.orange, size: 40),
+      child: Icon(Icons.skip_next_sharp, color: primary, size: 40),
       onTap: () {
         player.seekToNext();
       },
     );
   }
-
-  // Widget viewChapters() {
-  //   return InkWell(
-  //     onTap: () {
-  //       if (widget.onChapterTap != null) {
-  //         widget.onChapterTap!();
-  //       }
-  //     },
-  //     child: Icon(Icons.list, size: 40, color: Colors.orange),
-  //   );
-  // }
 }

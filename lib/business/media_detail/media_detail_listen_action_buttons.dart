@@ -53,7 +53,7 @@ class MediaDetailListenActionButtons extends StatelessWidget {
       child: FilledButton(
         onPressed: onListenFromStart,
         style: FilledButton.styleFrom(
-          backgroundColor: Colors.orange,
+          backgroundColor: primary,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 14),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

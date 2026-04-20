@@ -128,7 +128,7 @@ class _LoginState extends State<Login> {
   }) {
     return InputDecoration(
       labelText: label,
-      prefixIcon: Icon(icon, color: Colors.orange.shade400),
+      prefixIcon: Icon(icon, color: primary),
       suffixIcon: suffixIcon,
       filled: true,
       fillColor: Colors.grey.shade50,
@@ -143,13 +143,14 @@ class _LoginState extends State<Login> {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide(color: Colors.orange.shade400, width: 1.6),
+        borderSide: BorderSide(color: primary, width: 1.6),
       ),
     );
   }
-
+  Color primary=Colors.orange;
   @override
   Widget build(BuildContext context) {
+    primary = Theme.of(context).colorScheme.primary;
     return Scaffold(
       body: LoginBackground(
         child: SafeArea(

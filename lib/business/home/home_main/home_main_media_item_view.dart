@@ -16,7 +16,7 @@ class HomeMainMediaItemView extends StatelessWidget {
     final title = result?.media?.metadata?.title ?? '';
     final rawDesc = result?.media?.metadata?.description ?? '';
     final desc = StringUtils().htmlToPlainText(rawDesc);
-
+    final primary = Theme.of(context).colorScheme.primary;
     return Material(
       color: Colors.white,
       borderRadius: BorderRadius.circular(14),
@@ -47,7 +47,7 @@ class HomeMainMediaItemView extends StatelessWidget {
                             height: 28,
                             child: CircularProgressIndicator(
                               strokeWidth: 2.5,
-                              color: Colors.orange.shade300,
+                              color: primary,
                             ),
                           ),
                         ),
