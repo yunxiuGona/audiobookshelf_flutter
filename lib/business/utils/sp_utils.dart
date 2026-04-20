@@ -115,4 +115,23 @@ class SPUtils{
     return prefs?.getDouble("playSpeed")??1.0;
   }
 
+  static const String _keyAppLanguage = 'app_language';
+
+  /// 保存用户选择的界面语言标签（如 `zh_CN` / `en_US`）。
+  /// 传入 `null` 或空字符串表示清除，启动时将跟随系统语言。
+  static void saveAppLanguage(String? languageTag) {
+    if (languageTag == null || languageTag.isEmpty) {
+      prefs?.remove(_keyAppLanguage);
+    } else {
+      prefs?.setString(_keyAppLanguage, languageTag);
+    }
+  }
+
+  /// 已保存的语言标签；未设置或已清除时为 `null`，启动时应使用系统语言逻辑。
+  static String? getAppLanguage() {
+    final s = prefs?.getString(_keyAppLanguage);
+    if (s == null || s.isEmpty) return null;
+    return s;
+  }
+
 }

@@ -92,11 +92,23 @@ void main() async {
       supportedLocales: AppLocale.supported,
       path: 'assets/translations',
       fallbackLocale: AppLocale.enUS,
-      startLocale: AppLocale.fromPlatform(),
-      saveLocale: true,
+      startLocale: _resolveStartLocale(),
+      saveLocale: false,
       child: const MyApp(),
     ),
   );
+}
+
+Locale _resolveStartLocale() {
+  final tag = SPUtils.getAppLanguage();
+  if (tag == null || tag.isEmpty) {
+    return AppLocale.fromPlatform();
+  }
+  final parsed = AppLocale.fromTag(tag);
+  if (parsed != null && AppLocale.isSupportedLocale(parsed)) {
+    return parsed;
+  }
+  return AppLocale.fromPlatform();
 }
 
 class MyApp extends StatefulWidget {

@@ -21,4 +21,29 @@ class AppLocale {
   }
 
   static bool isChinese(Locale locale) => locale.languageCode.toLowerCase() == 'zh';
+
+  /// 持久化用标签，如 `zh_CN`、`en_US`。
+  static String toTag(Locale locale) {
+    final c = locale.countryCode;
+    if (c != null && c.isNotEmpty) {
+      return '${locale.languageCode}_$c';
+    }
+    return locale.languageCode;
+  }
+
+  /// 解析 [toTag] 结果；无效时返回 `null`。
+  static Locale? fromTag(String? tag) {
+    if (tag == null || tag.isEmpty) return null;
+    final idx = tag.indexOf('_');
+    if (idx <= 0 || idx >= tag.length - 1) {
+      return Locale.fromSubtags(languageCode: tag);
+    }
+    return Locale(tag.substring(0, idx), tag.substring(idx + 1));
+  }
+
+  static bool isSupportedLocale(Locale locale) {
+    return supported.any(
+      (s) => s.languageCode == locale.languageCode && s.countryCode == locale.countryCode,
+    );
+  }
 }

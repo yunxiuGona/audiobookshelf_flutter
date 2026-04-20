@@ -1,9 +1,19 @@
 import 'package:audio_book/business/utils/app_locale.dart';
+import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Trans;
 
 import '../../about/about.dart';
+
+Future<void> _applyAppLocale(BuildContext easyContext, BuildContext sheetContext, Locale locale) async {
+  await easyContext.setLocale(locale);
+  SPUtils.saveAppLanguage(AppLocale.toTag(locale));
+  Get.updateLocale(locale);
+  if (sheetContext.mounted) {
+    Navigator.of(sheetContext).pop();
+  }
+}
 
 void _showAppLanguageSheet(BuildContext context) {
   final selected = context.locale;
@@ -29,18 +39,12 @@ void _showAppLanguageSheet(BuildContext context) {
             ListTile(
               title: Text('settings.chinese'.tr()),
               trailing: AppLocale.isChinese(selected) ? const Icon(Icons.check, color: Colors.orange) : null,
-              onTap: () {
-                context.setLocale(AppLocale.zhCN);
-                Navigator.of(sheetContext).pop();
-              },
+              onTap: () => _applyAppLocale(context, sheetContext, AppLocale.zhCN),
             ),
             ListTile(
               title: Text('settings.english'.tr()),
               trailing: !AppLocale.isChinese(selected) ? const Icon(Icons.check, color: Colors.orange) : null,
-              onTap: () {
-                context.setLocale(AppLocale.enUS);
-                Navigator.of(sheetContext).pop();
-              },
+              onTap: () => _applyAppLocale(context, sheetContext, AppLocale.enUS),
             ),
             const SizedBox(height: 8),
           ],
