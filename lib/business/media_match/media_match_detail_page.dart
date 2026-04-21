@@ -1,4 +1,8 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
+import 'package:audio_book/business/audiobook_api/beans/all_library.dart';
+import 'package:audio_book/business/audiobook_api/beans/library.dart';
+import 'package:audio_book/business/audiobook_api/beans/provider_meta_data_save.dart';
+import 'package:audio_book/business/utils/cahce_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -228,11 +232,38 @@ class _MediaMatchDetailPageState extends State<MediaMatchDetailPage> {
     if (!mounted) return;
     setState(() => _saving = false);
     if (resp != null) {
+      _syncLibrariesCacheAfterMetadataSave(resp);
       ToastUtils.showSuccess(context, 'media_match.save_success'.tr());
       Navigator.of(context).pop(true);
     } else {
       ToastUtils.showError(context, 'media_match.save_failed'.tr());
     }
+  }
+
+  /**
+   * 更新本地缓存
+   * 用作首页显示
+   */
+  void _syncLibrariesCacheAfterMetadataSave(ProviderMetaDataSave resp) {
+    final updatedLibraryItem = resp.libraryItem;
+    final libraryId = updatedLibraryItem?.libraryId;
+    if (libraryId == null || libraryId.isEmpty) return;
+
+    final cached = CacheUtils.getLibraiesCache();
+    final libraries = cached?.libraries;
+    if (libraries == null || libraries.isEmpty) return;
+
+    final index = libraries.indexWhere((e) => e.id == libraryId);
+    if (index < 0) return;
+
+    final current = libraries[index];
+    final updatedLibrary = current.copyWith(
+      // 使用保存返回的更新时间，确保 HomeMain 下次从缓存恢复时可读到最新库状态。
+      lastUpdate: updatedLibraryItem?.updatedAt ?? current.lastUpdate,
+    );
+    final nextLibraries = List<Library>.from(libraries);
+    nextLibraries[index] = updatedLibrary;
+    CacheUtils.saveLibraiesCache(AllLibrary(libraries: nextLibraries));
   }
 
   List<String> _splitNarrators(String input) {

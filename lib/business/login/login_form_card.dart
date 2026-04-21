@@ -117,7 +117,9 @@ class LoginFormCard extends StatelessWidget {
                   onRememberMeChanged(value ?? false);
                 },
               ),
-              Text('login.remember_password'.tr()),
+              InkWell(child: Text('login.remember_password'.tr()),onTap: (){
+                onRememberMeChanged(!rememberMe);
+              },),
             ],
           ),
           const SizedBox(height: 10),

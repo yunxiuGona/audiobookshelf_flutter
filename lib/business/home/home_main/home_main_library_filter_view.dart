@@ -29,8 +29,11 @@ class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
     final libraries = widget.allLibraries?.libraries ?? const [];
+    if(libraries==null||libraries.isEmpty){
+      return Container();
+    }
     if(widget.valueListenable == null||widget.valueListenable?.value==null||widget.valueListenable?.value==""){
-      valueListenableDefault=ValueNotifier<String?>("${libraries.first?.id ?? ""}");
+      valueListenableDefault=ValueNotifier<String?>(libraries.first.id ?? "");
     }else{
       valueListenableDefault=widget.valueListenable!;
     }

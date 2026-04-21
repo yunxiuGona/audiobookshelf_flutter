@@ -19,7 +19,7 @@ class HomeMain extends StatefulWidget {
   _HomeMainState createState() => _HomeMainState();
 }
 
-class _HomeMainState extends State<HomeMain> {
+class _HomeMainState extends State<HomeMain> with WidgetsBindingObserver {
   EasyRefreshController _refreshController = EasyRefreshController(controlFinishRefresh: true, controlFinishLoad: true);
   AllLibrary? allLibraries;
   LibraryItemsBean? libraryItems;
@@ -28,7 +28,16 @@ class _HomeMainState extends State<HomeMain> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     restoreCache();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      restoreCache();
+    }
   }
 
   void restoreCache() {
@@ -174,6 +183,7 @@ class _HomeMainState extends State<HomeMain> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _refreshController.dispose();
     super.dispose();
   }
