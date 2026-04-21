@@ -105,6 +105,7 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    _userAuthInfo ??= SPUtils.userAuthInfoBean ?? SPUtils.getUserAuthInfo();
     final primary = Theme.of(context).colorScheme.primary;
     return Container(
       decoration: BoxDecoration(

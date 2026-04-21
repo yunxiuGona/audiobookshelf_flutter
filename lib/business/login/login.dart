@@ -29,7 +29,7 @@ class _LoginState extends State<Login> {
   String _serverScheme = 'http';
   bool _rememberMe = false;
   bool _isLoading = false;
-  bool _isAutoAuthorizing = SPUtils.getUserData() != null;
+  bool _isAutoAuthorizing = SPUtils.userAuthInfoBean != null;
   bool _obscurePassword = true;
 
   // 模拟网络登录函数
@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
       password,
     );
     ToastUtils.showSuccess(context, 'login.success'.tr());
-    SPUtils.saveUserData(jsonEncode(loginResponse));
+    SPUtils.saveUserAuthInfo(jsonEncode(loginResponse));
     Get.to(Home());
   }
 
@@ -86,7 +86,7 @@ class _LoginState extends State<Login> {
   }
 
   Future<void> _autoAuthorizeIfNeeded() async {
-    if (SPUtils.getUserData() == null) {
+    if (SPUtils.userAuthInfoBean == null) {
       _isAutoAuthorizing = false;
       return;
     }
@@ -100,8 +100,8 @@ class _LoginState extends State<Login> {
         Get.off(() => Home());
       } else {
         ToastUtils.showError(context, 'login.auto_failed'.tr());
-        SPUtils.userDatabean = null;
-        SPUtils.saveUserData("");
+        SPUtils.userAuthInfoBean = null;
+        SPUtils.saveUserAuthInfo("");
         setState(() {
           _isAutoAuthorizing = false;
         });
@@ -111,8 +111,8 @@ class _LoginState extends State<Login> {
         return;
       }
       ToastUtils.showError(context, 'login.auto_failed_error'.tr(namedArgs: {'error': '$e'}));
-      SPUtils.userDatabean = null;
-      SPUtils.saveUserData("");
+      SPUtils.userAuthInfoBean = null;
+      SPUtils.saveUserAuthInfo("");
       setState(() {
         _isAutoAuthorizing = false;
       });

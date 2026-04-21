@@ -84,7 +84,7 @@ void main() async {
   player.setSpeed(SPUtils.getPlaySpeed());
   SPUtils.prefs = await SharedPreferences.getInstance();
   CacheUtils.prefs = await SharedPreferences.getInstance();
-  SPUtils.getUserData();
+  SPUtils.userAuthInfoBean = SPUtils.getUserAuthInfo();
   final savedServerAddress = SPUtils.getServerAddress();
   if (savedServerAddress != null && savedServerAddress.isNotEmpty) {
     C.setHost(

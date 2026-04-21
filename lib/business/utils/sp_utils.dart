@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:audio_book/business/audiobook_api/beans/all_library.dart';
 import 'package:audio_book/business/audiobook_api/beans/library.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_items_bean.dart';
-import 'package:audio_book/business/audiobook_api/beans/login_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/user_authorize.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +14,6 @@ class SPUtils{
   static const String _keyServerAddress = "server_address";
 
   static SharedPreferences? prefs;
-  static LoginBean? userDatabean;
   static UserAuthorize? userAuthInfoBean;
   static saveUserName(String userName){
     prefs?.setString(_keyUserName, userName);
@@ -57,9 +55,6 @@ class SPUtils{
     if (s == null || s.trim().isEmpty) return null;
     return s.trim();
   }
-  static void saveUserData(String jsonEncode) {
-    prefs?.setString("userData", jsonEncode);
-  }
   static void saveSelectedLibrary(Library? librasyBean){
     prefs?.setString("selectedLibrary", jsonEncode(librasyBean));
   }
@@ -91,26 +86,10 @@ class SPUtils{
       return AllLibrary.fromJson(bean);
     }
   }
-  static LoginBean? getUserData(){
-    if(userDatabean!=null) {
-      return userDatabean;
-    }
-    var json = prefs?.getString("userData");
-    if(json == null||json.isEmpty){
-      return null;
-    }
-    var jmap = jsonDecode(json);
-    if(jmap==null){
-      return null;
-    }else{
-      userDatabean = LoginBean.fromJson(jmap);
-      return LoginBean.fromJson(jmap);
-    }
-  }
 
   static void saveUserAuthInfo(String jsonEncode) {
     prefs?.setString("userAuthInfo", jsonEncode);
-    userAuthInfoBean = null;
+    userAuthInfoBean = getUserAuthInfo();
   }
 
   static UserAuthorize? getUserAuthInfo() {
@@ -131,14 +110,11 @@ class SPUtils{
   }
 
   static void clearUserLoginInfo() {
-    userDatabean = null;
     userAuthInfoBean = null;
-    prefs?.remove("userData");
     prefs?.remove("userAuthInfo");
     prefs?.remove("selectedLibrary");
     prefs?.remove("lastAllLibraryCached");
     // 保留最近用户名与服务器配置，方便下次登录；清空密码与记住密码状态。
-    prefs?.remove(_keyPassword);
     prefs?.remove(_keyRememberPassword);
   }
 

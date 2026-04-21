@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:audio_book/C.dart';
 import 'package:audio_book/business/audiobook_api/beans/all_library.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_detail.dart';
-import 'package:audio_book/business/audiobook_api/beans/login_bean.dart';
 import 'package:audio_book/business/audiobook_api/beans/media_progress.dart';
 import 'package:audio_book/business/audiobook_api/beans/my_library_items.dart';
 import 'package:audio_book/business/audiobook_api/beans/play_media.dart';
@@ -35,10 +34,10 @@ class AudiobookshelfApi extends GetConnect {
   Map<String, String>? headers;
   final OK = 200;
 
-  Future<LoginBean> login(String username, String password) async {
+  Future<UserAuthorize> login(String username, String password) async {
     var resp = await post(headers: headers, "/login", {"username": username, "password": password});
-    var respBean = LoginBean.fromJson(resp.body);
-    SPUtils.saveUserData(jsonEncode(respBean));
+    var respBean = UserAuthorize.fromJson(resp.body);
+    SPUtils.saveUserAuthInfo(jsonEncode(respBean));
     initUserInfo();
     return respBean;
   }
@@ -380,12 +379,12 @@ class AudiobookshelfApi extends GetConnect {
   }
 
   String getMediaFileURL(String libraryid, String fileid) {
-    return "${C.HOST}/audiobookshelf/api/items/${libraryid}/file/${fileid}?token=${SPUtils.getUserData()?.user?.token}";
+    return "${C.HOST}/audiobookshelf/api/items/${libraryid}/file/${fileid}?token=${SPUtils.userAuthInfoBean?.user?.token}";
   }
 
   initUserInfo() {
-    if ((headers == null || headers!.isEmpty) && SPUtils.getUserData() != null) {
-      headers = {"Authorization": "Bearer ${SPUtils.getUserData()?.user?.token}"};
+    if ((headers == null || headers!.isEmpty) && SPUtils.userAuthInfoBean != null) {
+      headers = {"Authorization": "Bearer ${SPUtils.userAuthInfoBean?.user?.token}"};
     }
   }
 }

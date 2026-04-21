@@ -23,10 +23,17 @@ class HomeMainLibraryFilterView extends StatefulWidget {
 }
 
 class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
+
+  ValueListenable<String?> valueListenableDefault=ValueNotifier<String?>("");
   @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
     final libraries = widget.allLibraries?.libraries ?? const [];
+    if(widget.valueListenable == null||widget.valueListenable?.value==null||widget.valueListenable?.value==""){
+      valueListenableDefault=ValueNotifier<String?>("${libraries.first?.id ?? ""}");
+    }else{
+      valueListenableDefault=widget.valueListenable!;
+    }
     LogUtils.logd(TAG.HOME, "仓库列表IDS：${libraries.map((e) => "${e.id}:${e.name}\n").toList().toString()}");
     final seenIds = <String>{};
     List<DropdownItem<String>> items = libraries
@@ -101,7 +108,7 @@ class _HomeMainLibraryFilterViewState extends State<HomeMainLibraryFilterView> {
                   padding: EdgeInsets.symmetric(horizontal: 12),
                 ),
                 items: items,
-                valueListenable: widget.valueListenable,
+                valueListenable: valueListenableDefault,
                 onChanged: (String? value) {
                   if (value != null && value.isNotEmpty) {
                     widget.onChanged?.call(value);
