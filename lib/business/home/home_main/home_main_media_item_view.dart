@@ -14,7 +14,7 @@ class HomeMainMediaItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final title = result?.media?.metadata?.title ?? '';
-    final rawDesc = result?.media?.metadata?.description ?? '';
+    final rawDesc = result?.media?.metadata?.subtitle ?? '';
     final desc = StringUtils().htmlToPlainText(rawDesc);
     final primary = Theme.of(context).colorScheme.primary;
     return Material(
