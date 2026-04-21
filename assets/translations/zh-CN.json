@@ -133,7 +133,7 @@
     "folder_subtitle": "收藏夹"
   },
   "media_match": {
-    "title": "媒体匹配",
+    "title": "标题",
     "search_form_title": "查找元信息",
     "provider": "元数据来源",
     "provider_custom": "{name}（自定义）",

@@ -133,7 +133,7 @@
     "folder_subtitle": "Collection folder"
   },
   "media_match": {
-    "title": "Media match",
+    "title": "Title",
     "search_form_title": "Search metadata",
     "provider": "Metadata source",
     "provider_custom": "{name} (Custom)",

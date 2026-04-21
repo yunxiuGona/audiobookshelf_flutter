@@ -30,6 +30,41 @@ class _MediaMatchDetailPageState extends State<MediaMatchDetailPage> {
   bool _useLanguage = true;
   bool _useCoverUrl = true;
   bool _saving = false;
+  late final TextEditingController _titleController;
+  late final TextEditingController _subtitleController;
+  late final TextEditingController _narratorController;
+  late final TextEditingController _publisherController;
+  late final TextEditingController _publishedYearController;
+  late final TextEditingController _genresController;
+  late final TextEditingController _languageController;
+  late final TextEditingController _descriptionController;
+
+  @override
+  void initState() {
+    super.initState();
+    final d = widget.entry.data;
+    _titleController = TextEditingController(text: d.title ?? '');
+    _subtitleController = TextEditingController(text: d.subtitle ?? '');
+    _narratorController = TextEditingController(text: d.narrator ?? '');
+    _publisherController = TextEditingController(text: d.publisher ?? '');
+    _publishedYearController = TextEditingController(text: d.publishedYear ?? '');
+    _genresController = TextEditingController(text: (d.genres ?? []).join(', '));
+    _languageController = TextEditingController(text: d.language ?? '');
+    _descriptionController = TextEditingController(text: d.description ?? '');
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _subtitleController.dispose();
+    _narratorController.dispose();
+    _publisherController.dispose();
+    _publishedYearController.dispose();
+    _genresController.dispose();
+    _languageController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,51 +116,51 @@ class _MediaMatchDetailPageState extends State<MediaMatchDetailPage> {
             ),
           ),
           const SizedBox(height: 10),
-          _FieldCheckTile(
+          _EditableFieldCheckTile(
             label: 'media_match.title'.tr(),
-            value: d.title,
+            controller: _titleController,
             checked: _useTitle,
             onChanged: (v) => setState(() => _useTitle = v),
           ),
-          _FieldCheckTile(
+          _EditableFieldCheckTile(
             label: 'media_match.subtitle'.tr(),
-            value: d.subtitle,
+            controller: _subtitleController,
             checked: _useSubtitle,
             onChanged: (v) => setState(() => _useSubtitle = v),
           ),
-          _FieldCheckTile(
+          _EditableFieldCheckTile(
             label: 'media_match.narrator'.tr(),
-            value: d.narrator,
+            controller: _narratorController,
             checked: _useNarrator,
             onChanged: (v) => setState(() => _useNarrator = v),
           ),
-          _FieldCheckTile(
+          _EditableFieldCheckTile(
             label: 'media_match.publisher'.tr(),
-            value: d.publisher,
+            controller: _publisherController,
             checked: _usePublisher,
             onChanged: (v) => setState(() => _usePublisher = v),
           ),
-          _FieldCheckTile(
+          _EditableFieldCheckTile(
             label: 'media_match.published_year'.tr(),
-            value: d.publishedYear,
+            controller: _publishedYearController,
             checked: _usePublishedYear,
             onChanged: (v) => setState(() => _usePublishedYear = v),
           ),
-          _FieldCheckTile(
+          _EditableFieldCheckTile(
             label: 'media_match.genres'.tr(),
-            value: (d.genres ?? []).join(', '),
+            controller: _genresController,
             checked: _useGenres,
             onChanged: (v) => setState(() => _useGenres = v),
           ),
-          _FieldCheckTile(
+          _EditableFieldCheckTile(
             label: 'media_match.language'.tr(),
-            value: d.language,
+            controller: _languageController,
             checked: _useLanguage,
             onChanged: (v) => setState(() => _useLanguage = v),
           ),
-          _FieldCheckTile(
+          _EditableFieldCheckTile(
             label: 'media_match.description'.tr(),
-            value: d.description,
+            controller: _descriptionController,
             checked: _useDescription,
             multiline: true,
             onChanged: (v) => setState(() => _useDescription = v),
@@ -160,16 +195,25 @@ class _MediaMatchDetailPageState extends State<MediaMatchDetailPage> {
   Future<void> _onSave() async {
     final d = widget.entry.data;
     final metadata = <String, dynamic>{};
-    if (_useTitle && (d.title ?? '').trim().isNotEmpty) metadata['title'] = d.title!.trim();
-    if (_useSubtitle && (d.subtitle ?? '').trim().isNotEmpty) metadata['subtitle'] = d.subtitle!.trim();
-    if (_useNarrator && (d.narrator ?? '').trim().isNotEmpty) {
-      metadata['narrators'] = _splitNarrators(d.narrator!);
+    final title = _titleController.text.trim();
+    final subtitle = _subtitleController.text.trim();
+    final narrator = _narratorController.text.trim();
+    final description = _descriptionController.text.trim();
+    final publisher = _publisherController.text.trim();
+    final publishedYear = _publishedYearController.text.trim();
+    final genres = _splitGenres(_genresController.text);
+    final language = _languageController.text.trim();
+
+    if (_useTitle && title.isNotEmpty) metadata['title'] = title;
+    if (_useSubtitle && subtitle.isNotEmpty) metadata['subtitle'] = subtitle;
+    if (_useNarrator && narrator.isNotEmpty) {
+      metadata['narrators'] = _splitNarrators(narrator);
     }
-    if (_useDescription && (d.description ?? '').trim().isNotEmpty) metadata['description'] = d.description!.trim();
-    if (_usePublisher && (d.publisher ?? '').trim().isNotEmpty) metadata['publisher'] = d.publisher!.trim();
-    if (_usePublishedYear && (d.publishedYear ?? '').trim().isNotEmpty) metadata['publishedYear'] = d.publishedYear!.trim();
-    if (_useGenres && (d.genres ?? []).isNotEmpty) metadata['genres'] = d.genres;
-    if (_useLanguage && (d.language ?? '').trim().isNotEmpty) metadata['language'] = d.language!.trim();
+    if (_useDescription && description.isNotEmpty) metadata['description'] = description;
+    if (_usePublisher && publisher.isNotEmpty) metadata['publisher'] = publisher;
+    if (_usePublishedYear && publishedYear.isNotEmpty) metadata['publishedYear'] = publishedYear;
+    if (_useGenres && genres.isNotEmpty) metadata['genres'] = genres;
+    if (_useLanguage && language.isNotEmpty) metadata['language'] = language;
 
     if (metadata.isEmpty && !_useCoverUrl) {
       ToastUtils.showError(context, 'media_match.choose_at_least_one'.tr());
@@ -197,6 +241,14 @@ class _MediaMatchDetailPageState extends State<MediaMatchDetailPage> {
     final parts = t.split(RegExp(r'[;,/，、]')).map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
     if (parts.isEmpty) return [t];
     return parts;
+  }
+
+  List<String> _splitGenres(String input) {
+    return input
+        .split(RegExp(r'[,;/，、]'))
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toList();
   }
 }
 
@@ -229,17 +281,17 @@ class _InfoCard extends StatelessWidget {
   }
 }
 
-class _FieldCheckTile extends StatelessWidget {
-  const _FieldCheckTile({
+class _EditableFieldCheckTile extends StatelessWidget {
+  const _EditableFieldCheckTile({
     required this.label,
-    required this.value,
+    required this.controller,
     required this.checked,
     required this.onChanged,
     this.multiline = false,
   });
 
   final String label;
-  final String? value;
+  final TextEditingController controller;
   final bool checked;
   final ValueChanged<bool> onChanged;
   final bool multiline;
@@ -264,10 +316,17 @@ class _FieldCheckTile extends StatelessWidget {
             contentPadding: EdgeInsets.zero,
             title: Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
           ),
-          Text(
-            (value ?? '').isEmpty ? '-' : value!,
-            maxLines: multiline ? null : 3,
-            overflow: multiline ? null : TextOverflow.ellipsis,
+          TextField(
+            controller: controller,
+            enabled: checked,
+            minLines: multiline ? 3 : 1,
+            maxLines: multiline ? null : 1,
+            decoration: InputDecoration(
+              isDense: true,
+              hintText: '-',
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            ),
             style: TextStyle(fontSize: 13, color: Colors.grey.shade700, height: 1.3),
           ),
         ],
