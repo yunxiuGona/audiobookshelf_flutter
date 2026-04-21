@@ -137,6 +137,7 @@
     "title": "Title",
     "search_form_title": "Search metadata",
     "provider": "Metadata source",
+    "provider_ximalaya_inner": "ximalaya.com(Inner)",
     "provider_custom": "{name} (Custom)",
     "provider_required": "Please choose a metadata source",
     "title_required": "Please enter title",

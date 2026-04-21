@@ -137,6 +137,7 @@
     "title": "标题",
     "search_form_title": "查找元信息",
     "provider": "元数据来源",
+    "provider_ximalaya_inner": "喜马拉雅(内置)",
     "provider_custom": "{name}（自定义）",
     "provider_required": "请选择元数据来源",
     "title_required": "请输入专辑名称",

@@ -2,6 +2,7 @@ import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_item_detail.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
+import 'package:audio_book/business/ximalaya_api/XimalayaApi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:easy_localization/easy_localization.dart';
@@ -24,6 +25,7 @@ class MediaMatchPage extends StatefulWidget {
 }
 
 class _MediaMatchPageState extends State<MediaMatchPage> {
+  static const String _ximalayaInnerProviderId = 'ximalaya_inner';
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _authorController = TextEditingController();
   final List<MediaMatchProviderOption> _providers = [];
@@ -91,6 +93,14 @@ class _MediaMatchPageState extends State<MediaMatchPage> {
   Future<void> _loadProviders() async {
     final providers = await AudiobookshelfApi().searchProvidersBooks();
     final list = <MediaMatchProviderOption>[];
+
+    // <MediaMatchProviderOption>[
+    //   MediaMatchProviderOption(
+    //     providerId: _ximalayaInnerProviderId,
+    //     displayName: 'media_match.provider_ximalaya_inner'.tr(),
+    //     isCustom: false,
+    //   ),
+    // ];
     final apiProviders = providers
         .where((p) => (p.value ?? '').isNotEmpty)
         .map((p) => MediaMatchProviderOption(
@@ -132,13 +142,15 @@ class _MediaMatchPageState extends State<MediaMatchPage> {
       return;
     }
     setState(() => _searching = true);
-    final list = await AudiobookshelfApi().searchProviderMetadata(
-      providerId: providerId,
-      title: title,
-      libraryItemId: libraryItemId,
-      author: author,
-      fallbackTitleOnly: true,
-    );
+    final list = providerId == _ximalayaInnerProviderId
+        ? await XimalayaApi().searchBooks(keyword: title)
+        : await AudiobookshelfApi().searchProviderMetadata(
+            providerId: providerId,
+            title: title,
+            libraryItemId: libraryItemId,
+            author: author,
+            fallbackTitleOnly: true,
+          );
     if (!mounted) return;
     final provider = _providers.firstWhere((e) => e.providerId == providerId);
     setState(() {
