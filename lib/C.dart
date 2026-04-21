@@ -1,5 +1,6 @@
 class C{
   static String HOST = "";
+  static String HOST_XIMALAYA = "";
   static bool DEBUG_NETWORK = true;
 
   static void setHost({
