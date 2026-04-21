@@ -9,7 +9,7 @@ part 'provider_meta_data_save.g.dart';
 @freezed
 abstract class ProviderMetaDataSave with _$ProviderMetaDataSave {
   const factory ProviderMetaDataSave({
-    @JsonKey(name: 'updated') String? updated,
+    @JsonKey(name: 'updated') Object? updated,
     @JsonKey(name: 'libraryItem') LibraryItem? libraryItem,
   }) = _ProviderMetaDataSave;
 

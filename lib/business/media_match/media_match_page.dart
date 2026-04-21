@@ -1,5 +1,6 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/library_item_detail.dart';
+import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Trans;
@@ -64,7 +65,10 @@ class _MediaMatchPageState extends State<MediaMatchPage> {
                   MediaMatchSearchPanel(
                     providers: _providers,
                     selectedProviderId: _selectedProviderId,
-                    onProviderChanged: (v) => setState(() => _selectedProviderId = v),
+                    onProviderChanged: (v) => setState(() {
+                      _selectedProviderId = v;
+                      SPUtils.saveSelectedMediaMatchProviderId(v);
+                    }),
                     titleController: _titleController,
                     authorController: _authorController,
                     onSearch: _onSearch,
@@ -96,13 +100,18 @@ class _MediaMatchPageState extends State<MediaMatchPage> {
             ));
     list.addAll(apiProviders);
     if (!mounted) return;
+    final savedProviderId = SPUtils.getSelectedMediaMatchProviderId();
+    final hasSavedProvider = savedProviderId != null && list.any((e) => e.providerId == savedProviderId);
     setState(() {
       _providers
         ..clear()
         ..addAll(list);
-      _selectedProviderId = _providers.isEmpty ? null : _providers.first.providerId;
+      _selectedProviderId = _providers.isEmpty
+          ? null
+          : (hasSavedProvider ? savedProviderId : _providers.first.providerId);
       _loadingProviders = false;
     });
+    SPUtils.saveSelectedMediaMatchProviderId(_selectedProviderId);
   }
 
   Future<void> _onSearch() async {

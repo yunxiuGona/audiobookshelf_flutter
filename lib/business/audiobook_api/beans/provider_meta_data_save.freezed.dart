@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProviderMetaDataSave {
 
-@JsonKey(name: 'updated') String? get updated;@JsonKey(name: 'libraryItem') LibraryItem? get libraryItem;
+@JsonKey(name: 'updated') Object? get updated;@JsonKey(name: 'libraryItem') LibraryItem? get libraryItem;
 /// Create a copy of ProviderMetaDataSave
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,12 +28,12 @@ $ProviderMetaDataSaveCopyWith<ProviderMetaDataSave> get copyWith => _$ProviderMe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProviderMetaDataSave&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.libraryItem, libraryItem) || other.libraryItem == libraryItem));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProviderMetaDataSave&&const DeepCollectionEquality().equals(other.updated, updated)&&(identical(other.libraryItem, libraryItem) || other.libraryItem == libraryItem));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,updated,libraryItem);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(updated),libraryItem);
 
 @override
 String toString() {
@@ -48,7 +48,7 @@ abstract mixin class $ProviderMetaDataSaveCopyWith<$Res>  {
   factory $ProviderMetaDataSaveCopyWith(ProviderMetaDataSave value, $Res Function(ProviderMetaDataSave) _then) = _$ProviderMetaDataSaveCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'updated') String? updated,@JsonKey(name: 'libraryItem') LibraryItem? libraryItem
+@JsonKey(name: 'updated') Object? updated,@JsonKey(name: 'libraryItem') LibraryItem? libraryItem
 });
 
 
@@ -67,8 +67,7 @@ class _$ProviderMetaDataSaveCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? updated = freezed,Object? libraryItem = freezed,}) {
   return _then(_self.copyWith(
-updated: freezed == updated ? _self.updated : updated // ignore: cast_nullable_to_non_nullable
-as String?,libraryItem: freezed == libraryItem ? _self.libraryItem : libraryItem // ignore: cast_nullable_to_non_nullable
+updated: freezed == updated ? _self.updated : updated ,libraryItem: freezed == libraryItem ? _self.libraryItem : libraryItem // ignore: cast_nullable_to_non_nullable
 as LibraryItem?,
   ));
 }
@@ -166,7 +165,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'updated')  String? updated, @JsonKey(name: 'libraryItem')  LibraryItem? libraryItem)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'updated')  Object? updated, @JsonKey(name: 'libraryItem')  LibraryItem? libraryItem)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProviderMetaDataSave() when $default != null:
 return $default(_that.updated,_that.libraryItem);case _:
@@ -187,7 +186,7 @@ return $default(_that.updated,_that.libraryItem);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'updated')  String? updated, @JsonKey(name: 'libraryItem')  LibraryItem? libraryItem)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'updated')  Object? updated, @JsonKey(name: 'libraryItem')  LibraryItem? libraryItem)  $default,) {final _that = this;
 switch (_that) {
 case _ProviderMetaDataSave():
 return $default(_that.updated,_that.libraryItem);case _:
@@ -207,7 +206,7 @@ return $default(_that.updated,_that.libraryItem);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'updated')  String? updated, @JsonKey(name: 'libraryItem')  LibraryItem? libraryItem)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'updated')  Object? updated, @JsonKey(name: 'libraryItem')  LibraryItem? libraryItem)?  $default,) {final _that = this;
 switch (_that) {
 case _ProviderMetaDataSave() when $default != null:
 return $default(_that.updated,_that.libraryItem);case _:
@@ -225,7 +224,7 @@ class _ProviderMetaDataSave implements ProviderMetaDataSave {
   const _ProviderMetaDataSave({@JsonKey(name: 'updated') this.updated, @JsonKey(name: 'libraryItem') this.libraryItem});
   factory _ProviderMetaDataSave.fromJson(Map<String, dynamic> json) => _$ProviderMetaDataSaveFromJson(json);
 
-@override@JsonKey(name: 'updated') final  String? updated;
+@override@JsonKey(name: 'updated') final  Object? updated;
 @override@JsonKey(name: 'libraryItem') final  LibraryItem? libraryItem;
 
 /// Create a copy of ProviderMetaDataSave
@@ -241,12 +240,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProviderMetaDataSave&&(identical(other.updated, updated) || other.updated == updated)&&(identical(other.libraryItem, libraryItem) || other.libraryItem == libraryItem));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProviderMetaDataSave&&const DeepCollectionEquality().equals(other.updated, updated)&&(identical(other.libraryItem, libraryItem) || other.libraryItem == libraryItem));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,updated,libraryItem);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(updated),libraryItem);
 
 @override
 String toString() {
@@ -261,7 +260,7 @@ abstract mixin class _$ProviderMetaDataSaveCopyWith<$Res> implements $ProviderMe
   factory _$ProviderMetaDataSaveCopyWith(_ProviderMetaDataSave value, $Res Function(_ProviderMetaDataSave) _then) = __$ProviderMetaDataSaveCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'updated') String? updated,@JsonKey(name: 'libraryItem') LibraryItem? libraryItem
+@JsonKey(name: 'updated') Object? updated,@JsonKey(name: 'libraryItem') LibraryItem? libraryItem
 });
 
 
@@ -280,8 +279,7 @@ class __$ProviderMetaDataSaveCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? updated = freezed,Object? libraryItem = freezed,}) {
   return _then(_ProviderMetaDataSave(
-updated: freezed == updated ? _self.updated : updated // ignore: cast_nullable_to_non_nullable
-as String?,libraryItem: freezed == libraryItem ? _self.libraryItem : libraryItem // ignore: cast_nullable_to_non_nullable
+updated: freezed == updated ? _self.updated : updated ,libraryItem: freezed == libraryItem ? _self.libraryItem : libraryItem // ignore: cast_nullable_to_non_nullable
 as LibraryItem?,
   ));
 }

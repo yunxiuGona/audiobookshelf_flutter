@@ -12,6 +12,7 @@ class SPUtils{
   static const String _keyRememberPassword = "remember_password";
   static const String _keyServerScheme = "server_scheme";
   static const String _keyServerAddress = "server_address";
+  static const String _keySelectedMediaMatchProviderId = "selected_media_match_provider_id";
 
   static SharedPreferences? prefs;
   static UserAuthorize? userAuthInfoBean;
@@ -153,6 +154,20 @@ class SPUtils{
 
   static int? getAppThemeColor() {
     return prefs?.getInt(_keyAppThemeColor);
+  }
+
+  static void saveSelectedMediaMatchProviderId(String? providerId) {
+    if (providerId == null || providerId.trim().isEmpty) {
+      prefs?.remove(_keySelectedMediaMatchProviderId);
+      return;
+    }
+    prefs?.setString(_keySelectedMediaMatchProviderId, providerId.trim());
+  }
+
+  static String? getSelectedMediaMatchProviderId() {
+    final id = prefs?.getString(_keySelectedMediaMatchProviderId);
+    if (id == null || id.trim().isEmpty) return null;
+    return id.trim();
   }
 
 }

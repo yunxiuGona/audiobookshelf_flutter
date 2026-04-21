@@ -9,7 +9,7 @@ part of 'provider_meta_data_save.dart';
 _ProviderMetaDataSave _$ProviderMetaDataSaveFromJson(
   Map<String, dynamic> json,
 ) => _ProviderMetaDataSave(
-  updated: json['updated'] as String?,
+  updated: json['updated'],
   libraryItem: json['libraryItem'] == null
       ? null
       : LibraryItem.fromJson(json['libraryItem'] as Map<String, dynamic>),
