@@ -1,6 +1,7 @@
 import 'package:audio_book/business/audiobook_api/AudiobookshelfApi.dart';
 import 'package:audio_book/business/audiobook_api/beans/collect_list.dart';
 import 'package:audio_book/business/utils/app_theme.dart';
+import 'package:audio_book/business/utils/dialog_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -43,62 +44,45 @@ class _CollectManagePageState extends State<CollectManagePage> {
   Future<void> _onAdd() async {
     final primary = Theme.of(context).colorScheme.primary;
     final nameController = TextEditingController();
-    final ok = await showDialog<bool>(
+    final ok = await DialogUtils.showConfirmDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: primary.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Icon(Icons.create_new_folder_outlined, color: primary, size: 22),
+      title: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: primary.withOpacity(0.15),
+              borderRadius: BorderRadius.circular(10),
             ),
-            const SizedBox(width: 12),
-            Expanded(child: Text('collect.add_collection'.tr(), style: const TextStyle(fontSize: 18))),
-          ],
-        ),
-        content: TextField(
-          controller: nameController,
-          decoration: InputDecoration(
-            hintText: 'collect.name_hint'.tr(),
-            filled: true,
-            fillColor: AppTheme.tint(primary, 0.42),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade300),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade300),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: primary, width: 2),
-            ),
+            child: Icon(Icons.create_new_folder_outlined, color: primary, size: 22),
           ),
-          autofocus: true,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: Text('collect.cancel'.tr(), style: TextStyle(color: Colors.grey.shade700)),
-          ),
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: primary,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            ),
-            onPressed: () => Navigator.pop(ctx, true),
-            child: Text('collect.create'.tr()),
-          ),
+          const SizedBox(width: 12),
+          Expanded(child: Text('collect.add_collection'.tr(), style: const TextStyle(fontSize: 18))),
         ],
       ),
+      content: TextField(
+        controller: nameController,
+        decoration: InputDecoration(
+          hintText: 'collect.name_hint'.tr(),
+          filled: true,
+          fillColor: AppTheme.tint(primary, 0.42),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.grey.shade300),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.grey.shade300),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: primary, width: 2),
+          ),
+        ),
+        autofocus: true,
+      ),
+      cancelText: 'collect.cancel'.tr(),
+      confirmText: 'collect.create'.tr(),
     );
     final name = nameController.text.trim();
     nameController.dispose();
@@ -128,41 +112,26 @@ class _CollectManagePageState extends State<CollectManagePage> {
     final id = item.id;
     final name = item.name ?? '';
     if (id == null || id.isEmpty) return;
-    final confirm = await showDialog<bool>(
+    final confirm = await DialogUtils.showConfirmDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.12),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent, size: 22),
+      title: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.red.withOpacity(0.12),
+              borderRadius: BorderRadius.circular(10),
             ),
-            const SizedBox(width: 12),
-            Expanded(child: Text('collect.delete'.tr(), style: const TextStyle(fontSize: 18))),
-          ],
-        ),
-        content: Text('collect.delete_confirm'.tr(namedArgs: {'name': name})),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: Text('collect.cancel'.tr(), style: TextStyle(color: Colors.grey.shade700)),
+            child: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent, size: 22),
           ),
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: Colors.red.shade600,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            ),
-            onPressed: () => Navigator.pop(ctx, true),
-            child: Text('collect.delete'.tr()),
-          ),
+          const SizedBox(width: 12),
+          Expanded(child: Text('collect.delete'.tr(), style: const TextStyle(fontSize: 18))),
         ],
       ),
+      content: Text('collect.delete_confirm'.tr(namedArgs: {'name': name})),
+      cancelText: 'collect.cancel'.tr(),
+      confirmText: 'collect.delete'.tr(),
+      confirmColor: Colors.red.shade600,
     );
     if (confirm != true || !mounted) return;
     final success = await AudiobookshelfApi().deleteCollection(id);

@@ -1,5 +1,6 @@
 import 'package:audio_book/business/utils/app_locale.dart';
 import 'package:audio_book/business/utils/app_theme.dart';
+import 'package:audio_book/business/utils/dialog_utils.dart';
 import 'package:audio_book/business/utils/sp_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -132,6 +133,18 @@ class HomeUserActionCard extends StatelessWidget {
 
   final VoidCallback onLogoutTap;
 
+  Future<void> _confirmLogout(BuildContext context) async {
+    final confirmed = await DialogUtils.showConfirmDialog(
+      context: context,
+      content: Text('actions.logout_confirm_message'.tr()),
+      cancelText: 'actions.logout_confirm_cancel'.tr(),
+      confirmText: 'actions.logout_confirm_ok'.tr(),
+    );
+    if (confirmed == true) {
+      onLogoutTap();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
@@ -174,7 +187,7 @@ class HomeUserActionCard extends StatelessWidget {
             title: Text('actions.logout_title'.tr()),
             subtitle: Text('actions.logout_subtitle'.tr()),
             trailing: const Icon(Icons.chevron_right),
-            onTap: onLogoutTap,
+            onTap: () => _confirmLogout(context),
           ),
         ],
       ),

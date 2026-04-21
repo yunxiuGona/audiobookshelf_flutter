@@ -105,7 +105,10 @@
     "about_title": "关于软件",
     "about_subtitle": "查看版本、功能说明与支持信息",
     "logout_title": "退出登录",
-    "logout_subtitle": "清空本地登录信息并返回登录页"
+    "logout_subtitle": "清空本地登录信息并返回登录页",
+    "logout_confirm_message": "确定要退出登录吗？",
+    "logout_confirm_cancel": "取消",
+    "logout_confirm_ok": "确定"
   },
   "collection": {
     "default_name": "收藏集",

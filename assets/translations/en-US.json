@@ -105,7 +105,10 @@
     "about_title": "About",
     "about_subtitle": "Version, features, and support",
     "logout_title": "Sign out",
-    "logout_subtitle": "Clear local session and return to sign-in"
+    "logout_subtitle": "Clear local session and return to sign-in",
+    "logout_confirm_message": "Are you sure you want to sign out?",
+    "logout_confirm_cancel": "Cancel",
+    "logout_confirm_ok": "OK"
   },
   "collection": {
     "default_name": "Collection",

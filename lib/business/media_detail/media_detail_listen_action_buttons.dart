@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:audio_book/business/utils/dialog_utils.dart';
 
 /// 与 [MediaDetailChaptersSheet] 内一致的「从头收听 / 继续收听」按钮区。
 class MediaDetailListenActionButtons extends StatelessWidget {
@@ -20,23 +21,11 @@ class MediaDetailListenActionButtons extends StatelessWidget {
       return;
     }
 
-    final shouldRestart = await showDialog<bool>(
+    final shouldRestart = await DialogUtils.showConfirmDialog(
       context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Text('media_detail.listen_from_start_confirm_message'.tr()),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text('media_detail.listen_from_start_confirm_cancel'.tr()),
-            ),
-            FilledButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: Text('media_detail.listen_from_start_confirm_ok'.tr()),
-            ),
-          ],
-        );
-      },
+      content: Text('media_detail.listen_from_start_confirm_message'.tr()),
+      cancelText: 'media_detail.listen_from_start_confirm_cancel'.tr(),
+      confirmText: 'media_detail.listen_from_start_confirm_ok'.tr(),
     );
 
     if (shouldRestart == true) {
