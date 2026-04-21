@@ -32,7 +32,7 @@ class SPUtils{
     prefs?.setBool(_keyRememberPassword, remember);
   }
   static bool getRememberPassword() {
-    return prefs?.getBool(_keyRememberPassword) ?? false;
+    return true;
   }
 
   static void saveServerScheme(String scheme) {
