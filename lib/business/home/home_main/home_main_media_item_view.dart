@@ -8,8 +8,9 @@ import '../../utils/string_utils.dart';
 
 class HomeMainMediaItemView extends StatelessWidget {
   final LibraryItem? result;
+  final Function? onBackFromDetail;
 
-  const HomeMainMediaItemView(this.result, {super.key});
+  const HomeMainMediaItemView(this.result, {super.key,this.onBackFromDetail});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,11 @@ class HomeMainMediaItemView extends StatelessWidget {
       child: InkWell(
         onTap: () {
           if (result != null) {
-            Get.to(() => MediaDetail(result?.id ?? ''));
+            Get.to(() => MediaDetail(result?.id ?? ''))?.then((e){
+              if(onBackFromDetail!=null){
+                onBackFromDetail!();
+              }
+            });
           }
         },
         child: Column(

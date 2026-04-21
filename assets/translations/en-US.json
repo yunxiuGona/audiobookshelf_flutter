@@ -11,6 +11,7 @@
     "agreement": "By signing in you agree to the Terms of Service and Privacy Policy",
     "logging_in": "Signing in…",
     "success": "Signed in successfully",
+    "faild": "Signed in Faild",
     "need_server": "Please enter server address",
     "need_credentials": "Please enter username and password",
     "failed": "Sign-in failed: {error}",

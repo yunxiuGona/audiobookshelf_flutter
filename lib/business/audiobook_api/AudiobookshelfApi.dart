@@ -34,12 +34,16 @@ class AudiobookshelfApi extends GetConnect {
   Map<String, String>? headers;
   final OK = 200;
 
-  Future<UserAuthorize> login(String username, String password) async {
+  Future<UserAuthorize?> login(String username, String password) async {
     var resp = await post(headers: headers, "/login", {"username": username, "password": password});
-    var respBean = UserAuthorize.fromJson(resp.body);
-    SPUtils.saveUserAuthInfo(jsonEncode(respBean));
-    initUserInfo();
-    return respBean;
+    if (resp.status.code == OK && resp.body != null) {
+      var respBean = UserAuthorize.fromJson(resp.body);
+      SPUtils.saveUserAuthInfo(jsonEncode(respBean));
+      initUserInfo();
+      return respBean;
+    } else {
+      return null;
+    }
   }
 
   logout(String socketId) async {

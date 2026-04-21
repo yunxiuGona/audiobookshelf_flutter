@@ -11,6 +11,7 @@
     "agreement": "登录即代表你同意平台服务协议与隐私政策",
     "logging_in": "登录中，请稍候...",
     "success": "登录成功",
+    "faild": "登录失败",
     "need_server": "请输入服务器地址",
     "need_credentials": "请输入用户名和密码",
     "failed": "登录失败：{error}",

@@ -20,7 +20,7 @@ class HomeMain extends StatefulWidget {
 }
 
 class _HomeMainState extends State<HomeMain> with WidgetsBindingObserver {
-  EasyRefreshController _refreshController = EasyRefreshController(controlFinishRefresh: true, controlFinishLoad: true);
+  final EasyRefreshController _refreshController = EasyRefreshController(controlFinishRefresh: true, controlFinishLoad: true);
   AllLibrary? allLibraries;
   LibraryItemsBean? libraryItems;
   final valueListenable = ValueNotifier<String?>(null);
@@ -119,7 +119,9 @@ class _HomeMainState extends State<HomeMain> with WidgetsBindingObserver {
                                   ),
                                 ],
                               ),
-                              child: HomeMainMediaItemView(result),
+                              child: HomeMainMediaItemView(result,onBackFromDetail: (){
+                                restoreCache();
+                              }),
                             );
                           }
                           return null;

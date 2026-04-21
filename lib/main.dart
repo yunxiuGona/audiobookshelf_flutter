@@ -151,6 +151,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return FlutterAwesomeLogger(
+      enabled: false,
       navigatorKey: navigatorKey, // Required if logger history page does not open on floating button press
       child: ValueListenableBuilder<Color>(
         valueListenable: AppTheme.currentColor,

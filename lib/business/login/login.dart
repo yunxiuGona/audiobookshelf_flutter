@@ -48,9 +48,14 @@ class _LoginState extends State<Login> {
       username,
       password,
     );
-    ToastUtils.showSuccess(context, 'login.success'.tr());
-    SPUtils.saveUserAuthInfo(jsonEncode(loginResponse));
-    Get.to(Home());
+    if(loginResponse==null){
+      ToastUtils.showError(context, 'login.faild'.tr());
+      return;
+    }else{
+      ToastUtils.showSuccess(context, 'login.success'.tr());
+      SPUtils.saveUserAuthInfo(jsonEncode(loginResponse));
+      Get.to(Home());
+    }
   }
 
   void _handleLogin() async {
