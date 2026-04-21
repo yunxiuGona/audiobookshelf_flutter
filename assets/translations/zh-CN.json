@@ -41,6 +41,9 @@
     "current_progress": "当前听到：{title}",
     "listen_from_start": "从头收听",
     "listen_continue": "继续收听",
+    "listen_from_start_confirm_message": "从头收听会清除您的收听进度，您确定要从头收听吗？",
+    "listen_from_start_confirm_cancel": "取消",
+    "listen_from_start_confirm_ok": "确定",
     "tap_chapters": "查看章节",
     "add_to_collection": "加入收藏夹",
     "no_description": "No description for this media"

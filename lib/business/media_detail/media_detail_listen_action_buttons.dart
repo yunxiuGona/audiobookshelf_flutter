@@ -14,6 +14,36 @@ class MediaDetailListenActionButtons extends StatelessWidget {
   final VoidCallback onListenFromStart;
   final VoidCallback onListenContinue;
 
+  Future<void> _handleListenFromStartPressed(BuildContext context) async {
+    if (!hasProgress) {
+      onListenFromStart();
+      return;
+    }
+
+    final shouldRestart = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Text('media_detail.listen_from_start_confirm_message'.tr()),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('media_detail.listen_from_start_confirm_cancel'.tr()),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('media_detail.listen_from_start_confirm_ok'.tr()),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldRestart == true) {
+      onListenFromStart();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
@@ -22,7 +52,7 @@ class MediaDetailListenActionButtons extends StatelessWidget {
         children: [
           Expanded(
             child: OutlinedButton(
-              onPressed: onListenFromStart,
+              onPressed: () => _handleListenFromStartPressed(context),
               style: OutlinedButton.styleFrom(
                 foregroundColor: primary,
                 side: BorderSide(color: primary),
@@ -51,7 +81,7 @@ class MediaDetailListenActionButtons extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: FilledButton(
-        onPressed: onListenFromStart,
+        onPressed: () => _handleListenFromStartPressed(context),
         style: FilledButton.styleFrom(
           backgroundColor: primary,
           foregroundColor: Colors.white,
