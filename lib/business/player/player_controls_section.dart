@@ -83,7 +83,7 @@ class PlayerControlsSection extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 32),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -108,6 +108,7 @@ class PlayerControlsSection extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(height: 22),
       ],
     );
   }

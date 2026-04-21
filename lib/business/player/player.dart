@@ -154,7 +154,7 @@ class _PlayerState extends State<Player> {
                                   duration: _duration,
                                   onSeek: _onSeek,
                                 ),
-                                const SizedBox(height: 20),
+                                const SizedBox(height: 40),
                                 PlayerControlsSection(
                                   playState: _buildPlayState(playerState),
                                   hasPrevious: player.hasPrevious,
