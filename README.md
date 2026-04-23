@@ -1,17 +1,25 @@
-# audio_book
+# Flutter Audiobookshelf Player
 
-A AudioBook APp
+A minimalist audio novel and serialized audio player crafted with Flutter.
 
-## Getting Started
+Built exclusively for your self-hosted Audiobookshelf server, this is your ideal listening partner. We firmly believe: simplicity is the best.
+We only provide software and do not offer any media resources.
+If financially possible, please respect legitimate copyrighted media resources.
 
-This project is a starting point for a Flutter application.
+## Key Features
+- Connect to your self-hosted Audiobookshelf server with custom server address, username and password
+- View detailed album information and chapter data
+- Browse your media library and personal album list
+- Favorite collection functionality
+- Recent playback history tracking
+- Seamless breakpoint resume playback
+- Flexible theme switching
+- Bilingual support (Chinese / English)
+- Audio scraping: automatically fetch covers, media metadata and more
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3134.PNG)
+![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3135.PNG)
+![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3136.PNG)
+![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3137.PNG)
+![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3138.PNG)
+![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3139.PNG)
