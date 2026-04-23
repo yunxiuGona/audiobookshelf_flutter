@@ -4,13 +4,16 @@
 ## JustListen
 JustListen is A minimalist audio novel and serialized audio player for Ios/Android, crafted with Flutter.
 
-<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3134.PNG)" alt="Player Preview" width="100">
-<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3135.PNG)" alt="Player Preview" width="100">
-<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3136.PNG)" alt="Player Preview" width="100">
-<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3137.PNG)" alt="Player Preview" width="100">
-<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3138.PNG)" alt="Player Preview" width="100">
-<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3139.PNG)" alt="Player Preview" width="100">
-
+## ScreenShots
+<div style="display: flex; gap: 10px; justify-content: center;">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3134.PNG" alt="Player Preview" width="100">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3135.PNG" alt="Player Preview" width="100">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3136.PNG" alt="Player Preview" width="100">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3137.PNG" alt="Player Preview" width="100">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3138.PNG" alt="Player Preview" width="100">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3139.PNG" alt="Player Preview" width="100">
+</div>
+## About
 Built exclusively for your self-hosted Audiobookshelf server, this is your ideal listening partner. We firmly believe: simplicity is the best.
 We only provide software and do not offer any media resources.
 If financially possible, please respect legitimate copyrighted media resources.
