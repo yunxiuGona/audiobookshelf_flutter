@@ -18,6 +18,7 @@ Built exclusively for your self-hosted Audiobookshelf server, this is your ideal
 We only provide software and do not offer any media resources.
 If financially possible, please respect legitimate copyrighted media resources.
 
+
 ## Key Features
 - Connect to your self-hosted Audiobookshelf server with custom server address, username and password
 - View detailed album information and chapter data
@@ -29,3 +30,5 @@ If financially possible, please respect legitimate copyrighted media resources.
 - Bilingual support (Chinese / English)
 - Audio scraping: automatically fetch covers, media metadata and more
 
+## Link to audiobookshelf
+https://github.com/advplyr/audiobookshelf
