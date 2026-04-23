@@ -6,12 +6,12 @@ JustListen is A minimalist audio novel and serialized audio player for Ios/Andro
 
 ## ScreenShots
 <div style="display: flex; gap: 10px; justify-content: center;">
-<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3134.PNG" alt="Player Preview" width="100">
-<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3135.PNG" alt="Player Preview" width="100">
-<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3136.PNG" alt="Player Preview" width="100">
-<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3137.PNG" alt="Player Preview" width="100">
-<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3138.PNG" alt="Player Preview" width="100">
-<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3139.PNG" alt="Player Preview" width="100">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3134.PNG" alt="Player Preview" width="240">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3135.PNG" alt="Player Preview" width="240">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3136.PNG" alt="Player Preview" width="240">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3137.PNG" alt="Player Preview" width="240">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3138.PNG" alt="Player Preview" width="240">
+<img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3139.PNG" alt="Player Preview" width="240">
 </div>
 
 ## About
