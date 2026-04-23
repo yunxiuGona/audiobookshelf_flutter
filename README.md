@@ -1,5 +1,5 @@
 # Flutter Audiobookshelf Player
-!(https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/logo.png)
+![logo](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/logo.png)
 "JustListen" is A minimalist audio novel and serialized audio player crafted with Flutter.
 
 Built exclusively for your self-hosted Audiobookshelf server, this is your ideal listening partner. We firmly believe: simplicity is the best.
