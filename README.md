@@ -13,6 +13,7 @@ JustListen is A minimalist audio novel and serialized audio player for Ios/Andro
 <img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3138.PNG" alt="Player Preview" width="100">
 <img src="https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3139.PNG" alt="Player Preview" width="100">
 </div>
+
 ## About
 Built exclusively for your self-hosted Audiobookshelf server, this is your ideal listening partner. We firmly believe: simplicity is the best.
 We only provide software and do not offer any media resources.
