@@ -4,6 +4,13 @@
 ## JustListen
 JustListen is A minimalist audio novel and serialized audio player for Ios/Android, crafted with Flutter.
 
+<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3134.PNG)" alt="Player Preview" width="100">
+<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3135.PNG)" alt="Player Preview" width="100">
+<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3136.PNG)" alt="Player Preview" width="100">
+<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3137.PNG)" alt="Player Preview" width="100">
+<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3138.PNG)" alt="Player Preview" width="100">
+<img src="[https://your-image-link.com/screenshot.png](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3139.PNG)" alt="Player Preview" width="100">
+
 Built exclusively for your self-hosted Audiobookshelf server, this is your ideal listening partner. We firmly believe: simplicity is the best.
 We only provide software and do not offer any media resources.
 If financially possible, please respect legitimate copyrighted media resources.
@@ -19,9 +26,3 @@ If financially possible, please respect legitimate copyrighted media resources.
 - Bilingual support (Chinese / English)
 - Audio scraping: automatically fetch covers, media metadata and more
 
-![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3134.PNG)
-![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3135.PNG)
-![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3136.PNG)
-![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3137.PNG)
-![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3138.PNG)
-![Home Screen](https://github.com/yunxiuGona/audiobookshelf_flutter/blob/master/screens/IMG_3139.PNG)
