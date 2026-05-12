@@ -97,7 +97,10 @@ class _CollectionInSetState extends State<CollectionInSet> {
       return;
     }
     Slidable.of(context)?.close();
-    await _reloadCollection();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      _refreshController.callRefresh();
+    });
   }
 
   Widget _buildBookList(List<Books> books) {

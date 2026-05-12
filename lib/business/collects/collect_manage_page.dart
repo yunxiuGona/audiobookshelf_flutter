@@ -4,6 +4,7 @@ import 'package:audio_book/business/utils/app_theme.dart';
 import 'package:audio_book/business/utils/dialog_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 
 /// 收藏夹管理：新建（POST）、删除（DELETE）。主题色跟随全局设置。
@@ -24,6 +25,10 @@ class CollectManagePage extends StatefulWidget {
 class _CollectManagePageState extends State<CollectManagePage> {
   CollectList? _list;
   bool _loading = true;
+  final EasyRefreshController _refreshController = EasyRefreshController(
+    controlFinishRefresh: true,
+    controlFinishLoad: true,
+  );
 
   @override
   void initState() {
@@ -31,14 +36,34 @@ class _CollectManagePageState extends State<CollectManagePage> {
     _reload();
   }
 
+  @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
+
+  /// 拉取列表并写入 [_list]；返回是否请求成功（body 解析成功）。
+  Future<bool> _fetchAndApplyList() async {
+    final data = await AudiobookshelfApi().libraryCollectionsList(widget.libraryId);
+    if (!mounted) return false;
+    setState(() => _list = data);
+    return data != null;
+  }
+
   Future<void> _reload() async {
     setState(() => _loading = true);
-    final data = await AudiobookshelfApi().libraryCollectionsList(widget.libraryId);
+    await _fetchAndApplyList();
     if (!mounted) return;
-    setState(() {
-      _list = data;
-      _loading = false;
-    });
+    setState(() => _loading = false);
+  }
+
+  Future<void> _onRefresh() async {
+    final ok = await _fetchAndApplyList();
+    if (!mounted) return;
+    _refreshController.finishRefresh();
+    if (!ok) {
+      ToastUtils.showError(context, 'collect.load_failed'.tr());
+    }
   }
 
   Future<void> _onAdd() async {
@@ -102,7 +127,7 @@ class _CollectManagePageState extends State<CollectManagePage> {
     if (!mounted) return;
     if (created != null) {
       ToastUtils.showSuccess(context, 'collect.created'.tr());
-      await _reload();
+      await _fetchAndApplyList();
     } else {
       ToastUtils.showError(context, 'collect.create_failed'.tr());
     }
@@ -138,7 +163,10 @@ class _CollectManagePageState extends State<CollectManagePage> {
     if (!mounted) return;
     if (success) {
       ToastUtils.showSuccess(context, 'collect.deleted'.tr());
-      await _reload();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _refreshController.callRefresh();
+      });
     } else {
       ToastUtils.showError(context, 'collect.delete_failed'.tr());
     }
@@ -203,22 +231,35 @@ class _CollectManagePageState extends State<CollectManagePage> {
                   ],
                 ),
               )
-            : items.isEmpty
-                ? _EmptyState(onCreate: _loading ? null : _onAdd, primary: primary, deep: deep)
-                : ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
-                    itemCount: items.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 10),
-                    itemBuilder: (_, i) {
-                      final item = items[i];
-                      return _CollectionTile(
-                        primary: primary,
-                        deep: deep,
-                        name: item.name ?? '',
-                        onDelete: () => _onDelete(item),
-                      );
-                    },
-                  ),
+            : EasyRefresh(
+                controller: _refreshController,
+                onRefresh: _onRefresh,
+                child: items.isEmpty
+                    ? CustomScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        slivers: [
+                          SliverFillRemaining(
+                            hasScrollBody: false,
+                            child: _EmptyState(onCreate: _loading ? null : _onAdd, primary: primary, deep: deep),
+                          ),
+                        ],
+                      )
+                    : ListView.separated(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
+                        itemCount: items.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 10),
+                        itemBuilder: (_, i) {
+                          final item = items[i];
+                          return _CollectionTile(
+                            primary: primary,
+                            deep: deep,
+                            name: item.name ?? '',
+                            onDelete: () => _onDelete(item),
+                          );
+                        },
+                      ),
+              ),
       ),
     );
   }
