@@ -74,6 +74,9 @@ class _CollectionInSetState extends State<CollectionInSet> {
   }
 
   Future<void> _onRemoveBookPressed(BuildContext context, String libraryItemId) async {
+    // 必须在首个 await 之前获取：dialog / 网络返回后此 context 可能已 deactivate，
+    // 再调用 Slidable.of(context) 会触发 ancestor lookup 断言。
+    final slidableController = Slidable.of(context);
     final confirmed = await DialogUtils.showConfirmDialog(
       context: context,
       title: Text('collection.remove_confirm_title'.tr()),
@@ -96,7 +99,8 @@ class _CollectionInSetState extends State<CollectionInSet> {
       ToastUtils.showError(context, 'collection.remove_failed'.tr());
       return;
     }
-    Slidable.of(context)?.close();
+    await slidableController?.close();
+    if (!mounted) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       _refreshController.callRefresh();
