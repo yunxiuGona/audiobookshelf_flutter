@@ -133,30 +133,16 @@ class AudiobookshelfApi extends GetConnect {
     return null;
   }
 
-  /// 将作品加入收藏夹：先 GET 详情，再 PATCH 合并 `books`（服务端需通过 PATCH 更新书目）。
+  /// 将图书馆条目加入收藏夹：POST `/collections/{id}/book`，body 为 `{"id": libraryItemId}`。
   Future<CollectAdd?> addLibraryItemToCollection({
     required String collectionId,
     required String libraryItemId,
   }) async {
     initUserInfo();
-    final detail = await getCollectionDetail(collectionId);
-    if (detail == null) return null;
-    final ids = <String>{};
-    for (final b in detail.books ?? []) {
-      final id = b.id;
-      if (id != null && id.isNotEmpty) ids.add(id);
-    }
-    ids.add(libraryItemId);
-    final payload = <String, dynamic>{
-      "libraryId": detail.libraryId,
-      "name": detail.name,
-      "description": detail.description,
-      "books": ids.toList(),
-    };
-    final resp = await patch(
+    final resp = await post(
       headers: headers,
-      "/audiobookshelf/api/collections/$collectionId",
-      payload,
+      "/audiobookshelf/api/collections/$collectionId/book",
+      {"id": libraryItemId},
     );
     if (resp.status.code == OK && resp.body != null) {
       return CollectAdd.fromJson(Map<String, dynamic>.from(resp.body));
