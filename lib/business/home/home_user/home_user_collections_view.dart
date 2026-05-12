@@ -3,13 +3,22 @@ import 'package:flutter/material.dart';
 
 import '../../audiobook_api/beans/user_collection_item.dart';
 import '../../audiobook_api/beans/user_collections_list.dart';
+import '../../widgets/loading_view.dart';
 
 class HomeUserCollectionsView extends StatelessWidget {
   final UserCollectionsList? collections;
+  /// 为 false 时表示仍在等待首次列表请求结束，展示 [LoadingView]。
+  final bool collectionsLoaded;
   final ValueChanged<UserCollectionItem>? onCollectionTap;
   final VoidCallback? onEditTap;
 
-  const HomeUserCollectionsView({super.key, required this.collections, this.onCollectionTap, this.onEditTap});
+  const HomeUserCollectionsView({
+    super.key,
+    required this.collections,
+    required this.collectionsLoaded,
+    this.onCollectionTap,
+    this.onEditTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +49,15 @@ class HomeUserCollectionsView extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              if (items.isEmpty)
+              if (!collectionsLoaded)
+                Container(
+                  width: double.infinity,
+                  height: 40,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(color: primary.withOpacity(0.06), borderRadius: BorderRadius.circular(12)),
+                  child: const LoadingView(size: 30,),
+                )
+              else if (items.isEmpty)
                 Container(
                   width: double.infinity,
                   height: 100,

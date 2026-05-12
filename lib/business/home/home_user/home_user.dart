@@ -31,6 +31,8 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
   static const String _fallbackLibraryId = "26f127a9-c46e-499f-8bca-949c36baa607";
   MyLibraryItems? _myLibrary;
   UserCollectionsList? _collections;
+  /// 是否已完成至少一次收藏集列表请求（含失败）；未完成前由 [HomeUserCollectionsView] 显示 Loading。
+  bool _collectionsFetchCompleted = false;
   UserAuthorize? _userAuthInfo;
   EasyRefreshController _refreshController = EasyRefreshController(controlFinishRefresh: true, controlFinishLoad: true);
 
@@ -85,15 +87,18 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
   Future<void> _loadCollections({bool showError = true}) async {
     final libraryId = _userAuthInfo?.userDefaultLibraryId ?? _fallbackLibraryId;
     final resp = await AudiobookshelfApi().userCollectionsList(libraryId);
+    if (!mounted) return;
     if (resp == null) {
-      if (showError && mounted) {
+      if (showError) {
         ToastUtils.showError(context, 'errors.collections'.tr());
       }
-      return;
     }
     if (!mounted) return;
     setState(() {
-      _collections = resp;
+      if (resp != null) {
+        _collections = resp;
+      }
+      _collectionsFetchCompleted = true;
     });
   }
 
@@ -130,10 +135,15 @@ class _HomeUserState extends State<HomeUser> with WidgetsBindingObserver {
                 child: HomeUserHistoryView(_myLibrary),
               ),
               const SizedBox(height: 14),
-              HomeUserCollectionsView(collections: _collections, onCollectionTap: _handleCollectionTap,onEditTap: (){
-                final libraryId = _userAuthInfo?.userDefaultLibraryId ?? _fallbackLibraryId;
-                Get.to(CollectManagePage(libraryId: libraryId));
-              },),
+              HomeUserCollectionsView(
+                collections: _collections,
+                collectionsLoaded: _collectionsFetchCompleted,
+                onCollectionTap: _handleCollectionTap,
+                onEditTap: () {
+                  final libraryId = _userAuthInfo?.userDefaultLibraryId ?? _fallbackLibraryId;
+                  Get.to(CollectManagePage(libraryId: libraryId));
+                },
+              ),
               const SizedBox(height: 14),
               HomeUserActionCard(onLogoutTap: _handleLogout),
               const SizedBox(height: 164),
