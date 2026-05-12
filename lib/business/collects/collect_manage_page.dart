@@ -3,6 +3,7 @@ import 'package:audio_book/business/audiobook_api/beans/collect_list.dart';
 import 'package:audio_book/business/utils/app_theme.dart';
 import 'package:audio_book/business/utils/dialog_utils.dart';
 import 'package:audio_book/business/utils/toast_utils.dart';
+import 'package:audio_book/business/widgets/loading_center_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
@@ -159,7 +160,10 @@ class _CollectManagePageState extends State<CollectManagePage> {
       confirmColor: Colors.red.shade600,
     );
     if (confirm != true || !mounted) return;
-    final success = await AudiobookshelfApi().deleteCollection(id);
+    final success = await LoadingCenterDialog.run(
+      context,
+      AudiobookshelfApi().deleteCollection(id),
+    );
     if (!mounted) return;
     if (success) {
       ToastUtils.showSuccess(context, 'collect.deleted'.tr());
