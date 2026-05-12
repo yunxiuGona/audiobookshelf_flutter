@@ -160,6 +160,20 @@ class AudiobookshelfApi extends GetConnect {
     return c == OK || c == 204;
   }
 
+  /// 从收藏夹移除单本作品：DELETE `/collections/{collectionId}/book/{libraryItemId}`。
+  Future<bool> removeLibraryItemFromCollection({
+    required String collectionId,
+    required String libraryItemId,
+  }) async {
+    initUserInfo();
+    final resp = await delete(
+      headers: headers,
+      "/audiobookshelf/api/collections/$collectionId/book/$libraryItemId",
+    );
+    final c = resp.status.code;
+    return c == OK || c == 204;
+  }
+
   /// 获取用户自定义元数据提供程序。
   Future<CustomProviders?> customMetadataProviders() async {
     initUserInfo();

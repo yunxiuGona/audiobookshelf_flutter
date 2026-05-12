@@ -113,7 +113,10 @@
   "collection": {
     "default_name": "Collection",
     "empty_hint": "This collection has no items",
-    "author_line": "Author: {name}"
+    "author_line": "Author: {name}",
+    "remove_confirm_title": "Remove from collection",
+    "remove_confirm_message": "Remove this item from this collection?",
+    "remove_failed": "Could not remove from collection"
   },
   "collect": {
     "pick_title": "Choose a collection",

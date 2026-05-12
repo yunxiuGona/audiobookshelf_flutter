@@ -113,7 +113,10 @@
   "collection": {
     "default_name": "收藏集",
     "empty_hint": "该收藏集暂无作品",
-    "author_line": "作者：{name}"
+    "author_line": "作者：{name}",
+    "remove_confirm_title": "从收藏中移除",
+    "remove_confirm_message": "确定从该收藏夹中移除此作品？",
+    "remove_failed": "移除失败"
   },
   "collect": {
     "pick_title": "选择收藏夹",

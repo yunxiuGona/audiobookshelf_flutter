@@ -150,20 +150,31 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    // Keep a single stable [GetMaterialApp] / Navigator: wrapping the whole app in
+    // [ValueListenableBuilder] and rebuilding [GetMaterialApp] on theme changes can
+    // duplicate overlay GlobalKeys ([_OverlayEntryWidgetState]). Apply seed color
+    // updates via [builder] + nested [Theme] instead.
     return FlutterAwesomeLogger(
       enabled: false,
-      navigatorKey: navigatorKey, // Required if logger history page does not open on floating button press
-      child: ValueListenableBuilder<Color>(
-        valueListenable: AppTheme.currentColor,
-        builder: (context, seedColor, _) => GetMaterialApp(
-          title: 'Just Listen',
-          navigatorKey: navigatorKey,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          theme: AppTheme.buildTheme(seedColor),
-          home: const Login(),
-        ),
+      child: GetMaterialApp(
+        title: 'Just Listen',
+        navigatorKey: navigatorKey,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        theme: AppTheme.buildTheme(AppTheme.currentColor.value),
+        builder: (context, child) {
+          return ValueListenableBuilder<Color>(
+            valueListenable: AppTheme.currentColor,
+            builder: (context, seedColor, _) {
+              return Theme(
+                data: AppTheme.buildTheme(seedColor),
+                child: child ?? const SizedBox.shrink(),
+              );
+            },
+          );
+        },
+        home: const Login(),
       ),
     );
   }
